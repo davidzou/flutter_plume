@@ -1,6 +1,6 @@
 name: plume
 description: A new Flutter package project.
-version: 0.0.1
+version: 0.0.3-dev
 homepage: https://github.com/davidzou
 
 environment:
@@ -19,6 +19,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  uses-material-design: true
 
   # To add assets to your package, add an assets section, like this:
   # assets:
