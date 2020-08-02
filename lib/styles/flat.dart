@@ -5,12 +5,12 @@ class FlatStyles {
   ///
   /// 一般模式
   ///
-  static get normal => TextStyle();
+  static get normal => const TextStyle();
 
   ///
   /// 黑夜模式
   ///
-  static get normalDark => TextStyle();
+  static get normalDark => const TextStyle();
 
   ///
   /// 边距

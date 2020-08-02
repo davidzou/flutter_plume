@@ -12,7 +12,6 @@ typedef OnItemTaped<T extends ListItem> = void Function(T t, int index);
 ///
 ///
 mixin ListItem {
-
 }
 
 ///
@@ -56,6 +55,7 @@ abstract class ListViewBuilder<T extends ListItem> {
   /// 单个控件点击事件
   final OnItemTaped<T> onItemTap;
 
+  /// 高度
   final int height;
 
   ///
