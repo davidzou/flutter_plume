@@ -8,6 +8,13 @@ import 'package:flutter/widgets.dart';
 /// |  1  |
 /// +-----+
 ///
+/// Block(
+///   width: 80.0,
+///   height: 80.0,
+///   title: "1",
+///   color: Colors.blueAccent
+/// )
+///
 class Block extends StatelessWidget {
   Block({Key key, this.width = 80.0, this.height = 80.0, this.title = "", this.color = Colors.blueAccent}) : super(key: key);
 
