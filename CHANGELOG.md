@@ -1,3 +1,6 @@
+## [0.0.3-dev.2] - Add new widget
+
+* Add new widget ***Block***
 
 ## [0.0.3-dev.1] - Add new widget 
 
