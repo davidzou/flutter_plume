@@ -24,6 +24,8 @@ Calender(
 ),
 ```
 
+![](doc/images/widgets_header.png)
+
 2. Builder
 
 <em>ListViewBuilder</em>

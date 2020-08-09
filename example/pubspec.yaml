@@ -1,6 +1,6 @@
-name: plume
+name: plumedemo
 description: A new Flutter package project.
-version: 0.0.3-dev.1
+version: 1.0.0
 homepage: https://github.com/davidzou
 
 environment:
@@ -9,6 +9,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+#  plume: ">=0.0.2 <1.0.0"
+#  # 本地依赖
+  plume:
+    path: ../../flutter_plume
 
 dev_dependencies:
   flutter_test:
