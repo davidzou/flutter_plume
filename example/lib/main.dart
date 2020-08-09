@@ -20,31 +20,31 @@ class ExampleApp extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: HeadTitleWidget.h1("我是标题H1"),
+                child: HeadTitle.h1("我是标题H1"),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: HeadTitleWidget.h2("我是标题H2"),
+                child: HeadTitle.h2("我是标题H2"),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: HeadTitleWidget.h3("我是标题H3"),
+                child: HeadTitle.h3("我是标题H3"),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: HeadTitleWidget.h4("我是标题H4"),
+                child: HeadTitle.h4("我是标题H4"),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: HeadTitleWidget.h5("我是标题H5"),
+                child: HeadTitle.h5("我是标题H5"),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: HeadTitleWidget.h6("我是标题H6"),
+                child: HeadTitle.h6("我是标题H6"),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: HeadTitleWidget("我是标题Normal"),
+                child: HeadTitle("我是标题Normal"),
               ),
             ],
           )

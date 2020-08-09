@@ -9,13 +9,13 @@ import 'package:flutter/widgets.dart';
 /// || subTitle                  |
 /// +----------------------------+
 ///
-class HeadTitleWidget extends StatelessWidget {
+class HeadTitle extends StatelessWidget {
   ///
   /// @param title      标题文字
   /// @param subTitle   副标题文字
   /// @param color      主题色
   ///
-  const HeadTitleWidget(this.title, {Key key, this.subTitle, this.color = const Color(0xff2d85f0), this.titleStyle, this.subTitleStyle}) : super(key: key);
+  const HeadTitle(this.title, {Key key, this.subTitle, this.color = const Color(0xff2d85f0), this.titleStyle, this.subTitleStyle}) : super(key: key);
 
   final String title;
   final TextStyle titleStyle;
@@ -34,8 +34,8 @@ class HeadTitleWidget extends StatelessWidget {
     );
   }
 
-  factory HeadTitleWidget.h1(String title) {
-    return HeadTitleWidget(
+  factory HeadTitle.h1(String title) {
+    return HeadTitle(
       title,
       titleStyle: TextStyle(
         fontSize: 36.0,
@@ -44,8 +44,8 @@ class HeadTitleWidget extends StatelessWidget {
     );
   }
 
-  factory HeadTitleWidget.h2(String title) {
-    return HeadTitleWidget(
+  factory HeadTitle.h2(String title) {
+    return HeadTitle(
       title,
       titleStyle: TextStyle(
         fontSize: 32.0,
@@ -54,8 +54,8 @@ class HeadTitleWidget extends StatelessWidget {
     );
   }
 
-  factory HeadTitleWidget.h3(String title) {
-    return HeadTitleWidget(
+  factory HeadTitle.h3(String title) {
+    return HeadTitle(
       title,
       titleStyle: TextStyle(
         fontSize: 28.0,
@@ -64,8 +64,8 @@ class HeadTitleWidget extends StatelessWidget {
     );
   }
 
-  factory HeadTitleWidget.h4(String title) {
-    return HeadTitleWidget(
+  factory HeadTitle.h4(String title) {
+    return HeadTitle(
       title,
       titleStyle: TextStyle(
         fontSize: 24.0,
@@ -74,8 +74,8 @@ class HeadTitleWidget extends StatelessWidget {
     );
   }
 
-  factory HeadTitleWidget.h5(String title) {
-    return HeadTitleWidget(
+  factory HeadTitle.h5(String title) {
+    return HeadTitle(
       title,
       titleStyle: TextStyle(
         fontSize: 20.0,
@@ -84,8 +84,8 @@ class HeadTitleWidget extends StatelessWidget {
     );
   }
 
-  factory HeadTitleWidget.h6(String title) {
-    return HeadTitleWidget(
+  factory HeadTitle.h6(String title) {
+    return HeadTitle(
       title,
       titleStyle: TextStyle(
         fontSize: 16.0,
