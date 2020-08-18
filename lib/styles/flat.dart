@@ -1,6 +1,8 @@
 import 'package:flutter/widgets.dart';
 
+///
 /// 扁平化设置
+///
 class FlatStyles {
   ///
   /// 一般模式

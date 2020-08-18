@@ -4,10 +4,21 @@ import 'package:flutter/widgets.dart';
 ///
 /// 标题
 ///
+/// 应用场景：段落标题，分段主题等。
+///
 /// +----------------------------+
 /// || title                     |
 /// || subTitle                  |
 /// +----------------------------+
+///
+/// <pre>
+///   Column(
+///     children: <Widget>[
+///       HeaderTitle.h1("标题")，
+///       Text("正文内容"),
+///     ]
+///   )
+/// </pre>
 ///
 class HeadTitle extends StatelessWidget {
   ///
