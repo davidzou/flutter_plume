@@ -65,8 +65,18 @@ class Content extends StatelessWidget {
 /// ｜    0000 00-00      icon          ｜
 /// +-----------------------------------+
 ///
+/// ### Example:
+///
+///     Calender(
+///       "生产日期",
+///       onDays: DateTime.now(),
+///       notifier: (time){ print(time); },
+///       enable: true
+///     )
+///
+///
 class Calender extends StatefulWidget {
-  Calender(this.title, {Key key, this.onDays, this.notifier, this.enable})
+  Calender(this.title, {Key key, this.onDays, this.notifier, this.controller, this.enable})
       : super(key: key);
 
   final String title;
@@ -83,37 +93,42 @@ class Calender extends StatefulWidget {
   ///
   final CalenderCallback notifier;
 
+  final CalenderController controller;
+
   @override
-  CalenderState createState() => CalenderState(onDays: onDays, enable: enable);
+  _CalenderState createState() => _CalenderState();
 }
 
-class CalenderState extends State<Calender> {
-  CalenderState({this.onDays, this.enable});
-
-  DateTime onDays;
-  bool enable;
+class _CalenderState extends State<Calender> {
+  /// 初始值
+  DateTime _onDays;
+  /// 是否可以选择日期。
+  bool _enable;
+  /// 日期显示值
+  String _daysValue;
 
   @override
   void initState() {
     super.initState();
-    if (onDays == null) {
-      setState(() {
-        onDays = DateTime.now();
-      });
+    _onDays = widget?.controller?.value ?? widget?.onDays;
+    _enable = widget?.enable;
+    if (_onDays == null) {
+      _onDays = DateTime.now();
     }
   }
 
   _handleDateTime({time}) {
     assert(time != null);
+    /// 监听值变更
     setState(() {
-      onDays = time;
+      _onDays = time;
     });
     widget.notifier.call(time);
   }
 
   _handleOnPressed(BuildContext context) {
     return () {
-      if (!widget.enable) {
+      if (!_enable) {
         return;
       }
       showDatePicker(
@@ -122,7 +137,7 @@ class CalenderState extends State<Calender> {
         firstDate: new DateTime.now().subtract(new Duration(days: 365 * 3)),
         lastDate: new DateTime.now().add(new Duration(days: 365 * 3)),
       ).then((DateTime val) {
-        print(val); // 2018-07-12 00:00:00.000
+        print("onPressed $val"); // 2018-07-12 00:00:00.000
         _handleDateTime(time: val);
       }).catchError((err) {
         print(err);
@@ -130,8 +145,17 @@ class CalenderState extends State<Calender> {
     };
   }
 
+  _onDaysValue() {
+    if (widget?.controller?.value == null) {
+      return "${_onDays?.year} ${_onDays?.month}-${_onDays?.day}";
+    }
+    _onDays = widget?.controller?.value;
+    return "${_onDays?.year} ${_onDays?.month}-${_onDays?.day}";
+  }
+
   @override
   Widget build(BuildContext context) {
+    _daysValue = _onDaysValue();
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Column(
@@ -139,7 +163,7 @@ class CalenderState extends State<Calender> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            widget.title,
+            widget?.title,
             maxLines: 1,
             textAlign: TextAlign.left,
             style: TextStyle(
@@ -152,7 +176,7 @@ class CalenderState extends State<Calender> {
             height: FlatStyles.lineSpace,
           ),
           ImageButton(
-            title: "${onDays?.year} ${onDays?.month}-${onDays?.day}",
+            title: _daysValue,
             right: Icon(
               Icons.calendar_today,
               color: Colors.teal,
@@ -163,6 +187,10 @@ class CalenderState extends State<Calender> {
       ),
     );
   }
+}
+
+class CalenderController extends ValueNotifier<DateTime> {
+  CalenderController(DateTime value) : super(value);
 }
 
 /// and used by plume ^0.0.3+
