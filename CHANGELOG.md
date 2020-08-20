@@ -1,3 +1,6 @@
+## [0.0.3-dev.5] - Add new widget
+
+* Fix list builder
 
 ## [0.0.3-dev.4] - Add new widget
 
