@@ -26,7 +26,13 @@ class HeadTitle extends StatelessWidget {
   /// @param subTitle   副标题文字
   /// @param color      主题色
   ///
-  const HeadTitle(this.title, {Key key, this.subTitle, this.color = const Color(0xff2d85f0), this.titleStyle, this.subTitleStyle}) : super(key: key);
+  const HeadTitle(this.title,
+      {Key key,
+      this.subTitle,
+      this.color = const Color(0xff2d85f0),
+      this.titleStyle,
+      this.subTitleStyle})
+      : super(key: key);
 
   final String title;
   final TextStyle titleStyle;
@@ -138,8 +144,15 @@ class HeadTitle extends StatelessWidget {
           ),
 //        boxShadow: 0 0 0 1px #5F5A4B, 1px 1px 6px 1px rgba(10, 10, 0, 0.5)
           boxShadow: [
-            BoxShadow(color: Color(0xff5f5a4b), offset: Offset(0, 0), spreadRadius: 1),
-            BoxShadow(color: Color.fromARGB(127, 10, 10, 0), offset: Offset(1, 1), spreadRadius: 1, blurRadius: 6),
+            BoxShadow(
+                color: Color(0xff5f5a4b),
+                offset: Offset(0, 0),
+                spreadRadius: 1),
+            BoxShadow(
+                color: Color.fromARGB(127, 10, 10, 0),
+                offset: Offset(1, 1),
+                spreadRadius: 1,
+                blurRadius: 6),
           ]),
       child: Container(
         width: double.infinity,

@@ -3,6 +3,10 @@
 
 * Update list builder
 
+## [0.0.3-dev.4] - Add new widget
+
+* Update list builder
+
 ## [0.0.3-dev.3] - Add new widget
 
 * Add new widget ***HeadTitle***

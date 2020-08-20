@@ -76,7 +76,8 @@ class Content extends StatelessWidget {
 ///
 ///
 class Calender extends StatefulWidget {
-  Calender(this.title, {Key key, this.onDays, this.notifier, this.controller, this.enable})
+  Calender(this.title,
+      {Key key, this.onDays, this.notifier, this.controller, this.enable})
       : super(key: key);
 
   final String title;
@@ -102,8 +103,10 @@ class Calender extends StatefulWidget {
 class _CalenderState extends State<Calender> {
   /// 初始值
   DateTime _onDays;
+
   /// 是否可以选择日期。
   bool _enable;
+
   /// 日期显示值
   String _daysValue;
 
@@ -119,6 +122,7 @@ class _CalenderState extends State<Calender> {
 
   _handleDateTime({time}) {
     assert(time != null);
+
     /// 监听值变更
     setState(() {
       _onDays = time;

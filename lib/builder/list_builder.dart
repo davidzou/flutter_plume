@@ -56,15 +56,13 @@ mixin ListItem {}
 ///             print(_list[index]);
 ///            /// 显示详情
 ///            _showDetails(_list[index].mess);
-///          }),
+///          }).build(),
 ///    );
 ///  }
 ///  </code>
 ///
 abstract class ListViewBuilder<T extends ListItem> {
-  ListViewBuilder({this.list, this.onItemTap, this.height}) {
-    _createList();
-  }
+  ListViewBuilder({this.list, this.onItemTap, this.height});
 
   /// 数据列表
   final List<T> list;
@@ -93,7 +91,7 @@ abstract class ListViewBuilder<T extends ListItem> {
   /// @param list   列表数据
   /// @param item   Item布局
   ///
-  Widget _createList() {
+  Widget build() {
     if (list == null || list?.length == 0) {
       return Container(
         child: buildBlank(),
@@ -104,12 +102,14 @@ abstract class ListViewBuilder<T extends ListItem> {
 
           /// 这里是列表数量，如果不添加不会显示，还会报错哦！
           itemCount: list?.length,
+
           /// 使用构建器显示列表内容
           itemBuilder: (BuildContext context, int index) {
             return Container(
                 height: height ?? 80,
                 child: InkWell(
                   onTap: () => onItemTap(list[index], index),
+
                   /// 列表布局
                   child: itemBuild(list[index], index),
                 ));

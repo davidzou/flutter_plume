@@ -73,7 +73,6 @@ class _MyCustomFormState extends State<MyCustomForm> {
                 myController.text = text;
               },
             ),
-
             Container(
               color: Colors.blueAccent,
               width: 80,
@@ -84,7 +83,6 @@ class _MyCustomFormState extends State<MyCustomForm> {
                 controller: myController,
               ),
             ),
-
             SpinnerWidget(),
           ],
         ),
@@ -92,7 +90,6 @@ class _MyCustomFormState extends State<MyCustomForm> {
     );
   }
 }
-
 
 ///
 ///
@@ -104,24 +101,24 @@ class ExampleApp extends StatelessWidget {
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Container(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: HeadTitle.h1("我是标题H1"),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: HeadTitle.h2("我是标题H2"),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: HeadTitle.h3("我是标题H3"),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: HeadTitle.h4("我是标题H4"),
-              ),
+            child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: HeadTitle.h1("我是标题H1"),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: HeadTitle.h2("我是标题H2"),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: HeadTitle.h3("我是标题H3"),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: HeadTitle.h4("我是标题H4"),
+            ),
 //              Padding(
 //                padding: const EdgeInsets.all(8.0),
 //                child: HeadTitle.h5("我是标题H5"),
@@ -134,21 +131,22 @@ class ExampleApp extends StatelessWidget {
 //                padding: const EdgeInsets.all(8.0),
 //                child: HeadTitle("我是标题Normal"),
 //              ),
-              Counter(count: 0, title: "👍",)
-            ],
-          )
-        ),
+            Counter(
+              count: 0,
+              title: "👍",
+            )
+          ],
+        )),
       ),
     );
   }
 }
 
-class CounterState extends State{
+class CounterState extends State {
   int _count = 0;
 
   @override
   Widget build(BuildContext context) {
     return Text("$_count");
   }
-
 }

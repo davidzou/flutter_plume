@@ -12,8 +12,8 @@ import 'package:flutter/widgets.dart';
 /// +--------+
 ///
 class Counter extends StatelessWidget {
-
-  const Counter({Key key, this.count = 0, this.title, this.padding}) : super(key: key);
+  const Counter({Key key, this.count = 0, this.title, this.padding})
+      : super(key: key);
 
   final int count;
   final String title;
@@ -45,12 +45,16 @@ class CounterController extends ValueNotifier {
 class CounterRefresher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return CounterRefreshState(title: "", onRefreshed: (){},);
+    return CounterRefreshState(
+      title: "",
+      onRefreshed: () {},
+    );
   }
 }
 
 class CounterRefreshState extends StatefulWidget {
-  const CounterRefreshState({Key key, this.title, this.onRefreshed}) : super(key: key);
+  const CounterRefreshState({Key key, this.title, this.onRefreshed})
+      : super(key: key);
 
   final String title;
   final VoidCallback onRefreshed;
@@ -82,9 +86,6 @@ class CounterState extends State<CounterRefreshState> {
     return Text(_title);
   }
 }
-
-
-
 
 //class CounterDisplay extends StatelessWidget {
 //  CounterDisplay({this.count});

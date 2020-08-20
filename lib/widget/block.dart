@@ -16,7 +16,13 @@ import 'package:flutter/widgets.dart';
 /// )
 ///
 class Block extends StatelessWidget {
-  Block({Key key, this.width = 80.0, this.height = 80.0, this.title = "", this.color = Colors.blueAccent}) : super(key: key);
+  Block(
+      {Key key,
+      this.width = 80.0,
+      this.height = 80.0,
+      this.title = "",
+      this.color = Colors.blueAccent})
+      : super(key: key);
 
   ///
   /// 宽
@@ -46,9 +52,9 @@ class Block extends StatelessWidget {
       height: height,
       child: Center(
           child: Text(
-            title,
-            style: TextStyle(color: Colors.black, fontStyle: FontStyle.normal),
-          )),
+        title,
+        style: TextStyle(color: Colors.black, fontStyle: FontStyle.normal),
+      )),
     );
   }
 }
