@@ -11,14 +11,16 @@ import 'package:flutter/widgets.dart';
 /// || subTitle                  |
 /// +----------------------------+
 ///
-/// <pre>
+/// ### Example:
+///
+/// ```dart
 ///   Column(
 ///     children: <Widget>[
 ///       HeaderTitle.h1("标题")，
 ///       Text("正文内容"),
 ///     ]
 ///   )
-/// </pre>
+/// ```
 ///
 class HeadTitle extends StatelessWidget {
   ///

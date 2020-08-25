@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 ///
 /// 列表回调
 /// @param t  单个列表数据模型
+/// @param index 下标
 ///
 typedef OnItemTaped<T extends ListItem> = void Function(T t, int index);
 
@@ -17,7 +18,7 @@ mixin ListItem {}
 /// 通过继承实现不同List的构造创建。
 ///
 /// ### Example:
-/// <code>
+/// ```dart
 ///   class MessListItem implements ListItem{
 ///     MessListItem(this.name);
 ///     String name;
@@ -31,10 +32,10 @@ mixin ListItem {}
 ///       return Text(item.name);
 ///     }
 ///   }
-/// </code>
+/// ```
 ///
 /// 默认空数据页返回空数据文字，如果需要自定义，重写buildBlank方法。
-/// <code>
+/// ```dart
 ///   class MessListBuilder extends ListViewBuilder<MessListItem> {
 ///     ...
 ///
@@ -43,10 +44,10 @@ mixin ListItem {}
 ///       return Text("Blank");
 ///     }
 ///   }
-/// </code>
+/// ```
 ///
 /// 创建列表页
-/// <code>
+/// ```dart
 ///  @override
 ///  Widget build(BuildContext context) {
 ///    return Container(
@@ -59,7 +60,7 @@ mixin ListItem {}
 ///          }).build(),
 ///    );
 ///  }
-///  </code>
+///  ```
 ///
 abstract class ListViewBuilder<T extends ListItem> {
   ListViewBuilder({this.list, this.onItemTap, this.height});
@@ -75,6 +76,7 @@ abstract class ListViewBuilder<T extends ListItem> {
 
   ///
   /// 单个List自定义控件
+  ///
   /// @param item   Item布局对应的数据模型
   /// @param index  数据下标
   ///
@@ -87,10 +89,6 @@ abstract class ListViewBuilder<T extends ListItem> {
     return Text("没有数据");
   }
 
-  ///
-  /// @param list   列表数据
-  /// @param item   Item布局
-  ///
   Widget build() {
     if (list == null || list?.length == 0) {
       return Container(
@@ -100,17 +98,17 @@ abstract class ListViewBuilder<T extends ListItem> {
     return Scrollbar(
       child: ListView.builder(
 
-          /// 这里是列表数量，如果不添加不会显示，还会报错哦！
+          // 这里是列表数量，如果不添加不会显示，还会报错哦！
           itemCount: list?.length,
 
-          /// 使用构建器显示列表内容
+          // 使用构建器显示列表内容
           itemBuilder: (BuildContext context, int index) {
             return Container(
                 height: height ?? 80,
                 child: InkWell(
                   onTap: () => onItemTap(list[index], index),
 
-                  /// 列表布局
+                  // 列表布局
                   child: itemBuild(list[index], index),
                 ));
           }),
