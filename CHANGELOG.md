@@ -1,3 +1,7 @@
+## [0.0.3] - Fixed
+
+* Fix the icon what calender widget add expanded by show
+
 ## [0.0.3-dev.5] - Add new widget
 
 * Fix list builder
