@@ -288,7 +288,7 @@ class ImageButton extends StatelessWidget {
     if (right != null) {
       return Row(
         children: <Widget>[
-          Text(title),
+          Expanded(child: Text(title)),
           SizedBox(
             width: spaceSize,
             height: 1.0,

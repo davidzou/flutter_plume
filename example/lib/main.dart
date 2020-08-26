@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:plume/widget/counter.dart';
 import 'package:plume/widget/head.dart';
 import 'package:plume/taste/taste.dart';
+import 'package:plume/widget/rw_widgets.dart';
 
 //void main() {
 //  runApp(MaterialApp(
@@ -84,6 +85,11 @@ class _MyCustomFormState extends State<MyCustomForm> {
               ),
             ),
             SpinnerWidget(),
+
+            Calender(
+              "时间设置",
+              onDays: DateTime.now(),
+            )
           ],
         ),
       ),
