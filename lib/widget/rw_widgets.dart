@@ -183,7 +183,7 @@ class _CalenderState extends State<Calender> {
             title: _daysValue,
             right: Icon(
               Icons.calendar_today,
-              color: Colors.teal,
+              color: _enable ? Colors.teal : Colors.grey,
             ),
             onPressed: _handleOnPressed(context),
           ),
