@@ -106,7 +106,7 @@ abstract class ListViewBuilder<T extends ListItem> {
             return Container(
                 height: height ?? 80,
                 child: InkWell(
-                  onTap: () => onItemTap(context, list[index], index),
+                  onTap: () => onItemTap(list[index], index),
 
                   // 列表布局
                   child: itemBuild(context, list[index], index),

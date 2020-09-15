@@ -1,3 +1,7 @@
+## [0.0.5] - Update
+
+* remove list builder what remove callback BuildContext.
+
 ## [0.0.4] - Update
 
 * update list builder what add BuildContext to solved InheritedWidget data.
