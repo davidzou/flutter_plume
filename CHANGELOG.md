@@ -1,6 +1,6 @@
 ## [0.0.4] - Update
 
-* update list builder what add buildcontext to sloved inheritedwidget data.
+* update list builder what add BuildContext to solved InheritedWidget data.
 
 ## [0.0.3] - Fixed
 
