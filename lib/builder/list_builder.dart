@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 /// @param t  单个列表数据模型
 /// @param index 下标
 ///
-typedef OnItemTaped<T extends ListItem> = void Function(BuildContext context, T t, int index);
+typedef OnItemTaped<T extends ListItem> = void Function(T t, int index);
 
 ///
 ///
@@ -28,7 +28,7 @@ mixin ListItem {}
 ///     MessListBuilder(List<MessListItem> list, OnItemTaped<MessListItem> onItemTap) : super(list, onItemTap);
 ///
 ///     @override
-///     Widget itemBuild(MessListItem item, int index) {
+///     Widget itemBuild(BuildContext context, MessListItem item, int index) {
 ///       return Text(item.name);
 ///     }
 ///   }
