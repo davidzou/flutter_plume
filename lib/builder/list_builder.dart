@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 /// @param t  单个列表数据模型
 /// @param index 下标
 ///
-typedef OnItemTaped<T extends ListItem> = void Function(T t, int index);
+typedef OnItemTaped<T extends ListItem> = void Function(BuildContext context, T t, int index);
 
 ///
 ///
@@ -80,7 +80,7 @@ abstract class ListViewBuilder<T extends ListItem> {
   /// @param item   Item布局对应的数据模型
   /// @param index  数据下标
   ///
-  Widget itemBuild(T item, int index);
+  Widget itemBuild(BuildContext context, T item, int index);
 
   ///
   /// 空数据状态下的界面显示内容
@@ -106,10 +106,10 @@ abstract class ListViewBuilder<T extends ListItem> {
             return Container(
                 height: height ?? 80,
                 child: InkWell(
-                  onTap: () => onItemTap(list[index], index),
+                  onTap: () => onItemTap(context, list[index], index),
 
                   // 列表布局
-                  child: itemBuild(list[index], index),
+                  child: itemBuild(context, list[index], index),
                 ));
           }),
     );
