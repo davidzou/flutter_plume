@@ -3,6 +3,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 ///
 /// SharedPreferences 工具类
 ///
+/// #### 读取数据
+///
+///   ```
+///   RWSharePreferences.getBool(key)
+///   ```
+///
+/// #### 写入数据
+///
+///   ```
+///   RWSharePreferences.saveBool(key, value)
+///   ```
+///
 class RWSharedPreferences {
   RWSharedPreferences._();
 
