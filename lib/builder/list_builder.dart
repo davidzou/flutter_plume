@@ -97,6 +97,7 @@ abstract class ListViewBuilder<T extends ListItem> {
     }
     return Scrollbar(
       child: ListView.builder(
+          controller: ScrollController(),
 
           // 这里是列表数量，如果不添加不会显示，还会报错哦！
           itemCount: list?.length,

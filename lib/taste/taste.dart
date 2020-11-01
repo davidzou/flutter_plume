@@ -53,7 +53,7 @@ class SpinnerState extends State with SingleTickerProviderStateMixin {
     super.initState();
     _controller = AnimationController(
       duration: const Duration(seconds: 10),
-      value: this,
+      vsync: this,
     )..repeat();
   }
 

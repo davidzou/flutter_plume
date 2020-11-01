@@ -7,12 +7,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 ///
 ///   ```
 ///   RWSharePreferences.getBool(key)
+///   ...
 ///   ```
 ///
 /// #### 写入数据
 ///
 ///   ```
 ///   RWSharePreferences.saveBool(key, value)
+///   ...
 ///   ```
 ///
 class RWSharedPreferences {
@@ -33,7 +35,6 @@ class RWSharedPreferences {
     return sp.setDouble(key, value);
   }
 
-
   static saveString(String key, String value) async{
     SharedPreferences sp = await SharedPreferences.getInstance();
     return sp.setString(key, value);
@@ -50,7 +51,6 @@ class RWSharedPreferences {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getBool(key);
   }
-
 
   static Future<int> getInt(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
