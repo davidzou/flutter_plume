@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 ///
 /// [T] 被转换的数据对象。
 ///
@@ -28,5 +30,16 @@ mixin MapConvert<T> {
   ///   }
   /// ```
   ///
+  ///
+  ///
   T fromMap(Map<String, dynamic> map);
+}
+
+extension MapConvertExtension<T> on MapConvert<T> {
+  Map<String, dynamic> toMap(){
+    var map = <String, dynamic>{
+      // T.noSuchMethod(invocation);
+    };
+    return map;
+  }
 }

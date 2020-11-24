@@ -9,7 +9,7 @@ import 'package:flutter/widgets.dart';
 typedef OnItemTaped<T extends ListItem> = void Function(T t, int index);
 
 ///
-///
+/// 列表内容类型接口
 ///
 mixin ListItem {}
 
