@@ -9,8 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  shared_preferences: "^0.5.7+3"
 
+  # 持久化
+  shared_preferences: "^0.5.7+3"
   # 音频播放(VoiceLabel)
   just_audio: ^0.6.5
 
