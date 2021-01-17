@@ -13,7 +13,10 @@
 ## PUB_HOSTED_URL=https://pub.flutter-io.cn
 ##
 
-function updateVersion() {
+##
+## 获取版本号信息
+##
+function getVersion() {
   #[Major_Version_Number][Minor_Version_Number][Revision_Number][Build_Number]
   if [ -z "$1" ] ; then
     echo "未获取到版本号。"
@@ -27,15 +30,32 @@ function updateVersion() {
   # 情况2 存在buildNumer，即开发版本，测试版本号的判断增加。
 }
 
+##
+##  更新版本号
+##  $1  查找的版本号  $ROLLBACK_VERSION
+##  $2  替换的版本号  $CURRENT_VERSION
+##
+function updateVersion() {
+  sed -ig "s/^version: $1/version: $2/g" pubspec.yaml
+  ## [*]　添加自定义替换
+  sed -ig "s/$1/$2/g" README.md
+  sed -ig "s/$1/$2/g" README_zh.md
+
+  ## [*] 删除替换临时文件
+  rm pubspec.yamlg
+  rm README.mdg
+  rm README_zh.mdg
+}
+
 ## Step 1
 ## 获取当前版本号     pubspec.yaml 中第三行 version: 0.0.6
 CURRENT_VERSION=$(cat pubspec.yaml | grep version: | cut -d ':' -f2 | sed s/[[:space:]]//g)
-
+## 用于失败时回滚的版本好
 ROLLBACK_VERSION=$CURRENT_VERSION
 
 ## Step 2
 ## 更新当前小版本号
-updateVersion "$CURRENT_VERSION"
+getVersion "$CURRENT_VERSION"
 
 echo "Current version(Updated): $CURRENT_VERSION"
 echo "Rollback version(Before): $ROLLBACK_VERSION"
@@ -50,27 +70,7 @@ fi
 
 ## Step 4
 ## 变更版本号
-sed -ig "s/^version: $ROLLBACK_VERSION/version: $CURRENT_VERSION/g" pubspec.yaml
-## [*]　添加自定义替换
-sed -ig "s/$ROLLBACK_VERSION/$CURRENT_VERSION/g" README.md
-sed -ig "s/$ROLLBACK_VERSION/$CURRENT_VERSION/g" README_zh.md
-
-## [*] 删除替换临时文件
-rm pubspec.yamlg
-rm README.mdg
-rm README_zh.mdg
-
-## Step 5
-## 添加ChangeLog描述，提示描述
-## 这里mac比较奇葩, 换行使用'\\' 不能使用'\n'
-sed -ig "2a\\
-\\
-\#\# [$CURRENT_VERSION]\\
-\\
-* 更新内容描述\\
-\\ " CHANGELOG.md
-
-rm CHANGELOG.mdg
+updateVersion "$ROLLBACK_VERSION" "$CURRENT_VERSION"
 
 ## Step 6
 ## 执行dry-run, 检测代码错误。
@@ -81,5 +81,19 @@ flutter pub publish -v --dry-run
 echo "是否继续上传到正式服务器？请仔细查看--dry-run的结果。[y/n]"
 read -r result
 if [[ "$result" == 'y' ]] ; then
+  ## Step 5
+  ## 添加ChangeLog描述，提示描述
+  ## 这里mac比较奇葩, 换行使用'\\' 不能使用'\n'
+  sed -ig "2a\\
+  \\
+  \#\# [$CURRENT_VERSION]\\
+  \\
+  * 更新内容描述\\
+  \\ " CHANGELOG.md
+  rm CHANGELOG.mdg
+
   flutter pub publish -v
+else
+  # 回滚版本号
+  updateVersion "$CURRENT_VERSION" "$ROLLBACK_VERSION"
 fi
