@@ -1,6 +1,14 @@
 ChangeLog
 ======
-  
+
+## [0.0.6-dev.2]
+
+* 更新内容描述
+ 
+## [0.0.6-dev.1]
+
+* 更新内容描述
+   
 ## [0.0.6]
 
 * add new widget VoiceLabel. It can be used very well.

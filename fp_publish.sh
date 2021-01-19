@@ -57,40 +57,53 @@ ROLLBACK_VERSION=$CURRENT_VERSION
 ## 更新当前小版本号
 getVersion "$CURRENT_VERSION"
 
+## 指定版本的操作
+if [[ -n $1 ]] ; then
+  echo "This is a special version $1"
+  CURRENT_VERSION=$1
+fi
+
 echo "Current version(Updated): $CURRENT_VERSION"
 echo "Rollback version(Before): $ROLLBACK_VERSION"
 
 ## Step 3
-## 检查托送地址
+## 变更版本号
+updateVersion "$ROLLBACK_VERSION" "$CURRENT_VERSION"
+
+## Step 4
+## 添加ChangeLog描述，提示描述
+## 这里mac比较奇葩, 换行使用'\\' 不能使用'\n'
+sed -ig "2a\\
+\\
+\#\# [$CURRENT_VERSION]\\
+\\
+* 更新内容描述\\
+\\ " CHANGELOG.md
+rm CHANGELOG.mdg
+
+## Step 5
+## 执行dry-run, 检测代码错误。
+echo "Execute command -- 'flutter pub publish --dry-run'"
+if [[ ! $(flutter pub publish --dry-run) ]] ; then
+  echo "With error"
+  exit 0
+fi
+
+## Step 6
+## 检查推送地址
 if [ -n "$PUB_HOSTED_URL" ] ; then
   echo "$PUB_HOSTED_URL"
   # 临时变更为pub.dev, 无论设置的是什么。
   eval "export PUB_HOSTED_URL=https://pub.dev"
 fi
 
-## Step 4
-## 变更版本号
-updateVersion "$ROLLBACK_VERSION" "$CURRENT_VERSION"
-
-## Step 6
-## 执行dry-run, 检测代码错误。
-flutter pub publish -v --dry-run
-
 ## Step 7
 ## 执行上传，错误需要混滚版本号。
 echo "是否继续上传到正式服务器？请仔细查看--dry-run的结果。[y/n]"
 read -r result
 if [[ "$result" == 'y' ]] ; then
-  ## Step 5
-  ## 添加ChangeLog描述，提示描述
-  ## 这里mac比较奇葩, 换行使用'\\' 不能使用'\n'
-  sed -ig "2a\\
-  \\
-  \#\# [$CURRENT_VERSION]\\
-  \\
-  * 更新内容描述\\
-  \\ " CHANGELOG.md
-  rm CHANGELOG.mdg
+  ## 翻墙代理
+  export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7891
 
   flutter pub publish -v
 else
