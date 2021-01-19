@@ -1,13 +1,17 @@
 ChangeLog
 ======
 
+## [0.0.7]
+
+* 优化voicelabel
+ 
 ## [0.0.6-dev.2]
 
-* 更新内容描述
+* 修正voicelabel逻辑
  
 ## [0.0.6-dev.1]
 
-* 更新内容描述
+* 修正voicelabel逻辑
    
 ## [0.0.6]
 

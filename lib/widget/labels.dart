@@ -66,6 +66,7 @@ class _VoiceLabelState extends State<VoiceLabel> {
 
   int _index = 0;
   var _volume = [Icons.volume_up, Icons.volume_down, Icons.volume_mute];
+  bool isDispose = false;
 
   @override
   void initState() {
@@ -77,6 +78,7 @@ class _VoiceLabelState extends State<VoiceLabel> {
   void dispose() {
     _audioPlayer?.dispose();
     _valueNotifier.dispose();
+    isDispose = true;
     super.dispose();
   }
 
@@ -105,12 +107,6 @@ class _VoiceLabelState extends State<VoiceLabel> {
     });
   }
 
-  void updateValue() {
-    setState(() {
-      _valueNotifier.value = _index = (_index + 1) % _volume.length;
-    });
-  }
-
   void _playAudio() async {
     try {
       var duration = await _audioPlayer.load();
@@ -118,18 +114,12 @@ class _VoiceLabelState extends State<VoiceLabel> {
       _audioPlayer.play();
       // 根据播放的音频播放icon喇叭动画。
       int milliseconds = 0;
-      // for (; milliseconds < duration.inMilliseconds;) {
-      //   print("$milliseconds  $_index");
-      //   setState(() {
-      //     _valueNotifier.value = _index = (_index + 1) % _volume.length;
-      //   });
-      //   await Future.delayed(Duration(milliseconds: 200));
-      //   milliseconds += 200;
-      // }
       Future.doWhile(() async {
         await Future.delayed(Duration(milliseconds: 200));
-        updateValue();
-        return Future.value(milliseconds < duration.inMilliseconds);
+        setState(() {
+          _valueNotifier.value = _index = (_index + 1) % _volume.length;
+        });
+        return Future.value(milliseconds < duration.inMilliseconds && isDispose);
       });
       print("dispose");
     } catch (e) {
