@@ -5,7 +5,7 @@
 ## 快速上手
 
 
-[![plume flutter pub package](https://img.shields.io/static/v1?label=pub&message=v0.0.7&color=informational)](https://github.com/davidzou/flutter_plume)
+[![plume flutter pub package](https://img.shields.io/static/v1?label=pub&message=v0.0.8&color=informational)](https://github.com/davidzou/flutter_plume)
 
 
 [更多帮助](doc/getting_started.md)

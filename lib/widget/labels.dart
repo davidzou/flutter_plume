@@ -72,18 +72,14 @@ class _VoiceLabelState extends State<VoiceLabel> {
   void initState() {
     super.initState();
     _initAudio();
-    setState(() {
-      isDispose = false;
-    });
+    isDispose = false;
   }
 
   @override
   void dispose() {
     _audioPlayer?.dispose();
     _valueNotifier.dispose();
-    // setState(() {
-      isDispose = true;
-    // });
+    isDispose = true;
     super.dispose();
   }
 
