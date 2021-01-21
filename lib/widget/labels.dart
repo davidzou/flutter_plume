@@ -66,19 +66,24 @@ class _VoiceLabelState extends State<VoiceLabel> {
 
   int _index = 0;
   var _volume = [Icons.volume_up, Icons.volume_down, Icons.volume_mute];
-  bool isDispose = false;
+  bool isDispose;
 
   @override
   void initState() {
     super.initState();
     _initAudio();
+    setState(() {
+      isDispose = false;
+    });
   }
 
   @override
   void dispose() {
     _audioPlayer?.dispose();
     _valueNotifier.dispose();
-    isDispose = true;
+    // setState(() {
+      isDispose = true;
+    // });
     super.dispose();
   }
 
@@ -97,7 +102,7 @@ class _VoiceLabelState extends State<VoiceLabel> {
       });
     }
 
-    _audioPlayer.processingStateStream.listen((event) {
+    _audioPlayer?.processingStateStream?.listen((event) {
       print("index - ${event.index}");
       if(event == ProcessingState.completed) {
         setState(() {
@@ -114,13 +119,22 @@ class _VoiceLabelState extends State<VoiceLabel> {
       _audioPlayer.play();
       // 根据播放的音频播放icon喇叭动画。
       int milliseconds = 0;
-      Future.doWhile(() async {
-        await Future.delayed(Duration(milliseconds: 200));
+      for (; milliseconds < duration?.inMilliseconds; ) {
+        if(isDispose) { return; }
+        print("$milliseconds  $_index");
         setState(() {
-          _valueNotifier.value = _index = (_index + 1) % _volume.length;
+          _valueNotifier?.value = _index = (_index + 1) % _volume.length;
         });
-        return Future.value(milliseconds < duration.inMilliseconds && isDispose);
-      });
+        await Future.delayed(Duration(milliseconds: 200));
+        milliseconds += 200;
+      }
+      // Future.doWhile(() async {
+      //   await Future.delayed(Duration(milliseconds: 200));
+      //   setState(() {
+      //     _valueNotifier.value = _index = (_index + 1) % _volume.length;
+      //   });
+      //   return Future.value(milliseconds < duration.inMilliseconds && isDispose);
+      // });
       print("dispose");
     } catch (e) {
       print(e);
@@ -135,8 +149,8 @@ class _VoiceLabelState extends State<VoiceLabel> {
           widget.label,
           style: widget.style,
         ),
-        Visibility(
-          visible: _visible,
+        Opacity(
+          opacity: _visible ? 1.0 : 0.0,
           child: ValueListenableBuilder(
             valueListenable: _valueNotifier,
             builder: (_, value, child) {
