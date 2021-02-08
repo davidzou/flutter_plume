@@ -17,7 +17,7 @@ class FlatStyles {
   ///
   /// 边距
   ///
-  static get padding => const EdgeInsets.all(18.0);
+  static get padding => const EdgeInsets.fromLTRB(18.0, 18.0, 8.0, 18.0);
 
   ///
   /// 行距 标题文字和下面内容的距离间隔
