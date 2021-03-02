@@ -5,7 +5,7 @@
 ## 快速上手
 
 
-[![plume flutter pub package](https://img.shields.io/static/v1?label=pub&message=v0.0.8&color=informational)](https://github.com/davidzou/flutter_plume)
+[![plume flutter pub package](https://img.shields.io/static/v1?label=pub&message=v0.0.9&color=informational)](https://github.com/davidzou/flutter_plume)
 
 
 [更多帮助](doc/getting_started.md)
@@ -27,6 +27,12 @@
 > VoiceLabel
 
     一个带声音播放按钮的标签类。常用于名词解释的标题。
+
+> YearsWidget
+
+    一个用于日历顶端带有年份的显示部分，按钮可以操作年份的递增和递减
+
+    YearsWidget(onChanged: (int year) { print("$year"); })
 
 ### 工具类
 

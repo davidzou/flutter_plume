@@ -5,7 +5,7 @@ A tools for flutter [StatelessWidget], for widgets that always build the same wa
 ## Getting Started
 
 
-[![plume flutter pub package](https://img.shields.io/static/v1?label=pub&message=v0.0.8&color=informational)](https://github.com/davidzou/flutter_plume)
+[![plume flutter pub package](https://img.shields.io/static/v1?label=pub&message=v0.0.9&color=informational)](https://github.com/davidzou/flutter_plume)
 
 
 [MORE GUIDE](doc/getting_started.md)
@@ -23,6 +23,18 @@ A tools for flutter [StatelessWidget], for widgets that always build the same wa
 > HeaderTitle
 
     A custom headline.
+
+> YearsWidget
+
+    A display part with year at the top of calendar, button can operate year increment and decrement.
+
+    ```
+    YearsWidget(
+        onChanged: (int year) {
+            print("$year");
+        }
+    )
+    ```
 
 ### Tools
 
