@@ -7,8 +7,8 @@ class DateMath {
   ///
   /// * year  要获取的那一年的，用于计算
   ///
-  int getMonthDays(int month, {int year}) {
-    assert(month < 12 && month > 0);
+  int getDaysOfMonth(int month, {int year}) {
+    assert(month <= 12 && month > 0);
     switch (month) {
       case 1:
       case 3:
@@ -24,7 +24,7 @@ class DateMath {
       case 11:
         return 30;
       case 2:
-        return getLeapYearMothDays( year: year);
+        return _getDaysOfFebruary( year: year);
       default: throw Exception("Unknown Exception, Month: $month");
     }
   }
@@ -32,7 +32,7 @@ class DateMath {
   ///
   /// 获取闰年月的天数
   ///
-  int getLeapYearMothDays({int year}) {
+  int _getDaysOfFebruary({int year}) {
     if (isLeapYear(year: year)) {
       return 29;
     }

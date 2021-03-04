@@ -92,6 +92,11 @@ class _YearsMonthWidgetState extends State<YearsMonthWidget> {
             if(_monthNotifier.value > 1) {
               _monthNotifier.value -= 1;
               widget.onMonthChanged.call(_monthNotifier.value);
+            } else {
+              _monthNotifier.value = 12;
+              _yearNotifier.value -= 1;
+              widget.onYearChanged.call(_yearNotifier.value);
+              widget.onMonthChanged.call(_monthNotifier.value);
             }
           },
         ),

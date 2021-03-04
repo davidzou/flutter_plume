@@ -30,7 +30,7 @@ class Calendar {
     /// 要显示哪个月？
     int _month = month ?? DateTime.now().month;
     /// 一共要有多少个Widget，即天
-    int _days = DateMath().getMonthDays(_month, year: _year);
+    int _days = DateMath().getDaysOfMonth(_month, year: _year);
     print("year:$_year   month:$_month");
     int offset = DateTime(_year, _month, 1).weekday;
     return _getScope(context, innerCalendar, _year, _month, _days, offset);
