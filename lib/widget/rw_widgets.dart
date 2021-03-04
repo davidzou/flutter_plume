@@ -56,146 +56,146 @@ class Content extends StatelessWidget {
   }
 }
 
-///
-/// 日历选择
-///
-/// +-----------------------------------+
-/// ｜ title                            ｜
-/// ｜                                  ｜
-/// ｜    0000 00-00      icon          ｜
-/// +-----------------------------------+
-///
-/// ### Example:
-///
-///     Calender(
-///       "生产日期",
-///       onDays: DateTime.now(),
-///       notifier: (time){ print(time); },
-///       enable: true
-///     )
-///
-///
-class Calender extends StatefulWidget {
-  Calender(this.title,
-      {Key key, this.onDays, this.notifier, this.controller, this.enable})
-      : super(key: key);
-
-  final String title;
-
-  final DateTime onDays;
-
-  ///
-  /// 是否开启设置
-  ///
-  final bool enable;
-
-  ///
-  /// 当数据改变时的回调
-  ///
-  final CalenderCallback notifier;
-
-  final CalenderController controller;
-
-  @override
-  _CalenderState createState() => _CalenderState();
-}
-
-class _CalenderState extends State<Calender> {
-  /// 初始值
-  DateTime _onDays;
-
-  /// 是否可以选择日期。
-  bool _enable;
-
-  /// 日期显示值
-  String _daysValue;
-
-  @override
-  void initState() {
-    super.initState();
-    _onDays = widget?.controller?.value ?? widget?.onDays;
-    _enable = widget?.enable;
-    if (_onDays == null) {
-      _onDays = DateTime.now();
-    }
-  }
-
-  _handleDateTime({time}) {
-    assert(time != null);
-
-    /// 监听值变更
-    setState(() {
-      _onDays = time;
-    });
-    widget.notifier.call(time);
-  }
-
-  _handleOnPressed(BuildContext context) {
-    return () {
-      if (!_enable) {
-        return;
-      }
-      showDatePicker(
-        context: context,
-        initialDate: new DateTime.now(),
-        firstDate: new DateTime.now().subtract(new Duration(days: 365 * 3)),
-        lastDate: new DateTime.now().add(new Duration(days: 365 * 3)),
-      ).then((DateTime val) {
-        print("onPressed $val"); // 2018-07-12 00:00:00.000
-        _handleDateTime(time: val);
-      }).catchError((err) {
-        print(err);
-      });
-    };
-  }
-
-  _onDaysValue() {
-    if (widget?.controller?.value == null) {
-      return "${_onDays?.year} ${_onDays?.month}-${_onDays?.day}";
-    }
-    _onDays = widget?.controller?.value;
-    return "${_onDays?.year} ${_onDays?.month}-${_onDays?.day}";
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    _daysValue = _onDaysValue();
-    return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: Column(
-        // 左对齐
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            widget?.title,
-            maxLines: 1,
-            textAlign: TextAlign.left,
-            style: TextStyle(
-                fontSize: 16.0,
-                color: Colors.black54,
-                fontWeight: FontWeight.w600),
-          ),
-          SizedBox(
-            width: 1.0,
-            height: FlatStyles.lineSpace,
-          ),
-          ImageButton(
-            title: _daysValue,
-            right: Icon(
-              Icons.calendar_today,
-              color: _enable ? Colors.teal : Colors.grey,
-            ),
-            onPressed: _handleOnPressed(context),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CalenderController extends ValueNotifier<DateTime> {
-  CalenderController(DateTime value) : super(value);
-}
+// ///
+// /// 日历选择
+// ///
+// /// +-----------------------------------+
+// /// ｜ title                            ｜
+// /// ｜                                  ｜
+// /// ｜    0000 00-00      icon          ｜
+// /// +-----------------------------------+
+// ///
+// /// ### Example:
+// ///
+// ///     Calender(
+// ///       "生产日期",
+// ///       onDays: DateTime.now(),
+// ///       notifier: (time){ print(time); },
+// ///       enable: true
+// ///     )
+// ///
+// ///
+// class Calender extends StatefulWidget {
+//   Calender(this.title,
+//       {Key key, this.onDays, this.notifier, this.controller, this.enable})
+//       : super(key: key);
+//
+//   final String title;
+//
+//   final DateTime onDays;
+//
+//   ///
+//   /// 是否开启设置
+//   ///
+//   final bool enable;
+//
+//   ///
+//   /// 当数据改变时的回调
+//   ///
+//   final CalenderCallback notifier;
+//
+//   final CalenderController controller;
+//
+//   @override
+//   _CalenderState createState() => _CalenderState();
+// }
+//
+// class _CalenderState extends State<Calender> {
+//   /// 初始值
+//   DateTime _onDays;
+//
+//   /// 是否可以选择日期。
+//   bool _enable;
+//
+//   /// 日期显示值
+//   String _daysValue;
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     _onDays = widget?.controller?.value ?? widget?.onDays;
+//     _enable = widget?.enable;
+//     if (_onDays == null) {
+//       _onDays = DateTime.now();
+//     }
+//   }
+//
+//   _handleDateTime({time}) {
+//     assert(time != null);
+//
+//     /// 监听值变更
+//     setState(() {
+//       _onDays = time;
+//     });
+//     widget.notifier.call(time);
+//   }
+//
+//   _handleOnPressed(BuildContext context) {
+//     return () {
+//       if (!_enable) {
+//         return;
+//       }
+//       showDatePicker(
+//         context: context,
+//         initialDate: new DateTime.now(),
+//         firstDate: new DateTime.now().subtract(new Duration(days: 365 * 3)),
+//         lastDate: new DateTime.now().add(new Duration(days: 365 * 3)),
+//       ).then((DateTime val) {
+//         print("onPressed $val"); // 2018-07-12 00:00:00.000
+//         _handleDateTime(time: val);
+//       }).catchError((err) {
+//         print(err);
+//       });
+//     };
+//   }
+//
+//   _onDaysValue() {
+//     if (widget?.controller?.value == null) {
+//       return "${_onDays?.year} ${_onDays?.month}-${_onDays?.day}";
+//     }
+//     _onDays = widget?.controller?.value;
+//     return "${_onDays?.year} ${_onDays?.month}-${_onDays?.day}";
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     _daysValue = _onDaysValue();
+//     return Padding(
+//       padding: const EdgeInsets.all(12.0),
+//       child: Column(
+//         // 左对齐
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: <Widget>[
+//           Text(
+//             widget?.title,
+//             maxLines: 1,
+//             textAlign: TextAlign.left,
+//             style: TextStyle(
+//                 fontSize: 16.0,
+//                 color: Colors.black54,
+//                 fontWeight: FontWeight.w600),
+//           ),
+//           SizedBox(
+//             width: 1.0,
+//             height: FlatStyles.lineSpace,
+//           ),
+//           ImageButton(
+//             title: _daysValue,
+//             right: Icon(
+//               Icons.calendar_today,
+//               color: _enable ? Colors.teal : Colors.grey,
+//             ),
+//             onPressed: _handleOnPressed(context),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+//
+// class CalenderController extends ValueNotifier<DateTime> {
+//   CalenderController(DateTime value) : super(value);
+// }
 
 /// and used by plume ^0.0.3+
 /// 图标文字控件，类似Android的Image。
