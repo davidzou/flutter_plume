@@ -89,6 +89,34 @@ class Calendar {
 
 }
 
+///
+/// 周表
+///
+class WeekDayClip {
+  WeekDayClip(this.dayOfWeek);
+  final int dayOfWeek;
+
+  @override
+  String toString() {
+    return 'WeekDayClip{dayOfWeek: $dayOfWeek}';
+  }
+
+}
+
+///
+/// 日历碎片，每个日历所在的
+///
+class DayClip {
+  DayClip(this.day);
+
+  final int day;
+
+  @override
+  String toString() {
+    return 'DayModel{day: $day}';
+  }
+}
+
 
 /// 可扩展日历设置。
 ///

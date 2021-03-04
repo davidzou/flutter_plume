@@ -89,12 +89,12 @@ class _YearsMonthWidgetState extends State<YearsMonthWidget> {
         InkWell(
           child: Icon(Icons.chevron_left),
           onTap: () {
-            if(_monthNotifier.value > 1) {
+            if(_monthNotifier.value > DateTime.january) {
               _monthNotifier.value -= 1;
               widget.onMonthChanged.call(_monthNotifier.value);
             } else {
               if(_yearNotifier.value > widget.minYear) {
-                _monthNotifier.value = 12;
+                _monthNotifier.value = DateTime.december;
                 _yearNotifier.value -= 1;
                 widget.onYearChanged.call(_yearNotifier.value);
                 widget.onMonthChanged.call(_monthNotifier.value);
@@ -125,12 +125,12 @@ class _YearsMonthWidgetState extends State<YearsMonthWidget> {
         InkWell(
           child: Icon(Icons.chevron_right),
           onTap: () {
-            if(_monthNotifier.value < 12) {
+            if(_monthNotifier.value < DateTime.monthsPerYear) {
               _monthNotifier.value += 1;
               widget.onMonthChanged.call(_monthNotifier.value);
             } else {
               if(_yearNotifier.value < widget.maxYear) {
-                _monthNotifier.value = 1;
+                _monthNotifier.value = DateTime.january;
                 _yearNotifier.value += 1;
                 widget.onMonthChanged.call(_monthNotifier.value);
                 widget.onYearChanged.call(_yearNotifier.value);
