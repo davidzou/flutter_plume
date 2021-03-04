@@ -29,7 +29,7 @@ class Calendar {
     int _month = month ?? DateTime.now().month;
 
     /// 一共要有多少个Widget，即天
-    int _days = getMonthDays(_month);
+    int _days = getMonthDays(_month, year: _year);
     print("year:$_year   month:$_month");
     int offset = DateTime(_year, _month, 1).weekday;
     return _getScope(_days, offset);
@@ -43,21 +43,42 @@ class Calendar {
   ///
   List<Widget> _getScope(int days, int offset) {
     print("days:$days  offset:$offset");
-    List<Widget> children = <Widget>[];
-    bool spec = (offset - 1) % 7 != 0;
 
-    int _num = days + (spec ? (offset - 1) : 0);
+    //
+    // 排序方式
+    // * 0  -- 日  一  二  三  四  五  六
+    // * 1  -- 一  二  三  四  五  六  日
+    //
+    int _tuning = 0;
+    assert(_tuning == 0 || _tuning == 1);
+    List<String> _tuningTitle;
+    if (_tuning == 0) {
+      _tuningTitle = ["日", "一", "二", "三", "四", "五", "六"];
+    } else {
+      _tuningTitle = ["一", "二", "三", "四", "五", "六", "日"];
+    }
+
+    List<Widget> children = <Widget>[];
+    bool spec = (offset - _tuning) % 7 != 0;
+
+    int _num = days + (spec ? (offset - _tuning) : 0);
     for (int i = 0; i < _num; i++) {
-      if (i < (offset - 1) && spec) {
+      if (i < (offset - _tuning) && spec) {
+        /// FIXME 前要保留上个月的结束，后要保留下个月的开始
+        /// 填空位
         children.add(Text(""));
       } else {
         if (!spec) {
           children.add(Text("${(i + 1)}"));
         } else {
-          children.add(Text("${(i + 1) - (offset - 1)}"));
+          children.add(Text("${(i + 1) - (offset - _tuning)}"));
         }
       }
     }
+
+    // for(int i = 0; i < 7; i ++) {
+    children.insertAll(0, _tuningTitle.map((e) => Text(e)));
+    // }
     return children;
   }
 
