@@ -124,7 +124,7 @@ class WeekDayClip extends CalendarClip {
   getData() => dayOfWeek;
 
   @override
-  Widget build(BuildContext context, {OnClickedDayClip onSelectedDayClip}) {
+  Widget build(BuildContext context, {OnClickedDayClip onClickedDayClip}) {
     if(delegate != null) {
       return delegate.buildWeekDay(context, dayOfWeek);
     }
@@ -156,10 +156,10 @@ class DayClip extends CalendarClip {
   // }
 
   @override
-  Widget build(BuildContext context, {OnClickedDayClip onSelectedDayClip}) {
+  Widget build(BuildContext context, {OnClickedDayClip onClickedDayClip}) {
     return dayClipModel?.day == -1 ? Text("") : (delegate != null
-        ? delegate.buildDayClip(context, dayClipModel, onSelectedDayClip)
-        : SimpleDayClipDelegate().buildDayClip(context, dayClipModel, onSelectedDayClip));
+        ? delegate.buildDayClip(context, dayClipModel, onClickedDayClip)
+        : SimpleDayClipDelegate().buildDayClip(context, dayClipModel, onClickedDayClip));
   }
 
   @override
@@ -179,7 +179,7 @@ class DayClip extends CalendarClip {
 abstract class CalendarClip {
   // getData();
 
-  Widget build(BuildContext context, {OnClickedDayClip onSelectedDayClip});
+  Widget build(BuildContext context, {OnClickedDayClip onClickedDayClip});
 }
 
 /// 日期数据模型
@@ -213,12 +213,18 @@ class DayClipModel {
 abstract class DayClipData {
   /// 是否是节日(无论东方，西方，国际国内，法定或者纪念日等）
   external bool isFestival();
+  /// 是否打卡
+  external bool isPunch();
 }
 
 ///  String数据类型，一般用于数据测试，简单数据。
 class DayClipStringData extends DayClipData {
   DayClipStringData(this.data);
   final String data;
+
+  bool isPunch() {
+    return true;
+  }
 
   @override
   String toString() {
