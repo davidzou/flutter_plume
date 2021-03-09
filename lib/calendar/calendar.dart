@@ -10,6 +10,7 @@ typedef  OnClickedDayClip = Function(List<int> multi, DayClipModel dayClipModel)
 ///
 /// 日历相关计算工具。
 ///
+/// ### 获取日历中的每一个日碎片
 /// ```
 ///   Calendar().getPage().map((e) => Center(child: e)).toList();
 /// ```
