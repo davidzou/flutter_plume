@@ -5,7 +5,7 @@ import 'package:plume/calendar/constant/constant.dart';
 import 'package:plume/calendar/tools/date_math.dart';
 
 /// 当被点击事件触发
-typedef  OnSelectedDayClip = Function(List<int> multi, DayClipModel dayClipModel);
+typedef  OnClickedDayClip = Function(List<int> multi, DayClipModel dayClipModel);
 
 ///
 /// 日历相关计算工具。
@@ -93,13 +93,13 @@ class Calendar {
         if (!spec) {
           // 寻找给定的数据列表中是否有匹配的数据模型，有则返回，无则返回一个日期数据模型，数据内容为空。
           DayClipModel _dayClipModel = data?.firstWhere((element) => (element.year == year && element.month == month && element.day == i + 1), orElse: () => DayClipModel(year, month, i + 1));
-          print("spc $_dayClipModel");
+          // print("spc $_dayClipModel");
           dayClips.add(DayClip(_dayClipModel, delegate: dayClipDelegate));
         } else {
           int _day = (i + 1) - (offset - _tuning);
           DayClipModel _dayClipModel = data?.firstWhere((element) => (element.year == year && element.month == month && element.day == _day), orElse: () => DayClipModel(year, month, _day));
 
-          print("ddd $_dayClipModel");
+          // print("ddd $_dayClipModel");
           dayClips.add(DayClip(_dayClipModel, delegate: dayClipDelegate));
         }
       }
@@ -123,7 +123,7 @@ class WeekDayClip extends CalendarClip {
   getData() => dayOfWeek;
 
   @override
-  Widget build(BuildContext context, {OnSelectedDayClip onSelectedDayClip}) {
+  Widget build(BuildContext context, {OnClickedDayClip onSelectedDayClip}) {
     if(delegate != null) {
       return delegate.buildWeekDay(context, dayOfWeek);
     }
@@ -155,7 +155,7 @@ class DayClip extends CalendarClip {
   // }
 
   @override
-  Widget build(BuildContext context, {OnSelectedDayClip onSelectedDayClip}) {
+  Widget build(BuildContext context, {OnClickedDayClip onSelectedDayClip}) {
     return dayClipModel?.day == -1 ? Text("") : (delegate != null
         ? delegate.buildDayClip(context, dayClipModel, onSelectedDayClip)
         : SimpleDayClipDelegate().buildDayClip(context, dayClipModel, onSelectedDayClip));
@@ -178,11 +178,17 @@ class DayClip extends CalendarClip {
 abstract class CalendarClip {
   // getData();
 
-  Widget build(BuildContext context, {OnSelectedDayClip onSelectedDayClip});
+  Widget build(BuildContext context, {OnClickedDayClip onSelectedDayClip});
 }
 
 /// 日期数据模型
 class DayClipModel {
+
+  factory DayClipModel.now({DayClipData data}) {
+    DateTime _now = DateTime.now();
+    return DayClipModel(_now.year, _now.month, _now.day, data: data);
+  }
+
   DayClipModel(this.year, this.month, this.day, {this.data});
   /// 每日数据
   final DayClipData data;
@@ -252,13 +258,13 @@ class DayClipStringData extends DayClipData {
 /// ```
 abstract class DayClipDelegate {
   /// 构建每一个日期子类布局，其中用于显示日期，和点击效果？。
-  external Widget buildDayClip(BuildContext context, DayClipModel dayClipModel, OnSelectedDayClip onSelectedDayClip);
+  external Widget buildDayClip(BuildContext context, DayClipModel dayClipModel, OnClickedDayClip onSelectedDayClip);
 }
 
 /// 默认
 mixin DayClipDelegateMiXin on DayClipDelegate {
   @override
-  Widget buildDayClip(BuildContext context, DayClipModel dayClipModel, OnSelectedDayClip onSelectedDayClip);
+  Widget buildDayClip(BuildContext context, DayClipModel dayClipModel, OnClickedDayClip onSelectedDayClip);
 }
 
 ///
@@ -266,7 +272,7 @@ mixin DayClipDelegateMiXin on DayClipDelegate {
 /// 今天被单独标出
 ///
 class SimpleDayClipDelegate implements DayClipDelegateMiXin {
-  Widget buildDayClip(BuildContext context, DayClipModel dayClipModel, OnSelectedDayClip onSelectedDayClip)  {
+  Widget buildDayClip(BuildContext context, DayClipModel dayClipModel, OnClickedDayClip onSelectedDayClip)  {
     // 判断是否为今天
     bool _isToday = dayClipModel?.day == DateTime.now().day && dayClipModel?.month == DateTime.now().month && dayClipModel?.year == DateTime.now().year;
     /// 默认显示
