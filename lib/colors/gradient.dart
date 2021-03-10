@@ -1,7 +1,6 @@
+import 'dart:ui';
 
 // 渐变配色
-
-import 'dart:ui';
 
 const List<Color> GradeGrey = const <Color>[Color(0xffbdc3c7), Color(0xff2c3e50)];
 
