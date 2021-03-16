@@ -111,3 +111,57 @@ const List<Color> Delicate = const <Color>[Color(0xffd3cce3), Color(0xffe9e4f0)]
 const List<Color> Selenium = const <Color>[Color(0xff3c3b3f), Color(0xff605c3c)];
 
 const List<Color> Sulphur = const <Color>[Color(0xffcac531), Color(0xfff3f9a7)];
+
+const List<Color> PinkFlavour = const <Color>[Color(0xff800080), Color(0xffffc0cb)];
+
+const List<Color> RainbowBlue = const <Color>[Color(0xff00f260), Color(0xff0575e6)];
+
+const List<Color> OrangeFun = const <Color>[Color(0xfffc4a1a), Color(0xfff7b733)];
+
+const List<Color> DigitalWater = const <Color>[Color(0xff74ebd5), Color(0xffacb6e5)];
+
+const List<Color> Lithium = const <Color>[Color(0xff6d6027), Color(0xffd3cbb8)];
+
+const List<Color> Argon = const <Color>[Color(0xff03001e), Color(0xff7303c0), Color(0xffec38bc), Color(0xfffdeff9)];
+
+const List<Color> Hydrogen = const <Color>[Color(0xff667db6), Color(0xff0082c8), Color(0xff0082c8), Color(0xff667db6)];
+
+const List<Color> Zinc = const <Color>[Color(0xffada996), Color(0xfff2f2f2), Color(0xffdbdbdb), Color(0xffeaeaea)];
+
+const List<Color> VelvetSun = const <Color>[Color(0xffe1eec3), Color(0xfff05053)];
+
+const List<Color> KingYna = const <Color>[Color(0xff1a2a6c), Color(0xffb21f1f), Color(0xfffdbb2d)];
+
+const List<Color> Summer = const <Color>[Color(0xff22c1c3), Color(0xfffdbb2d)];
+
+const List<Color> OrangeCoral = const <Color>[Color(0xffff9966), Color(0xfffff5e62)];
+
+const List<Color> Purpink = const <Color>[Color(0xff7f00ff), Color(0xffe100ff)];
+
+const List<Color> Dull = const <Color>[Color(0xffc9d6ff), Color(0xffe2e2e2)];
+
+const List<Color> KimobyIsTheNewBlue = const <Color>[Color(0xff396afc), Color(0xff2948ff)];
+
+const List<Color> BrokenHearts = const <Color>[Color(0xffd9a7c7), Color(0xfffffcdc)];
+
+const List<Color> Subu = const <Color>[Color(0xff0cebeb), Color(0xff20e3b2), Color(0xff29ffc6)];
+
+const List<Color> Socialive = const <Color>[Color(0xff06beb6), Color(0xff48b1bf)];
+
+const List<Color> CrimsonTide = const <Color>[Color(0xff642b73), Color(0xffc6426e)];
+
+const List<Color> Telegram = const <Color>[Color(0xff1c92d2), Color(0xfff2fcfe)];
+
+const List<Color> Terminal = const <Color>[Color(0xff000000), Color(0xff0f9b0f)];
+
+const List<Color> Scooter = const <Color>[Color(0xff36d1dc), Color(0xff5b86e5)];
+
+const List<Color> Alive = const <Color>[Color(0xffcb356b), Color(0xffbd3f32)];
+
+const List<Color> Relay = const <Color>[Color(0xff3a1c71), Color(0xffd76d77), Color(0xffffaf7b)];
+
+const List<Color> Meridian = const <Color>[Color(0xff283c86), Color(0xff45a247)];
+
+const List<Color> CompareNow = const <Color>[Color(0xffef3b36), Color(0xffffffff)];
+
+const List<Color> Mello = const <Color>[Color(0xffc0392b), Color(0xff8e44ad)];
