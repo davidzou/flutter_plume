@@ -40,7 +40,7 @@ class Calendar {
   ///                           1  -- 一  二  三  四  五  六  日     周一为第一位
   ///
   ///
-  List<CalendarClip> getPage({List<DayClipModel> data = const [], DayClipDelegate dayClipDelegate, WeekDayClipDelegate weekDayClipDelegate, int year, int month, int tuning = 0}) {
+  List<CalendarClip> getPage({List<DayClipModel> data = const [], DayClipDelegate dayClipDelegate, WeekDayClipDelegate weekDayClipDelegate, int year, int month}) {
     /// 要显示哪年？
     int _year = year ?? DateTime.now().year;
     /// 要显示哪个月？
@@ -50,7 +50,7 @@ class Calendar {
     /// 计算当月的第一天是周几。即在列表中的偏移位置。
     int offset = DateTime(_year, _month, 1).weekday;
     print("year:$_year   month:$_month");
-    return _getScope(dayClipDelegate, weekDayClipDelegate, data, _year, _month, _days, offset, tuning);
+    return _getScope(dayClipDelegate, weekDayClipDelegate, data, _year, _month, _days, offset);
   }
 
   ///
@@ -59,7 +59,7 @@ class Calendar {
   /// * days    每个月的天数
   /// * offset   偏移量
   ///
-  List<CalendarClip> _getScope(DayClipDelegate dayClipDelegate, WeekDayClipDelegate weekDayClipDelegate, List<DayClipModel> data, int year, int month, int days, int offset, int tuning) {
+  List<CalendarClip> _getScope(DayClipDelegate dayClipDelegate, WeekDayClipDelegate weekDayClipDelegate, List<DayClipModel> data, int year, int month, int days, int offset) {
     print("days:$days  offset:$offset");
 
     //
@@ -67,7 +67,7 @@ class Calendar {
     // * 0  -- 日  一  二  三  四  五  六
     // * 1  -- 一  二  三  四  五  六  日
     //
-    int _tuning = tuning;
+    int _tuning = weekDayClipDelegate?.isTuning() ? 0 : 1;
     assert(_tuning == 0 || _tuning == 1);
 
     List<int> _tuningTitle;
@@ -315,11 +315,22 @@ abstract class WeekDayClipDelegate {
   /// * dayOfWeek   周几，一周的第几天
   ///
   external Widget buildWeekDay(BuildContext context, int dayOfWeek);
+
+  ///
+  /// 是否调整排序
+  ///
+  /// true 按照圣经排序
+  /// false 按照中国排序，即星期一为第一天
+  ///
+  external bool isTuning();
 }
 
 mixin WeekDayClipDelegateMiXin on WeekDayClipDelegate {
   @override
   Widget buildWeekDay(BuildContext context, int dayOfWeek);
+
+  @override
+  bool isTuning();
 }
 
 /// 一般简单实现，中文标题
@@ -340,6 +351,9 @@ class SimpleWeekDayClipDelegate implements WeekDayClipDelegateMiXin {
     }
     return Text(_name, style: _style,);
   }
+
+  @override
+  bool isTuning() => false;
 }
 
 ///
@@ -368,4 +382,6 @@ class EnglishWeekDayClipDelegate implements WeekDayClipDelegateMiXin {
     }
     return Text(_name, style: _style,);
   }
+
+  bool isTuning() => true;
 }
