@@ -1,6 +1,18 @@
 import 'dart:ui';
 
+// class Gradients {
+//   Gradients._();
+//
+//   static get gradients => _getGradients();
+//
+//   List _getGradients() {
+//     return [];
+//   }
+// }
 
+List gradients = const [
+  GradeGrey, PiggyPink, CoolBlues, MegaTron
+];
 
 // 渐变配色
 
