@@ -11,7 +11,7 @@ import 'dart:ui';
 // }
 
 List gradients = const [
-  GradeGrey, PiggyPink, CoolBlues, MegaTron
+  GradeGrey, PiggyPink, CoolBlues, MegaTron, MoonlitAsteroid, JShine, EveningSunshine, DarkOcean, CoolSky, Yoda,
 ];
 
 // 渐变配色
