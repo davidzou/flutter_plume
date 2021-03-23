@@ -145,9 +145,10 @@ abstract class ListViewBuilder<T extends ListItem> {
   /// ```
   ///
   void init() {
-    if(scrollController != null) {
+    if (scrollController != null) {
       scrollController.addListener(() {
-        if(scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+        if (scrollController.position.pixels ==
+            scrollController.position.maxScrollExtent) {
           // 最底部时加载数据。
           _onLoadMore();
           isLoading = true;
@@ -166,23 +167,24 @@ abstract class ListViewBuilder<T extends ListItem> {
   /// 加载更多
   /// 网络请求，数据刷新。
   ///
-  Future _onLoadMore() async{
+  Future _onLoadMore() async {
     if (isLoading) {
       print("more has loading");
       return;
     }
     print("list build loding more");
-    await Future.delayed(Duration(seconds: 3));
-    onLoadingMore.call();
-    // 加载完成。loadingMore 错误那么加载失败。
-    isLoading = false;
+    await Future.delayed(Duration(seconds: 3), () {
+      onLoadingMore?.call();
+    }).whenComplete(() =>
+        // 加载完成。loadingMore 错误那么加载失败。
+        isLoading = false);
   }
 
   ///
   /// 空数据状态下的界面显示内容
   ///
   Widget buildBlank() {
-    return Text("没有数据");
+    return Center(child: Text("没有可用数据"));
   }
 
   Widget build() {
@@ -202,16 +204,27 @@ abstract class ListViewBuilder<T extends ListItem> {
             // 使用构建器显示列表内容
             itemBuilder: (BuildContext context, int index) {
               print("list index $index - ${list.length}");
-              if(index == list.length) {
-                return SizedBox(child: Text("加载中"));
+              if (index == list.length) {
+                return Visibility(
+                  visible: isLoading,
+                  child: SizedBox(
+                    child: Text("加载中"),
+                  ),
+                );
               } else {
-                return Container(
+                return
+                  onItemTap == null ?
+                  Container(
+                    child: itemBuild(context, list[index], index),
+                  )
+                      : Container(
                     height: height ?? 80,
                     child: InkWell(
                       onTap: () => onItemTap(list[index], index),
                       // 列表布局
                       child: itemBuild(context, list[index], index),
-                    ));
+                    ),
+                  );
               }
             }),
       ),
@@ -223,6 +236,6 @@ abstract class ListViewBuilder<T extends ListItem> {
   Future _doRefresh() async {
     // return onLoadRefresh();
     await Future.delayed(Duration(seconds: 3));
-    onPullToRefreshed.call();
+    onPullToRefreshed?.call();
   }
 }
