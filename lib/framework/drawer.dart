@@ -31,7 +31,10 @@ class DrawerBuilder {
   /// * 包含footer
   /// * 包含背景
   ///
-  static Drawer drawer(BuildContext context, { DrawBuilderDelegate delegate, }) {
+  static Drawer drawer(
+    BuildContext context, {
+    DrawerDelegate delegate,
+  }) {
     Widget _builderHeader() {
       if (delegate.enableHeader()) {
         if (delegate.buildHeader() != null) {
@@ -42,13 +45,10 @@ class DrawerBuilder {
               padding: EdgeInsets.zero,
               margin: EdgeInsets.zero,
               decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [
-                        Colors.black12,
-                        Colors.orangeAccent,
-                      ]
-                  )
-              ),
+                  gradient: LinearGradient(colors: [
+                Colors.black12,
+                Colors.orangeAccent,
+              ])),
               child: Text("header"),
             ),
           );
@@ -65,12 +65,15 @@ class DrawerBuilder {
         );
       }
     }
+
     List<Widget> _buildList(BuildContext context) {
       return delegate.buildList(context);
     }
+
     Widget _buildFooter() {
-      return delegate.buildFooter();
+      return delegate.buildFooter() ?? Container();
     }
+
     return Drawer(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -96,9 +99,11 @@ class DrawerBuilder {
 ///
 /// Drawer代理
 ///
-abstract class DrawBuilderDelegate {
-
-  const DrawBuilderDelegate();
+abstract class DrawerDelegate {
+  const DrawerDelegate({
+    Widget header,
+    Widget footer,
+  });
 
   /// 是否显示头部定制区域
   bool enableHeader();
@@ -118,15 +123,57 @@ abstract class DrawBuilderDelegate {
 }
 
 ///
-mixin DrawBuilderDelegateMiXin on DrawBuilderDelegate {
+mixin DrawerDelegateMiXin on DrawerDelegate {}
+
+///
+/// Drawer列表创建代理
+///
+class DrawerChildListDelegate extends DrawerDelegate {
+  const DrawerChildListDelegate({
+    @required this.children,
+    this.enable = false,
+    this.header,
+    this.footer,
+  }) : super(
+          header: header,
+          footer: footer,
+        );
+
+  final List<Widget> children;
+  final bool enable;
+  final DrawerHeader header;
+  final Widget footer;
+
+  @override
+  Widget buildFooter() {
+    return footer ?? null;
+  }
+
+  @override
+  DrawerHeader buildHeader() {
+    return header ?? null;
+  }
+
+  @override
+  List<Widget> buildList(BuildContext context) {
+    return children;
+  }
+
+  @override
+  bool enableHeader() => enable;
 }
 
 ///
 /// 简单实现
 ///
-class SimpleDrawBuilderDelegate extends DrawBuilderDelegate {
-  const SimpleDrawBuilderDelegate(
-      {this.enable = false, this.childCount = 0, this.builder, this.footer, this.header}) ;
+class DrawerChildBuilderDelegate extends DrawerDelegate {
+  const DrawerChildBuilderDelegate({
+    this.enable = false,
+    @required this.childCount,
+    @required this.builder,
+    this.footer,
+    this.header,
+  });
 
   /// 是否开启头部
   final bool enable;
@@ -141,23 +188,22 @@ class SimpleDrawBuilderDelegate extends DrawBuilderDelegate {
 
   final DrawerHeader header;
 
-  factory SimpleDrawBuilderDelegate.custom() {
-    return SimpleDrawBuilderDelegate(
-      enable: false,
-      childCount: 1,
-      builder: (context, index) {return Text("$index");},
-      footer: null,
-      header: null,
-    );
-  }
-
   @override
   Widget buildFooter() {
-    return footer ?? Container(
-      padding: EdgeInsets.all(8.0),
-      child: Text("上海若紊科技有限公司"),
-    );
+    return footer ??
+        Container(
+          padding: EdgeInsets.all(8.0),
+          child: Text("上海若紊科技有限公司"),
+        );
   }
+
+  // _getVersion() {
+  //   // PackageInfo packageInfo = await PackageInfo.fromPlatform();
+  //   //
+  //   // String version = packageInfo.version;//版本号
+  //   // String buildNumber = packageInfo.buildNumber;//版本构建号
+  //   return Platform.version;
+  // }
 
   @override
   DrawerHeader buildHeader() => header ?? null;
@@ -165,15 +211,12 @@ class SimpleDrawBuilderDelegate extends DrawBuilderDelegate {
   @override
   List<Widget> buildList(BuildContext context) {
     List<Widget> children = [];
-    for (int i = 0; i < childCount; i ++) {
+    for (int i = 0; i < childCount; i++) {
       children.add(builder(context, i));
     }
     return children ?? [];
   }
 
   @override
-  bool enableHeader() {
-    return enable;
-  }
-
+  bool enableHeader() => enable;
 }
