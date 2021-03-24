@@ -198,6 +198,16 @@ class DayClipModel {
   final int month;
   final int day;
 
+  /// 是否为同一天
+  bool isSame(DayClipModel dayClipModel) {
+    return day == dayClipModel?.day && month == dayClipModel?.month && year == dayClipModel?.year;
+  }
+
+  /// 是否为今天
+  bool isNow() {
+    return day == DateTime.now().day && month == DateTime.now().month && year == DateTime.now().year;
+  }
+
   @override
   String toString() {
     return 'DayClipModel{year: $year, month: $month, day: $day}';
@@ -279,6 +289,8 @@ mixin DayClipDelegateMiXin on DayClipDelegate {
 /// 今天被单独标出
 ///
 class SimpleDayClipDelegate implements DayClipDelegateMiXin {
+
+  @override
   Widget buildDayClip(BuildContext context, DayClipModel dayClipModel, OnClickedDayClip onSelectedDayClip)  {
     // 判断是否为今天
     bool _isToday = dayClipModel?.day == DateTime.now().day && dayClipModel?.month == DateTime.now().month && dayClipModel?.year == DateTime.now().year;
@@ -309,6 +321,14 @@ class SimpleDayClipDelegate implements DayClipDelegateMiXin {
   }
 }
 
+///
+/// 周显示
+///
+/// 显示在日历头部的标识周的一栏
+/// ```
+///   日 一 二 三 四 五 六
+/// ```
+///
 abstract class WeekDayClipDelegate {
   ///
   /// 构建日期Title
@@ -333,7 +353,9 @@ mixin WeekDayClipDelegateMiXin on WeekDayClipDelegate {
   bool isTuning();
 }
 
+///
 /// 一般简单实现，中文标题
+///
 class SimpleWeekDayClipDelegate implements WeekDayClipDelegateMiXin {
   @override
   Widget buildWeekDay(BuildContext context, int dayOfWeek){
