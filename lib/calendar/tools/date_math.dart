@@ -57,7 +57,10 @@ class DateMath {
   ///
   bool isLeapYear({int year}) {
     int _year = year ?? DateTime.now().year;
-    return ((_year % 4 == 0 && _year % 100 == 0) || _year % 400 == 0) ;
+    if(_year == 3200) {
+      return false;
+    }
+    return ((_year % 4 == 0 && _year % 100 != 0) || _year % 400 == 0) ;
   }
 
 }
