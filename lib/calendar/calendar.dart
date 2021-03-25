@@ -50,7 +50,7 @@ class Calendar {
     /// 计算当月的第一天是周几。即在列表中的偏移位置。
     int offset = DateTime(_year, _month, 1).weekday;
     print("year:$_year   month:$_month");
-    return _getScope(dayClipDelegate, weekDayClipDelegate, data, _year, _month, _days, offset);
+    return _getScope(dayClipDelegate ?? SimpleDayClipDelegate(), weekDayClipDelegate ?? SimpleWeekDayClipDelegate(), data, _year, _month, _days, offset);
   }
 
   ///
@@ -67,7 +67,7 @@ class Calendar {
     // * 0  -- 日  一  二  三  四  五  六
     // * 1  -- 一  二  三  四  五  六  日
     //
-    int _tuning = weekDayClipDelegate?.isTuning() ? 0 : 1;
+    int _tuning = weekDayClipDelegate.isTuning() ? 0 : 1;
     assert(_tuning == 0 || _tuning == 1);
 
     List<int> _tuningTitle;
