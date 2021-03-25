@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:plume/plume.dart';
@@ -9,5 +10,8 @@ void main() {
     expect(calculator.addOne(-7), -6);
     expect(calculator.addOne(0), 1);
     expect(() => calculator.addOne(null), throwsNoSuchMethodError);
+
+    Color a = Color(0xffd9a7c7);
+    print("***********" + a.red.toString());
   });
 }
