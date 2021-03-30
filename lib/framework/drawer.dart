@@ -55,7 +55,7 @@ class DrawerBuilder {
           // 自定义
           return Container(
             width: double.infinity,
-            child: DrawerHeader(),
+            child: DrawerHeader(child: Text(""),),
           );
         }
       } else {
