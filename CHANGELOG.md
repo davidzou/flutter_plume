@@ -1,6 +1,13 @@
 ChangeLog
 ======
 
+## [0.0.10]
+
+* 增加了框架类型DrawerBuilder，用来构建固定式滑动式菜单栏
+* 增加了日历相关计算工具方法。
+* 修正list builder的部分问题。
+* 增加了颜色数据，Gradient已知的渐变色组合。
+
 ## [0.0.9]
 
 * 增加了YearsWidget 用于日历Title显示。
