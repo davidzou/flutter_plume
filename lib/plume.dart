@@ -19,6 +19,7 @@ class Calculator {
 ///     }
 ///   }
 ///
+@Deprecated("[OrientationResponsible] instead it.")
 class RWOrientationBuilder extends StatelessWidget {
   RWOrientationBuilder({this.landscape, this.portrait})
       : assert(landscape != null),
@@ -47,8 +48,7 @@ class RWOrientationBuilder extends StatelessWidget {
 ///  界面底部按钮，宽度为整屏，高度自适应，按照字体大小
 ///
 class RWLoginButton extends StatelessWidget {
-  RWLoginButton(
-      {this.title, this.onPressed, this.textStyle, this.backgroundColor});
+  RWLoginButton({this.title, this.onPressed, this.textStyle, this.backgroundColor});
 
   final VoidCallback onPressed;
   final String title;
@@ -58,20 +58,22 @@ class RWLoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        alignment: Alignment.bottomCenter,
-        child: SizedBox(
-          width: double.infinity,
-          height: textStyle.fontSize + 30,
-          child: RaisedButton(
-            child: Text(
-              title,
-              style: textStyle,
-            ),
-//                  color: RWTheme.wonderingwall, // #82cdb8
-            color: backgroundColor,
-            onPressed: onPressed,
+      alignment: Alignment.bottomCenter,
+      child: SizedBox(
+        width: double.infinity,
+        height: textStyle.fontSize + 30,
+        child: ElevatedButton(
+          child: Text(
+            title,
+            style: textStyle,
           ),
-        ));
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(backgroundColor),
+          ),
+          onPressed: onPressed,
+        ),
+      ),
+    );
   }
 }
 
@@ -92,11 +94,7 @@ class RWWidget {
       color: Colors.white,
       // 边框阴影
       boxShadow: [
-        BoxShadow(
-            color: Color(0x99cccccc),
-            offset: Offset(5.0, 5.0),
-            blurRadius: 10.0,
-            spreadRadius: 2.0),
+        BoxShadow(color: Color(0x99cccccc), offset: Offset(5.0, 5.0), blurRadius: 10.0, spreadRadius: 2.0),
         BoxShadow(color: Color(0x99aaaaaa), offset: Offset(1.0, 1.0)),
       ],
     );
