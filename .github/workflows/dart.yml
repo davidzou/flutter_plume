@@ -1,5 +1,14 @@
 name: Dart CI
 
+os:
+  - osx
+install:
+  - git clone https://github.com/flutter/flutter.git
+  - export PATH="$PATH:`pwd`/flutter/bin"
+script:
+  - flutter doctor && flutter test
+
+
 on:
   push:
     branches: [ master ]

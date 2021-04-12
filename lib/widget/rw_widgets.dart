@@ -14,10 +14,7 @@ typedef CalenderCallback = void Function(DateTime dateTime);
 /// +-------------------------+
 ///
 class Content extends StatelessWidget {
-  Content({Key key, this.title, this.content})
-      : assert(title != null),
-        assert(content != null),
-        super(key: key);
+  Content({Key? key, required this.title, required this.content}) : super(key: key);
 
   /// 标题，label
   final String title;
@@ -210,11 +207,11 @@ class Content extends StatelessWidget {
 ///
 class ImageButton extends StatelessWidget {
   const ImageButton(
-      {Key key,
+      {Key? key,
 
       /// 文字和图片间的间距
       this.spaceSize = 16.0,
-      this.title,
+      required this.title,
       this.textStyle,
       this.color,
       this.constraints,
@@ -234,16 +231,16 @@ class ImageButton extends StatelessWidget {
 
   /// 文字
   final String title;
-  final TextStyle textStyle;
-  final Color color;
-  final EdgeInsetsGeometry padding;
-  final BoxConstraints constraints;
-  final Decoration decoration;
-  final Icon left;
-  final Icon right;
-  final Icon top;
-  final Icon bottom;
-  final VoidCallback onPressed;
+  final TextStyle? textStyle;
+  final Color? color;
+  final EdgeInsetsGeometry? padding;
+  final BoxConstraints? constraints;
+  final Decoration? decoration;
+  final Icon? left;
+  final Icon? right;
+  final Icon? top;
+  final Icon? bottom;
+  final VoidCallback? onPressed;
 
   /// 文字和logo中间的间隔
   final double spaceSize;
@@ -270,7 +267,7 @@ class ImageButton extends StatelessWidget {
     );
   }
 
-  _selectWidget(String title, Icon left, Icon right, Icon top, Icon bottom) {
+  _selectWidget(String title, Icon? left, Icon? right, Icon? top, Icon? bottom) {
     if (left != null) {
       // 左右结构，左图右文字
       return Row(

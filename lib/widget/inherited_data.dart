@@ -12,7 +12,7 @@ import 'package:flutter/widgets.dart';
 ///     }
 ///
 abstract class InheritedDataWidget<T> extends InheritedWidget {
-  InheritedDataWidget({Key key, this.data, this.child})
+  InheritedDataWidget({Key? key, required this.data, required this.child})
       : super(key: key, child: child);
   final Widget child;
   final T data;

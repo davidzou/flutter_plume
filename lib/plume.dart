@@ -10,50 +10,15 @@ class Calculator {
 }
 
 ///
-/// 选择横屏和竖屏的布局
-/// Example:
-///
-///   class Main extends StatefulWidget {
-///      build(BuildContext context) {
-///       return RWOrientationBuilder(landscape: Center(child: Text('landscape')), portrait: Center(child: Text('portrait')),);
-///     }
-///   }
-///
-@Deprecated("[OrientationResponsible] instead it.")
-class RWOrientationBuilder extends StatelessWidget {
-  RWOrientationBuilder({this.landscape, this.portrait})
-      : assert(landscape != null),
-        assert(portrait != null);
-
-  /// 屏幕竖屏的布局
-  final Widget landscape;
-
-  /// 屏幕横屏的布局
-  final Widget portrait;
-
-  @override
-  Widget build(BuildContext context) {
-    return OrientationBuilder(
-      builder: (BuildContext context, Orientation orientation) {
-        if (orientation == Orientation.landscape) {
-          return landscape;
-        }
-        return portrait;
-      },
-    );
-  }
-}
-
-///
 ///  界面底部按钮，宽度为整屏，高度自适应，按照字体大小
 ///
 class RWLoginButton extends StatelessWidget {
-  RWLoginButton({this.title, this.onPressed, this.textStyle, this.backgroundColor});
+  RWLoginButton({this.title = "", this.onPressed, this.textStyle = const TextStyle(), this.backgroundColor});
 
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final String title;
   final TextStyle textStyle;
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +26,7 @@ class RWLoginButton extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: SizedBox(
         width: double.infinity,
-        height: textStyle.fontSize + 30,
+        height: textStyle.fontSize! + 30,
         child: ElevatedButton(
           child: Text(
             title,

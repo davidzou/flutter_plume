@@ -73,34 +73,34 @@ mixin RefreshMore<T> {
 ///
 abstract class ListViewBuilder<T extends ListItem> {
   ListViewBuilder({
-    @required this.list,
+    required this.list,
     this.onItemTap,
-    this.height,
+    this.height = 80,
     this.scrollController,
     this.blankTitle = "",
     this.onPullToRefreshed,
     this.onLoadingMore,
-  }) : assert(list != null);
+  });
 
   /// 数据列表
   final List<T> list;
 
   /// 单个控件点击事件
-  final OnItemTaped<T> onItemTap;
+  final OnItemTaped<T>? onItemTap;
 
   /// 高度(一个控件的高度)
-  final int height;
+  final double height;
 
-  final ScrollController scrollController;
+  final ScrollController? scrollController;
 
   /// list的长度为0时，显示的文字内容。
   final String blankTitle;
 
   /// 状态改变
-  final VoidCallback onPullToRefreshed;
+  final VoidCallback? onPullToRefreshed;
 
   /// 加载更多
-  final VoidCallback onLoadingMore;
+  final VoidCallback? onLoadingMore;
 
   /// 是否加载中
   bool isLoading = false;
@@ -145,16 +145,16 @@ abstract class ListViewBuilder<T extends ListItem> {
   /// ```
   ///
   void init() {
-    if (scrollController != null) {
-      scrollController.addListener(() {
-        if (scrollController.position.pixels ==
-            scrollController.position.maxScrollExtent) {
+    // if (scrollController != null) {
+      scrollController?.addListener(() {
+        if (scrollController?.position.pixels ==
+            scrollController?.position.maxScrollExtent) {
           // 最底部时加载数据。
           _onLoadMore();
           isLoading = true;
         }
       });
-    }
+    // }
   }
 
   void dispose() {
@@ -218,9 +218,9 @@ abstract class ListViewBuilder<T extends ListItem> {
                     child: itemBuild(context, list[index], index),
                   )
                       : Container(
-                    height: height ?? 80,
+                    height: height,
                     child: InkWell(
-                      onTap: () => onItemTap(list[index], index),
+                      onTap: () => onItemTap!(list[index], index),
                       // 列表布局
                       child: itemBuild(context, list[index], index),
                     ),

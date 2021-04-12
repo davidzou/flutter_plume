@@ -11,13 +11,14 @@ import 'package:flutter/widgets.dart';
 /// |   10   |
 /// +--------+
 ///
+@deprecated
 class Counter extends StatelessWidget {
-  const Counter({Key key, this.count = 0, this.title, this.padding})
+  const Counter({Key? key, this.count = 0, this.title, this.padding})
       : super(key: key);
 
   final int count;
-  final String title;
-  final EdgeInsetsGeometry padding;
+  final String? title;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class Counter extends StatelessWidget {
         onEnd: () {},
         child: Column(
           children: [
-            Text(title),
+            Text(title!),
             Text("$count"),
           ],
         ),
@@ -38,6 +39,7 @@ class Counter extends StatelessWidget {
   }
 }
 
+@deprecated
 class CounterController extends ValueNotifier {
   CounterController(value) : super(value);
 }
@@ -52,12 +54,13 @@ class CounterRefresher extends StatelessWidget {
   }
 }
 
+@deprecated
 class CounterRefreshState extends StatefulWidget {
-  const CounterRefreshState({Key key, this.title, this.onRefreshed})
+  const CounterRefreshState({Key? key, this.title, this.onRefreshed})
       : super(key: key);
 
-  final String title;
-  final VoidCallback onRefreshed;
+  final String? title;
+  final VoidCallback? onRefreshed;
 
   @override
   State<StatefulWidget> createState() {
@@ -65,20 +68,21 @@ class CounterRefreshState extends StatefulWidget {
   }
 }
 
+@deprecated
 class CounterState extends State<CounterRefreshState> {
-  String _title;
+  late String _title;
 
   @override
   void initState() {
     super.initState();
-    _title = widget.title;
+    _title = widget.title ?? "";
   }
 
   refresh(String title) {
     setState(() {
       _title = title;
     });
-    widget.onRefreshed.call();
+    widget.onRefreshed!.call();
   }
 
   @override

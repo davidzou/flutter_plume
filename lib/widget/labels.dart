@@ -31,12 +31,11 @@ import 'package:just_audio/just_audio.dart';
 class VoiceLabel extends StatefulWidget {
   VoiceLabel(
       this.label, {
-        this.assetPath,
+        required this.assetPath,
         // this.icon,
         this.iconColor = Colors.amberAccent,
         this.style = const TextStyle(color: Colors.black87, fontSize: 20.0, fontWeight: FontWeight.bold),
-      })  : assert(label != null),
-        assert(assetPath != null);
+      });
 
   /// 名词
   final String label;
@@ -60,13 +59,13 @@ class _VoiceLabelState extends State<VoiceLabel> {
   /// 是否显示音频喇叭按钮图标，当有音频文件时为true且显示。否则相反。
   bool _visible = false;
   /// 声音播放插件
-  AudioPlayer _audioPlayer;
+  late AudioPlayer _audioPlayer;
   /// 声音图标动态刷新，播放时。
-  ValueNotifier _valueNotifier = ValueNotifier(0);
+  ValueNotifier<int> _valueNotifier = ValueNotifier(0);
 
   int _index = 0;
   var _volume = [Icons.volume_up, Icons.volume_down, Icons.volume_mute];
-  bool isDispose;
+  late bool isDispose;
 
   @override
   void initState() {
@@ -115,7 +114,7 @@ class _VoiceLabelState extends State<VoiceLabel> {
       _audioPlayer.play();
       // 根据播放的音频播放icon喇叭动画。
       int milliseconds = 0;
-      for (; milliseconds < duration?.inMilliseconds; ) {
+      for (; milliseconds < duration!.inMilliseconds; ) {
         if(isDispose) { return; }
         print("$milliseconds  $_index");
         setState(() {
@@ -147,9 +146,9 @@ class _VoiceLabelState extends State<VoiceLabel> {
         ),
         Opacity(
           opacity: _visible ? 1.0 : 0.0,
-          child: ValueListenableBuilder(
+          child: ValueListenableBuilder<int>(
             valueListenable: _valueNotifier,
-            builder: (_, value, child) {
+            builder: (_, int value, child) {
               return IconButton(
                 icon: Icon(
                   _volume[value],

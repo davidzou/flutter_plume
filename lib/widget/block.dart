@@ -20,7 +20,7 @@ import 'package:flutter/widgets.dart';
 ///
 class Block extends StatelessWidget {
   Block(
-      {Key key,
+      {Key? key,
       this.width = 80.0,
       this.height = 80.0,
       this.title = "",

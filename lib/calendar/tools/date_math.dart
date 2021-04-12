@@ -7,7 +7,7 @@ class DateMath {
   ///
   /// * year  要获取的那一年的，用于计算
   ///
-  int getDaysOfMonth(int month, {int year}) {
+  int getDaysOfMonth(int month, {int? year}) {
     assert(month <= 12 && month > 0);
     switch (month) {
       case 1:
@@ -32,7 +32,7 @@ class DateMath {
   ///
   /// 获取闰年月的天数
   ///
-  int _getDaysOfFebruary({int year}) {
+  int _getDaysOfFebruary({int? year}) {
     if (isLeapYear(year: year)) {
       return 29;
     }
@@ -55,7 +55,7 @@ class DateMath {
   /// ### 参数
   /// * year    传入年份，计算，否则计算当年。
   ///
-  bool isLeapYear({int year}) {
+  bool isLeapYear({int? year}) {
     int _year = year ?? DateTime.now().year;
     if(_year == 3200) {
       return false;

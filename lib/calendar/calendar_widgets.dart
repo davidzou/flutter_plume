@@ -25,12 +25,12 @@ class YearsMonthWidget extends StatefulWidget {
   }) : assert(onYearChanged != null);
 
   /// 监听变更
-  final ValueChanged<int> onYearChanged;
-  final ValueChanged<int> onMonthChanged;
+  final ValueChanged<int>? onYearChanged;
+  final ValueChanged<int>? onMonthChanged;
 
   /// 初始值
-  final int initByYear;
-  final int initByMonth;
+  final int? initByYear;
+  final int? initByMonth;
   /// 最小值
   final int minYear;
   /// 最大值
@@ -48,11 +48,11 @@ class YearsMonthWidget extends StatefulWidget {
 }
 
 class _YearsMonthWidgetState extends State<YearsMonthWidget> {
-  int _year;
-  int _month;
+  late int _year;
+  late int _month;
 
-  ValueNotifier<int> _yearNotifier;
-  ValueNotifier<int> _monthNotifier;
+  late ValueNotifier<int> _yearNotifier;
+  late ValueNotifier<int> _monthNotifier;
 
   @override
   void initState() {
@@ -82,7 +82,7 @@ class _YearsMonthWidgetState extends State<YearsMonthWidget> {
           onTap: () {
             if(_yearNotifier.value > widget.minYear) {
               _yearNotifier.value -= 1;
-              widget.onYearChanged.call(_yearNotifier.value);
+              widget.onYearChanged!.call(_yearNotifier.value);
             }
           },
         ),
@@ -91,13 +91,13 @@ class _YearsMonthWidgetState extends State<YearsMonthWidget> {
           onTap: () {
             if(_monthNotifier.value > DateTime.january) {
               _monthNotifier.value -= 1;
-              widget.onMonthChanged.call(_monthNotifier.value);
+              widget.onMonthChanged!.call(_monthNotifier.value);
             } else {
               if(_yearNotifier.value > widget.minYear) {
                 _monthNotifier.value = DateTime.december;
                 _yearNotifier.value -= 1;
-                widget.onYearChanged.call(_yearNotifier.value);
-                widget.onMonthChanged.call(_monthNotifier.value);
+                widget.onYearChanged!.call(_yearNotifier.value);
+                widget.onMonthChanged!.call(_monthNotifier.value);
               }
             }
           },
@@ -105,7 +105,7 @@ class _YearsMonthWidgetState extends State<YearsMonthWidget> {
         // 年
         ValueListenableBuilder(
           valueListenable: _yearNotifier,
-          builder: (BuildContext context, int value, Widget child) {
+          builder: (BuildContext context, int value, Widget? child) {
             return Text(
               "$value${widget.suffixByYear}",
               style: widget.style,
@@ -115,7 +115,7 @@ class _YearsMonthWidgetState extends State<YearsMonthWidget> {
         // 月
         ValueListenableBuilder(
           valueListenable: _monthNotifier,
-          builder: (BuildContext context, int value, Widget child) {
+          builder: (BuildContext context, int value, Widget? child) {
             return Text(
               "$value${widget.suffixByMonth}",
               style: widget.style,
@@ -127,13 +127,13 @@ class _YearsMonthWidgetState extends State<YearsMonthWidget> {
           onTap: () {
             if(_monthNotifier.value < DateTime.monthsPerYear) {
               _monthNotifier.value += 1;
-              widget.onMonthChanged.call(_monthNotifier.value);
+              widget.onMonthChanged!.call(_monthNotifier.value);
             } else {
               if(_yearNotifier.value < widget.maxYear) {
                 _monthNotifier.value = DateTime.january;
                 _yearNotifier.value += 1;
-                widget.onMonthChanged.call(_monthNotifier.value);
-                widget.onYearChanged.call(_yearNotifier.value);
+                widget.onMonthChanged!.call(_monthNotifier.value);
+                widget.onYearChanged!.call(_yearNotifier.value);
               }
             }
           },
@@ -143,7 +143,7 @@ class _YearsMonthWidgetState extends State<YearsMonthWidget> {
           onTap: () {
             if(_yearNotifier.value < widget.maxYear) {
               _yearNotifier.value += 1;
-              widget.onYearChanged.call(_yearNotifier.value);
+              widget.onYearChanged!.call(_yearNotifier.value);
             }
           },
         ),
@@ -164,7 +164,7 @@ class _YearsMonthWidgetState extends State<YearsMonthWidget> {
 ///
 class YearsWidget extends StatefulWidget {
   YearsWidget({
-    @required this.onChanged,
+    required this.onChanged,
     this.init,
     this.suffix = " 年",
     this.style = const TextStyle(fontSize: 18.0),
@@ -174,7 +174,7 @@ class YearsWidget extends StatefulWidget {
   final ValueChanged<int> onChanged;
 
   /// 初始值
-  final int init;
+  final int? init;
 
   /// 后缀，就是显示在年后面的内容
   final String suffix;
@@ -187,9 +187,9 @@ class YearsWidget extends StatefulWidget {
 }
 
 class _YearsWidgetState extends State<YearsWidget> {
-  int _years;
+  late int _years;
 
-  ValueNotifier<int> _valueNotifier;
+  late ValueNotifier<int> _valueNotifier;
 
   @override
   void initState() {
@@ -220,7 +220,7 @@ class _YearsWidgetState extends State<YearsWidget> {
         ),
         ValueListenableBuilder(
           valueListenable: _valueNotifier,
-          builder: (BuildContext context, int value, Widget child) {
+          builder: (BuildContext context, int value, Widget? child) {
             return Text(
               "$value${widget.suffix}",
               style: widget.style,

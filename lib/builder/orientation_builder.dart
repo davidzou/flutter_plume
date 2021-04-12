@@ -11,9 +11,10 @@ import 'package:flutter/widgets.dart';
 ///   }
 ///
 class OrientationResponsible extends StatelessWidget {
-  OrientationResponsible({this.landscape, this.portrait})
-      : assert(landscape != null),
-        assert(portrait != null);
+  OrientationResponsible({
+    required this.landscape,
+    required this.portrait,
+  });
 
   /// 屏幕竖屏的布局
   final Widget landscape;
