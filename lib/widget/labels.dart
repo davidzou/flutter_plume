@@ -157,20 +157,21 @@ class _VoiceLabelState extends State<VoiceLabel> {
   }
 }
 
-///
 /// 数字选择器
-///
 class NumberSelector extends StatefulWidget {
-  NumberSelector(
-      {this.label = "",
-        this.start,
-        this.end,
-        this.array,
-        this.value,
-        this.onChanged})
-      : assert((start != null || end != null) || array != null);
+  NumberSelector({
+    this.leading = const Text(""),
+    this.trailing,
+    this.start,
+    this.end,
+    this.array,
+    this.value,
+    this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
+    this.onChanged,
+  }) : assert((start != null || end != null) || array != null);
 
-  final String label;
+  final Widget leading;
+  final Widget? trailing;
 
   /// 数字选择器起始数字
   final int? start;
@@ -185,6 +186,8 @@ class NumberSelector extends StatefulWidget {
   final List<int>? array;
 
   final Function(int? value)? onChanged;
+
+  final MainAxisAlignment mainAxisAlignment;
 
   @override
   _NumberSelectorState createState() => _NumberSelectorState();
@@ -206,29 +209,38 @@ class _NumberSelectorState extends State<NumberSelector> {
       }
     }
     _value = widget.value ?? _array[0];
-    assert( _array.contains(_value) );
+    assert(_array.contains(_value));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(right: 16.0),
-          child: Text(widget.label),
-        ),
-        DropdownButton<int>(
-          value: _value,
-          items: _array
-              .map((e) => DropdownMenuItem<int>(value: e, child: Text("$e")))
-              .toList(),
-          onChanged: (value) {
-            _value = value;
-            setState(() {});
-            widget.onChanged?.call(_value);
-          },
-        ),
-      ],
+    return Container(
+      margin: EdgeInsets.all(5.0),
+      child: Row(
+        mainAxisAlignment: widget.mainAxisAlignment,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 5.0, right: 16.0),
+            child: widget.leading,
+          ),
+          DropdownButton<int>(
+            value: _value,
+            items: _array
+                .map((e) => DropdownMenuItem<int>(value: e, child: Text("$e")))
+                .toList(),
+            onChanged: (value) {
+              _value = value;
+              setState(() {});
+              widget.onChanged?.call(_value);
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 12.0, right: 5.0),
+            child: widget.trailing ?? Text(""),
+          ),
+        ],
+      ),
     );
   }
 }
+
