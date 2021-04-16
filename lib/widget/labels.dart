@@ -123,13 +123,6 @@ class _VoiceLabelState extends State<VoiceLabel> {
         await Future.delayed(Duration(milliseconds: 200));
         milliseconds += 200;
       }
-      // Future.doWhile(() async {
-      //   await Future.delayed(Duration(milliseconds: 200));
-      //   setState(() {
-      //     _valueNotifier.value = _index = (_index + 1) % _volume.length;
-      //   });
-      //   return Future.value(milliseconds < duration.inMilliseconds && isDispose);
-      // });
       print("dispose");
     } catch (e) {
       print(e);
@@ -159,6 +152,68 @@ class _VoiceLabelState extends State<VoiceLabel> {
             },
           ),
         )
+      ],
+    );
+  }
+}
+
+
+/// 数字选择器
+class NumberSelector extends StatefulWidget {
+  NumberSelector(
+      {this.label = "", this.start, this.end, this.array, this.onChanged}): assert((start != null || end != null) || array != null);
+
+  final String label;
+  /// 数字选择器起始数字
+  final int? start;
+
+  /// 数字选择器终止数字
+  final int? end;
+
+  /// 给定数组
+  final List<int>? array;
+
+  final Function(int? value)? onChanged;
+
+  @override
+  _NumberSelectorState createState() => _NumberSelectorState();
+}
+
+class _NumberSelectorState extends State<NumberSelector> {
+  late List<int> _array;
+  int? _value;
+  @override
+  void initState() {
+    super.initState();
+    if(widget.array != null) {
+      _array = widget.array!;
+    } else {
+      _array = <int>[];
+      for(int i = widget.start!; i < widget.end!; i ++) {
+        _array.add(i);
+      }
+    }
+    _value = _array[0];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(right: 16.0),
+          child: Text(widget.label),
+        ),
+        DropdownButton<int>(
+          value: _value,
+          items: _array.map((e) => DropdownMenuItem<int>(value: e, child: Text("$e"))).toList(),
+          onChanged: (value) {
+            _value = value;
+            setState(() {
+            });
+            widget.onChanged?.call(_value);
+          },
+        ),
       ],
     );
   }
