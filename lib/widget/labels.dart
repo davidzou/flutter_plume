@@ -157,18 +157,29 @@ class _VoiceLabelState extends State<VoiceLabel> {
   }
 }
 
-
+///
 /// 数字选择器
+///
 class NumberSelector extends StatefulWidget {
   NumberSelector(
-      {this.label = "", this.start, this.end, this.array, this.onChanged}): assert((start != null || end != null) || array != null);
+      {this.label = "",
+        this.start,
+        this.end,
+        this.array,
+        this.value,
+        this.onChanged})
+      : assert((start != null || end != null) || array != null);
 
   final String label;
+
   /// 数字选择器起始数字
   final int? start;
 
   /// 数字选择器终止数字
   final int? end;
+
+  /// 默认值, 初始化值，当前那个值被选中。
+  final int? value;
 
   /// 给定数组
   final List<int>? array;
@@ -182,18 +193,20 @@ class NumberSelector extends StatefulWidget {
 class _NumberSelectorState extends State<NumberSelector> {
   late List<int> _array;
   int? _value;
+
   @override
   void initState() {
     super.initState();
-    if(widget.array != null) {
+    if (widget.array != null) {
       _array = widget.array!;
     } else {
       _array = <int>[];
-      for(int i = widget.start!; i < widget.end!; i ++) {
+      for (int i = widget.start!; i < widget.end!; i++) {
         _array.add(i);
       }
     }
-    _value = _array[0];
+    _value = widget.value ?? _array[0];
+    assert( _array.contains(_value) );
   }
 
   @override
@@ -206,11 +219,12 @@ class _NumberSelectorState extends State<NumberSelector> {
         ),
         DropdownButton<int>(
           value: _value,
-          items: _array.map((e) => DropdownMenuItem<int>(value: e, child: Text("$e"))).toList(),
+          items: _array
+              .map((e) => DropdownMenuItem<int>(value: e, child: Text("$e")))
+              .toList(),
           onChanged: (value) {
             _value = value;
-            setState(() {
-            });
+            setState(() {});
             widget.onChanged?.call(_value);
           },
         ),
