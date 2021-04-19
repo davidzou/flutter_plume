@@ -112,13 +112,13 @@ abstract class DrawerDelegate {
   /// * 可定制背景
   /// * 可定义内容
   ///
-  DrawerHeader buildHeader();
+  DrawerHeader? buildHeader();
 
   /// 构建菜单列表
   List<Widget> buildList(BuildContext context);
 
   /// 底部控件
-  Widget buildFooter();
+  Widget? buildFooter();
 }
 
 ///
@@ -144,13 +144,13 @@ class DrawerChildListDelegate extends DrawerDelegate {
   final Widget? footer;
 
   @override
-  Widget buildFooter() {
-    return footer!;
+  Widget? buildFooter() {
+    return footer;
   }
 
   @override
-  DrawerHeader buildHeader() {
-    return header!;
+  DrawerHeader? buildHeader() {
+    return header;
   }
 
   @override
@@ -213,7 +213,7 @@ class DrawerChildBuilderDelegate extends DrawerDelegate {
     for (int i = 0; i < childCount; i++) {
       children.add(builder(context, i));
     }
-    return children ?? [];
+    return children;
   }
 
   @override

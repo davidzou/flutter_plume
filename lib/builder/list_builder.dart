@@ -188,7 +188,7 @@ abstract class ListViewBuilder<T extends ListItem> {
   }
 
   Widget build() {
-    if (list == null || list?.length == 0) {
+    if (list.length == 0) {
       return Container(
         child: buildBlank(),
       );
