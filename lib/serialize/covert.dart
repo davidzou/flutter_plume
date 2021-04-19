@@ -3,6 +3,24 @@ import 'package:flutter/material.dart';
 ///
 /// [T] 被转换的数据对象。
 ///
+/// ```
+/// class Model extends MapConvert<Model> {
+///   toMap() {
+///     return ModelExtension().toMap();
+///   }
+/// }
+///
+/// extension ModelExtension on Model {
+///   Map<String, dynamic> get mapping => toMap();
+///
+///   toMap() {
+///     return {
+///       "key":"value",
+///     }
+///   }
+/// }
+/// ```
+///
 mixin MapConvert<T> {
   ///
   /// 将对象转换为Map
@@ -39,6 +57,7 @@ extension MapConvertExtension<T> on MapConvert<T> {
   Map<String, dynamic> toMap(){
     var map = <String, dynamic>{
       // T.noSuchMethod(invocation);
+      // 这里使用反射来处理数据？
     };
     return map;
   }

@@ -15,7 +15,7 @@ import 'package:plume/widget/block.dart';
 /// ```
 ///
 class ColorValueWidget extends StatelessWidget {
-  ColorValueWidget({this.color});
+  ColorValueWidget({this.color = Colors.black});
 
   final Color color;
 
@@ -51,17 +51,17 @@ class ColorValueWidget extends StatelessWidget {
 ///
 class ColorSelector extends StatefulWidget {
   ColorSelector({
-    this.label,
+    required this.label,
     this.labelStyle,
-    @required this.colors,
+    required this.colors,
     this.onChanged,
   });
 
   /// 标题
   final String label;
-  final TextStyle labelStyle;
+  final TextStyle? labelStyle;
   final List<Color> colors;
-  final ValueChanged<Color> onChanged;
+  final ValueChanged<Color>? onChanged;
 
   @override
   _ColorSelectorState createState() => _ColorSelectorState();
@@ -69,12 +69,12 @@ class ColorSelector extends StatefulWidget {
 
 class _ColorSelectorState extends State<ColorSelector> {
   /// 标签
-  String _label;
+  late String _label;
   /// 标签样式
-  TextStyle _labelStyle;
+  late TextStyle _labelStyle;
 
   /// 当前选中颜色（默认取列表中的第一个）
-  Color _color;
+  late Color _color;
 
   @override
   void initState() {
@@ -95,7 +95,7 @@ class _ColorSelectorState extends State<ColorSelector> {
             style: _labelStyle,
           ),
           DropdownButtonHideUnderline(
-            child: DropdownButton(
+            child: DropdownButton<Color>(
               value: _color,
               items: widget.colors
                   .map((e) => DropdownMenuItem(
@@ -106,9 +106,9 @@ class _ColorSelectorState extends State<ColorSelector> {
                   .toList(),
               onChanged: (value) {
                 setState(() {
-                  _color = value;
+                  _color = value!;
                 });
-                widget?.onChanged?.call(_color);
+                widget.onChanged!.call(_color);
               },
             ),
           ),

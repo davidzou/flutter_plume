@@ -6,15 +6,13 @@ import 'package:flutter/widgets.dart';
 
 class SpinModel extends InheritedNotifier<AnimationController> {
   SpinModel({
-    Key key,
-    AnimationController notifier,
-    Widget child,
+    Key? key,
+    AnimationController? notifier,
+    required Widget child,
   }) : super(key: key, notifier: notifier, child: child);
 
   static double of(BuildContext context) {
-    double value =
-        context.dependOnInheritedWidgetOfExactType<SpinModel>().notifier.value;
-//    print("$value");
+    double value = context.dependOnInheritedWidgetOfExactType<SpinModel>()!.notifier!.value;
     return value;
   }
 }
@@ -46,7 +44,7 @@ class SpinnerWidget extends StatefulWidget {
 }
 
 class SpinnerState extends State with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  AnimationController? _controller;
 
   @override
   void initState() {
@@ -59,7 +57,7 @@ class SpinnerState extends State with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 

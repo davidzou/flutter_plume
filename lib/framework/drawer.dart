@@ -32,10 +32,10 @@ class DrawerBuilder {
   ///
   static Drawer drawer(
     BuildContext context, {
-    DrawerDelegate delegate,
+    DrawerDelegate? delegate,
   }) {
     Widget _builderHeader() {
-      if (delegate.enableHeader()) {
+      if (delegate!.enableHeader()) {
         if (delegate.buildHeader() != null) {
           // 默认自定义
           return Container(
@@ -66,11 +66,11 @@ class DrawerBuilder {
     }
 
     List<Widget> _buildList(BuildContext context) {
-      return delegate.buildList(context);
+      return delegate!.buildList(context);
     }
 
     Widget _buildFooter() {
-      return delegate.buildFooter() ?? Container();
+      return delegate?.buildFooter() ?? Container();
     }
 
     return Drawer(
@@ -100,8 +100,8 @@ class DrawerBuilder {
 ///
 abstract class DrawerDelegate {
   const DrawerDelegate({
-    Widget header,
-    Widget footer,
+    Widget? header,
+    Widget? footer,
   });
 
   /// 是否显示头部定制区域
@@ -129,7 +129,7 @@ mixin DrawerDelegateMiXin on DrawerDelegate {}
 ///
 class DrawerChildListDelegate extends DrawerDelegate {
   const DrawerChildListDelegate({
-    @required this.children,
+    required this.children,
     this.enable = false,
     this.header,
     this.footer,
@@ -140,17 +140,17 @@ class DrawerChildListDelegate extends DrawerDelegate {
 
   final List<Widget> children;
   final bool enable;
-  final DrawerHeader header;
-  final Widget footer;
+  final DrawerHeader? header;
+  final Widget? footer;
 
   @override
   Widget buildFooter() {
-    return footer ?? null;
+    return footer!;
   }
 
   @override
   DrawerHeader buildHeader() {
-    return header ?? null;
+    return header!;
   }
 
   @override
@@ -168,8 +168,8 @@ class DrawerChildListDelegate extends DrawerDelegate {
 class DrawerChildBuilderDelegate extends DrawerDelegate {
   const DrawerChildBuilderDelegate({
     this.enable = false,
-    @required this.childCount,
-    @required this.builder,
+    required this.childCount,
+    required this.builder,
     this.footer,
     this.header,
   });
@@ -183,9 +183,9 @@ class DrawerChildBuilderDelegate extends DrawerDelegate {
   /// Item创建
   final IndexedWidgetBuilder builder;
 
-  final Widget footer;
+  final Widget? footer;
 
-  final DrawerHeader header;
+  final DrawerHeader? header;
 
   @override
   Widget buildFooter() {
@@ -205,7 +205,7 @@ class DrawerChildBuilderDelegate extends DrawerDelegate {
   // }
 
   @override
-  DrawerHeader buildHeader() => header ?? null;
+  DrawerHeader buildHeader() => header!;
 
   @override
   List<Widget> buildList(BuildContext context) {

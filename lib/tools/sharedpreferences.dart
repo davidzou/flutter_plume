@@ -49,27 +49,27 @@ class RWSharedPreferences {
 
   static Future<bool> getBool(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(key);
+    return Future.value(prefs.getBool(key));
   }
 
   static Future<int> getInt(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getInt(key);
+    return Future.value(prefs.getInt(key));
   }
 
   static Future<double> getDouble(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getDouble(key);
+    return Future.value(prefs.getDouble(key));
   }
 
   static Future<String> getString(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(key);
+    return Future.value(prefs.getString(key));
   }
 
   static Future<List<String>> getStringArray(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getStringList(key);
+    return Future.value(prefs.getStringList(key));
   }
 
 }

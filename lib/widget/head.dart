@@ -29,7 +29,7 @@ class HeadTitle extends StatelessWidget {
   /// @param color      主题色
   ///
   const HeadTitle(this.title,
-      {Key key,
+      {Key? key,
       this.subTitle,
       this.color = const Color(0xff2d85f0),
       this.titleStyle,
@@ -37,9 +37,9 @@ class HeadTitle extends StatelessWidget {
       : super(key: key);
 
   final String title;
-  final TextStyle titleStyle;
-  final String subTitle;
-  final String subTitleStyle;
+  final TextStyle? titleStyle;
+  final String? subTitle;
+  final String? subTitleStyle;
   final Color color;
 
   _titleStyle() {
@@ -113,7 +113,7 @@ class HeadTitle extends StatelessWidget {
     );
   }
 
-  List<Widget> _children(String title, String subTitle) {
+  List<Widget> _children(String title, String? subTitle) {
     List<Widget> list = [];
     if (title != null) {
       var tx = Text(

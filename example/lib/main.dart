@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plume/framework/drawer.dart';
 
 void main() => runApp(MyApp());
 
@@ -34,24 +35,33 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Transform(  // Transform widget
+    return Transform(
+        // Transform widget
         transform: Matrix4.identity()
           ..setEntry(3, 2, 0.001) // perspective
           ..rotateX(0.01 * _offset.dy) // changed
           ..rotateY(-0.01 * _offset.dx), // changed
         alignment: FractionalOffset.center,
-        child: GestureDetector( // new
+        child: GestureDetector(
+          // new
           onPanUpdate: (details) => setState(() => _offset += details.delta),
           onDoubleTap: () => setState(() => _offset = Offset.zero),
           child: _defaultApp(context),
-        )
-    );
+        ));
   }
 
   _defaultApp(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('The Matrix 3D'), // changed
+      ),
+      drawer: DrawerBuilder.drawer(
+        context,
+        delegate: DrawerChildListDelegate(
+          children: [
+
+          ],
+        ),
       ),
       body: Center(
         child: Column(
@@ -74,5 +84,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
 }
