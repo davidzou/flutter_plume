@@ -157,7 +157,7 @@ class DayClip extends CalendarClip {
 
   @override
   Widget build(BuildContext context, {OnClickedDayClip? onClickedDayClip}) {
-    return dayClipModel?.day == -1 ? Text("") : (delegate != null
+    return dayClipModel.day == -1 ? Text("") : (delegate != null
         ? delegate!.buildDayClip(context, dayClipModel, onClickedDayClip)
         : SimpleDayClipDelegate().buildDayClip(context, dayClipModel, onClickedDayClip));
   }
@@ -200,7 +200,7 @@ class DayClipModel {
 
   /// 是否为同一天
   bool isSame(DayClipModel dayClipModel) {
-    return day == dayClipModel?.day && month == dayClipModel?.month && year == dayClipModel?.year;
+    return day == dayClipModel.day && month == dayClipModel.month && year == dayClipModel.year;
   }
 
   /// 是否为今天
