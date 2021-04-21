@@ -145,12 +145,12 @@ class DrawerChildListDelegate extends DrawerDelegate {
 
   @override
   Widget? buildFooter() {
-    return footer!;
+    return footer;
   }
 
   @override
   DrawerHeader? buildHeader() {
-    return header!;
+    return header;
   }
 
   @override
