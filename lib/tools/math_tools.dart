@@ -58,15 +58,4 @@ class MathTools {
     return _remain;
   }
 
-  // ///
-  // /// 随机数
-  // ///
-  // /// 直到满足条件
-  // ///
-  // static Futurn<int> randomNextIntFit(Futurn<bool> met) {
-  //   Future.doWhile(() {
-  //     print("i");
-  //   }, Future.value(met));
-  // }
-
 }
