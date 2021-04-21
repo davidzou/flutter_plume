@@ -25,7 +25,7 @@ class MathTools {
       list.add(i);
     }
     var ran = Random();
-    return list.elementAt(ran.nextInt(list.length + 1));
+    return list.elementAt(ran.nextInt(list.length));
   }
 
   ///
@@ -39,5 +39,34 @@ class MathTools {
     var ran = Random();
     return list.elementAt(ran.nextInt(list.length));
   }
+
+  ///
+  /// 随机一个不为零的整数
+  ///
+  /// ### 参数
+  /// * max           随机数范围，最大值。即[1-max]中随机
+  /// * condition     其他满足条件
+  ///
+  static int randomNextIntNotZero(int max, [bool condition = true]) {
+    var ran = Random();
+    int _remain = ran.nextInt(max);
+    bool stop = (_remain == 0);
+    while(stop) {
+      _remain = ran.nextInt(max);
+      stop = !(_remain != 0 && condition);
+    }
+    return _remain;
+  }
+
+  // ///
+  // /// 随机数
+  // ///
+  // /// 直到满足条件
+  // ///
+  // static Futurn<int> randomNextIntFit(Futurn<bool> met) {
+  //   Future.doWhile(() {
+  //     print("i");
+  //   }, Future.value(met));
+  // }
 
 }
