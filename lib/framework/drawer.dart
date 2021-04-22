@@ -32,10 +32,10 @@ class DrawerBuilder {
   ///
   static Drawer drawer(
     BuildContext context, {
-    DrawerDelegate? delegate,
+    DrawerDelegate delegate = const DrawerChildListDelegate(children: []),
   }) {
     Widget _builderHeader() {
-      if (delegate!.enableHeader()) {
+      if (delegate.enableHeader()) {
         if (delegate.buildHeader() != null) {
           // 默认自定义
           return Container(
@@ -55,7 +55,9 @@ class DrawerBuilder {
           // 自定义
           return Container(
             width: double.infinity,
-            child: DrawerHeader(child: Text(""),),
+            child: DrawerHeader(
+              child: Text(""),
+            ),
           );
         }
       } else {
@@ -66,11 +68,11 @@ class DrawerBuilder {
     }
 
     List<Widget> _buildList(BuildContext context) {
-      return delegate!.buildList(context);
+      return delegate.buildList(context);
     }
 
     Widget _buildFooter() {
-      return delegate!.buildFooter() ?? Container();
+      return delegate.buildFooter() ?? Container();
     }
 
     return Drawer(
@@ -145,12 +147,12 @@ class DrawerChildListDelegate extends DrawerDelegate {
 
   @override
   Widget? buildFooter() {
-    return footer!;
+    return footer;
   }
 
   @override
   DrawerHeader? buildHeader() {
-    return header!;
+    return header;
   }
 
   @override
@@ -188,24 +190,17 @@ class DrawerChildBuilderDelegate extends DrawerDelegate {
   final DrawerHeader? header;
 
   @override
-  Widget buildFooter() {
-    return footer ??
-        Container(
-          padding: EdgeInsets.all(8.0),
-          child: Text("上海若紊科技有限公司"),
-        );
+  Widget? buildFooter() {
+    return footer;
+    // return footer ??
+    //     Container(
+    //       padding: EdgeInsets.all(8.0),
+    //       child: Text("上海若紊科技有限公司"),
+    //     );
   }
 
-  // _getVersion() {
-  //   // PackageInfo packageInfo = await PackageInfo.fromPlatform();
-  //   //
-  //   // String version = packageInfo.version;//版本号
-  //   // String buildNumber = packageInfo.buildNumber;//版本构建号
-  //   return Platform.version;
-  // }
-
   @override
-  DrawerHeader buildHeader() => header!;
+  DrawerHeader? buildHeader() => header;
 
   @override
   List<Widget> buildList(BuildContext context) {
