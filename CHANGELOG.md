@@ -1,6 +1,12 @@
 ChangeLog
 ======
 
+## [0.1.1]
+
+* 更新内容描述
+* 更新代码支持到Null Safety
+* 增加MathTools方法
+ 
 ## [0.0.10]
 
 * 增加了框架类型DrawerBuilder，用来构建固定式滑动式菜单栏
