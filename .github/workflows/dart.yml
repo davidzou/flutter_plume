@@ -1,12 +1,12 @@
 name: Dart CI
 
-os:
-  - osx
-install:
-  - git clone https://github.com/flutter/flutter.git
-  - export PATH="$PATH:`pwd`/flutter/bin"
-script:
-  - flutter doctor && flutter test
+#os:
+#  - osx
+#install:
+#  - git clone https://github.com/flutter/flutter.git
+#  - export PATH="$PATH:`pwd`/flutter/bin"
+#script:
+#  - flutter doctor && flutter test
 
 
 on:
@@ -16,13 +16,14 @@ on:
     branches: [ master ]
 
 jobs:
+#  install:
+#    - git clone https://github.com/flutter/flutter.git
+#    - export PATH="PATH:`pwd`/flutter/bin"
   build:
-
     runs-on: ubuntu-latest
 
     container:
       image:  google/dart:latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies

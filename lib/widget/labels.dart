@@ -76,7 +76,7 @@ class _VoiceLabelState extends State<VoiceLabel> {
 
   @override
   void dispose() {
-    _audioPlayer?.dispose();
+    _audioPlayer.dispose();
     _valueNotifier.dispose();
     isDispose = true;
     super.dispose();
@@ -97,7 +97,7 @@ class _VoiceLabelState extends State<VoiceLabel> {
       });
     }
 
-    _audioPlayer?.processingStateStream?.listen((event) {
+    _audioPlayer.processingStateStream.listen((event) {
       print("index - ${event.index}");
       if(event == ProcessingState.completed) {
         setState(() {
@@ -118,7 +118,7 @@ class _VoiceLabelState extends State<VoiceLabel> {
         if(isDispose) { return; }
         print("$milliseconds  $_index");
         setState(() {
-          _valueNotifier?.value = _index = (_index + 1) % _volume.length;
+          _valueNotifier.value = _index = (_index + 1) % _volume.length;
         });
         await Future.delayed(Duration(milliseconds: 200));
         milliseconds += 200;
