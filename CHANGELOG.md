@@ -1,9 +1,12 @@
 ChangeLog
 ======
 
+## [0.1.2]
+
+* 修正Sound Null Safety错误
+ 
 ## [0.1.1]
 
-* 更新内容描述
 * 更新代码支持到Null Safety
 * 增加MathTools方法
  

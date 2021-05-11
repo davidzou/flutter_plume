@@ -79,7 +79,7 @@ class _ColorSelectorState extends State<ColorSelector> {
   @override
   void initState() {
     super.initState();
-    _label = widget.label ?? "";
+    _label = widget.label;
     _labelStyle = widget.labelStyle ?? TextStyle();
     _color = widget.colors[0];
   }

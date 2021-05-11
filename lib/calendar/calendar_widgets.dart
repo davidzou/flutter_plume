@@ -168,7 +168,7 @@ class YearsWidget extends StatefulWidget {
     this.init,
     this.suffix = " 年",
     this.style = const TextStyle(fontSize: 18.0),
-  }) : assert(onChanged != null);
+  });
 
   /// 监听变更
   final ValueChanged<int> onChanged;
