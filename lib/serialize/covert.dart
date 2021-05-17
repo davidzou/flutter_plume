@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 ///
 /// [T] 被转换的数据对象。
 ///

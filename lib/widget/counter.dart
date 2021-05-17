@@ -44,6 +44,7 @@ class CounterController extends ValueNotifier {
   CounterController(value) : super(value);
 }
 
+@deprecated
 class CounterRefresher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
