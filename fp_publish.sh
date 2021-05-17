@@ -7,7 +7,7 @@
 ##        2. 通过此命令自动增加CHANGELOG的版本信息更新内容，变更内容需手动变更，后续改为提示输入。
 ##        3. 通过此命令自动变更README对版本号状态图标的更新。
 ##
-## [注意] 这条命令适用Mac系统; Linux暂未测试。其中包含了sed命令的特殊处理
+## [注意] 这条命令适用Mac系统; Linux暂未测试。其中包含了sed命令的特殊处理。
 ##
 ## 检测是否配置了本地配置，中国镜像是不能上传的。
 ## PUB_HOSTED_URL=https://pub.flutter-io.cn
@@ -27,7 +27,7 @@ function getVersion() {
   Revision=$(echo "$1" | cut -d '.' -f3)
   CURRENT_VERSION="$Major.$Minor.$((Revision + 1))"
   # 情况1 Revision号每次增加1，一直增加到99, 100的时候归0，Minor增加1，同样以此类推
-  # 情况2 存在buildNumer，即开发版本，测试版本号的判断增加。
+  # 情况2 存在buildNumber，即开发版本，测试版本号的判断增加。
 }
 
 ##

@@ -35,36 +35,40 @@ class DrawerBuilder {
     DrawerDelegate delegate = const DrawerChildListDelegate(children: []),
   }) {
     Widget _builderHeader() {
-      if (delegate.enableHeader()) {
-        if (delegate.buildHeader() != null) {
-          // 默认自定义
-          return Container(
-            width: double.infinity,
-            child: DrawerHeader(
-              padding: EdgeInsets.zero,
-              margin: EdgeInsets.zero,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [
-                Colors.black12,
-                Colors.orangeAccent,
-              ])),
-              child: Text("header"),
-            ),
-          );
-        } else {
-          // 自定义
-          return Container(
-            width: double.infinity,
-            child: DrawerHeader(
-              child: Text(""),
-            ),
-          );
-        }
-      } else {
-        return Container(
-          width: double.infinity,
-        );
-      }
+      // if (delegate.buildHeader() != null) {
+      //   return Container();
+      // }
+      return delegate.buildHeader() ?? Container();
+      // if (delegate.enableHeader()) {
+      //   if (delegate.buildHeader() != null) {
+      //     // 默认自定义
+      //     return Container(
+      //       width: double.infinity,
+      //       child: DrawerHeader(
+      //         padding: EdgeInsets.zero,
+      //         margin: EdgeInsets.zero,
+      //         decoration: BoxDecoration(
+      //             gradient: LinearGradient(colors: [
+      //           Colors.black12,
+      //           Colors.orangeAccent,
+      //         ])),
+      //         child: Text("header"),
+      //       ),
+      //     );
+      //   } else {
+      //     // 自定义
+      //     return Container(
+      //       width: double.infinity,
+      //       child: DrawerHeader(
+      //         child: Text(""),
+      //       ),
+      //     );
+      //   }
+      // } else {
+      //   return Container(
+      //     width: double.infinity,
+      //   );
+      // }
     }
 
     List<Widget> _buildList(BuildContext context) {
