@@ -12,14 +12,12 @@ class MainListPage extends StatelessWidget{
       appBar: AppBar(title: Text("title"),),
       body: Container(
         child: ListView.builder(itemBuilder: (BuildContext context, int index) {
-          return Container(
-            child: InkWell(
-                child: Text("Component[$index]: ${LIST[index].values.first}"),
-              onTap: () {
-                var name = LIST[index].keys.first;
-                Navigator.of(context).pushNamed(name);
-              },
-            ),
+          return ListTile(
+            title: Text("Component[$index]: ${LIST[index].values.first}"),
+            onTap: () {
+              var name = LIST[index].keys.first;
+              Navigator.of(context).pushNamed(name);
+            },
           );
         }, itemCount: LIST.length,),
       ),
