@@ -1,6 +1,10 @@
 ChangeLog
 ======
+ 
+## [0.1.2+1]
 
+* 修正DrawerBuilder返回drawerHeader默认值错误问题。
+ 
 ## [0.1.2]
 
 * 修正Sound Null Safety错误
