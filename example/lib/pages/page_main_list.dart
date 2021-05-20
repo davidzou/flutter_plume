@@ -28,5 +28,6 @@ class MainListPage extends StatelessWidget{
 const LIST = [
   // 框架Drawer
   {FRAMEWORK_DRAWER_PAGE: "framework/DrawerBuilder"},
+  // 整屏旋转
   {PERSPECTIVE_PAGE: "perspective"},
 ];
