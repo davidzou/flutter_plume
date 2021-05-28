@@ -102,11 +102,15 @@ fi
 echo "是否继续上传到正式服务器？请仔细查看--dry-run的结果。[y/n]"
 read -r result
 if [[ "$result" == 'y' ]] ; then
+  ##  TODO 正式变更CHANGELOG内容
+
   ## 翻墙代理
   export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7891
 
   flutter pub publish -v
 else
+  # 回滚 CHANGELOG
+  git checkout CHANGELOG.md
   # 回滚版本号
   updateVersion "$CURRENT_VERSION" "$ROLLBACK_VERSION"
 fi
