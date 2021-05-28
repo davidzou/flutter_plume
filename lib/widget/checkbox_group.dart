@@ -39,7 +39,7 @@ typedef CheckBoxGroupCallback = Function(int index, bool? value);
 class CheckBoxGroup extends StatefulWidget {
   const CheckBoxGroup(this.header, {required this.subTitle, this.subCheckable, this.callback});
 
-  /// 标题
+  /// 标题([MainTitle])
   final String header;
 
   /// 主标题显示，可以是多组
