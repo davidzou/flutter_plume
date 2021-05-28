@@ -107,6 +107,7 @@ if [[ "$result" == 'y' ]] ; then
   ## 翻墙代理
   export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7891
 
+  ## FIXME 这里没有考虑到私库，即publish_to不为空的情形。默认提交到pub.dev
   flutter pub publish -v
 else
   # 回滚 CHANGELOG
