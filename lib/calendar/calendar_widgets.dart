@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-
 ///
 /// 用于显示年的控件。
 ///
@@ -31,8 +30,10 @@ class YearsMonthWidget extends StatefulWidget {
   /// 初始值
   final int? initByYear;
   final int? initByMonth;
+
   /// 最小值
   final int minYear;
+
   /// 最大值
   final int maxYear;
 
@@ -80,7 +81,7 @@ class _YearsMonthWidgetState extends State<YearsMonthWidget> {
         InkWell(
           child: Icon(Icons.first_page),
           onTap: () {
-            if(_yearNotifier.value > widget.minYear) {
+            if (_yearNotifier.value > widget.minYear) {
               _yearNotifier.value -= 1;
               widget.onYearChanged!.call(_yearNotifier.value);
             }
@@ -89,11 +90,11 @@ class _YearsMonthWidgetState extends State<YearsMonthWidget> {
         InkWell(
           child: Icon(Icons.chevron_left),
           onTap: () {
-            if(_monthNotifier.value > DateTime.january) {
+            if (_monthNotifier.value > DateTime.january) {
               _monthNotifier.value -= 1;
               widget.onMonthChanged!.call(_monthNotifier.value);
             } else {
-              if(_yearNotifier.value > widget.minYear) {
+              if (_yearNotifier.value > widget.minYear) {
                 _monthNotifier.value = DateTime.december;
                 _yearNotifier.value -= 1;
                 widget.onYearChanged!.call(_yearNotifier.value);
@@ -125,11 +126,11 @@ class _YearsMonthWidgetState extends State<YearsMonthWidget> {
         InkWell(
           child: Icon(Icons.chevron_right),
           onTap: () {
-            if(_monthNotifier.value < DateTime.monthsPerYear) {
+            if (_monthNotifier.value < DateTime.monthsPerYear) {
               _monthNotifier.value += 1;
               widget.onMonthChanged!.call(_monthNotifier.value);
             } else {
-              if(_yearNotifier.value < widget.maxYear) {
+              if (_yearNotifier.value < widget.maxYear) {
                 _monthNotifier.value = DateTime.january;
                 _yearNotifier.value += 1;
                 widget.onMonthChanged!.call(_monthNotifier.value);
@@ -141,7 +142,7 @@ class _YearsMonthWidgetState extends State<YearsMonthWidget> {
         InkWell(
           child: Icon(Icons.last_page),
           onTap: () {
-            if(_yearNotifier.value < widget.maxYear) {
+            if (_yearNotifier.value < widget.maxYear) {
               _yearNotifier.value += 1;
               widget.onYearChanged!.call(_yearNotifier.value);
             }
@@ -151,7 +152,6 @@ class _YearsMonthWidgetState extends State<YearsMonthWidget> {
     );
   }
 }
-
 
 ///
 /// 用于显示年的控件。

@@ -5,7 +5,7 @@ import 'package:plume/calendar/constant/constant.dart';
 import 'package:plume/calendar/tools/date_math.dart';
 
 /// 当被点击事件触发
-typedef  OnClickedDayClip = Function(List<int> multi, DayClipModel dayClipModel);
+typedef OnClickedDayClip = Function(List<int> multi, DayClipModel dayClipModel);
 
 ///
 /// 日历相关计算工具。
@@ -24,7 +24,6 @@ typedef  OnClickedDayClip = Function(List<int> multi, DayClipModel dayClipModel)
 /// ```
 ///
 class Calendar {
-
   ///
   /// 计算显示区域。
   ///
@@ -43,10 +42,13 @@ class Calendar {
   List<CalendarClip> getPage({List<DayClipModel> data = const [], DayClipDelegate? dayClipDelegate, WeekDayClipDelegate? weekDayClipDelegate, int? year, int? month}) {
     /// 要显示哪年？
     int _year = year ?? DateTime.now().year;
+
     /// 要显示哪个月？
     int _month = month ?? DateTime.now().month;
+
     /// 根据年月获取一个月的天数。
     int _days = DateMath().getDaysOfMonth(_month, year: _year);
+
     /// 计算当月的第一天是周几。即在列表中的偏移位置。
     int offset = DateTime(_year, _month, 1).weekday;
     print("year:$_year   month:$_month");
@@ -59,7 +61,8 @@ class Calendar {
   /// * days    每个月的天数
   /// * offset   偏移量
   ///
-  List<CalendarClip> _getScope(DayClipDelegate dayClipDelegate, WeekDayClipDelegate weekDayClipDelegate, List<DayClipModel> data, int year, int month, int days, int offset) {
+  List<CalendarClip> _getScope(
+      DayClipDelegate dayClipDelegate, WeekDayClipDelegate weekDayClipDelegate, List<DayClipModel> data, int year, int month, int days, int offset) {
     print("days:$days  offset:$offset");
 
     //
@@ -93,12 +96,14 @@ class Calendar {
         // 每天
         if (!spec) {
           // 寻找给定的数据列表中是否有匹配的数据模型，有则返回，无则返回一个日期数据模型，数据内容为空。
-          DayClipModel _dayClipModel = data.firstWhere((element) => (element.year == year && element.month == month && element.day == i + 1), orElse: () => DayClipModel(year, month, i + 1));
+          DayClipModel _dayClipModel =
+              data.firstWhere((element) => (element.year == year && element.month == month && element.day == i + 1), orElse: () => DayClipModel(year, month, i + 1));
           // print("spc $_dayClipModel");
           dayClips.add(DayClip(_dayClipModel, delegate: dayClipDelegate));
         } else {
           int _day = (i + 1) - (offset - _tuning);
-          DayClipModel _dayClipModel = data.firstWhere((element) => (element.year == year && element.month == month && element.day == _day), orElse: () => DayClipModel(year, month, _day));
+          DayClipModel _dayClipModel =
+              data.firstWhere((element) => (element.year == year && element.month == month && element.day == _day), orElse: () => DayClipModel(year, month, _day));
 
           // print("ddd $_dayClipModel");
           dayClips.add(DayClip(_dayClipModel, delegate: dayClipDelegate));
@@ -109,7 +114,6 @@ class Calendar {
     dayClips.insertAll(0, _tuningTitle.map((e) => WeekDayClip(e, delegate: weekDayClipDelegate)));
     return dayClips;
   }
-
 }
 
 ///
@@ -125,7 +129,7 @@ class WeekDayClip extends CalendarClip {
 
   @override
   Widget build(BuildContext context, {OnClickedDayClip? onClickedDayClip}) {
-    if(delegate != null) {
+    if (delegate != null) {
       return delegate!.buildWeekDay(context, dayOfWeek);
     }
     return SimpleWeekDayClipDelegate().buildWeekDay(context, dayOfWeek);
@@ -157,16 +161,17 @@ class DayClip extends CalendarClip {
 
   @override
   Widget build(BuildContext context, {OnClickedDayClip? onClickedDayClip}) {
-    return dayClipModel.day == -1 ? Text("") : (delegate != null
-        ? delegate!.buildDayClip(context, dayClipModel, onClickedDayClip)
-        : SimpleDayClipDelegate().buildDayClip(context, dayClipModel, onClickedDayClip));
+    return dayClipModel.day == -1
+        ? Text("")
+        : (delegate != null
+            ? delegate!.buildDayClip(context, dayClipModel, onClickedDayClip)
+            : SimpleDayClipDelegate().buildDayClip(context, dayClipModel, onClickedDayClip));
   }
 
   @override
   String toString() {
     return 'DayClip{$dayClipModel}';
   }
-
 }
 
 ///
@@ -184,13 +189,13 @@ abstract class CalendarClip {
 
 /// 日期数据模型
 class DayClipModel {
-
   factory DayClipModel.now({DayClipData? data}) {
     DateTime _now = DateTime.now();
     return DayClipModel(_now.year, _now.month, _now.day, data: data);
   }
 
   DayClipModel(this.year, this.month, this.day, {this.data});
+
   /// 每日数据
   final DayClipData? data;
 
@@ -223,6 +228,7 @@ class DayClipModel {
 abstract class DayClipData {
   /// 是否是节日(无论东方，西方，国际国内，法定或者纪念日等）
   external bool isFestival();
+
   /// 是否打卡
   external bool isPunch();
 }
@@ -230,6 +236,7 @@ abstract class DayClipData {
 ///  String数据类型，一般用于数据测试，简单数据。
 class DayClipStringData extends DayClipData {
   DayClipStringData(this.data);
+
   final String data;
 
   bool isPunch() {
@@ -289,33 +296,40 @@ mixin DayClipDelegateMiXin on DayClipDelegate {
 /// 今天被单独标出
 ///
 class SimpleDayClipDelegate implements DayClipDelegateMiXin {
-
   @override
-  Widget buildDayClip(BuildContext context, DayClipModel? dayClipModel, OnClickedDayClip? onSelectedDayClip)  {
+  Widget buildDayClip(BuildContext context, DayClipModel? dayClipModel, OnClickedDayClip? onSelectedDayClip) {
     // 判断是否为今天
     bool _isToday = dayClipModel?.day == DateTime.now().day && dayClipModel?.month == DateTime.now().month && dayClipModel?.year == DateTime.now().year;
+
     /// 默认显示
     return InkWell(
       onTap: () {
         onSelectedDayClip?.call([dayClipModel!.day], dayClipModel);
       },
       child: Container(
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              CircleAvatar(
-                backgroundColor: _isToday ? Colors.orangeAccent : Colors.transparent,
-              ),
-              _isToday ?
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("${dayClipModel?.day}", style: TextStyle(color: Colors.white),),
-                  Text("今天", style: TextStyle(color: Colors.greenAccent, fontSize: 8.0),),
-                ],
-              ) : Text("${dayClipModel?.day}"),
-            ],
-          ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            CircleAvatar(
+              backgroundColor: _isToday ? Colors.orangeAccent : Colors.transparent,
+            ),
+            _isToday
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "${dayClipModel?.day}",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Text(
+                        "今天",
+                        style: TextStyle(color: Colors.greenAccent, fontSize: 8.0),
+                      ),
+                    ],
+                  )
+                : Text("${dayClipModel?.day}"),
+          ],
+        ),
       ),
     );
   }
@@ -358,20 +372,39 @@ mixin WeekDayClipDelegateMiXin on WeekDayClipDelegate {
 ///
 class SimpleWeekDayClipDelegate implements WeekDayClipDelegateMiXin {
   @override
-  Widget buildWeekDay(BuildContext context, int dayOfWeek){
+  Widget buildWeekDay(BuildContext context, int dayOfWeek) {
     String _name = "";
     TextStyle _style = TextStyle(color: Colors.black);
+
     /// 构建每个返回显示的
-     switch (dayOfWeek) {
-      case DateTime.monday:     _name = "一"; break;
-      case DateTime.tuesday:    _name = "二"; break;
-      case DateTime.wednesday:  _name = "三"; break;
-      case DateTime.thursday:   _name = "四"; break;
-      case DateTime.friday:     _name = "五"; break;
-      case DateTime.saturday:   _name = "六"; break;
-      case DateTime.sunday:     _name = "日"; _style = TextStyle(color: Colors.orangeAccent); break;
+    switch (dayOfWeek) {
+      case DateTime.monday:
+        _name = "一";
+        break;
+      case DateTime.tuesday:
+        _name = "二";
+        break;
+      case DateTime.wednesday:
+        _name = "三";
+        break;
+      case DateTime.thursday:
+        _name = "四";
+        break;
+      case DateTime.friday:
+        _name = "五";
+        break;
+      case DateTime.saturday:
+        _name = "六";
+        break;
+      case DateTime.sunday:
+        _name = "日";
+        _style = TextStyle(color: Colors.orangeAccent);
+        break;
     }
-    return Text(_name, style: _style,);
+    return Text(
+      _name,
+      style: _style,
+    );
   }
 
   @override
@@ -389,20 +422,39 @@ class SimpleWeekDayClipDelegate implements WeekDayClipDelegateMiXin {
 ///
 class EnglishWeekDayClipDelegate implements WeekDayClipDelegateMiXin {
   @override
-  Widget buildWeekDay(BuildContext context, int dayOfWeek){
+  Widget buildWeekDay(BuildContext context, int dayOfWeek) {
     String _name = "";
     TextStyle _style = TextStyle(color: Colors.black);
+
     /// 构建每个返回显示的
     switch (dayOfWeek) {
-      case DateTime.monday:     _name = "Mon"; break;
-      case DateTime.tuesday:    _name = "Tues"; break;
-      case DateTime.wednesday:  _name = "Wed"; break;
-      case DateTime.thursday:   _name = "Thur"; break;
-      case DateTime.friday:     _name = "Fri"; break;
-      case DateTime.saturday:   _name = "Sat"; break;
-      case DateTime.sunday:     _name = "Sun"; _style = TextStyle(color: Colors.orangeAccent); break;
+      case DateTime.monday:
+        _name = "Mon";
+        break;
+      case DateTime.tuesday:
+        _name = "Tues";
+        break;
+      case DateTime.wednesday:
+        _name = "Wed";
+        break;
+      case DateTime.thursday:
+        _name = "Thur";
+        break;
+      case DateTime.friday:
+        _name = "Fri";
+        break;
+      case DateTime.saturday:
+        _name = "Sat";
+        break;
+      case DateTime.sunday:
+        _name = "Sun";
+        _style = TextStyle(color: Colors.orangeAccent);
+        break;
     }
-    return Text(_name, style: _style,);
+    return Text(
+      _name,
+      style: _style,
+    );
   }
 
   bool isTuning() => true;
