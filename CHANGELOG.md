@@ -1,6 +1,11 @@
 ChangeLog
 ======
- 
+
+## [0.1.3]
+
+* 增加新控件CheckBoxGroup
+* 修正fp_publish脚本，及添加下个版本支持功能描述
+  
 ## [0.1.2+1]
 
 * 修正DrawerBuilder返回drawerHeader默认值错误问题。
