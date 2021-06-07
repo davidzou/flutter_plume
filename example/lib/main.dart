@@ -22,6 +22,7 @@ void main() {
         routes: {
           // drawer
           FRAMEWORK_DRAWER_PAGE: (BuildContext context) => FrameworkDrawerPage(),
+          // perspective
           PERSPECTIVE_PAGE: (BuildContext context) => PerspectivePage(),
         },
 

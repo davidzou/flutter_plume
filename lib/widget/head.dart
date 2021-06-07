@@ -22,6 +22,8 @@ import 'package:flutter/widgets.dart';
 ///   )
 /// ```
 ///
+/// > version: [1.0.0]
+///
 class HeadTitle extends StatelessWidget {
   ///
   /// @param title      标题文字

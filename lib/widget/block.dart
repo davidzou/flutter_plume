@@ -18,6 +18,8 @@ import 'package:flutter/widgets.dart';
 /// )
 /// ```
 ///
+/// > version: [1.0.0]
+///
 class Block extends StatelessWidget {
   Block(
       {Key? key,
