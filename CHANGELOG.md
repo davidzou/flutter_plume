@@ -1,6 +1,10 @@
 ChangeLog
 ======
 
+## [0.1.4-dev.1]
+
+* 更新依赖just_audio 从版本0.7.5至0.9.5
+ 
 ## [0.1.3]
 
 * 增加新控件CheckBoxGroup
