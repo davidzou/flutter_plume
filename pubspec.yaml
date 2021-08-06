@@ -13,13 +13,10 @@ dependencies:
     sdk: flutter
 
   # 持久化
-  shared_preferences: ^2.0.5
-#  sqflite: ^2.0.0+3
+  shared_preferences: ^2.0.6
+
   # 音频播放(VoiceLabel)
   just_audio: ^0.9.5
-#  path_provider: ^2.0.1
-
-#  crypto 3.0.0
 
 dev_dependencies:
   flutter_test:
