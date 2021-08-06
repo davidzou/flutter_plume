@@ -19,6 +19,10 @@ import 'package:flutter/material.dart';
 ///      )
 /// ```
 ///
+/// ```
+/// [example/lib/pages/page_framework_drawer.dart -- FrameworkDrawerPage]
+/// ```
+///
 class DrawerBuilder {
   DrawerBuilder._();
 

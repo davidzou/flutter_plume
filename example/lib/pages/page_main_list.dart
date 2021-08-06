@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:plumedemo/main.dart';
 
 ///
-///
+/// 主页列表项
 ///
 class MainListPage extends StatelessWidget{
   @override
@@ -25,6 +25,10 @@ class MainListPage extends StatelessWidget{
   }
 }
 
+///
+/// key ： 控件名称，即测试页Route名称
+/// value：使用的控件路径。描述文件
+///
 const LIST = [
   // 框架Drawer
   {FRAMEWORK_DRAWER_PAGE: "framework/DrawerBuilder"},
