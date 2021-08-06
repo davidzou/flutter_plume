@@ -52,7 +52,7 @@ mixin MapConvert<T> {
 }
 
 extension MapConvertExtension<T> on MapConvert<T> {
-  Map<String, dynamic> toMap(){
+  Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
       // T.noSuchMethod(invocation);
       // 这里使用反射来处理数据？

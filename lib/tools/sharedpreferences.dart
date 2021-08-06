@@ -35,7 +35,7 @@ class RWSharedPreferences {
     return sp.setDouble(key, value);
   }
 
-  static saveString(String key, String value) async{
+  static saveString(String key, String value) async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     return sp.setString(key, value);
   }
@@ -71,5 +71,4 @@ class RWSharedPreferences {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getStringList(key);
   }
-
 }

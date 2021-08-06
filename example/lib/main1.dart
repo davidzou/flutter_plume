@@ -163,7 +163,6 @@ class MessItem implements ListItem {
 /// Step2：构建展示逻辑
 ///
 class ListBuilder extends ListViewBuilder<MessItem> {
-
   ListBuilder({
     List<MessItem> list,
     ScrollController scrollController,
@@ -189,8 +188,6 @@ class ListBuilder extends ListViewBuilder<MessItem> {
     );
   }
 }
-
-
 
 class ListWidget extends StatefulWidget {
   @override
@@ -219,27 +216,26 @@ class ListWidgetState extends State<ListWidget> {
     super.dispose();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     print("object build");
     _listBuilder = ListBuilder(
-      list: array,
-      scrollController: ScrollController(),
-      onPullToRefreshed: () {
-        print("voidCallback update list");
-        setState(() {
-          array = List.generate(20, (index) => MessItem(name: "name-new$index"));
-        });
-      },
-      onLoadingMore: () async {
-        await Future.delayed(Duration(seconds: 3));
-        setState(() {
-          array.add(MessItem(name: "name-more"));
-        });
-      }
-    )..init();
+        list: array,
+        scrollController: ScrollController(),
+        onPullToRefreshed: () {
+          print("voidCallback update list");
+          setState(() {
+            array =
+                List.generate(20, (index) => MessItem(name: "name-new$index"));
+          });
+        },
+        onLoadingMore: () async {
+          await Future.delayed(Duration(seconds: 3));
+          setState(() {
+            array.add(MessItem(name: "name-more"));
+          });
+        })
+      ..init();
     return _listBuilder.build();
   }
 }
@@ -256,22 +252,19 @@ class ListWidgetApp extends StatelessWidget {
   }
 }
 
-
-
 class CardWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _CardWidgetState();
 }
 
 class _CardWidgetState extends State<CardWidget> {
-
-  var angle = [1,2, 3, 4];
+  var angle = [1, 2, 3, 4];
   double _angle = math.pi / 4;
   int index = 0;
   @override
   void initState() {
     super.initState();
-    Future.doWhile((){
+    Future.doWhile(() {
       setState(() {
         _angle = math.pi / angle[index % 4];
         index++;
@@ -292,9 +285,10 @@ class _CardWidgetState extends State<CardWidget> {
     return SizeTransition(
       child: Container(
         padding: EdgeInsets.fromLTRB(20.0, 50.0, 20.0, 20.0),
-        margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 100.0),
+        margin:
+            EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 100.0),
         width: double.infinity,
-        height: double.infinity ,
+        height: double.infinity,
         decoration: BoxDecoration(
           color: Colors.blueAccent,
           borderRadius: BorderRadius.all(Radius.circular(20.0)),

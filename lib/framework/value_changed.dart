@@ -23,7 +23,8 @@ import 'package:flutter/widgets.dart';
 ///
 /// *切勿使用value的GET方法获取更新*
 ///
-class MultiValueNotifier<T> extends ChangeNotifier implements ValueListenable<List<T>> {
+class MultiValueNotifier<T> extends ChangeNotifier
+    implements ValueListenable<List<T>> {
   ///
   MultiValueNotifier(this._value);
 
@@ -37,11 +38,11 @@ class MultiValueNotifier<T> extends ChangeNotifier implements ValueListenable<Li
     notifyListeners();
   }
 
-  T operator [](int index){
+  T operator [](int index) {
     return _value[index];
   }
 
-  void operator []=(int index, T newValue){
+  void operator []=(int index, T newValue) {
     if (_value[index] == newValue) return;
     _value[index] = newValue;
     notifyListeners();

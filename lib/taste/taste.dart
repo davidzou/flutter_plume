@@ -12,7 +12,10 @@ class SpinModel extends InheritedNotifier<AnimationController> {
   }) : super(key: key, notifier: notifier, child: child);
 
   static double of(BuildContext context) {
-    double value = context.dependOnInheritedWidgetOfExactType<SpinModel>()!.notifier!.value;
+    double value = context
+        .dependOnInheritedWidgetOfExactType<SpinModel>()!
+        .notifier!
+        .value;
     return value;
   }
 }

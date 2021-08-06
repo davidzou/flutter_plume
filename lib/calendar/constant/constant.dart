@@ -1,4 +1,3 @@
-
 /// 圣经上的排序
 const List<int> BIBLE_WEEK_TITLE = <int>[
   DateTime.sunday,
@@ -9,6 +8,7 @@ const List<int> BIBLE_WEEK_TITLE = <int>[
   DateTime.friday,
   DateTime.saturday,
 ];
+
 /// 中国历代的排序
 const List<int> CHINA_WEEK_TITLE = <int>[
   DateTime.monday,

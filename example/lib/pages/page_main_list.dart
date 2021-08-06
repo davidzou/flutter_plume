@@ -5,21 +5,26 @@ import 'package:plumedemo/main.dart';
 ///
 /// 主页列表项
 ///
-class MainListPage extends StatelessWidget{
+class MainListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("title"),),
+      appBar: AppBar(
+        title: Text("title"),
+      ),
       body: Container(
-        child: ListView.builder(itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: Text("Component[$index]: ${LIST[index].values.first}"),
-            onTap: () {
-              var name = LIST[index].keys.first;
-              Navigator.of(context).pushNamed(name);
-            },
-          );
-        }, itemCount: LIST.length,),
+        child: ListView.builder(
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+              title: Text("Component[$index]: ${LIST[index].values.first}"),
+              onTap: () {
+                var name = LIST[index].keys.first;
+                Navigator.of(context).pushNamed(name);
+              },
+            );
+          },
+          itemCount: LIST.length,
+        ),
       ),
     );
   }

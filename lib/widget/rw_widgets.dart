@@ -14,7 +14,8 @@ typedef CalenderCallback = void Function(DateTime dateTime);
 /// +-------------------------+
 ///
 class Content extends StatelessWidget {
-  Content({Key? key, required this.title, required this.content}) : super(key: key);
+  Content({Key? key, required this.title, required this.content})
+      : super(key: key);
 
   /// 标题，label
   final String title;
@@ -267,7 +268,8 @@ class ImageButton extends StatelessWidget {
     );
   }
 
-  _selectWidget(String title, Icon? left, Icon? right, Icon? top, Icon? bottom) {
+  _selectWidget(
+      String title, Icon? left, Icon? right, Icon? top, Icon? bottom) {
     if (left != null) {
       // 左右结构，左图右文字
       return Row(

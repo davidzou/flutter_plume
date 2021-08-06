@@ -146,14 +146,14 @@ abstract class ListViewBuilder<T extends ListItem> {
   ///
   void init() {
     // if (scrollController != null) {
-      scrollController?.addListener(() {
-        if (scrollController?.position.pixels ==
-            scrollController?.position.maxScrollExtent) {
-          // 最底部时加载数据。
-          _onLoadMore();
-          isLoading = true;
-        }
-      });
+    scrollController?.addListener(() {
+      if (scrollController?.position.pixels ==
+          scrollController?.position.maxScrollExtent) {
+        // 最底部时加载数据。
+        _onLoadMore();
+        isLoading = true;
+      }
+    });
     // }
   }
 
@@ -212,19 +212,18 @@ abstract class ListViewBuilder<T extends ListItem> {
                   ),
                 );
               } else {
-                return
-                  onItemTap == null ?
-                  Container(
-                    child: itemBuild(context, list[index], index),
-                  )
-                      : Container(
-                    height: height,
-                    child: InkWell(
-                      onTap: () => onItemTap!(list[index], index),
-                      // 列表布局
-                      child: itemBuild(context, list[index], index),
-                    ),
-                  );
+                return onItemTap == null
+                    ? Container(
+                        child: itemBuild(context, list[index], index),
+                      )
+                    : Container(
+                        height: height,
+                        child: InkWell(
+                          onTap: () => onItemTap!(list[index], index),
+                          // 列表布局
+                          child: itemBuild(context, list[index], index),
+                        ),
+                      );
               }
             }),
       ),

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:plume/framework/value_changed.dart';
@@ -39,7 +38,8 @@ typedef CheckBoxGroupCallback = Function(int index, bool? value);
 ///
 ///
 class CheckBoxGroup extends StatefulWidget {
-  const CheckBoxGroup(this.header, {required this.subTitle, this.subCheckable, this.callback});
+  const CheckBoxGroup(this.header,
+      {required this.subTitle, this.subCheckable, this.callback});
 
   /// 标题([MainTitle])
   final String header;
@@ -71,7 +71,8 @@ class _CheckBoxGroupState extends State<CheckBoxGroup> {
     super.initState();
     _expandedNotified = ValueNotifier(false);
     _parentNotified = ValueNotifier(false);
-    _subChildNotified = MultiValueNotifier(widget.subCheckable ?? widget.subTitle.map((e) => false).toList());
+    _subChildNotified = MultiValueNotifier(
+        widget.subCheckable ?? widget.subTitle.map((e) => false).toList());
     _parentValueChanged();
   }
 
@@ -104,7 +105,8 @@ class _CheckBoxGroupState extends State<CheckBoxGroup> {
     return !expanded ? _unExpandedFillColor : _expandedFillColor;
   }
 
-  static MaterialStateProperty<Color?> _unExpandedFillColor = MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+  static MaterialStateProperty<Color?> _unExpandedFillColor =
+      MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
     const Set<MaterialState> interactiveStates = <MaterialState>{
       MaterialState.pressed,
       MaterialState.hovered,
@@ -121,7 +123,8 @@ class _CheckBoxGroupState extends State<CheckBoxGroup> {
     }
     return ThemeData().unselectedWidgetColor;
   });
-  static MaterialStateProperty<Color?> _expandedFillColor = MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+  static MaterialStateProperty<Color?> _expandedFillColor =
+      MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
     const Set<MaterialState> interactiveStates = <MaterialState>{
       MaterialState.pressed,
       MaterialState.hovered,
@@ -177,26 +180,27 @@ class _CheckBoxGroupState extends State<CheckBoxGroup> {
           // 子列表
           children: widget.subTitle
               .map((e) => FractionallySizedBox(
-            widthFactor: 0.8,
-            child: ValueListenableBuilder(
-              valueListenable: _subChildNotified,
-              builder: (BuildContext context, List<bool> value, Widget? child) {
-                int index = widget.subTitle.indexOf(e);
-                return Row(children: [
-                  Checkbox(
-                      value: _subChildNotified.value[index],
-                      onChanged: (value) {
-                        // 子选择项改变状态
-                        _subChildNotified[index] = value!;
-                        _parentValueChanged();
-                        widget.callback?.call(index, value);
-                      }),
-                  child!,
-                ]);
-              },
-              child: Expanded(child: Text(e)),
-            ),
-          ))
+                    widthFactor: 0.8,
+                    child: ValueListenableBuilder(
+                      valueListenable: _subChildNotified,
+                      builder: (BuildContext context, List<bool> value,
+                          Widget? child) {
+                        int index = widget.subTitle.indexOf(e);
+                        return Row(children: [
+                          Checkbox(
+                              value: _subChildNotified.value[index],
+                              onChanged: (value) {
+                                // 子选择项改变状态
+                                _subChildNotified[index] = value!;
+                                _parentValueChanged();
+                                widget.callback?.call(index, value);
+                              }),
+                          child!,
+                        ]);
+                      },
+                      child: Expanded(child: Text(e)),
+                    ),
+                  ))
               .toList(),
         );
       },

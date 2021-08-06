@@ -70,6 +70,7 @@ class ColorSelector extends StatefulWidget {
 class _ColorSelectorState extends State<ColorSelector> {
   /// 标签
   late String _label;
+
   /// 标签样式
   late TextStyle _labelStyle;
 

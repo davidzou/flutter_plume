@@ -7,7 +7,6 @@ import 'package:just_audio/just_audio.dart';
 ///
 ///
 
-
 ///
 /// 这是一个用于名词解释的标题，包含了一个声音的模块播放
 ///
@@ -30,12 +29,13 @@ import 'package:just_audio/just_audio.dart';
 ///
 class VoiceLabel extends StatefulWidget {
   VoiceLabel(
-      this.label, {
-        required this.assetPath,
-        // this.icon,
-        this.iconColor = Colors.amberAccent,
-        this.style = const TextStyle(color: Colors.black87, fontSize: 20.0, fontWeight: FontWeight.bold),
-      });
+    this.label, {
+    required this.assetPath,
+    // this.icon,
+    this.iconColor = Colors.amberAccent,
+    this.style = const TextStyle(
+        color: Colors.black87, fontSize: 20.0, fontWeight: FontWeight.bold),
+  });
 
   /// 名词
   final String label;
@@ -58,8 +58,10 @@ class VoiceLabel extends StatefulWidget {
 class _VoiceLabelState extends State<VoiceLabel> {
   /// 是否显示音频喇叭按钮图标，当有音频文件时为true且显示。否则相反。
   bool _visible = false;
+
   /// 声音播放插件
   late AudioPlayer _audioPlayer;
+
   /// 声音图标动态刷新，播放时。
   ValueNotifier<int> _valueNotifier = ValueNotifier(0);
 
@@ -99,7 +101,7 @@ class _VoiceLabelState extends State<VoiceLabel> {
 
     _audioPlayer.processingStateStream.listen((event) {
       print("index - ${event.index}");
-      if(event == ProcessingState.completed) {
+      if (event == ProcessingState.completed) {
         setState(() {
           _valueNotifier.value = _index = 0;
         });
@@ -114,8 +116,10 @@ class _VoiceLabelState extends State<VoiceLabel> {
       _audioPlayer.play();
       // 根据播放的音频播放icon喇叭动画。
       int milliseconds = 0;
-      for (; milliseconds < duration!.inMilliseconds; ) {
-        if(isDispose) { return; }
+      for (; milliseconds < duration!.inMilliseconds;) {
+        if (isDispose) {
+          return;
+        }
         print("$milliseconds  $_index");
         setState(() {
           _valueNotifier.value = _index = (_index + 1) % _volume.length;
@@ -243,4 +247,3 @@ class _NumberSelectorState extends State<NumberSelector> {
     );
   }
 }
-

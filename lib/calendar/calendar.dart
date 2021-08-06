@@ -39,7 +39,12 @@ class Calendar {
   ///                           1  -- 一  二  三  四  五  六  日     周一为第一位
   ///
   ///
-  List<CalendarClip> getPage({List<DayClipModel> data = const [], DayClipDelegate? dayClipDelegate, WeekDayClipDelegate? weekDayClipDelegate, int? year, int? month}) {
+  List<CalendarClip> getPage(
+      {List<DayClipModel> data = const [],
+      DayClipDelegate? dayClipDelegate,
+      WeekDayClipDelegate? weekDayClipDelegate,
+      int? year,
+      int? month}) {
     /// 要显示哪年？
     int _year = year ?? DateTime.now().year;
 
@@ -52,7 +57,14 @@ class Calendar {
     /// 计算当月的第一天是周几。即在列表中的偏移位置。
     int offset = DateTime(_year, _month, 1).weekday;
     print("year:$_year   month:$_month");
-    return _getScope(dayClipDelegate ?? SimpleDayClipDelegate(), weekDayClipDelegate ?? SimpleWeekDayClipDelegate(), data, _year, _month, _days, offset);
+    return _getScope(
+        dayClipDelegate ?? SimpleDayClipDelegate(),
+        weekDayClipDelegate ?? SimpleWeekDayClipDelegate(),
+        data,
+        _year,
+        _month,
+        _days,
+        offset);
   }
 
   ///
@@ -62,7 +74,13 @@ class Calendar {
   /// * offset   偏移量
   ///
   List<CalendarClip> _getScope(
-      DayClipDelegate dayClipDelegate, WeekDayClipDelegate weekDayClipDelegate, List<DayClipModel> data, int year, int month, int days, int offset) {
+      DayClipDelegate dayClipDelegate,
+      WeekDayClipDelegate weekDayClipDelegate,
+      List<DayClipModel> data,
+      int year,
+      int month,
+      int days,
+      int offset) {
     print("days:$days  offset:$offset");
 
     //
@@ -91,19 +109,26 @@ class Calendar {
       if (i < (offset - _tuning) && spec) {
         /// FIXME 前要保留上个月的结束，后要保留下个月的开始
         // 填空位
-        dayClips.add(DayClip(DayClipModel(year, month, -1), delegate: dayClipDelegate));
+        dayClips.add(
+            DayClip(DayClipModel(year, month, -1), delegate: dayClipDelegate));
       } else {
         // 每天
         if (!spec) {
           // 寻找给定的数据列表中是否有匹配的数据模型，有则返回，无则返回一个日期数据模型，数据内容为空。
-          DayClipModel _dayClipModel =
-              data.firstWhere((element) => (element.year == year && element.month == month && element.day == i + 1), orElse: () => DayClipModel(year, month, i + 1));
+          DayClipModel _dayClipModel = data.firstWhere(
+              (element) => (element.year == year &&
+                  element.month == month &&
+                  element.day == i + 1),
+              orElse: () => DayClipModel(year, month, i + 1));
           // print("spc $_dayClipModel");
           dayClips.add(DayClip(_dayClipModel, delegate: dayClipDelegate));
         } else {
           int _day = (i + 1) - (offset - _tuning);
-          DayClipModel _dayClipModel =
-              data.firstWhere((element) => (element.year == year && element.month == month && element.day == _day), orElse: () => DayClipModel(year, month, _day));
+          DayClipModel _dayClipModel = data.firstWhere(
+              (element) => (element.year == year &&
+                  element.month == month &&
+                  element.day == _day),
+              orElse: () => DayClipModel(year, month, _day));
 
           // print("ddd $_dayClipModel");
           dayClips.add(DayClip(_dayClipModel, delegate: dayClipDelegate));
@@ -111,7 +136,8 @@ class Calendar {
       }
     }
     // 头部标题，标记星期几，具体展现方式见实现
-    dayClips.insertAll(0, _tuningTitle.map((e) => WeekDayClip(e, delegate: weekDayClipDelegate)));
+    dayClips.insertAll(0,
+        _tuningTitle.map((e) => WeekDayClip(e, delegate: weekDayClipDelegate)));
     return dayClips;
   }
 }
@@ -165,7 +191,8 @@ class DayClip extends CalendarClip {
         ? Text("")
         : (delegate != null
             ? delegate!.buildDayClip(context, dayClipModel, onClickedDayClip)
-            : SimpleDayClipDelegate().buildDayClip(context, dayClipModel, onClickedDayClip));
+            : SimpleDayClipDelegate()
+                .buildDayClip(context, dayClipModel, onClickedDayClip));
   }
 
   @override
@@ -205,12 +232,16 @@ class DayClipModel {
 
   /// 是否为同一天
   bool isSame(DayClipModel dayClipModel) {
-    return day == dayClipModel.day && month == dayClipModel.month && year == dayClipModel.year;
+    return day == dayClipModel.day &&
+        month == dayClipModel.month &&
+        year == dayClipModel.year;
   }
 
   /// 是否为今天
   bool isNow() {
-    return day == DateTime.now().day && month == DateTime.now().month && year == DateTime.now().year;
+    return day == DateTime.now().day &&
+        month == DateTime.now().month &&
+        year == DateTime.now().year;
   }
 
   @override
@@ -282,13 +313,15 @@ class DayClipStringData extends DayClipData {
 /// ```
 abstract class DayClipDelegate {
   /// 构建每一个日期子类布局，其中用于显示日期，和点击效果？。
-  external Widget buildDayClip(BuildContext context, DayClipModel? dayClipModel, OnClickedDayClip? onSelectedDayClip);
+  external Widget buildDayClip(BuildContext context, DayClipModel? dayClipModel,
+      OnClickedDayClip? onSelectedDayClip);
 }
 
 /// 默认
 mixin DayClipDelegateMiXin on DayClipDelegate {
   @override
-  Widget buildDayClip(BuildContext context, DayClipModel? dayClipModel, OnClickedDayClip? onSelectedDayClip);
+  Widget buildDayClip(BuildContext context, DayClipModel? dayClipModel,
+      OnClickedDayClip? onSelectedDayClip);
 }
 
 ///
@@ -297,9 +330,12 @@ mixin DayClipDelegateMiXin on DayClipDelegate {
 ///
 class SimpleDayClipDelegate implements DayClipDelegateMiXin {
   @override
-  Widget buildDayClip(BuildContext context, DayClipModel? dayClipModel, OnClickedDayClip? onSelectedDayClip) {
+  Widget buildDayClip(BuildContext context, DayClipModel? dayClipModel,
+      OnClickedDayClip? onSelectedDayClip) {
     // 判断是否为今天
-    bool _isToday = dayClipModel?.day == DateTime.now().day && dayClipModel?.month == DateTime.now().month && dayClipModel?.year == DateTime.now().year;
+    bool _isToday = dayClipModel?.day == DateTime.now().day &&
+        dayClipModel?.month == DateTime.now().month &&
+        dayClipModel?.year == DateTime.now().year;
 
     /// 默认显示
     return InkWell(
@@ -311,7 +347,8 @@ class SimpleDayClipDelegate implements DayClipDelegateMiXin {
           alignment: Alignment.center,
           children: [
             CircleAvatar(
-              backgroundColor: _isToday ? Colors.orangeAccent : Colors.transparent,
+              backgroundColor:
+                  _isToday ? Colors.orangeAccent : Colors.transparent,
             ),
             _isToday
                 ? Column(
@@ -323,7 +360,8 @@ class SimpleDayClipDelegate implements DayClipDelegateMiXin {
                       ),
                       Text(
                         "今天",
-                        style: TextStyle(color: Colors.greenAccent, fontSize: 8.0),
+                        style:
+                            TextStyle(color: Colors.greenAccent, fontSize: 8.0),
                       ),
                     ],
                   )

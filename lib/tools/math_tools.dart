@@ -4,7 +4,6 @@ import 'dart:math';
 ///
 ///
 class MathTools {
-
   ///
   /// 求斐波那契数列
   ///
@@ -22,9 +21,10 @@ class MathTools {
   /// * contains    是否包含结束值
   /// * increase    递增值
   ///
-  static int randomNextInt(int to, {int from = 0, bool contains = false, int increase = 1}) {
+  static int randomNextInt(int to,
+      {int from = 0, bool contains = false, int increase = 1}) {
     List<int> list = [];
-    for(int i = from; i < (contains ? (to + 1) : to); i += increase) {
+    for (int i = from; i < (contains ? (to + 1) : to); i += increase) {
       list.add(i);
     }
     var ran = Random();
@@ -54,11 +54,10 @@ class MathTools {
     var ran = Random();
     int _remain = ran.nextInt(max);
     bool stop = (_remain == 0);
-    while(stop) {
+    while (stop) {
       _remain = ran.nextInt(max);
       stop = !(_remain != 0 && condition);
     }
     return _remain;
   }
-
 }

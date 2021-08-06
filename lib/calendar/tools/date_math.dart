@@ -24,8 +24,9 @@ class DateMath {
       case 11:
         return 30;
       case 2:
-        return _getDaysOfFebruary( year: year);
-      default: throw Exception("Unknown Exception, Month: $month");
+        return _getDaysOfFebruary(year: year);
+      default:
+        throw Exception("Unknown Exception, Month: $month");
     }
   }
 
@@ -57,10 +58,9 @@ class DateMath {
   ///
   bool isLeapYear({int? year}) {
     int _year = year ?? DateTime.now().year;
-    if(_year == 3200) {
+    if (_year == 3200) {
       return false;
     }
-    return ((_year % 4 == 0 && _year % 100 != 0) || _year % 400 == 0) ;
+    return ((_year % 4 == 0 && _year % 100 != 0) || _year % 400 == 0);
   }
-
 }

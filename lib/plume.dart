@@ -13,7 +13,11 @@ class Calculator {
 ///  界面底部按钮，宽度为整屏，高度自适应，按照字体大小
 ///
 class RWLoginButton extends StatelessWidget {
-  RWLoginButton({this.title = "", this.onPressed, this.textStyle = const TextStyle(), this.backgroundColor});
+  RWLoginButton(
+      {this.title = "",
+      this.onPressed,
+      this.textStyle = const TextStyle(),
+      this.backgroundColor});
 
   final VoidCallback? onPressed;
   final String title;
@@ -59,7 +63,11 @@ class RWWidget {
       color: Colors.white,
       // 边框阴影
       boxShadow: [
-        BoxShadow(color: Color(0x99cccccc), offset: Offset(5.0, 5.0), blurRadius: 10.0, spreadRadius: 2.0),
+        BoxShadow(
+            color: Color(0x99cccccc),
+            offset: Offset(5.0, 5.0),
+            blurRadius: 10.0,
+            spreadRadius: 2.0),
         BoxShadow(color: Color(0x99aaaaaa), offset: Offset(1.0, 1.0)),
       ],
     );
