@@ -1,6 +1,11 @@
 ChangeLog
 ======
 
+## [0.1.4-dev.2]
+
+* 更新shared_preference 从版本2.0.5至2.0.6
+* 执行dartfmt -w . 格式化代码
+ 
 ## [0.1.4-dev.1]
 
 * 更新依赖just_audio 从版本0.7.5至0.9.5
