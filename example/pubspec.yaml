@@ -10,10 +10,10 @@ dependencies:
   flutter:
     sdk: flutter
 
-  plume: "^0.1.1"
+#  plume: "^0.1.1"
 #  # 本地依赖
-#  plume:
-#    path: ../../flutter_plume
+  plume:
+    path: ../../flutter_plume
 
 dev_dependencies:
   flutter_test:

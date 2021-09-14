@@ -15,12 +15,19 @@ class MainListPage extends StatelessWidget {
       body: Container(
         child: ListView.builder(
           itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              title: Text("Component[$index]: ${LIST[index].values.first}"),
-              onTap: () {
-                var name = LIST[index].keys.first;
-                Navigator.of(context).pushNamed(name);
-              },
+            return Container(
+              padding: EdgeInsets.all(5.0),
+              child: ListTile(
+                contentPadding: EdgeInsets.all(5.0),
+                minVerticalPadding: 5.0,
+                horizontalTitleGap: 5.0,
+                shape: RoundedRectangleBorder(side: BorderSide(), borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                title: Text("模块[$index]: ${LIST[index].values.first}"),
+                onTap: () {
+                  var name = LIST[index].keys.first;
+                  Navigator.of(context).pushNamed(name);
+                },
+              ),
             );
           },
           itemCount: LIST.length,
@@ -36,7 +43,9 @@ class MainListPage extends StatelessWidget {
 ///
 const LIST = [
   // 框架Drawer
-  {FRAMEWORK_DRAWER_PAGE: "framework/DrawerBuilder"},
+  {FRAMEWORK_DRAWER_PAGE: "自定义Drawer"},
   // 整屏旋转
-  {PERSPECTIVE_PAGE: "perspective"},
+  {PERSPECTIVE_PAGE: "旋转桌面效果"},
+
+  {DIALOGS_PAGE: "自定义对话框"}
 ];

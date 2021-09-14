@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:plume/framework/drawer.dart';
+import 'package:plumedemo/pages/page_dialogs.dart';
 import 'package:plumedemo/pages/page_framework_drawer.dart';
 import 'package:plumedemo/pages/page_main_list.dart';
 import 'package:plumedemo/pages/page_perspective.dart';
 
-const String FRAMEWORK_DRAWER_PAGE = "FrameworkDrawerPage";
 
-const String PERSPECTIVE_PAGE = "PerspectivePage";
 
 void main() {
   runApp(
@@ -23,6 +22,8 @@ void main() {
         FRAMEWORK_DRAWER_PAGE: (BuildContext context) => FrameworkDrawerPage(),
         // perspective
         PERSPECTIVE_PAGE: (BuildContext context) => PerspectivePage(),
+        // custom dialog
+        DIALOGS_PAGE: (BuildContext context) => DialogsPage(),
       },
 
       // *******  调试类参数
@@ -39,3 +40,9 @@ void main() {
     ),
   );
 }
+
+const String FRAMEWORK_DRAWER_PAGE = "/FrameworkDrawerPage";
+
+const String PERSPECTIVE_PAGE = "/PerspectivePage";
+
+const String DIALOGS_PAGE = "/dialogs";
