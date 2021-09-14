@@ -4,13 +4,13 @@ version: 1.0.0
 homepage: https://github.com/davidzou
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-#  plume: "^0.1.1"
+#  plume: "^0.1.4.dev2"
 #  # 本地依赖
   plume:
     path: ../../flutter_plume

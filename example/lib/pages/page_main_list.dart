@@ -47,5 +47,7 @@ const LIST = [
   // 整屏旋转
   {PERSPECTIVE_PAGE: "旋转桌面效果"},
 
-  {DIALOGS_PAGE: "自定义对话框"}
+  {DIALOGS_PAGE: "自定义对话框"},
+
+  {FLIP_PAGE: "旋转的卡片"},
 ];

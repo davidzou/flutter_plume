@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plume/framework/drawer.dart';
 import 'package:plumedemo/pages/page_dialogs.dart';
+import 'package:plumedemo/pages/page_flipable.dart';
 import 'package:plumedemo/pages/page_framework_drawer.dart';
 import 'package:plumedemo/pages/page_main_list.dart';
 import 'package:plumedemo/pages/page_perspective.dart';
@@ -24,6 +25,8 @@ void main() {
         PERSPECTIVE_PAGE: (BuildContext context) => PerspectivePage(),
         // custom dialog
         DIALOGS_PAGE: (BuildContext context) => DialogsPage(),
+        // flip card
+        FLIP_PAGE: (BuildContext context) => FlipablePage(),
       },
 
       // *******  调试类参数
@@ -46,3 +49,5 @@ const String FRAMEWORK_DRAWER_PAGE = "/FrameworkDrawerPage";
 const String PERSPECTIVE_PAGE = "/PerspectivePage";
 
 const String DIALOGS_PAGE = "/dialogs";
+
+const String FLIP_PAGE = "/flipable";

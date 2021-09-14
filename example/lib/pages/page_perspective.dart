@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 /// 旋转整个屏幕
 ///
 class PerspectivePage extends StatefulWidget {
-  PerspectivePage({Key key}) : super(key: key); // changed
+  PerspectivePage({Key? key}) : super(key: key); // changed
 
   @override
   _PerspectivePageState createState() => _PerspectivePageState();

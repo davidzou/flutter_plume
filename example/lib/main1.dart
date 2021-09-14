@@ -1,14 +1,12 @@
-import 'dart:developer';
 import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:plume/builder/list_builder.dart';
+import 'package:plume/framework/builder/list_builder.dart';
 import 'package:plume/widget/counter.dart';
 import 'package:plume/widget/head.dart';
 import 'package:plume/taste/taste.dart';
-import 'package:plume/widget/rw_widgets.dart';
 
 void main() => runApp(MyApp());
 
@@ -154,7 +152,7 @@ class CounterState extends State {
 /// List Item 数据模型类。
 ///
 class MessItem implements ListItem {
-  MessItem({this.name});
+  MessItem({required this.name});
 
   String name;
 }
@@ -164,10 +162,10 @@ class MessItem implements ListItem {
 ///
 class ListBuilder extends ListViewBuilder<MessItem> {
   ListBuilder({
-    List<MessItem> list,
-    ScrollController scrollController,
-    VoidCallback onPullToRefreshed,
-    VoidCallback onLoadingMore,
+    required List<MessItem> list,
+    required ScrollController scrollController,
+    VoidCallback? onPullToRefreshed,
+    VoidCallback? onLoadingMore,
   }) : super(
           list: list,
           scrollController: scrollController,
@@ -197,12 +195,12 @@ class ListWidget extends StatefulWidget {
 }
 
 class ListWidgetState extends State<ListWidget> {
-  ListBuilder _listBuilder;
-  List<MessItem> array;
+  late ListBuilder _listBuilder;
+  late List<MessItem> array;
 
   @override
   void initState() {
-    array = new List();
+    array = List.empty();
     for (int i = 0; i < 20; i++) {
       array.add(MessItem(name: "name-$i"));
     }
@@ -211,7 +209,7 @@ class ListWidgetState extends State<ListWidget> {
 
   @override
   void dispose() {
-    _listBuilder.dispose();
+    // _listBuilder.dispose();
     array.clear();
     super.dispose();
   }
@@ -257,10 +255,20 @@ class CardWidget extends StatefulWidget {
   State<StatefulWidget> createState() => _CardWidgetState();
 }
 
-class _CardWidgetState extends State<CardWidget> {
+class _CardWidgetState extends State<CardWidget> with SingleTickerProviderStateMixin {
   var angle = [1, 2, 3, 4];
   double _angle = math.pi / 4;
   int index = 0;
+
+  late final AnimationController _controller = AnimationController(
+    duration: const Duration(seconds: 3),
+    vsync: this,
+  )..repeat();
+  late final Animation<double> _animation = CurvedAnimation(
+    parent: _controller,
+    curve: Curves.fastOutSlowIn,
+  );
+
   @override
   void initState() {
     super.initState();
@@ -277,12 +285,14 @@ class _CardWidgetState extends State<CardWidget> {
 
   @override
   void dispose() {
+    _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return SizeTransition(
+      sizeFactor: _animation,
       child: Container(
         padding: EdgeInsets.fromLTRB(20.0, 50.0, 20.0, 20.0),
         margin:
