@@ -1,6 +1,11 @@
 ChangeLog
 ======
 
+## [0.1.4-dev.4]
+
+* 修正VoiceLabel，label超长显示错误的问题。
+* 升级example的Gradle依赖版本。
+ 
 ## [0.1.4-dev.3]
 
 * 增加了Flip组建，用于后续创建卡片式动画效果。
