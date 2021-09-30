@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:plume/widget/flipable.dart';
+import 'package:plume/widget/labels.dart';
 
 class FlipablePage extends StatelessWidget {
   FlipController _flipController = FlipController();
@@ -47,7 +48,7 @@ class FlipablePage extends StatelessWidget {
           ),
           back: Card(
             child: Container(
-              color: Colors.orangeAccent,
+              color: Colors.tealAccent,
               child: Center(
                 child: Column(
                   children: [
@@ -57,6 +58,8 @@ class FlipablePage extends StatelessWidget {
                     TextButton.icon(onPressed: (){
                       _flipController.flip();
                     }, icon: Icon(Icons.backpack_outlined), label: Text("点我看前面")),
+                    VoiceLabel("就几个字符", assetPath: "assets/audios/additive_name_1.mp3"),
+                    VoiceLabel("这个是字符超多的，你觉得会不会超出界面呢？", assetPath: "assets/audios/additive_name_1.mp3"),
                   ],
                 ),
               ),

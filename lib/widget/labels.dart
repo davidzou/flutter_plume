@@ -93,9 +93,9 @@ class _VoiceLabelState extends State<VoiceLabel> {
         _visible = true;
       });
     } catch (e) {
-      print(e);
+      print("load error : $e");
       setState(() {
-        _visible = false;
+        _visible = true;
       });
     }
 
@@ -136,10 +136,16 @@ class _VoiceLabelState extends State<VoiceLabel> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
-          widget.label,
-          style: widget.style,
+        Flexible(
+          child: Text(
+            widget.label,
+            style: widget.style,
+            softWrap: true,
+          ),
         ),
         Opacity(
           opacity: _visible ? 1.0 : 0.0,

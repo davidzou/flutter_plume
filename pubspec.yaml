@@ -14,7 +14,7 @@ dependencies:
   shared_preferences: ^2.0.6
 
   # 音频播放(VoiceLabel)
-  just_audio: ^0.9.5
+  just_audio: ^0.9.12
 
 dev_dependencies:
   flutter_test:

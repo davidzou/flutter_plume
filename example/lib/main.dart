@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:plume/framework/drawer.dart';
 import 'package:plumedemo/pages/page_dialogs.dart';
 import 'package:plumedemo/pages/page_flipable.dart';
 import 'package:plumedemo/pages/page_framework_drawer.dart';
