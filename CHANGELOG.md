@@ -1,6 +1,10 @@
 ChangeLog
 ======
 
+## [0.1.4-dev.5]
+
+* 修正VoiceLable显示开关问题，当没有音频文件的时候。
+ 
 ## [0.1.4-dev.4]
 
 * 修正VoiceLabel，label超长显示错误的问题。
