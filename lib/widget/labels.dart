@@ -95,7 +95,7 @@ class _VoiceLabelState extends State<VoiceLabel> {
     } catch (e) {
       print("load error : $e");
       setState(() {
-        _visible = true;
+        _visible = false;
       });
     }
 
