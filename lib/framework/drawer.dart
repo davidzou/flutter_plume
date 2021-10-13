@@ -185,6 +185,7 @@ class DrawerChildBuilderDelegate extends DrawerDelegate {
   });
 
   /// 是否开启头部
+  @deprecated
   final bool enable;
 
   /// 列表数量
