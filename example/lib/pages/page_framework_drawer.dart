@@ -18,8 +18,8 @@ class _FrameworkDrawerBody extends StatefulWidget {
   _FrameworkDrawerState createState() => _FrameworkDrawerState();
 }
 
-class _FrameworkDrawerState extends State<_FrameworkDrawerBody> {
-  List<Widget> _children = [];
+class _FrameworkDrawerState extends State<_FrameworkDrawerBody> with DrawerProperty {
+  // List<Widget> _children = [];
   DrawerHeader? _drawerHeader;
   Widget? _drawerFooter;
 
@@ -37,13 +37,16 @@ class _FrameworkDrawerState extends State<_FrameworkDrawerBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                _children.add(
-                  Text("菜单${_children.length + 1}"),
+            Builder(
+              builder: (context) {
+                return ElevatedButton(
+                  onPressed: () {
+                    addItem(Text("菜单${itemLength() + 1}"));
+                    Scaffold.of(context).openDrawer();
+                  },
+                  child: Text("添加菜单"),
                 );
               },
-              child: Text("添加菜单"),
             ),
             ElevatedButton(
               onPressed: () {
@@ -68,16 +71,12 @@ class _FrameworkDrawerState extends State<_FrameworkDrawerBody> {
                 } else {
                   _drawerFooter = null;
                 }
-                setState(() {
-
-                });
+                setState(() {});
               },
               child: _drawerFooter == null ? Text("开启Footer区域") : Text("关闭Footer区域"),
             ),
             ElevatedButton(
-              onPressed: () {
-                
-              },
+              onPressed: () {},
               child: Text("d"),
             )
           ],
@@ -85,11 +84,39 @@ class _FrameworkDrawerState extends State<_FrameworkDrawerBody> {
       ),
       drawer: DrawerBuilder.drawer(context,
           delegate: DrawerChildListDelegate(
-            children: _children,
+            children: drawerItems(),
             enable: true,
             header: _drawerHeader,
             footer: _drawerFooter,
           )),
     );
+  }
+}
+
+mixin DrawerProperty {
+  List<Widget> _drawerItems = [];
+
+  addItem(Widget child) {
+    _drawerItems.add(child);
+  }
+
+  bool removeItem(Widget child) {
+    return _drawerItems.remove(child);
+  }
+
+  Widget removeItemAt(int index) {
+    return _drawerItems.removeAt(index);
+  }
+
+  Widget getItem(int index) {
+    return _drawerItems.elementAt(index);
+  }
+
+  int itemLength() {
+    return _drawerItems.length;
+  }
+
+  List<Widget> drawerItems() {
+    return _drawerItems;
   }
 }
