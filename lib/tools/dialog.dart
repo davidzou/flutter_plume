@@ -69,7 +69,10 @@ class DialogProvider {
   /// * 展示说明
   ///
   /// ### 参数
-  /// * context     上下文<Must>
+  ///
+  /// |参数名|描述|是否必须|
+  /// |:--|:--|:--|
+  /// |context|上下文|<Must>|
   /// * title       信息标题<Must>
   /// * content     信息内容<Must>
   /// * buttonName  按钮文字

@@ -32,12 +32,16 @@ class DialogsPage extends StatelessWidget {
           ),
           TextButton.icon(
             onPressed: () {
-              DialogProvider.notice(context, title: "信息", content: "北朝鮮では重罪とされる金（ゴールド）の密輸。昨年、両江道（リャンガンド）の恵山（ヘサン）では、58キロもの金の密輸事件が摘発され、密輸業者、国境警備隊の副小隊長、中隊の保衛指導員ら7人が逮捕された。"
-                  "ドラマ『推しの王子様』（フジテレビ系／毎週木曜22時）の公式インスタグラムが21日、主演を務める比嘉愛未と渡邊圭祐の2ショットを公開。第1話終盤で二人が出会う「始まりのシーン」のオフショットが、まるでお笑いコンビのようだと反響を呼んでいる。",
-              indent: 28, dark: false,);
+              DialogProvider.notice(
+                context,
+                title: "信息",
+                content: "中国国家統計局が18日発表した2021年7～9月期の国内総生産（GDP）は、物価変動の影響を除いた実質で前年同期比4・9％増となった。6四半期連続のプラス成長だが、4～6月期（7・9％増）から大きく減速した。前期比でも0・2％増（4～6月期は1・2％増）と低調だった。",
+                indent: 28,
+                dark: false,
+              );
             },
-            icon: Icon(Icons.call),
-            label: Text("自定义弹窗"),
+            icon: Icon(Icons.message_outlined),
+            label: Text("Notice弹窗（标题加内容，一个知道了按钮事件。）"),
           ),
         ],
       ),
