@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DialogProvider {
+  static GlobalKey _dialogGlobalKey = GlobalKey();
+
   ///
   /// 显示一个对话框，只有一个按钮，取消则按空白区域即可。减少选择的困惑。
   ///
@@ -91,7 +93,6 @@ class DialogProvider {
     // 取宽，屏幕的60%用于对话框。
     double _width = MediaQuery.of(context).size.width * 72 / 100;
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
-    final GlobalKey _dialogGlobalKey = GlobalKey();
     return showDialog(
       context: context,
       barrierColor: _dark ? Color(0xaa000000) : Color(0x88B2EbF2),
@@ -122,7 +123,8 @@ class DialogProvider {
               SizedBox(
                 width: _dialogGlobalKey.currentContext?.size?.width ?? _width,
                 child: Divider(
-                  height: 8,
+                  height: 18,
+                  thickness: 0.8,
                   indent: indent,
                   color: _dark ? Colors.white : Colors.black87,
                 ),
