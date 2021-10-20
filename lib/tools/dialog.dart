@@ -78,15 +78,16 @@ class DialogProvider {
   /// |context|上下文|<Must>|
   /// * title       信息标题<Must>
   /// * content     信息内容<Must>
-  /// * buttonName  按钮文字
-  /// * onPressed   按钮点击事件响应
-  /// *
+  /// * buttonName  按钮文字。
+  /// * onPressed   按钮点击事件响应。
+  /// * indent      排版，左边缩进的距离。
+  /// * dark        是否强制指定夜间模式或者白天模式，不设置使用系统默认。
   ///
   static Future<T?> notice<T>(
     BuildContext context, {
     required String title,
     required String content,
-    String? buttonName,
+    String buttonName = "Got it",
     VoidCallback? onPressed,
     double indent = 28,
     bool? dark,
@@ -144,7 +145,7 @@ class DialogProvider {
                 padding: EdgeInsets.only(right: 8.0),
                 child: TextButton(
                   child: Text(
-                    buttonName ?? "Got it",
+                    buttonName,
                     style: TextStyle(
                       fontSize: 16.0,
                     ),
@@ -165,9 +166,69 @@ class DialogProvider {
   ///
   ///
   ///
-  static Future noticeX() {
-    return Future.delayed(Duration());
+  /// Do not use it.
+  Future<T?> noticeX<T>(
+    BuildContext context, {
+    required Widget title,
+    required Widget content,
+        Widget button = const ElevatedButton(child: Text("Got it"), onPressed: null,),
+        VoidCallback? onPressed,
+        double indent = 28,
+        bool? dark,
+  }) {
+    // 取宽，屏幕的60%用于对话框。
+    double _width = MediaQuery.of(context).size.width * 72 / 100;
+    bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          key: _dialogGlobalKey,
+          backgroundColor: _dark ? Colors.black45 : Colors.white24,
+          // 对话框区域背景色
+          elevation: 12.0,
+          insetPadding: EdgeInsets.zero,
+          clipBehavior: Clip.hardEdge,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18.0),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: _dialogGlobalKey.currentContext?.size?.width ?? _width,
+                padding: EdgeInsets.fromLTRB(indent, 28.0, 8.0, 8.0),
+                child: title,
+              ),
+              SizedBox(
+                width: _dialogGlobalKey.currentContext?.size?.width ?? _width,
+                child: Divider(
+                  height: 18,
+                  thickness: 0.8,
+                  indent: indent,
+                  color: _dark ? Colors.white : Colors.black87,
+                ),
+              ),
+              Container(
+                width: _dialogGlobalKey.currentContext?.size?.width ?? _width,
+                padding: EdgeInsets.fromLTRB((indent + 8.0), 8.0, 8.0, 8.0),
+                child: content,
+              ),
+              Container(
+                width: _dialogGlobalKey.currentContext?.size?.width ?? _width,
+                alignment: Alignment.centerRight,
+                padding: EdgeInsets.only(right: 8.0),
+                child: button,
+              )
+            ],
+          ),
+        );
+      },
+    );
   }
+
   ///
   /// 选择项，确定或者取消。
   ///
@@ -175,10 +236,19 @@ class DialogProvider {
     return showDialog(
       context: context,
       builder: (context) {
-        return Container(
+        return Dialog(
 
         );
       },
     );
   }
+}
+
+class DialogStyle {
+  /// 对话框背景色
+  Color? background;
+  /// 对话框内文字颜色
+  Color? textColor;
+  /// 对话框内按钮颜色
+  Color? buttonColor;
 }
