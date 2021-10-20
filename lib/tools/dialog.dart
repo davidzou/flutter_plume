@@ -18,6 +18,7 @@ class DialogProvider {
   /// > message
   ///   内容，消息。
   ///
+  @deprecated
   static Future<bool?> show(
     BuildContext context, {
     required String title,
@@ -81,7 +82,7 @@ class DialogProvider {
   /// * onPressed   按钮点击事件响应
   /// *
   ///
-  static Future notice(
+  static Future<T?> notice<T>(
     BuildContext context, {
     required String title,
     required String content,
@@ -93,7 +94,7 @@ class DialogProvider {
     // 取宽，屏幕的60%用于对话框。
     double _width = MediaQuery.of(context).size.width * 72 / 100;
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
-    return showDialog(
+    return showDialog<T>(
       context: context,
       barrierColor: _dark ? Color(0xaa000000) : Color(0x88B2EbF2),
       builder: (BuildContext context) {
@@ -114,7 +115,7 @@ class DialogProvider {
             children: [
               Container(
                 width: _dialogGlobalKey.currentContext?.size?.width ?? _width,
-                padding: EdgeInsets.fromLTRB(indent, 13.0, 8.0, 8.0),
+                padding: EdgeInsets.fromLTRB(indent, 28.0, 8.0, 8.0),
                 child: Text(
                   title,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: _dark ? Colors.white : Colors.black87),
@@ -148,13 +149,34 @@ class DialogProvider {
                       fontSize: 16.0,
                     ),
                   ),
-                  onPressed: onPressed ?? () {
-                    Navigator.of(context).pop();
-                  },
+                  onPressed: onPressed ??
+                      () {
+                        Navigator.of(context).pop();
+                      },
                 ),
               )
             ],
           ),
+        );
+      },
+    );
+  }
+
+  ///
+  ///
+  ///
+  static Future noticeX() {
+    return Future.delayed(Duration());
+  }
+  ///
+  /// 选择项，确定或者取消。
+  ///
+  static Future dilemma(BuildContext context, {required String title}) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return Container(
+
         );
       },
     );
