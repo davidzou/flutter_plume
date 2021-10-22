@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:plume/tools/dialog.dart';
 
+///
+/// 自定义对话框
+///
 class DialogsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -30,6 +33,7 @@ class DialogsPage extends StatelessWidget {
               ],
             ),
           ),
+
           /// Notice白天
           TextButton.icon(
             onPressed: () {
@@ -48,12 +52,20 @@ class DialogsPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Notice弹窗白天模式(通知或者告知类的信息)", maxLines: 1,),
-                  Text("标题加内容，以及一个知道了按钮事件。有白天和黑夜两种模式。知道了按钮可以关闭弹窗，也可以点击空白区域关闭弹窗。", maxLines: 2, style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),),
+                  Text(
+                    "Notice弹窗白天模式(通知或者告知类的信息)",
+                    maxLines: 1,
+                  ),
+                  Text(
+                    "标题加内容，以及一个知道了按钮事件。有白天和黑夜两种模式。知道了按钮可以关闭弹窗，也可以点击空白区域关闭弹窗。",
+                    maxLines: 2,
+                    style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
+                  ),
                 ],
               ),
             ),
           ),
+
           /// Notice黑夜
           TextButton.icon(
             onPressed: () {
@@ -72,8 +84,47 @@ class DialogsPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Notice弹窗黑夜模式(通知或者告知类的信息)", maxLines: 1,),
-                  Text("标题加内容，以及一个知道了按钮事件。有白天和黑夜两种模式。知道了按钮可以关闭弹窗，也可以点击空白区域关闭弹窗。", maxLines: 2, style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),),
+                  Text(
+                    "Notice弹窗黑夜模式(通知或者告知类的信息)",
+                    maxLines: 1,
+                  ),
+                  Text(
+                    "标题加内容，以及一个知道了按钮事件。有白天和黑夜两种模式。知道了按钮可以关闭弹窗，也可以点击空白区域关闭弹窗。",
+                    maxLines: 2,
+                    style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          /// 选择弹框
+          TextButton.icon(
+            onPressed: () {
+              DialogProvider.dilemma(
+                context,
+                title: "title",
+                onTapedRight: () {
+                  Navigator.of(context).pop();
+                }
+              );
+            },
+            icon: Icon(Icons.message_outlined),
+            label: Flexible(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Dilemma弹窗黑夜模式(两难选择)",
+                    maxLines: 1,
+                  ),
+                  Text(
+                    "需要用户选择，同意不同意，执行不执行的方式弹窗，交由用户的A/B选择",
+                    maxLines: 2,
+                    style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
+                  ),
                 ],
               ),
             ),
