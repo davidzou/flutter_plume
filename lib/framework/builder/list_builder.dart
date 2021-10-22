@@ -145,7 +145,6 @@ abstract class ListViewBuilder<T extends ListItem> {
   /// ```
   ///
   void init() {
-    // if (scrollController != null) {
     scrollController?.addListener(() {
       if (scrollController?.position.pixels ==
           scrollController?.position.maxScrollExtent) {
@@ -154,7 +153,6 @@ abstract class ListViewBuilder<T extends ListItem> {
         isLoading = true;
       }
     });
-    // }
   }
 
   void dispose() {

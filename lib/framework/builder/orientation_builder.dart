@@ -1,14 +1,19 @@
 import 'package:flutter/widgets.dart';
 
 ///
-/// 选择横屏和竖屏的布局
+/// 选择横屏和竖屏的布局<br>
 /// Example:
 ///
+/// ```
 ///   class Main extends StatefulWidget {
 ///      build(BuildContext context) {
-///       return OrientationBuilder(landscape: Center(child: Text('landscape')), portrait: Center(child: Text('portrait')),);
+///       return OrientationBuilder(
+///          landscape: Center(child: Text('landscape')),
+///          portrait: Center(child: Text('portrait')),
+///       );
 ///     }
 ///   }
+/// ```
 ///
 class OrientationResponsible extends StatelessWidget {
   OrientationResponsible({
