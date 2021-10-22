@@ -263,7 +263,7 @@ class DialogProvider {
                     style: TextStyle(color: Colors.black, fontSize: 18.0, shadows: kElevationToShadow[4]),
                   )),
               content: Container(
-                  padding: EdgeInsets.only(top: 10.0, bottom: 20.0, left: 10.0),
+                  padding: EdgeInsets.only(top: 10.0, bottom: 20.0, left: 20.0, right: 10.0),
                   child: Text("内容部分，你想展示些什么，或者你能选择什么，来拿出来！", textAlign: centerContent ? TextAlign.center : TextAlign.left,),),
               footer: Column(
                 children: [
