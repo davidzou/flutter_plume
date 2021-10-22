@@ -72,11 +72,9 @@ class DialogProvider {
   /// * 展示内容
   /// * 展示说明
   ///
-  /// ### 参数
+  /// ### 参数    |参数名|描述|是否必须|
   ///
-  /// |参数名|描述|是否必须|
-  /// |:--|:--|:--|
-  /// |context|上下文|<Must>|
+  /// * context     上下文<Must>
   /// * title       信息标题<Must>
   /// * content     信息内容<Must>
   /// * buttonName  按钮文字。
@@ -168,14 +166,16 @@ class DialogProvider {
   ///
   ///
   /// Do not use it.
+  /// TODO 扩展出内容，仅有布局框架。
   Future<T?> noticeX<T>(
     BuildContext context, {
     required Widget title,
     required Widget content,
-    Widget button = const ElevatedButton(
-      child: Text("Got it"),
-      onPressed: null,
-    ),
+    // Widget button = const ElevatedButton(
+    //   child: Text("Got it"),
+    //   onPressed: null,
+    // ),
+    Widget? button,
     VoidCallback? onPressed,
     double indent = 28,
     bool? dark,
@@ -236,7 +236,31 @@ class DialogProvider {
   ///
   /// 选择项，确定或者取消。
   ///
-  static Future dilemma(BuildContext context, {required String title, bool centerContent = false, bool? dark, VoidCallback? onTapedRight, VoidCallback? onTapedLeft}) {
+  /// ### 用途
+  /// * 参数选择
+  /// * 内容判断
+  /// * 条款确认
+  ///
+  /// ### 参数    |参数名|描述|是否必须|
+  ///
+  /// * context           上下文<Must>
+  /// * title             信息标题<Must>
+  /// * centerContent     是否居中显示，默认不居中。
+  /// * onTapedRight      按钮点击事件响应。
+  /// * onTapedLeft       排版，左边缩进的距离。
+  /// * dark              是否强制指定夜间模式或者白天模式，不设置使用系统默认。
+  ///
+  static Future dilemma(
+    BuildContext context, {
+    required String title,
+    required String content,
+    String rightButton = "同意",
+    String leftButton = "不同意",
+    bool centerContent = false,
+    bool? dark,
+    VoidCallback? onTapedRight,
+    VoidCallback? onTapedLeft,
+  }) {
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
     Color _fontColor = _dark ? Colors.white : Colors.black;
     return showDialog(
@@ -261,15 +285,17 @@ class DialogProvider {
                   alignment: Alignment.center,
                   padding: EdgeInsets.only(top: 25.0, bottom: 10.0),
                   child: Text(
-                    "请选择",
+                    title,
                     style: TextStyle(color: _fontColor, fontSize: 18.0, shadows: kElevationToShadow[4]),
                   )),
               content: Container(
                 padding: EdgeInsets.only(top: 10.0, bottom: 20.0, left: 20.0, right: 10.0),
                 child: Text(
-                  "内容部分，你想展示些什么，或者你能选择什么，来拿出来！",
+                  content,
                   textAlign: centerContent ? TextAlign.center : TextAlign.left,
-                  style: TextStyle(color: _fontColor,),
+                  style: TextStyle(
+                    color: _fontColor,
+                  ),
                 ),
               ),
               footer: Column(
@@ -289,7 +315,7 @@ class DialogProvider {
                             child: TextButton(
                               onPressed: onTapedLeft,
                               child: Text(
-                                "同 意",
+                                leftButton,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(fontSize: 16.0),
                               ),
@@ -308,7 +334,7 @@ class DialogProvider {
                             child: TextButton(
                               onPressed: onTapedRight,
                               child: Text(
-                                "不同意",
+                                rightButton,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(fontSize: 16.0),
                               ),
@@ -327,6 +353,9 @@ class DialogProvider {
   }
 }
 
+///
+///
+/// TODO 用于传递参数，待设计
 class DialogStyle {
   /// 对话框背景色
   Color? background;

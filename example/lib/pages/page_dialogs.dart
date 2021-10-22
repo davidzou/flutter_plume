@@ -104,6 +104,7 @@ class DialogsPage extends StatelessWidget {
               DialogProvider.dilemma(
                 context,
                 title: "title",
+                content: "内容部分，你想展示些什么，或者你能选择什么，来拿出来！",
                 // centerContent: true,
                 onTapedRight: () {
                   Navigator.of(context).pop();
@@ -142,6 +143,7 @@ class DialogsPage extends StatelessWidget {
               DialogProvider.dilemma(
                   context,
                   title: "title",
+                  content: "内容部分，你想展示些什么，或者你能选择什么，来拿出来！",
                   dark: true,
                   // centerContent: true,
                   onTapedRight: () {
