@@ -98,7 +98,7 @@ class DialogsPage extends StatelessWidget {
             ),
           ),
 
-          /// 选择弹框
+          /// Dilemma白天
           TextButton.icon(
             onPressed: () {
               DialogProvider.dilemma(
@@ -123,7 +123,46 @@ class DialogsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Dilemma 弹窗(两难选择,Cupertino风格)",
+                    "Dilemma 弹窗白天模式(两难选择,Cupertino风格)",
+                    maxLines: 1,
+                  ),
+                  Text(
+                    "需要用户选择，同意不同意，执行不执行的方式弹窗，交由用户的A/B选择",
+                    maxLines: 2,
+                    style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          /// Dilemma黑夜
+          TextButton.icon(
+            onPressed: () {
+              DialogProvider.dilemma(
+                  context,
+                  title: "title",
+                  dark: true,
+                  // centerContent: true,
+                  onTapedRight: () {
+                    Navigator.of(context).pop();
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("右边的按钮被按到了")));
+                  },
+                  onTapedLeft: () {
+                    Navigator.of(context).pop();
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("左边的按钮被按到了")));
+                  }
+              );
+            },
+            icon: Icon(Icons.message_outlined),
+            label: Flexible(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Dilemma 弹窗黑夜模式(两难选择,Cupertino风格)",
                     maxLines: 1,
                   ),
                   Text(

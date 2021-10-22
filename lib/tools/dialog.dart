@@ -236,14 +236,16 @@ class DialogProvider {
   ///
   /// 选择项，确定或者取消。
   ///
-  static Future dilemma(BuildContext context, {required String title, bool centerContent = false, VoidCallback? onTapedRight, VoidCallback? onTapedLeft}) {
+  static Future dilemma(BuildContext context, {required String title, bool centerContent = false, bool? dark, VoidCallback? onTapedRight, VoidCallback? onTapedLeft}) {
+    bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
+    Color _fontColor = _dark ? Colors.white : Colors.black;
     return showDialog(
       context: context,
       builder: (context) {
         return Dialog(
           key: _dialogGlobalKey,
           // backgroundColor: Color(0xffe5e5e5),
-          backgroundColor: Colors.white,
+          backgroundColor: _dark ? Colors.black87 : Colors.white,
           // 对话框区域背景色
           elevation: 12.0,
           insetPadding: EdgeInsets.zero,
@@ -260,11 +262,16 @@ class DialogProvider {
                   padding: EdgeInsets.only(top: 25.0, bottom: 10.0),
                   child: Text(
                     "请选择",
-                    style: TextStyle(color: Colors.black, fontSize: 18.0, shadows: kElevationToShadow[4]),
+                    style: TextStyle(color: _fontColor, fontSize: 18.0, shadows: kElevationToShadow[4]),
                   )),
               content: Container(
-                  padding: EdgeInsets.only(top: 10.0, bottom: 20.0, left: 20.0, right: 10.0),
-                  child: Text("内容部分，你想展示些什么，或者你能选择什么，来拿出来！", textAlign: centerContent ? TextAlign.center : TextAlign.left,),),
+                padding: EdgeInsets.only(top: 10.0, bottom: 20.0, left: 20.0, right: 10.0),
+                child: Text(
+                  "内容部分，你想展示些什么，或者你能选择什么，来拿出来！",
+                  textAlign: centerContent ? TextAlign.center : TextAlign.left,
+                  style: TextStyle(color: _fontColor,),
+                ),
+              ),
               footer: Column(
                 children: [
                   Divider(
