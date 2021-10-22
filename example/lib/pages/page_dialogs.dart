@@ -53,7 +53,7 @@ class DialogsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Notice弹窗白天模式(通知或者告知类的信息)",
+                    "Notice 弹窗白天模式(通知或者告知类的信息)",
                     maxLines: 1,
                   ),
                   Text(
@@ -85,7 +85,7 @@ class DialogsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Notice弹窗黑夜模式(通知或者告知类的信息)",
+                    "Notice 弹窗黑夜模式(通知或者告知类的信息)",
                     maxLines: 1,
                   ),
                   Text(
@@ -104,8 +104,14 @@ class DialogsPage extends StatelessWidget {
               DialogProvider.dilemma(
                 context,
                 title: "title",
+                // centerContent: true,
                 onTapedRight: () {
                   Navigator.of(context).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("右边的按钮被按到了")));
+                },
+                onTapedLeft: () {
+                  Navigator.of(context).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("左边的按钮被按到了")));
                 }
               );
             },
@@ -117,7 +123,7 @@ class DialogsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Dilemma弹窗黑夜模式(两难选择)",
+                    "Dilemma 弹窗(两难选择,Cupertino风格)",
                     maxLines: 1,
                   ),
                   Text(

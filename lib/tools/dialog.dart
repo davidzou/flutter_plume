@@ -236,7 +236,7 @@ class DialogProvider {
   ///
   /// 选择项，确定或者取消。
   ///
-  static Future dilemma(BuildContext context, {required String title, VoidCallback? onTapedRight, VoidCallback? onTapCancel}) {
+  static Future dilemma(BuildContext context, {required String title, bool centerContent = false, VoidCallback? onTapedRight, VoidCallback? onTapedLeft}) {
     return showDialog(
       context: context,
       builder: (context) {
@@ -262,10 +262,15 @@ class DialogProvider {
                     "请选择",
                     style: TextStyle(color: Colors.black, fontSize: 18.0, shadows: kElevationToShadow[4]),
                   )),
-              content: Container(padding: EdgeInsets.only(top: 10.0, bottom: 20.0, left: 10.0), child: Text("内容部分，你想展示些什么，或者你能选择什么，来拿出来！")),
+              content: Container(
+                  padding: EdgeInsets.only(top: 10.0, bottom: 20.0, left: 10.0),
+                  child: Text("内容部分，你想展示些什么，或者你能选择什么，来拿出来！", textAlign: centerContent ? TextAlign.center : TextAlign.left,),),
               footer: Column(
                 children: [
-                  Divider(color: Colors.grey, height: 2,),
+                  Divider(
+                    color: Colors.grey,
+                    height: 2,
+                  ),
                   Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -274,27 +279,33 @@ class DialogProvider {
                         Expanded(
                           child: Container(
                             alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              // borderRadius: BorderRadius.circular(10),
-                              // color: Colors.deepPurpleAccent,
-                              gradient: LinearGradient(colors: [Colors.white70, Colors.white38], begin: Alignment.topLeft, end: Alignment.bottomRight),
-                            ),
                             child: TextButton(
-                              onPressed: onTapedRight,
-                              child: Text("同意", textAlign: TextAlign.center, style: TextStyle(fontSize: 16.0),),
+                              onPressed: onTapedLeft,
+                              child: Text(
+                                "同 意",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 16.0),
+                              ),
                             ),
                           ),
                         ),
-                        Container(height: 48, child: const VerticalDivider(color: Colors.grey, width: 2,)),
+                        Container(
+                            height: 48,
+                            child: const VerticalDivider(
+                              color: Colors.grey,
+                              width: 2,
+                            )),
                         Expanded(
                           child: Container(
                             alignment: Alignment.center,
-                            // decoration: BoxDecoration(
-                            //   // borderRadius: BorderRadius.circular(10),
-                            //   // color: Colors.deepOrangeAccent,
-                            // ),
-                            padding: EdgeInsets.all(10.0),
-                            child: Text("不同意", textAlign: TextAlign.center, style: TextStyle(fontSize: 16.0),),
+                            child: TextButton(
+                              onPressed: onTapedRight,
+                              child: Text(
+                                "不同意",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 16.0),
+                              ),
+                            ),
                           ),
                         ),
                       ],
