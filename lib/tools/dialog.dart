@@ -96,11 +96,12 @@ class DialogProvider {
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
     return showDialog<T>(
       context: context,
-      barrierColor: _dark ? Color(0xaa000000) : Color(0x88B2EbF2),
+      // Color(0x9eB2EbF2) 忧郁蓝
+      barrierColor: _dark ? Color(0xaa000000) : Color(0x9effffff),
       builder: (BuildContext context) {
         return Dialog(
           key: _dialogGlobalKey,
-          backgroundColor: _dark ? Colors.black45 : Colors.white24,
+          backgroundColor: _dark ? Colors.black45 : Colors.white60,
           // 对话框区域背景色
           elevation: 12.0,
           insetPadding: EdgeInsets.zero,
@@ -125,7 +126,7 @@ class DialogProvider {
                 width: _dialogGlobalKey.currentContext?.size?.width ?? _width,
                 child: Divider(
                   height: 18,
-                  thickness: 0.8,
+                  thickness: 1.8,
                   indent: indent,
                   color: _dark ? Colors.white : Colors.black87,
                 ),
