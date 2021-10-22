@@ -105,7 +105,7 @@ class DialogsPage extends StatelessWidget {
                 context,
                 title: "title",
                 content: "内容部分，你想展示些什么，或者你能选择什么，来拿出来！",
-                // centerContent: true,
+                centerContent: true,
                 onTapedRight: () {
                   Navigator.of(context).pop();
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("右边的按钮被按到了")));

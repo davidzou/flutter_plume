@@ -254,8 +254,8 @@ class DialogProvider {
     BuildContext context, {
     required String title,
     required String content,
-    String rightButton = "同意",
-    String leftButton = "不同意",
+    String rightButton = "OK",
+    String leftButton = "CANCEL",
     bool centerContent = false,
     bool? dark,
     VoidCallback? onTapedRight,

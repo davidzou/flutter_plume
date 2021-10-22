@@ -5,6 +5,20 @@ import 'package:flutter/material.dart';
 /// 3部分组成的容器。
 ///
 /// 头部，内容，和底部。
+/// <pre>
+///  +---------------------+
+///  |+-------------------+|
+///  || Header part       ||
+///  |+-------------------+|
+///  || Content part      ||
+///  |+-------------------+|
+///  ||  Footer part      ||
+///  |+-------------------+|
+///  |TernaryContainer     |
+///  +---------------------+
+/// </pre>
+///
+/// * 如果要使用在Dialog中，设置选项inDialog为true，这样就会设置容器的宽度最大在屏幕的72%。否则以全屏宽度计。
 ///
 class TernaryContainer extends StatelessWidget {
   TernaryContainer({
@@ -16,6 +30,7 @@ class TernaryContainer extends StatelessWidget {
     this.mainAxisSize = MainAxisSize.min,
     this.crossAxisAlignment = CrossAxisAlignment.center,
     this.inDialog = false,
+    this.direction = Axis.vertical,
   });
 
   final Widget header;
@@ -24,26 +39,53 @@ class TernaryContainer extends StatelessWidget {
   final MainAxisAlignment mainAxisAlignment;
   final MainAxisSize mainAxisSize;
   final CrossAxisAlignment crossAxisAlignment;
+  final Axis direction;
   ///
   /// 用于判断是否在对话框中使用，对话框的宽度一般设置为屏宽的72%。此值默认为false
   ///
   final bool inDialog;
+
+  /// 竖向布局
+  Widget _vertical() {
+    return Column(
+      mainAxisSize: mainAxisSize,
+      mainAxisAlignment: mainAxisAlignment,
+      crossAxisAlignment: crossAxisAlignment,
+      children: [
+        header,
+        content,
+        footer,
+      ],
+    );
+  }
+
+  /// 横向布局
+  Widget _horizontal() {
+    return Row(
+      mainAxisSize: mainAxisSize,
+      mainAxisAlignment: mainAxisAlignment,
+      crossAxisAlignment: crossAxisAlignment,
+      children: [
+        header,
+        content,
+        footer,
+      ],
+    );
+  }
+
+  Widget _childBuild() {
+    if(direction == Axis.horizontal) {
+      return _horizontal();
+    }
+    return _vertical();
+  }
 
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width * 72 / 100;
     return Container(
       width: inDialog ? _width : null,
-      child: Column(
-        mainAxisSize: mainAxisSize,
-        mainAxisAlignment: mainAxisAlignment,
-        crossAxisAlignment: crossAxisAlignment,
-        children: [
-          header,
-          content,
-          footer,
-        ],
-      ),
+      child: _childBuild(),
     );
   }
 }
