@@ -19,6 +19,14 @@ A tools for flutter [StatelessWidget], for widgets that always build the same wa
 
 ListViewBuilder
 
+> Container
+
+[TernaryContainer]   The ternary container.
+
+> Dialog
+
+[DialogProvider]     The standard dialog ui.
+
 ### Custom Widgets
 
 > Block Container

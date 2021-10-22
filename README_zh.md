@@ -22,6 +22,10 @@ ListViewBuilder
 
 TernaryContainer   三元容器，将容器内分割为3个部分。
 
+> Dialog
+
+DialogProvider     创建标准化对话框。
+
 ### 自定义部件
 
 > Block Container（块）
