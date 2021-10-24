@@ -25,7 +25,7 @@ void main() {
         // custom dialog
         DIALOGS_PAGE: (BuildContext context) => DialogsPage(),
         // flip card
-        FLIP_PAGE: (BuildContext context) => FlipablePage(),
+        FLIP_PAGE: (BuildContext context) => FlipPage(),
       },
 
       // *******  调试类参数

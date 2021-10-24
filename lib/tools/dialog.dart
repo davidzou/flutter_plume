@@ -356,6 +356,18 @@ class DialogProvider {
   ///
   /// 状态栏，表示成功，失败，奖励等状态的提示
   ///
+  /// ### 用途
+  /// * 成功/失败事件的显示，说明
+  /// * 获取道具事件的说明
+  /// * 仅表示一种状态的事件。
+  ///
+  /// ### 参数    |参数名|描述|是否必须|
+  ///
+  /// * context           上下文<Must>
+  /// * status            表示状态的文字
+  /// * statusIcon        表示状态相对于的图标
+  /// * closeIcon         右上角关闭按钮的图标
+  /// * description       描述文字，用于表示状态获取后的描述。
   ///
   static Future<T?> status<T>(
     BuildContext context, {
@@ -434,6 +446,8 @@ class DialogProvider {
       },
     );
   }
+
+
 }
 
 ///

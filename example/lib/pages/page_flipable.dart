@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:plume/widget/flipable.dart';
 import 'package:plume/widget/labels.dart';
 
-class FlipablePage extends StatelessWidget {
-  FlipController _flipController = FlipController();
+class FlipPage extends StatelessWidget {
+  final FlipController _flipController = FlipController();
 
   @override
   Widget build(BuildContext context) {
