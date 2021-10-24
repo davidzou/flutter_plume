@@ -188,17 +188,7 @@ class DialogsPage extends StatelessWidget {
                     color: Colors.white,
                     size: 48.0,
                   ),
-                  description: "内容部分，你想展示些什么，或者你能选择什么，来拿出来！",
-                  // dark: true,
-                  // // centerContent: true,
-                  // onTapedRight: () {
-                  //   Navigator.of(context).pop();
-                  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("右边的按钮被按到了")));
-                  // },
-                  // onTapedLeft: () {
-                  //   Navigator.of(context).pop();
-                  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("左边的按钮被按到了")));
-                  // }
+                  description: "成功了，你想给点什么奖励，提示些什么，升级了的状态。写这里吧。",
               );
             },
             icon: Icon(Icons.message_outlined),
