@@ -251,7 +251,7 @@ class DialogProvider {
   /// * onTapedLeft       排版，左边缩进的距离。
   /// * dark              是否强制指定夜间模式或者白天模式，不设置使用系统默认。
   ///
-  static Future dilemma(
+  static Future<T?> dilemma<T>(
     BuildContext context, {
     required String title,
     required String content,
@@ -264,7 +264,7 @@ class DialogProvider {
   }) {
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
     Color _fontColor = _dark ? Colors.white : Colors.black;
-    return showDialog(
+    return showDialog<T>(
       context: context,
       builder: (context) {
         return Dialog(
@@ -348,6 +348,88 @@ class DialogProvider {
                   // SizedBox(height: 10.0,),
                 ],
               )),
+        );
+      },
+    );
+  }
+
+  ///
+  /// 状态栏，表示成功，失败，奖励等状态的提示
+  ///
+  ///
+  static Future<T?> status<T>(
+    BuildContext context, {
+    required String status,
+    required Widget statusIcon,
+    IconData? closeIcon,
+    String? description,
+  }) {
+    return showDialog<T>(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          child: Stack(
+            children: [
+              Container(
+                padding: EdgeInsets.only(top: 12.0, left: 12.0, bottom: 12.0, right: 10.0),
+                margin: EdgeInsets.only(right: 18.0, top: 12.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0x9a03A9F4),
+                      Color(0xFF651FFF),
+                      Color(0x9a7C4DFF),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.only(bottom: 20.0, top: 20.0),
+                      child: statusIcon,
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(bottom: 8.0),
+                      child: Text(
+                        status,
+                        style: TextStyle(fontSize: 28.0, color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Container(
+                      child: Text(
+                        description ?? "",
+                        style: TextStyle(fontSize: 10.0, color: Colors.white),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                  height: 24,
+                  alignment: Alignment.topRight,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: Colors.black54,
+                      child: Icon(
+                        closeIcon ?? Icons.close_rounded,
+                        color: Colors.white,
+                        size: 18.0,
+                      ),
+                    ),
+                  )),
+            ],
+          ),
         );
       },
     );

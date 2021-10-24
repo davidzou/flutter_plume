@@ -176,6 +176,51 @@ class DialogsPage extends StatelessWidget {
               ),
             ),
           ),
+
+          /// Status
+          TextButton.icon(
+            onPressed: () {
+              DialogProvider.status(
+                  context,
+                  status: "SUCCESS",
+                  statusIcon: Icon(
+                    Icons.where_to_vote_outlined,
+                    color: Colors.white,
+                    size: 48.0,
+                  ),
+                  description: "内容部分，你想展示些什么，或者你能选择什么，来拿出来！",
+                  // dark: true,
+                  // // centerContent: true,
+                  // onTapedRight: () {
+                  //   Navigator.of(context).pop();
+                  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("右边的按钮被按到了")));
+                  // },
+                  // onTapedLeft: () {
+                  //   Navigator.of(context).pop();
+                  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("左边的按钮被按到了")));
+                  // }
+              );
+            },
+            icon: Icon(Icons.message_outlined),
+            label: Flexible(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Status 弹窗模式(状态展示)",
+                    maxLines: 1,
+                  ),
+                  Text(
+                    "操作成功后的弹窗，表示状态信息的。",
+                    maxLines: 2,
+                    style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
