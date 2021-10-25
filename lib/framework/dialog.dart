@@ -380,6 +380,7 @@ class DialogProvider {
       }
       return TextStyle(color: _fontColor);
     }
+
     return showDialog<T>(
       context: context,
       builder: (context) {
@@ -390,13 +391,19 @@ class DialogProvider {
             TextButton(
               onPressed: onTapedLeft,
               child: Text(leftButton),
-              style: ButtonStyle(
-                  textStyle: MaterialStateProperty.resolveWith((states) => getTextStyle(states)),
-                backgroundColor: MaterialStateProperty.resolveWith((states) => getTextStyle(states).color),
-              ),
+              // style: ButtonStyle(
+              //     textStyle: MaterialStateProperty.resolveWith((states) => getTextStyle(states)),
+              //   backgroundColor: MaterialStateProperty.resolveWith((states) => getTextStyle(states).color),
+              // ),
               // style: TextButton.styleFrom(primary: Color(0xff000f0f)),
             ),
-            TextButton(onPressed: onTapedRight, child: Text(rightButton), style: ButtonStyle(textStyle: MaterialStateProperty.resolveWith((states) => getTextStyle(states)),),)
+            TextButton(
+              onPressed: onTapedRight,
+              child: Text(rightButton, style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.orangeAccent),),
+              // style: ButtonStyle(
+              //   textStyle: MaterialStateProperty.resolveWith((states) => getTextStyle(states)),
+              // ),
+            )
           ],
         );
       },
