@@ -29,14 +29,14 @@ class Block extends StatelessWidget {
     this.color = Colors.blueAccent,
   }) : super(key: key);
 
-  factory Block.normal({String title = "", double? width, double? height, Color? color}) {
+  factory Block.normal({String title = "", TextStyle? style, double? width, double? height, Color? color}) {
     return Block(
       width: width ?? 80.0,
       height: height ?? 80.0,
       color: color ?? Colors.blueAccent,
       title: Text(
         title,
-        style: TextStyle(color: Colors.black, fontStyle: FontStyle.normal),
+        style: style ?? TextStyle(color: Colors.black, fontStyle: FontStyle.normal),
       ),
     );
   }
