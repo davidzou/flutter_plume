@@ -21,13 +21,25 @@ import 'package:flutter/widgets.dart';
 /// > version: [1.0.0]
 ///
 class Block extends StatelessWidget {
-  Block(
-      {Key? key,
-      this.width = 80.0,
-      this.height = 80.0,
-      this.title = "",
-      this.color = Colors.blueAccent})
-      : super(key: key);
+  Block({
+    Key? key,
+    this.width = 80.0,
+    this.height = 80.0,
+    this.title,
+    this.color = Colors.blueAccent,
+  }) : super(key: key);
+
+  factory Block.normal({String title = "", double? width, double? height, Color? color}) {
+    return Block(
+      width: width ?? 80.0,
+      height: height ?? 80.0,
+      color: color ?? Colors.blueAccent,
+      title: Text(
+        title,
+        style: TextStyle(color: Colors.black, fontStyle: FontStyle.normal),
+      ),
+    );
+  }
 
   ///
   /// 宽
@@ -42,7 +54,7 @@ class Block extends StatelessWidget {
   ///
   /// 标题
   ///
-  final String title;
+  final Widget? title;
 
   ///
   /// 背景色
@@ -55,11 +67,7 @@ class Block extends StatelessWidget {
       color: color,
       width: width,
       height: height,
-      child: Center(
-          child: Text(
-        title,
-        style: TextStyle(color: Colors.black, fontStyle: FontStyle.normal),
-      )),
+      child: Center(child: title),
     );
   }
 }
