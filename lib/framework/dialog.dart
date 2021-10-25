@@ -354,6 +354,56 @@ class DialogProvider {
   }
 
   ///
+  ///
+  ///
+  static Future<T?> dilemmaMaterial<T>(
+    BuildContext context, {
+    required String title,
+    required String content,
+    String rightButton = "ACCEPT",
+    String leftButton = "CANCEL",
+    bool centerContent = false,
+    bool? dark,
+    VoidCallback? onTapedRight,
+    VoidCallback? onTapedLeft,
+  }) {
+    bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
+    Color _fontColor = _dark ? Colors.white : Colors.black;
+    TextStyle getTextStyle(Set<MaterialState> states) {
+      const Set<MaterialState> interactiveStates = <MaterialState>{
+        MaterialState.pressed,
+        MaterialState.hovered,
+        MaterialState.focused,
+      };
+      if (states.any(interactiveStates.contains)) {
+        return TextStyle(color: Color(0xFF6200EE));
+      }
+      return TextStyle(color: _fontColor);
+    }
+    return showDialog<T>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(content),
+          actions: [
+            TextButton(
+              onPressed: onTapedLeft,
+              child: Text(leftButton),
+              style: ButtonStyle(
+                  textStyle: MaterialStateProperty.resolveWith((states) => getTextStyle(states)),
+                backgroundColor: MaterialStateProperty.resolveWith((states) => getTextStyle(states).color),
+              ),
+              // style: TextButton.styleFrom(primary: Color(0xff000f0f)),
+            ),
+            TextButton(onPressed: onTapedRight, child: Text(rightButton), style: ButtonStyle(textStyle: MaterialStateProperty.resolveWith((states) => getTextStyle(states)),),)
+          ],
+        );
+      },
+    );
+  }
+
+  ///
   /// 状态栏，表示成功，失败，奖励等状态的提示
   ///
   /// ### 用途
@@ -446,8 +496,6 @@ class DialogProvider {
       },
     );
   }
-
-
 }
 
 ///

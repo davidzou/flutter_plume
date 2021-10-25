@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:plume/tools/dialog.dart';
+import 'package:plume/framework/dialog.dart';
 
 ///
 /// 自定义对话框
@@ -98,7 +98,7 @@ class DialogsPage extends StatelessWidget {
             ),
           ),
 
-          /// Dilemma白天
+          /// Dilemma Cuptinor白天
           TextButton.icon(
             onPressed: () {
               DialogProvider.dilemma(
@@ -177,6 +177,46 @@ class DialogsPage extends StatelessWidget {
             ),
           ),
 
+          /// Dilemma MaterialDesign样式
+          TextButton.icon(
+            onPressed: () {
+              DialogProvider.dilemmaMaterial(
+                  context,
+                  title: "title",
+                  content: "内容部分，你想展示些什么，或者你能选择什么，来拿出来！",
+                  dark: true,
+                  // centerContent: true,
+                  onTapedRight: () {
+                    Navigator.of(context).pop();
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("右边的按钮被按到了")));
+                  },
+                  onTapedLeft: () {
+                    Navigator.of(context).pop();
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("左边的按钮被按到了")));
+                  }
+              );
+            },
+            icon: Icon(Icons.message_outlined),
+            label: Flexible(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Dilemma 弹窗白天模式(两难选择,MaterialDesign样式)",
+                    maxLines: 1,
+                  ),
+                  Text(
+                    "需要用户选择，同意不同意，执行不执行的方式弹窗，交由用户的A/B选择",
+                    maxLines: 2,
+                    style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
           /// Status
           TextButton.icon(
             onPressed: () {
@@ -209,6 +249,36 @@ class DialogsPage extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+          ),
+
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Stack(
+              children: <Widget>[
+                Positioned.fill(
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Color(0xFF0D47A1),
+                          Color(0xFF1976D2),
+                          Color(0xFF42A5F5),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.all(16.0),
+                    primary: Colors.white,
+                    textStyle: const TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {},
+                   child: const Text('Gradient'),
+                ),
+              ],
             ),
           ),
         ],
