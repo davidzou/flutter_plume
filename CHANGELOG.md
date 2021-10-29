@@ -1,6 +1,14 @@
 ChangeLog
 ======
 
+## [0.1.4-dev.6]
+
+* 更新[Block]参数，提供文字风格配置
+* 创建标准框Dialog样式。
+* 优化文档内容
+* DrawerBuilder移动到framework目录下
+* 其他优化变动。
+ 
 ## [0.1.4-dev.5]
 
 * 修正VoiceLable显示开关问题，当没有音频文件的时候。
