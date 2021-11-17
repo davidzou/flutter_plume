@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:plume/framework/container/ternary.dart';
 
 class DialogProvider {
-  static GlobalKey _dialogGlobalKey = GlobalKey();
-
   ///
   /// 显示一个对话框，只有一个按钮，取消则按空白区域即可。减少选择的困惑。
   ///
@@ -92,7 +90,7 @@ class DialogProvider {
     bool? dark,
   }) {
     // 取宽，屏幕的60%用于对话框。
-    double _width = MediaQuery.of(context).size.width * 72 / 100;
+    double _width = MediaQuery.of(context).size.width * 0.72;
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
     return showDialog<T>(
       context: context,
@@ -100,7 +98,6 @@ class DialogProvider {
       barrierColor: _dark ? Color(0xaa000000) : Color(0x9effffff),
       builder: (BuildContext context) {
         return Dialog(
-          key: _dialogGlobalKey,
           backgroundColor: _dark ? Colors.black45 : Colors.white60,
           // 对话框区域背景色
           elevation: 12.0,
@@ -115,7 +112,7 @@ class DialogProvider {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: _dialogGlobalKey.currentContext?.size?.width ?? _width,
+                width: _width,
                 padding: EdgeInsets.fromLTRB(indent, 28.0, 8.0, 8.0),
                 child: Text(
                   title,
@@ -123,7 +120,7 @@ class DialogProvider {
                 ),
               ),
               SizedBox(
-                width: _dialogGlobalKey.currentContext?.size?.width ?? _width,
+                width: _width,
                 child: Divider(
                   height: 18,
                   thickness: 1.8,
@@ -132,7 +129,7 @@ class DialogProvider {
                 ),
               ),
               Container(
-                width: _dialogGlobalKey.currentContext?.size?.width ?? _width,
+                width: _width,
                 padding: EdgeInsets.fromLTRB((indent + 8.0), 8.0, 8.0, 8.0),
                 child: Text(
                   content,
@@ -140,7 +137,7 @@ class DialogProvider {
                 ),
               ),
               Container(
-                width: _dialogGlobalKey.currentContext?.size?.width ?? _width,
+                width: _width,
                 alignment: Alignment.centerRight,
                 padding: EdgeInsets.only(right: 8.0),
                 child: TextButton(
@@ -182,13 +179,12 @@ class DialogProvider {
     bool? dark,
   }) {
     // 取宽，屏幕的60%用于对话框。
-    double _width = MediaQuery.of(context).size.width * 72 / 100;
+    double _width = MediaQuery.of(context).size.width * 0.72;
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
     return showDialog(
       context: context,
       builder: (context) {
         return Dialog(
-          key: _dialogGlobalKey,
           backgroundColor: _dark ? Colors.black45 : Colors.white24,
           // 对话框区域背景色
           elevation: 12.0,
@@ -203,12 +199,12 @@ class DialogProvider {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: _dialogGlobalKey.currentContext?.size?.width ?? _width,
+                width: _width,
                 padding: EdgeInsets.fromLTRB(indent, 28.0, 8.0, 8.0),
                 child: title,
               ),
               SizedBox(
-                width: _dialogGlobalKey.currentContext?.size?.width ?? _width,
+                width: _width,
                 child: Divider(
                   height: 18,
                   thickness: 0.8,
@@ -217,12 +213,12 @@ class DialogProvider {
                 ),
               ),
               Container(
-                width: _dialogGlobalKey.currentContext?.size?.width ?? _width,
+                width: _width,
                 padding: EdgeInsets.fromLTRB((indent + 8.0), 8.0, 8.0, 8.0),
                 child: content,
               ),
               Container(
-                width: _dialogGlobalKey.currentContext?.size?.width ?? _width,
+                width: _width,
                 alignment: Alignment.centerRight,
                 padding: EdgeInsets.only(right: 8.0),
                 child: button,
@@ -268,8 +264,6 @@ class DialogProvider {
       context: context,
       builder: (context) {
         return Dialog(
-          key: _dialogGlobalKey,
-          // backgroundColor: Color(0xffe5e5e5),
           backgroundColor: _dark ? Colors.black87 : Colors.white,
           // 对话框区域背景色
           elevation: 12.0,

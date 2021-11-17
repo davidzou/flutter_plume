@@ -52,7 +52,7 @@ class _PerspectivePageState extends State<PerspectivePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.bodyText1,
             ),
           ],
         ),
