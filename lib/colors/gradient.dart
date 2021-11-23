@@ -93,6 +93,12 @@ List gradients = const [
   Meridian,
   CompareNow,
   Mello,
+  CrystalClear,
+  VisionsOfGrandeur,
+  ChittyChittyBangBang,
+  BlueSkies,
+  Sunkist,
+  Coal,
 ];
 
 // 渐变配色
@@ -395,3 +401,13 @@ const List<Color> BlueSkies = const <Color>[
 ];
 const List<Color> Sunkist = const <Color>[Color(0xfff2994a), Color(0xfff2c94c)];
 const List<Color> Coal = const <Color>[Color(0xffeb5757), Color(0xff000000)];
+
+const List<Color> Html = const <Color>[Color(0xffE44D26), Color(0xffF16529)];
+const List<Color> Cinnamint = const <Color>[Color(0xff4AC29A), Color(0xffBDFFF3)];
+const List<Color> Maldives = const <Color>[Color(0xffB2FEFA), Color(0xff0ED2F7)];
+const List<Color> Mini = const <Color>[Color(0xff30E8BF), Color(0xffFF8235)];
+const List<Color> Shalala = const <Color>[Color(0xffD66D75), Color(0xffE29587)];
+const List<Color> Purplepine = const <Color>[Color(0xff20002c), Color(0xffcbb4d4)];
+const List<Color> Celestial = const <Color>[Color(0xffC33764), Color(0xff1D2671)];
+const List<Color> LeaningAndLeading = const <Color>[Color(0xffF7971E), Color(0xffFFD200)];
+const List<Color> PacificDream = const <Color>[Color(0xff34e89e), Color(0xff0f3443)];
