@@ -30,16 +30,19 @@ class CupertinoPickerX extends StatelessWidget {
     required this.items,
     this.color,
     this.fontSize = 14.0,
+    this.scrollController,
   }) : super(key: key);
 
   final ValueChanged<int>? onSelectedItemChanged;
   final List<String> items;
   final Color? color;
   final double fontSize;
+  final FixedExtentScrollController? scrollController;
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPicker(
+      scrollController: scrollController,
       children: items
           .map((e) => Text(
                 e,
