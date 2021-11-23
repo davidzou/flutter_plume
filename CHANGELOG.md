@@ -3,7 +3,7 @@ ChangeLog
 
 ## [0.1.4-dev.8]
 
-* 更新内容描述
+* 增加了新的控件CupertinoPickerX, 用于定义现有的文字类型选择。
  
 ## [0.1.4-dev.7]
 
