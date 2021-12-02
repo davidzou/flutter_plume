@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 abstract class Themes {
@@ -37,19 +36,35 @@ const ColorScheme shrineColorScheme = ColorScheme(
 );
 
 /// 默认Theme配置
-class DefaultThemes extends Themes{
-  
+class DefaultThemes extends Themes {
   ///
   /// AppBar 文字样式
   /// 带阴影的标题文字，文字颜色位白色，主题色注意。
   ///
   @override
-  get appBarTextStyle => const TextStyle(color: Colors.white, fontSize: 18, shadows: _shadows4, letterSpacing: 1.8, fontWeight: FontWeight.w500);
+  get appBarTextStyle => const TextStyle(
+      color: Colors.white,
+      fontSize: 18,
+      shadows: _shadows4,
+      letterSpacing: 1.8,
+      fontWeight: FontWeight.w500);
 
   static const List<BoxShadow> _shadows4 = <BoxShadow>[
-    const BoxShadow(offset: Offset(0.0, 2.0), blurRadius: 4.0, spreadRadius: -1.0, color: const Color(0x33000000)),
-    const BoxShadow(offset: Offset(0.0, 4.0), blurRadius: 5.0, spreadRadius: 0.0, color: const Color(0x24000000)),
-    const BoxShadow(offset: Offset(0.0, 1.0), blurRadius: 10.0, spreadRadius: 0.0, color: const Color(0x1F000000)),
+    const BoxShadow(
+        offset: Offset(0.0, 2.0),
+        blurRadius: 4.0,
+        spreadRadius: -1.0,
+        color: const Color(0x33000000)),
+    const BoxShadow(
+        offset: Offset(0.0, 4.0),
+        blurRadius: 5.0,
+        spreadRadius: 0.0,
+        color: const Color(0x24000000)),
+    const BoxShadow(
+        offset: Offset(0.0, 1.0),
+        blurRadius: 10.0,
+        spreadRadius: 0.0,
+        color: const Color(0x1F000000)),
   ];
 
   static ThemeData base() {
@@ -79,7 +94,6 @@ class DefaultThemes extends Themes{
     );
   }
 
-
   static IconThemeData _customIconTheme(IconThemeData original) {
     return original.copyWith(color: shrineBrown900);
   }
@@ -87,26 +101,21 @@ class DefaultThemes extends Themes{
   static TextTheme _buildShrineTextTheme(TextTheme base) {
     return base
         .copyWith(
-      caption: base.caption!.copyWith(
-        fontWeight: FontWeight.w400,
-        fontSize: 14,
-        letterSpacing: defaultLetterSpacing,
-      ),
-      button: base.button!.copyWith(
-        fontWeight: FontWeight.w500,
-        fontSize: 14,
-        letterSpacing: defaultLetterSpacing,
-      ),
-    )
+          caption: base.caption!.copyWith(
+            fontWeight: FontWeight.w400,
+            fontSize: 14,
+            letterSpacing: defaultLetterSpacing,
+          ),
+          button: base.button!.copyWith(
+            fontWeight: FontWeight.w500,
+            fontSize: 14,
+            letterSpacing: defaultLetterSpacing,
+          ),
+        )
         .apply(
-      fontFamily: 'Rubik',
-      displayColor: shrineBrown900,
-      bodyColor: shrineBrown900,
-    );
+          fontFamily: 'Rubik',
+          displayColor: shrineBrown900,
+          bodyColor: shrineBrown900,
+        );
   }
-
-
-
-
 }
-

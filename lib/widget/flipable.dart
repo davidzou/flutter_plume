@@ -36,7 +36,8 @@ class _FlipState extends State<Flip> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     isFront = widget.controller.value;
-    flipAnimation = AnimationController(value: isFront ? 0 : 1, vsync: this, duration: widget.flipDuration);
+    flipAnimation = AnimationController(
+        value: isFront ? 0 : 1, vsync: this, duration: widget.flipDuration);
     flipAnimation.addListener(_listenAnimationController);
     widget.controller.addListener(_listenFlipController);
     super.initState();
@@ -84,7 +85,13 @@ class _FlipState extends State<Flip> with SingleTickerProviderStateMixin {
       child: IndexedStack(
         index: isFront ? 0 : 1,
         alignment: Alignment.center,
-        children: <Widget>[widget.front, Transform(transform: _buildSecondChildMatrix4(), alignment: Alignment.center, child: widget.back)],
+        children: <Widget>[
+          widget.front,
+          Transform(
+              transform: _buildSecondChildMatrix4(),
+              alignment: Alignment.center,
+              child: widget.back)
+        ],
       ),
     );
     return child;

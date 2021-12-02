@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 ///
@@ -41,6 +40,7 @@ class TernaryContainer extends StatelessWidget {
   final MainAxisSize mainAxisSize;
   final CrossAxisAlignment crossAxisAlignment;
   final Axis direction;
+
   ///
   /// 用于判断是否在对话框中使用，对话框的宽度一般设置为屏宽的72%。此值默认为false
   ///
@@ -75,7 +75,7 @@ class TernaryContainer extends StatelessWidget {
   }
 
   Widget _childBuild() {
-    if(direction == Axis.horizontal) {
+    if (direction == Axis.horizontal) {
       return _horizontal();
     }
     return _vertical();

@@ -34,7 +34,8 @@ class DialogProvider {
               children: [
                 Text(
                   title,
-                  style: TextStyle(color: Colors.black54, fontWeight: FontWeight.w800),
+                  style: TextStyle(
+                      color: Colors.black54, fontWeight: FontWeight.w800),
                 ),
                 SizedBox(
                   width: 12,
@@ -116,7 +117,10 @@ class DialogProvider {
                 padding: EdgeInsets.fromLTRB(indent, 28.0, 8.0, 8.0),
                 child: Text(
                   title,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: _dark ? Colors.white : Colors.black87),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                      color: _dark ? Colors.white : Colors.black87),
                 ),
               ),
               SizedBox(
@@ -133,7 +137,8 @@ class DialogProvider {
                 padding: EdgeInsets.fromLTRB((indent + 8.0), 8.0, 8.0, 8.0),
                 child: Text(
                   content,
-                  style: TextStyle(color: _dark ? Colors.white : Colors.black87),
+                  style:
+                      TextStyle(color: _dark ? Colors.white : Colors.black87),
                 ),
               ),
               Container(
@@ -281,10 +286,14 @@ class DialogProvider {
                   padding: EdgeInsets.only(top: 25.0, bottom: 10.0),
                   child: Text(
                     title,
-                    style: TextStyle(color: _fontColor, fontSize: 18.0, shadows: kElevationToShadow[4]),
+                    style: TextStyle(
+                        color: _fontColor,
+                        fontSize: 18.0,
+                        shadows: kElevationToShadow[4]),
                   )),
               content: Container(
-                padding: EdgeInsets.only(top: 10.0, bottom: 20.0, left: 20.0, right: 10.0),
+                padding: EdgeInsets.only(
+                    top: 10.0, bottom: 20.0, left: 20.0, right: 10.0),
                 child: Text(
                   content,
                   textAlign: centerContent ? TextAlign.center : TextAlign.left,
@@ -393,7 +402,13 @@ class DialogProvider {
             ),
             TextButton(
               onPressed: onTapedRight,
-              child: Text(rightButton, style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.orangeAccent),),
+              child: Text(
+                rightButton,
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle1!
+                    .copyWith(color: Colors.orangeAccent),
+              ),
               // style: ButtonStyle(
               //   textStyle: MaterialStateProperty.resolveWith((states) => getTextStyle(states)),
               // ),
@@ -435,7 +450,8 @@ class DialogProvider {
           child: Stack(
             children: [
               Container(
-                padding: EdgeInsets.only(top: 12.0, left: 12.0, bottom: 12.0, right: 10.0),
+                padding: EdgeInsets.only(
+                    top: 12.0, left: 12.0, bottom: 12.0, right: 10.0),
                 margin: EdgeInsets.only(right: 18.0, top: 12.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
@@ -463,7 +479,10 @@ class DialogProvider {
                       padding: EdgeInsets.only(bottom: 8.0),
                       child: Text(
                         status,
-                        style: TextStyle(fontSize: 28.0, color: Colors.white, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 28.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                     Container(

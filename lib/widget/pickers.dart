@@ -46,7 +46,12 @@ class CupertinoPickerX extends StatelessWidget {
       children: items
           .map((e) => Text(
                 e,
-                style: TextStyle(color: Theme.of(context).copyWith(primaryColor: color).primaryColor.withOpacity(0.6), fontSize: fontSize),
+                style: TextStyle(
+                    color: Theme.of(context)
+                        .copyWith(primaryColor: color)
+                        .primaryColor
+                        .withOpacity(0.6),
+                    fontSize: fontSize),
               ))
           .toList(),
       onSelectedItemChanged: onSelectedItemChanged,
