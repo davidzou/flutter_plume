@@ -1,6 +1,10 @@
 ChangeLog
 ======
 
+## [0.1.4]
+
+* 去除just_audio的依赖，将VoiceLabel作为独立项目提交。
+ 
 ## [0.1.4-dev.8]
 
 * 增加了新的控件CupertinoPickerX, 用于定义现有的文字类型选择。
