@@ -112,6 +112,7 @@ class DialogProvider {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // title
               Container(
                 width: _width,
                 padding: EdgeInsets.fromLTRB(indent, 28.0, 8.0, 8.0),
@@ -132,6 +133,7 @@ class DialogProvider {
                   color: _dark ? Colors.white : Colors.black87,
                 ),
               ),
+              // content
               Container(
                 width: _width,
                 padding: EdgeInsets.fromLTRB((indent + 8.0), 8.0, 8.0, 8.0),
@@ -141,6 +143,7 @@ class DialogProvider {
                       TextStyle(color: _dark ? Colors.white : Colors.black87),
                 ),
               ),
+              // button
               Container(
                 width: _width,
                 alignment: Alignment.centerRight,
@@ -150,6 +153,7 @@ class DialogProvider {
                     buttonName,
                     style: TextStyle(
                       fontSize: 16.0,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                   onPressed: onPressed ??
