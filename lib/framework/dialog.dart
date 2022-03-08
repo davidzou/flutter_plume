@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:plume/framework/container/ternary.dart';
 
+///
+///
+///
+///
 class DialogProvider {
   ///
   /// 显示一个对话框，只有一个按钮，取消则按空白区域即可。减少选择的困惑。
