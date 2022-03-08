@@ -1,6 +1,10 @@
 ChangeLog
 ======
 
+## [0.1.5-dev.1]
+
+* 修正Dialog中按钮字体颜色的默认获取源自primaryColor。
+
 ## [0.1.4]
 
 * 去除just_audio的依赖，将VoiceLabel作为独立项目提交。

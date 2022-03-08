@@ -1,6 +1,3 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:plume/framework/container/ternary.dart';
 
@@ -325,7 +322,7 @@ class DialogProvider {
                               child: Text(
                                 leftButton,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 16.0),
+                                style: TextStyle(fontSize: 16.0, color: Theme.of(context).primaryColor),
                               ),
                             ),
                           ),
@@ -344,7 +341,7 @@ class DialogProvider {
                               child: Text(
                                 rightButton,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 16.0),
+                                style: TextStyle(fontSize: 16.0, color: Theme.of(context).primaryColor),
                               ),
                             ),
                           ),
