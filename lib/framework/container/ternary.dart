@@ -90,3 +90,24 @@ class TernaryContainer extends StatelessWidget {
     );
   }
 }
+
+class TernaryImageContainer extends StatelessWidget {
+  const TernaryImageContainer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Stack(
+        children: [
+          Icon(Icons.star),
+          Column(
+            children: [
+              Text("abc"),
+              Text("sdjkke"),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}

@@ -35,8 +35,7 @@ class DialogProvider {
               children: [
                 Text(
                   title,
-                  style: TextStyle(
-                      color: Colors.black54, fontWeight: FontWeight.w800),
+                  style: TextStyle(color: Colors.black54, fontWeight: FontWeight.w800),
                 ),
                 SizedBox(
                   width: 12,
@@ -119,10 +118,7 @@ class DialogProvider {
                 padding: EdgeInsets.fromLTRB(indent, 28.0, 8.0, 8.0),
                 child: Text(
                   title,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20.0,
-                      color: _dark ? Colors.white : Colors.black87),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: _dark ? Colors.white : Colors.black87),
                 ),
               ),
               SizedBox(
@@ -140,8 +136,7 @@ class DialogProvider {
                 padding: EdgeInsets.fromLTRB((indent + 8.0), 8.0, 8.0, 8.0),
                 child: Text(
                   content,
-                  style:
-                      TextStyle(color: _dark ? Colors.white : Colors.black87),
+                  style: TextStyle(color: _dark ? Colors.white : Colors.black87),
                 ),
               ),
               // button
@@ -291,14 +286,10 @@ class DialogProvider {
                   padding: EdgeInsets.only(top: 25.0, bottom: 10.0),
                   child: Text(
                     title,
-                    style: TextStyle(
-                        color: _fontColor,
-                        fontSize: 18.0,
-                        shadows: kElevationToShadow[4]),
+                    style: TextStyle(color: _fontColor, fontSize: 18.0, shadows: kElevationToShadow[4]),
                   )),
               content: Container(
-                padding: EdgeInsets.only(
-                    top: 10.0, bottom: 20.0, left: 20.0, right: 10.0),
+                padding: EdgeInsets.only(top: 10.0, bottom: 20.0, left: 20.0, right: 10.0),
                 child: Text(
                   content,
                   textAlign: centerContent ? TextAlign.center : TextAlign.left,
@@ -364,6 +355,103 @@ class DialogProvider {
   ///
   ///
   ///
+  static Future<T?> dilemmaX<T>(
+    BuildContext context, {
+    required Widget title,
+    required Widget content,
+    String rightButton = "OK",
+    String leftButton = "CANCEL",
+    bool centerContent = false,
+    bool? dark,
+    VoidCallback? onTapedRight,
+    VoidCallback? onTapedLeft,
+  }) {
+    bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
+    Color _fontColor = _dark ? Colors.white : Colors.black;
+    return showDialog<T>(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: _dark ? Colors.black87 : Colors.white,
+          // 对话框区域背景色
+          elevation: 12.0,
+          insetPadding: EdgeInsets.zero,
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18.0),
+          ),
+          // insetAnimationCurve: Curves.easeInOutQuad,
+          // insetAnimationDuration: Duration(milliseconds: 5000),
+          child: TernaryContainer(
+            inDialog: true,
+            header: Container(
+              alignment: Alignment.center,
+              padding: EdgeInsets.only(top: 25.0, bottom: 10.0),
+              child: title,
+            ),
+            content: Container(
+              padding: EdgeInsets.only(top: 10.0, bottom: 20.0, left: 20.0, right: 10.0),
+              alignment: centerContent ? Alignment.center : Alignment.centerLeft,
+              child: content,
+            ),
+            footer: Column(
+              children: [
+                Divider(
+                  color: Colors.grey,
+                  height: 2,
+                ),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: TextButton(
+                            onPressed: onTapedLeft,
+                            child: Text(
+                              leftButton,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 16.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                          height: 48,
+                          child: const VerticalDivider(
+                            color: Colors.grey,
+                            width: 2,
+                          )),
+                      Expanded(
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: TextButton(
+                            onPressed: onTapedRight,
+                            child: Text(
+                              rightButton,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 16.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // SizedBox(height: 10.0,),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  ///
+  ///
+  ///
   static Future<T?> dilemmaMaterial<T>(
     BuildContext context, {
     required String title,
@@ -409,10 +497,7 @@ class DialogProvider {
               onPressed: onTapedRight,
               child: Text(
                 rightButton,
-                style: Theme.of(context)
-                    .textTheme
-                    .subtitle1!
-                    .copyWith(color: Colors.orangeAccent),
+                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.orangeAccent),
               ),
               // style: ButtonStyle(
               //   textStyle: MaterialStateProperty.resolveWith((states) => getTextStyle(states)),
@@ -455,8 +540,7 @@ class DialogProvider {
           child: Stack(
             children: [
               Container(
-                padding: EdgeInsets.only(
-                    top: 12.0, left: 12.0, bottom: 12.0, right: 10.0),
+                padding: EdgeInsets.only(top: 12.0, left: 12.0, bottom: 12.0, right: 10.0),
                 margin: EdgeInsets.only(right: 18.0, top: 12.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
@@ -484,10 +568,7 @@ class DialogProvider {
                       padding: EdgeInsets.only(bottom: 8.0),
                       child: Text(
                         status,
-                        style: TextStyle(
-                            fontSize: 28.0,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 28.0, color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                     ),
                     Container(

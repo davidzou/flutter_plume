@@ -5,6 +5,7 @@ import 'package:plumedemo/pages/page_flipable.dart';
 import 'package:plumedemo/pages/page_framework_drawer.dart';
 import 'package:plumedemo/pages/page_main_list.dart';
 import 'package:plumedemo/pages/page_perspective.dart';
+import 'package:plumedemo/pages/page_test.dart';
 
 
 
@@ -28,6 +29,8 @@ void main() {
         DIALOGS_PAGE: (BuildContext context) => DialogsPage(),
         // flip card
         FLIP_PAGE: (BuildContext context) => FlipPage(),
+        // test
+        TEST_PAGE: (BuildContext context) => TestPage(),
       },
 
       // *******  调试类参数
@@ -52,3 +55,5 @@ const String PERSPECTIVE_PAGE = "/PerspectivePage";
 const String DIALOGS_PAGE = "/dialogs";
 
 const String FLIP_PAGE = "/flipable";
+
+const String TEST_PAGE = "/test";

@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:plume/widget/flipable.dart';
-import 'package:plume/widget/labels.dart';
+import 'package:voice_label/com/wonderingwall/widgets/voice_label.dart';
 
 class FlipPage extends StatelessWidget {
   final FlipController _flipController = FlipController();

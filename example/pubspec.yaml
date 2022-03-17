@@ -13,10 +13,13 @@ dependencies:
   flutter:
     sdk: flutter
 
-#  plume: "^0.1.4.dev2"
+#  plume: ^0.1.5-dev.1
 #  # 本地依赖
   plume:
     path: ../../flutter_plume
+  # 至plume0.1.5起独立开的插件
+  voice_label: ^1.0.3
+  just_audio: ^0.9.20
 
 dev_dependencies:
   flutter_test:

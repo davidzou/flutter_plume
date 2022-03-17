@@ -61,7 +61,7 @@ class DrawerBuilder {
   /// * 包含头部信息。
   /// * 包含菜单项（关于，帮助）。
   /// * 包含版本标注(Footer)。
-  /// * 包含背景(Comming soon)
+  /// * 包含背景(Coming soon)
   ///
   static Drawer drawer(
     BuildContext context, {
