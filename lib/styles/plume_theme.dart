@@ -73,7 +73,7 @@ class DefaultThemes extends Themes {
       colorScheme: shrineColorScheme,
       toggleableActiveColor: shrinePink400,
       accentColor: shrineBrown900,
-      primaryColor: shrinePink100,
+      primaryColor: Colors.orange,
       buttonColor: shrinePink100,
       scaffoldBackgroundColor: shrineBackgroundWhite,
       cardColor: shrineBackgroundWhite,

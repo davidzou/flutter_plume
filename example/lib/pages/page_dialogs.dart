@@ -25,7 +25,16 @@ class DialogsPage extends StatelessWidget {
 
           /// Notice白天
           ListTile(
-            leading: Icon(Icons.wb_incandescent_outlined),
+            leading: Icon(Icons.wb_incandescent_outlined, color: Colors.lightBlue,),
+            // 放截屏的缩略图
+            trailing: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 64, maxHeight: 64),
+              child: Placeholder(
+                color: Colors.grey,
+                fallbackWidth: 64,
+                fallbackHeight: 64,
+              ),
+            ),
             onTap: () {
               DialogProvider.notice(
                 context,
@@ -36,19 +45,28 @@ class DialogsPage extends StatelessWidget {
               );
             },
             title: Text(
-              "Notice 弹窗白天模式(通知或者告知类的信息)",
+              "Notice 弹窗白天模式",
               maxLines: 1,
             ),
             subtitle: Text(
-              "标题加内容，以及一个知道了按钮事件。有白天和黑夜两种模式。知道了按钮可以关闭弹窗，也可以点击空白区域关闭弹窗。",
-              maxLines: 2,
+              "(通知或者告知类的信息), 标题加内容，以及一个知道了按钮事件。有白天和黑夜两种模式。知道了按钮可以关闭弹窗，也可以点击空白区域关闭弹窗。",
+              // maxLines: 2,
               style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
             ),
           ),
 
           /// Notice黑夜
           ListTile(
-            leading: Icon(Icons.wb_incandescent_outlined),
+            leading: Icon(Icons.wb_incandescent_outlined, color: Colors.black87,),
+            // 放截屏的缩略图
+            trailing: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 64, maxHeight: 64),
+              child: Placeholder(
+                color: Colors.grey,
+                fallbackWidth: 64,
+                fallbackHeight: 64,
+              ),
+            ),
             onTap: () {
               DialogProvider.notice(
                 context,
@@ -59,19 +77,27 @@ class DialogsPage extends StatelessWidget {
               );
             },
             title: Text(
-              "Notice 弹窗黑夜模式(通知或者告知类的信息)",
+              "Notice 弹窗黑夜模式",
               maxLines: 1,
             ),
             subtitle: Text(
-              "标题加内容，以及一个知道了按钮事件。有白天和黑夜两种模式。知道了按钮可以关闭弹窗，也可以点击空白区域关闭弹窗。",
-              maxLines: 2,
+              "(通知或者告知类的信息), 标题加内容，以及一个知道了按钮事件。有白天和黑夜两种模式。知道了按钮可以关闭弹窗，也可以点击空白区域关闭弹窗。",
               style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
             ),
           ),
 
-          /// Dilemma Cuptinor白天
+          /// Dilemma Cupertino白天
           ListTile(
-            leading: Icon(Icons.wb_incandescent_outlined),
+            leading: Icon(Icons.wb_incandescent_outlined, color: Colors.lightBlueAccent,),
+            // 放截屏的缩略图
+            trailing: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 64, maxHeight: 64),
+              child: Placeholder(
+                color: Colors.grey,
+                fallbackWidth: 64,
+                fallbackHeight: 64,
+              ),
+            ),
             onTap: () {
               DialogProvider.dilemma(context, title: "title", content: "内容部分，你想展示些什么，或者你能选择什么，来拿出来！", centerContent: true, onTapedRight: () {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("右边的按钮被按到了")));
@@ -82,19 +108,27 @@ class DialogsPage extends StatelessWidget {
               });
             },
             title: Text(
-              "Dilemma 弹窗白天模式(两难选择,Cupertino风格)",
+              "Dilemma 弹窗白天模式",
               maxLines: 1,
             ),
             subtitle: Text(
-              "需要用户选择，同意不同意，执行不执行的方式弹窗，交由用户的A/B选择",
-              maxLines: 2,
+              "(两难选择,Cupertino风格)，需要用户选择，同意不同意，执行不执行的方式弹窗，交由用户的A/B选择",
               style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
             ),
           ),
 
           /// Dilemma黑夜
           ListTile(
-            leading: Icon(Icons.wb_incandescent_outlined),
+            leading: Icon(Icons.wb_incandescent_outlined, color: Colors.black87,),
+            // 放截屏的缩略图
+            trailing: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 64, maxHeight: 64),
+              child: Placeholder(
+                color: Colors.grey,
+                fallbackWidth: 64,
+                fallbackHeight: 64,
+              ),
+            ),
             onTap: () {
               DialogProvider.dilemma(context, title: "title", content: "内容部分，你想展示些什么，或者你能选择什么，来拿出来！", dark: true,
                   // centerContent: true,
@@ -107,12 +141,11 @@ class DialogsPage extends StatelessWidget {
               });
             },
             title: Text(
-              "Dilemma 弹窗黑夜模式(两难选择,Cupertino风格)",
+              "Dilemma 弹窗黑夜模式",
               maxLines: 1,
             ),
             subtitle: Text(
-              "需要用户选择，同意不同意，执行不执行的方式弹窗，交由用户的A/B选择",
-              maxLines: 2,
+              "(两难选择,Cupertino风格)，需要用户选择，同意不同意，执行不执行的方式弹窗，交由用户的A/B选择",
               style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
             ),
           ),
@@ -147,14 +180,11 @@ class DialogsPage extends StatelessWidget {
             onTap: () {
               DialogProvider.dilemmaX(
                 context,
-                title: Text("title"),
-                // content: Column(
-                //   children: [
-                //     Text("Cd"),
-                //     Text("内容部分，你想展示些什么，或者你能选择什么，来拿出来！"),
-                //   ],
-                // ),
-                content: Text("CD"),
+                delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      return Container();
+                    }
+                ),
                 centerContent: false,
                 onTapedRight: () {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("右边的按钮被按到了")));

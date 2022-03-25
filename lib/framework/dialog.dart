@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:plume/framework/container/ternary.dart';
 
+/// 统一圆角值
+///
+const double _radiusValue = 18.0;
+const BorderRadius _borderRadius = const BorderRadius.all(const Radius.circular(_radiusValue));
+
 ///
 ///
 ///
@@ -90,7 +95,7 @@ class DialogProvider {
     double indent = 28,
     bool? dark,
   }) {
-    // 取宽，屏幕的60%用于对话框。
+    // 取宽，屏幕的72%用于对话框。
     double _width = MediaQuery.of(context).size.width * 0.72;
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
     return showDialog<T>(
@@ -357,8 +362,11 @@ class DialogProvider {
   ///
   static Future<T?> dilemmaX<T>(
     BuildContext context, {
-    required Widget title,
-    required Widget content,
+
+    /// 列表内容
+    required SliverChildDelegate delegate,
+
+    /// 按钮名称
     String rightButton = "OK",
     String leftButton = "CANCEL",
     bool centerContent = false,
@@ -366,6 +374,7 @@ class DialogProvider {
     VoidCallback? onTapedRight,
     VoidCallback? onTapedLeft,
   }) {
+    double _width = MediaQuery.of(context).size.width * 72 / 100;
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
     Color _fontColor = _dark ? Colors.white : Colors.black;
     return showDialog<T>(
@@ -373,74 +382,110 @@ class DialogProvider {
       builder: (context) {
         return Dialog(
           backgroundColor: _dark ? Colors.black87 : Colors.white,
+          // backgroundColor: Colors.grey.withOpacity(0.1),
           // 对话框区域背景色
           elevation: 12.0,
           insetPadding: EdgeInsets.zero,
           clipBehavior: Clip.antiAlias,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18.0),
+            borderRadius: _borderRadius,
           ),
-          // insetAnimationCurve: Curves.easeInOutQuad,
-          // insetAnimationDuration: Duration(milliseconds: 5000),
-          child: TernaryContainer(
-            inDialog: true,
-            header: Container(
-              alignment: Alignment.center,
-              padding: EdgeInsets.only(top: 25.0, bottom: 10.0),
-              child: title,
-            ),
-            content: Container(
-              padding: EdgeInsets.only(top: 10.0, bottom: 20.0, left: 20.0, right: 10.0),
-              alignment: centerContent ? Alignment.center : Alignment.centerLeft,
-              child: content,
-            ),
-            footer: Column(
+          child: Container(
+            width: _width,
+            constraints: BoxConstraints(maxHeight: 348),
+            decoration: BoxDecoration(
+                color: Colors.lightBlueAccent,
+                // backgroundBlendMode: BlendMode.modulate,
+                gradient: LinearGradient(colors: [
+                  Colors.transparent,
+                  Colors.transparent,
+                  Colors.lightBlueAccent,
+                  Colors.transparent,
+                ], stops: [
+                  0.0,
+                  0.4,
+                  0.9,
+                  1.0,
+                ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+            child: Stack(
+              fit: StackFit.expand,
               children: [
-                Divider(
-                  color: Colors.grey,
-                  height: 2,
-                ),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                // 内容和按键
+                Positioned(
+                  top: 100,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: Column(
                     children: [
-                      Expanded(
-                        child: Container(
-                          alignment: Alignment.center,
-                          child: TextButton(
-                            onPressed: onTapedLeft,
-                            child: Text(
-                              leftButton,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 16.0),
-                            ),
-                          ),
+                      // Container(height: 28, color: Colors.transparent,),
+                      ConstrainedBox(
+                        constraints: BoxConstraints(maxHeight: 200, maxWidth: _width),
+                        child: ListView.custom(
+                          shrinkWrap: true,
+                          childrenDelegate: SliverChildBuilderDelegate((context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: _borderRadius,
+                                  color: Colors.pinkAccent[400],
+                                ),
+                                child: ListTile(
+                                  leading: Icon(
+                                    Icons.star,
+                                    size: 44,
+                                    color: Colors.lightGreenAccent,
+                                  ),
+                                  title: Text("index$index, High light"),
+                                  subtitle: Text("we are list tile, and this is subtitle."),
+                                ),
+                              ),
+                            );
+                          }, childCount: 4),
                         ),
                       ),
                       Container(
-                          height: 48,
-                          child: const VerticalDivider(
-                            color: Colors.grey,
-                            width: 2,
-                          )),
-                      Expanded(
-                        child: Container(
-                          alignment: Alignment.center,
-                          child: TextButton(
-                            onPressed: onTapedRight,
-                            child: Text(
-                              rightButton,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 16.0),
-                            ),
-                          ),
+                        width: _width,
+                        height: 48,
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(_radiusValue), bottomRight: Radius.circular(_radiusValue)),
+                          color: Colors.orangeAccent.withOpacity(0.8),
+                          boxShadow: kElevationToShadow[8],
                         ),
-                      ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('Cancel')),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('OK')),
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ),
-                // SizedBox(height: 10.0,),
+                // 图标
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  child: IgnorePointer(
+                    child: Icon(
+                      Icons.batch_prediction,
+                      size: 128,
+                      color: Colors.greenAccent,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -481,27 +526,23 @@ class DialogProvider {
       context: context,
       builder: (context) {
         return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
           title: Text(title),
           content: Text(content),
           actions: [
             TextButton(
               onPressed: onTapedLeft,
-              child: Text(leftButton),
-              // style: ButtonStyle(
-              //     textStyle: MaterialStateProperty.resolveWith((states) => getTextStyle(states)),
-              //   backgroundColor: MaterialStateProperty.resolveWith((states) => getTextStyle(states).color),
-              // ),
-              // style: TextButton.styleFrom(primary: Color(0xff000f0f)),
+              child: Text(
+                leftButton,
+                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Theme.of(context).primaryColor),
+              ),
             ),
             TextButton(
               onPressed: onTapedRight,
               child: Text(
                 rightButton,
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.orangeAccent),
+                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Theme.of(context).primaryColor),
               ),
-              // style: ButtonStyle(
-              //   textStyle: MaterialStateProperty.resolveWith((states) => getTextStyle(states)),
-              // ),
             )
           ],
         );
