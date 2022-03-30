@@ -29,11 +29,12 @@ class DialogsPage extends StatelessWidget {
             // 放截屏的缩略图
             trailing: ConstrainedBox(
               constraints: BoxConstraints(maxWidth: 64, maxHeight: 64),
-              child: Placeholder(
-                color: Colors.grey,
-                fallbackWidth: 64,
-                fallbackHeight: 64,
-              ),
+              // child: Placeholder(
+              //   color: Colors.grey,
+              //   fallbackWidth: 64,
+              //   fallbackHeight: 64,
+              // ),
+              child: Image.asset("assets/images/dialog_notice_bright.png"),
             ),
             onTap: () {
               DialogProvider.notice(
@@ -61,11 +62,12 @@ class DialogsPage extends StatelessWidget {
             // 放截屏的缩略图
             trailing: ConstrainedBox(
               constraints: BoxConstraints(maxWidth: 64, maxHeight: 64),
-              child: Placeholder(
-                color: Colors.grey,
-                fallbackWidth: 64,
-                fallbackHeight: 64,
-              ),
+              // child: Placeholder(
+              //   color: Colors.grey,
+              //   fallbackWidth: 64,
+              //   fallbackHeight: 64,
+              // ),
+              child: Image.asset("assets/images/dialog_notice_dark.png"),
             ),
             onTap: () {
               DialogProvider.notice(
@@ -92,11 +94,12 @@ class DialogsPage extends StatelessWidget {
             // 放截屏的缩略图
             trailing: ConstrainedBox(
               constraints: BoxConstraints(maxWidth: 64, maxHeight: 64),
-              child: Placeholder(
-                color: Colors.grey,
-                fallbackWidth: 64,
-                fallbackHeight: 64,
-              ),
+              // child: Placeholder(
+              //   color: Colors.grey,
+              //   fallbackWidth: 64,
+              //   fallbackHeight: 64,
+              // ),
+              child: Image.asset("assets/images/dialog_dilemma_bright.png"),
             ),
             onTap: () {
               DialogProvider.dilemma(context, title: "title", content: "内容部分，你想展示些什么，或者你能选择什么，来拿出来！", centerContent: true, onTapedRight: () {
@@ -123,11 +126,12 @@ class DialogsPage extends StatelessWidget {
             // 放截屏的缩略图
             trailing: ConstrainedBox(
               constraints: BoxConstraints(maxWidth: 64, maxHeight: 64),
-              child: Placeholder(
-                color: Colors.grey,
-                fallbackWidth: 64,
-                fallbackHeight: 64,
-              ),
+              // child: Placeholder(
+              //   color: Colors.grey,
+              //   fallbackWidth: 64,
+              //   fallbackHeight: 64,
+              // ),
+              child: Image.asset("assets/images/dialog_dilemma_dark.png"),
             ),
             onTap: () {
               DialogProvider.dilemma(context, title: "title", content: "内容部分，你想展示些什么，或者你能选择什么，来拿出来！", dark: true,
@@ -165,12 +169,11 @@ class DialogsPage extends StatelessWidget {
               });
             },
             title: Text(
-              "Dilemma 弹窗白天模式(两难选择,MaterialDesign样式)",
+              "Dilemma 弹窗模式",
               maxLines: 1,
             ),
             subtitle: Text(
-              "需要用户选择，同意不同意，执行不执行的方式弹窗，交由用户的A/B选择",
-              maxLines: 2,
+              "(两难选择,Material Design样式，标准Android风格)，需要用户选择，同意不同意，执行不执行的方式弹窗，交由用户的A/B选择",
               style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
             ),
           ),
@@ -233,8 +236,9 @@ class DialogsPage extends StatelessWidget {
             ),
           ),
 
+          /// 渐变按钮
           ClipRRect(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(18),
             child: Stack(
               children: <Widget>[
                 Positioned.fill(
@@ -258,7 +262,9 @@ class DialogsPage extends StatelessWidget {
                       primary: Colors.white,
                       textStyle: const TextStyle(fontSize: 20),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      DialogProvider.showDialogNormal(context);
+                    },
                     child: const Text('Gradient'),
                   ),
                 ),

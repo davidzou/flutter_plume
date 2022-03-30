@@ -446,7 +446,6 @@ class DialogProvider {
                         ),
                       ),
                       Container(
-                        width: _width,
                         height: 48,
                         decoration: BoxDecoration(
                           borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(_radiusValue), bottomRight: Radius.circular(_radiusValue)),
@@ -495,7 +494,10 @@ class DialogProvider {
   }
 
   ///
+  /// 两难选择模式，Android Material Design样式。
   ///
+  /// ### 用途
+  /// * 提示内容，两难选择
   ///
   static Future<T?> dilemmaMaterial<T>(
     BuildContext context, {
@@ -524,9 +526,11 @@ class DialogProvider {
 
     return showDialog<T>(
       context: context,
+      barrierDismissible: false,
       builder: (context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
+          backgroundColor: _dark ? Colors.white70.withOpacity(0.8) : Colors.black87.withOpacity(0.8),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radiusValue)),
           title: Text(title),
           content: Text(content),
           actions: [
@@ -624,12 +628,12 @@ class DialogProvider {
               Container(
                   height: 24,
                   alignment: Alignment.topRight,
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: CircleAvatar(
-                      backgroundColor: Colors.black54,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.black54,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
                       child: Icon(
                         closeIcon ?? Icons.close_rounded,
                         color: Colors.white,
@@ -642,6 +646,89 @@ class DialogProvider {
         );
       },
     );
+  }
+
+  static Future<int> showDialogNormal(
+    BuildContext context, {
+    // required String status,
+    // required Widget statusIcon,
+    IconData? closeIcon,
+    String? description,
+  }) async {
+    // 这是对话框内部就解决的选择性问题，有内部返回值处理，最终返回到事件。
+    switch (await showDialog<int>(
+        context: context,
+        builder: (context) {
+          ValueNotifier<int> _valueNotifier = ValueNotifier(1);
+          return SimpleDialog(
+            title: Text("title"),
+            backgroundColor: Colors.white.withOpacity(0.8),
+            // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
+            contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
+            children: [
+              // 选择列表
+              ValueListenableBuilder<int>(
+                builder: (context, value, child) => Center(
+                  child: DropdownButton<int>(
+                    alignment: AlignmentDirectional.centerEnd,
+                    items: [
+                      DropdownMenuItem(
+                        alignment: Alignment.centerRight,
+                        child: Text("1"),
+                        value: 1,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("2"),
+                        value: 2,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("3"),
+                        value: 3,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("4"),
+                        value: 4,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("5"),
+                        value: 5,
+                      ),
+                    ],
+                    onChanged: (value) {
+                      _valueNotifier.value = value!;
+                    },
+                    value: value,
+                  ),
+                ),
+                valueListenable: _valueNotifier,
+              ),
+              SimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, _valueNotifier.value);
+                },
+                child: const Text('Treasury department'),
+              ),
+              SimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('State department'),
+              ),
+            ],
+          );
+        })) {
+      case 1:
+        print("return 1");
+        return 1;
+      case 2:
+        print("return 2");
+        return 2;
+      case 3:
+        print("return 3");
+        return 3;
+    }
+    return 0;
   }
 }
 
