@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 ///
 /// 列表回调
@@ -75,7 +74,7 @@ abstract class ListViewBuilder<T extends ListItem> {
   ListViewBuilder({
     required this.list,
     this.onItemTap,
-    this.height = 80,
+    this.height,
     this.scrollController,
     this.blankTitle = "",
     this.onPullToRefreshed,
@@ -89,7 +88,7 @@ abstract class ListViewBuilder<T extends ListItem> {
   final OnItemTaped<T>? onItemTap;
 
   /// 高度(一个控件的高度)
-  final double height;
+  final double? height;
 
   final ScrollController? scrollController;
 

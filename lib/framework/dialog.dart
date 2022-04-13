@@ -358,7 +358,66 @@ class DialogProvider {
   }
 
   ///
+  /// 选择弹出框
   ///
+  static Future<T?> dilemmaChoiceChips<T>(
+    BuildContext context, {
+    required List<Widget> children,
+    Widget? title, // 标题Title
+    Color titleBackgroundColor = Colors.lightBlueAccent, // Title 背景色
+    Color? barrierColor, // 背景蒙版色
+    Color? dialogBackgroundColor,
+    bool barrierDismissible = true, // 点击空白区域用作取消
+  }) {
+    const _radius = const Radius.circular(18.0);
+    return showDialog(
+      context: context,
+      barrierColor: barrierColor,
+      barrierDismissible: barrierDismissible,
+      builder: (context) {
+        return SimpleDialog(
+          backgroundColor: dialogBackgroundColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: _radius,
+              topRight: Radius.circular(18.0),
+              bottomLeft: Radius.circular(18.0),
+              bottomRight: Radius.circular(18.0),
+            ),
+          ),
+          title: Container(
+            padding: EdgeInsets.all(18.0),
+            child: title,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(18.0),
+                topRight: Radius.circular(18.0),
+              ),
+              color: titleBackgroundColor,
+              boxShadow: kElevationToShadow[4],
+            ),
+          ),
+          titlePadding: EdgeInsets.zero,
+          children: children
+              .map(
+                (e) => Padding(
+                  padding: EdgeInsets.only(
+                    left: 18.0,
+                    right: 18.0,
+                    top: 12.0,
+                    bottom: 12.0,
+                  ),
+                  child: e,
+                ),
+              )
+              .toList(),
+        );
+      },
+    );
+  }
+
+  ///
+  /// 可扩展内容的对话框选择。
   ///
   static Future<T?> dilemmaX<T>(
     BuildContext context, {

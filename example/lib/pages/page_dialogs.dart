@@ -236,6 +236,36 @@ class DialogsPage extends StatelessWidget {
             ),
           ),
 
+          /// 选择信息弹窗
+          ListTile(
+            leading: Icon(Icons.wb_incandescent_outlined),
+            onTap: () {
+              DialogProvider.dilemmaChoiceChips(
+                context,
+                dialogBackgroundColor: Colors.lightBlue.withOpacity(0.7),
+                children: [
+                  Text("data1"),
+                  Text("data2"),
+                  Text("data3"),
+                  Text("data4"),
+                  Text("data5"),
+                  ElevatedButton(onPressed: (){
+
+                  }, child: Text("Clicked"), style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.lightBlue.withOpacity(0.7))),),
+                ]
+              );
+            },
+            title: Text(
+              "Selector 弹窗模式(状态展示)",
+              maxLines: 1,
+            ),
+            subtitle: Text(
+              "操作成功后的弹窗，表示状态信息的。",
+              maxLines: 2,
+              style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
+            ),
+          ),
+
           /// 渐变按钮
           ClipRRect(
             borderRadius: BorderRadius.circular(18),
