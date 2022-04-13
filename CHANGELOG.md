@@ -1,6 +1,10 @@
 ChangeLog
 ======
 
+## [0.1.5-dev.2]
+
+* 修正ListViewBuilder中参数height的设定
+ 
 ## [0.1.5-dev.1]
 
 * 修正Dialog中按钮字体颜色的默认获取源自primaryColor。
