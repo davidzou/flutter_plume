@@ -35,29 +35,11 @@ class DialogsPage extends StatelessWidget {
           /// Dilemma Cupertino黑夜
           _createDilemmaCupertinoDarkMode(context),
 
-          /// Dilemma MaterialDesign样式
-          ListTile(
-            leading: Icon(Icons.wb_incandescent_outlined),
-            onTap: () {
-              DialogProvider.dilemmaMaterial(context, title: "title", content: "内容部分，你想展示些什么，或者你能选择什么，来拿出来！", dark: true,
-                  // centerContent: true,
-                  onTapedRight: () {
-                Navigator.of(context).pop();
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("右边的按钮被按到了")));
-              }, onTapedLeft: () {
-                Navigator.of(context).pop();
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("左边的按钮被按到了")));
-              });
-            },
-            title: Text(
-              "Dilemma 弹窗模式",
-              maxLines: 1,
-            ),
-            subtitle: Text(
-              "(两难选择,Material Design样式，标准Android风格)，需要用户选择，同意不同意，执行不执行的方式弹窗，交由用户的A/B选择",
-              style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
-            ),
-          ),
+          /// Dilemma MaterialDesign 白天样式
+          _createDilemmaMaterialDesignLightMode(context),
+
+          ///  Dilemma MaterialDesign 黑夜样式
+          _createDilemmaMaterialDesignDarkMode(context),
 
           ListTile(
             leading: Icon(Icons.wb_incandescent_outlined),
@@ -258,7 +240,7 @@ class DialogsPage extends StatelessWidget {
     return ListTile(
       leading: Icon(
         Icons.wb_incandescent_outlined,
-        color: Colors.black87,
+        color: Colors.cyanAccent,
       ),
       // 放截屏的缩略图
       trailing: ConstrainedBox(
@@ -341,7 +323,7 @@ class DialogsPage extends StatelessWidget {
     return ListTile(
       leading: Icon(
         Icons.wb_incandescent_outlined,
-        color: Colors.black87,
+        color: Colors.cyanAccent,
       ),
       // 放截屏的缩略图
       trailing: ConstrainedBox(
@@ -377,7 +359,10 @@ class DialogsPage extends StatelessWidget {
 
   ListTile _createDilemmaMaterialDesignLightMode(BuildContext context) {
     return ListTile(
-      leading: Icon(Icons.wb_incandescent_outlined),
+      leading: Icon(
+        Icons.wb_incandescent_outlined,
+        color: Colors.lightBlueAccent,
+      ),
       onTap: () {
         DialogProvider.dilemmaMaterial(
           context, title: "title",
@@ -395,7 +380,40 @@ class DialogsPage extends StatelessWidget {
         );
       },
       title: Text(
-        "Dilemma 弹窗模式",
+        "Dilemma 弹窗白天模式",
+        maxLines: 1,
+      ),
+      subtitle: Text(
+        "(两难选择,Material Design样式，标准Android风格)，需要用户选择，同意不同意，执行不执行的方式弹窗，交由用户的A/B选择",
+        style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
+      ),
+    );
+  }
+
+  ListTile _createDilemmaMaterialDesignDarkMode(BuildContext context) {
+    return ListTile(
+      leading: Icon(
+        Icons.wb_incandescent_outlined,
+        color: Colors.cyanAccent,
+      ),
+      onTap: () {
+        DialogProvider.dilemmaMaterial(
+          context, title: "title",
+          content: "内容部分，你想展示些什么，或者你能选择什么，来拿出来！",
+          dark: true,
+          // centerContent: true,
+          onTapedRight: () {
+            Navigator.of(context).pop();
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("右边的按钮被按到了")));
+          },
+          onTapedLeft: () {
+            Navigator.of(context).pop();
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("左边的按钮被按到了")));
+          },
+        );
+      },
+      title: Text(
+        "Dilemma 弹窗黑夜模式",
         maxLines: 1,
       ),
       subtitle: Text(

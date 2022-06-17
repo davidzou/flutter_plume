@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:plume/framework/container/ternary.dart';
 
 /// 统一圆角值
@@ -600,10 +601,10 @@ class DialogProvider {
       barrierDismissible: false,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: _dark ? Colors.white70.withOpacity(0.8) : Colors.black87.withOpacity(0.8),
+          backgroundColor: _dark ? Colors.black87.withOpacity(0.8) : Colors.white70.withOpacity(0.8),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radiusValue)),
-          title: Text(title),
-          content: Text(content),
+          title: Text(title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: _dark ? Colors.white : Colors.black87),),
+          content: Text(content, style: TextStyle(color: _dark ? Colors.white : Colors.black87),),
           actions: [
             TextButton(
               onPressed: onTapedLeft ??
@@ -779,17 +780,9 @@ class DialogProvider {
             ),
             content: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  label == null ? Container() : Text(label),
-                  TextField(
-                    controller: editingController,
-                    onChanged: (String s) {
-                      editingController.text = s;
-                    },
-                  )
-                ],
+              child: CustomTextInput(
+                label: label,
+                editingController: editingController,
               ),
             ),
             footer: Column(
@@ -831,6 +824,10 @@ class DialogProvider {
                           child: TextButton(
                             onPressed: onTapedRight ??
                                 () {
+                                  if (editingController.text.isEmpty) {
+                                    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("右边的按钮被按到了")));
+                                    return;
+                                  }
                                   Navigator.of(context).pop(DialogResult(status: true, code: 200, msg: "返回输入内容", data: editingController.text));
                                 },
                             child: Text(
@@ -934,6 +931,62 @@ class DialogProvider {
         return 3;
     }
     return 0;
+  }
+}
+
+class CustomTextInput extends StatefulWidget {
+  const CustomTextInput({Key? key, this.label, required this.editingController}) : super(key: key);
+
+  final String? label;
+  final TextEditingController editingController;
+
+  @override
+  _CustomTextInputState createState() => _CustomTextInputState();
+}
+
+class _CustomTextInputState extends State<CustomTextInput> {
+  String? _errorText;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  _getErrorText() {
+    return _errorText;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: TextField(
+        autofocus: true,
+        controller: widget.editingController,
+        onSubmitted: (String s) {
+          // 监听回车键
+          setState(() {
+            if (s.isEmpty) {
+              _errorText = "不能为空";
+              print("isEmpty ");
+            } else {
+              print("isNotEmpty");
+              _errorText = null;
+            }
+          });
+        },
+        onChanged: (String s) {
+          // editingController.text = s;
+        },
+        decoration: InputDecoration(
+          labelText: widget.label,
+          errorText: _getErrorText(),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xFF409EFF), width: 2.0),
+            borderRadius: BorderRadius.circular(6.0),
+          ),
+        ),
+      ),
+    );
   }
 }
 
