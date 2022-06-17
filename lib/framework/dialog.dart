@@ -739,11 +739,11 @@ class DialogProvider {
   ///
   /// 输入条件的回调对话框
   ///
-  static Future<PromptResult?> prompt(
+  static Future<DialogResult?> prompt(
     BuildContext context, {
     required String title,
   }) {
-    return showDialog<PromptResult?>(
+    return showDialog<DialogResult>(
       context: context,
       builder: (BuildContext context) {
         TextEditingController editingController = TextEditingController();
@@ -768,14 +768,14 @@ class DialogProvider {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).pop(PromptResult());
+                      Navigator.of(context).pop(DialogResult(status: false, code: 200));
                     },
                     child: Text("Cancel"),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       print(editingController.text);
-                      Navigator.of(context).pop(PromptResult(status: true, value: editingController.text));
+                      Navigator.of(context).pop(DialogResult(status: true, code: 200));
                     },
                     child: Text("OK"),
                   ),
@@ -870,14 +870,6 @@ class DialogProvider {
     }
     return 0;
   }
-}
-
-/// 输入条件返回结果。
-class PromptResult {
-  PromptResult({this.status = false, this.value});
-
-  bool status;
-  String? value;
 }
 
 ///
