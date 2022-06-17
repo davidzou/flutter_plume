@@ -718,9 +718,10 @@ class DialogProvider {
                 child: CircleAvatar(
                   backgroundColor: Colors.black54,
                   child: InkWell(
-                    onTap: onTapClosed ?? () {
-                      Navigator.of(context).pop();
-                    },
+                    onTap: onTapClosed ??
+                        () {
+                          Navigator.of(context).pop();
+                        },
                     child: Icon(
                       closeIcon ?? Icons.close_rounded,
                       color: Colors.white,
@@ -739,49 +740,113 @@ class DialogProvider {
   ///
   /// 输入条件的回调对话框
   ///
+  /// * title                 对话框标题
+  /// * label                 输入框Label
+  /// * textField             自定义输入框
+  /// * barrierDismissible    对话框空白区域点击关闭是否支持，默认支持点击空白区域可以关闭对话框。
+  ///
   static Future<DialogResult?> prompt(
     BuildContext context, {
     required String title,
+    String? label = "输入需要的答案，确认并返回",
+    TextField? textField,
+    String leftButton = "Cancel",
+    String rightButton = "OK",
+    VoidCallback? onTapedLeft,
+    VoidCallback? onTapedRight,
+    bool barrierDismissible = false,
+    bool? dark = false,
   }) {
+    bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
     return showDialog<DialogResult>(
       context: context,
+      barrierColor: _dark ? Color(0xaa000000) : Color(0x9effffff),
+      barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
         TextEditingController editingController = TextEditingController();
+        Color _backgroundColor = _dark ? Colors.black45 : Colors.white60;
         return Dialog(
+          backgroundColor: _backgroundColor,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text("$title"),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: editingController,
-                  onEditingComplete: () {},
-                  onChanged: (String s) {
-                    editingController.text = s;
-                  },
-                ),
+          child: TernaryContainer(
+            header: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.only(top: 25.0, bottom: 10.0, left: 20.0, right: 20.0),
+              child: Text(
+                title,
+                style: TextStyle(fontSize: 18.0, shadows: kElevationToShadow[4]),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
+            content: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop(DialogResult(status: false, code: 200));
+                  label == null ? Container() : Text(label),
+                  TextField(
+                    controller: editingController,
+                    onChanged: (String s) {
+                      editingController.text = s;
                     },
-                    child: Text("Cancel"),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      print(editingController.text);
-                      Navigator.of(context).pop(DialogResult(status: true, code: 200));
-                    },
-                    child: Text("OK"),
-                  ),
+                  )
                 ],
-              )
-            ],
+              ),
+            ),
+            footer: Column(
+              children: [
+                Divider(
+                  color: Colors.grey,
+                  height: 2,
+                ),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: TextButton(
+                            onPressed: onTapedLeft ??
+                                () {
+                                  Navigator.of(context).pop(DialogResult(status: false, code: 200));
+                                },
+                            child: Text(
+                              leftButton,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 16.0, color: Theme.of(context).primaryColor),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                          height: 48,
+                          child: const VerticalDivider(
+                            color: Colors.grey,
+                            width: 2,
+                          )),
+                      Expanded(
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: TextButton(
+                            onPressed: onTapedRight ??
+                                () {
+                                  Navigator.of(context).pop(DialogResult(status: true, code: 200, msg: "返回输入内容", data: editingController.text));
+                                },
+                            child: Text(
+                              rightButton,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 16.0, color: Theme.of(context).primaryColor),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // SizedBox(height: 10.0,),
+              ],
+            ),
           ),
         );
       },
