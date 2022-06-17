@@ -41,6 +41,9 @@ class DialogsPage extends StatelessWidget {
           ///  Dilemma MaterialDesign 黑夜样式
           _createDilemmaMaterialDesignDarkMode(context),
 
+          /// Status 状态弹窗
+          _createStatusMode(context),
+
           ListTile(
             leading: Icon(Icons.wb_incandescent_outlined),
             onTap: () {
@@ -66,32 +69,6 @@ class DialogsPage extends StatelessWidget {
             ),
             subtitle: Text(
               "需要用户选择，同意不同意，执行不执行的方式弹窗，交由用户的A/B选择",
-              maxLines: 2,
-              style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
-            ),
-          ),
-
-          /// Status
-          ListTile(
-            leading: Icon(Icons.wb_incandescent_outlined),
-            onTap: () {
-              DialogProvider.status(
-                context,
-                status: "SUCCESS",
-                statusIcon: Icon(
-                  Icons.where_to_vote_outlined,
-                  color: Colors.white,
-                  size: 48.0,
-                ),
-                description: "成功了，你想给点什么奖励，提示些什么，升级了的状态。写这里吧。",
-              );
-            },
-            title: Text(
-              "Status 弹窗模式(状态展示)",
-              maxLines: 1,
-            ),
-            subtitle: Text(
-              "操作成功后的弹窗，表示状态信息的。",
               maxLines: 2,
               style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
             ),
@@ -418,6 +395,37 @@ class DialogsPage extends StatelessWidget {
       ),
       subtitle: Text(
         "(两难选择,Material Design样式，标准Android风格)，需要用户选择，同意不同意，执行不执行的方式弹窗，交由用户的A/B选择",
+        style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
+      ),
+    );
+  }
+
+  ListTile _createStatusMode(BuildContext context) {
+    return ListTile(
+      leading: Icon(
+        Icons.wb_incandescent_outlined,
+        color: Colors.blue,
+      ),
+      onTap: () {
+        // 状态信息没有数据返回
+        DialogProvider.status(
+          context,
+          status: "SUCCESS",
+          statusIcon: Icon(
+            Icons.where_to_vote_outlined,
+            color: Colors.white,
+            size: 48.0,
+          ),
+          description: "成功了，你想给点什么奖励，提示些什么，升级了的状态。写这里吧。",
+        );
+      },
+      title: Text(
+        "Status 弹窗模式(状态展示)",
+        maxLines: 1,
+      ),
+      subtitle: Text(
+        "操作成功后的弹窗，表示状态信息的。",
+        maxLines: 2,
         style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
       ),
     );
