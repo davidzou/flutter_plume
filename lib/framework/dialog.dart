@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:plume/framework/container/ternary.dart';
 
 /// 统一圆角值
@@ -78,30 +79,33 @@ class DialogProvider {
   ///
   /// ### 参数    |参数名|描述|是否必须|
   ///
-  /// * context     上下文<Must>
-  /// * title       信息标题<Must>
-  /// * content     信息内容<Must>
-  /// * buttonName  按钮文字。
-  /// * onPressed   按钮点击事件响应。
-  /// * indent      排版，左边缩进的距离。
-  /// * dark        是否强制指定夜间模式或者白天模式，不设置使用系统默认。
+  /// * context                 上下文<Must>
+  /// * title                   信息标题<Must>
+  /// * content                 信息内容<Must>
+  /// * buttonName              按钮文字。
+  /// * onPressed               按钮点击事件响应。
+  /// * indent                  排版，左边缩进的距离。
+  /// * barrierDismissible      对话框空白区域点击关闭是否支持，默认支持点击空白区域可以关闭对话框。
+  /// * dark                    是否强制指定夜间模式或者白天模式，不设置使用系统默认。
   ///
-  static Future<T?> notice<T>(
+  static Future<DialogResult?> notice(
     BuildContext context, {
     required String title,
     required String content,
     String buttonName = "Got it",
-    VoidCallback? onPressed,
+    VoidCallback? onPressed, // 自定义回调按钮监听。
     double indent = 28,
+    bool barrierDismissible = true,
     bool? dark,
   }) {
     // 取宽，屏幕的72%用于对话框。
     double _width = MediaQuery.of(context).size.width * 0.72;
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
-    return showDialog<T>(
+    return showDialog<DialogResult>(
       context: context,
       // Color(0x9eB2EbF2) 忧郁蓝
       barrierColor: _dark ? Color(0xaa000000) : Color(0x9effffff),
+      barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
         return Dialog(
           backgroundColor: _dark ? Colors.black45 : Colors.white60,
@@ -159,7 +163,7 @@ class DialogProvider {
                   ),
                   onPressed: onPressed ??
                       () {
-                        Navigator.of(context).pop();
+                        Navigator.of(context).pop(DialogResult(status: true, code: 200));
                       },
                 ),
               )
@@ -257,21 +261,23 @@ class DialogProvider {
   /// * onTapedLeft       排版，左边缩进的距离。
   /// * dark              是否强制指定夜间模式或者白天模式，不设置使用系统默认。
   ///
-  static Future<T?> dilemma<T>(
+  static Future<DialogResult?> dilemma(
     BuildContext context, {
     required String title,
     required String content,
     String rightButton = "OK",
     String leftButton = "CANCEL",
     bool centerContent = false,
+    bool barrierDismissible = true,
     bool? dark,
     VoidCallback? onTapedRight,
     VoidCallback? onTapedLeft,
   }) {
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
     Color _fontColor = _dark ? Colors.white : Colors.black;
-    return showDialog<T>(
+    return showDialog<DialogResult>(
       context: context,
+      barrierDismissible: barrierDismissible,
       builder: (context) {
         return Dialog(
           backgroundColor: _dark ? Colors.black87 : Colors.white,
@@ -318,7 +324,10 @@ class DialogProvider {
                           child: Container(
                             alignment: Alignment.center,
                             child: TextButton(
-                              onPressed: onTapedLeft,
+                              onPressed: onTapedLeft ??
+                                  () {
+                                    Navigator.of(context).pop(DialogResult(status: false, code: 200));
+                                  },
                               child: Text(
                                 leftButton,
                                 textAlign: TextAlign.center,
@@ -337,7 +346,10 @@ class DialogProvider {
                           child: Container(
                             alignment: Alignment.center,
                             child: TextButton(
-                              onPressed: onTapedRight,
+                              onPressed: onTapedRight ??
+                                  () {
+                                    Navigator.of(context).pop(DialogResult(status: true, code: 200));
+                                  },
                               child: Text(
                                 rightButton,
                                 textAlign: TextAlign.center,
@@ -558,7 +570,7 @@ class DialogProvider {
   /// ### 用途
   /// * 提示内容，两难选择
   ///
-  static Future<T?> dilemmaMaterial<T>(
+  static Future<DialogResult?> dilemmaMaterial(
     BuildContext context, {
     required String title,
     required String content,
@@ -583,7 +595,7 @@ class DialogProvider {
       return TextStyle(color: _fontColor);
     }
 
-    return showDialog<T>(
+    return showDialog<DialogResult>(
       context: context,
       barrierDismissible: false,
       builder: (context) {
@@ -594,14 +606,20 @@ class DialogProvider {
           content: Text(content),
           actions: [
             TextButton(
-              onPressed: onTapedLeft,
+              onPressed: onTapedLeft ??
+                  () {
+                    Navigator.of(context).pop(DialogResult(status: false, code: 200));
+                  },
               child: Text(
                 leftButton,
                 style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Theme.of(context).primaryColor),
               ),
             ),
             TextButton(
-              onPressed: onTapedRight,
+              onPressed: onTapedRight ??
+                  () {
+                    Navigator.of(context).pop(DialogResult(status: true, code: 200));
+                  },
               child: Text(
                 rightButton,
                 style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Theme.of(context).primaryColor),
@@ -635,6 +653,13 @@ class DialogProvider {
     required Widget statusIcon,
     IconData? closeIcon,
     String? description,
+    List<Color> colors = const [
+      Color(0x9a03A9F4),
+      Color(0xFF651FFF),
+      Color(0x9a7C4DFF),
+    ],
+    Alignment begin = Alignment.topLeft,
+    Alignment end = Alignment.bottomRight,
   }) {
     return showDialog<T>(
       context: context,
@@ -649,13 +674,9 @@ class DialogProvider {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
                   gradient: LinearGradient(
-                    colors: [
-                      Color(0x9a03A9F4),
-                      Color(0xFF651FFF),
-                      Color(0x9a7C4DFF),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+                    colors: colors,
+                    begin: begin,
+                    end: end,
                   ),
                 ),
                 child: Column(
@@ -685,21 +706,74 @@ class DialogProvider {
                 ),
               ),
               Container(
-                  height: 24,
-                  alignment: Alignment.topRight,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.black54,
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Icon(
-                        closeIcon ?? Icons.close_rounded,
-                        color: Colors.white,
-                        size: 18.0,
-                      ),
+                height: 24,
+                alignment: Alignment.topRight,
+                child: CircleAvatar(
+                  backgroundColor: Colors.black54,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Icon(
+                      closeIcon ?? Icons.close_rounded,
+                      color: Colors.white,
+                      size: 18.0,
                     ),
-                  )),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  ///
+  /// 输入条件的回调对话框
+  ///
+  static Future<PromptResult?> prompt(
+    BuildContext context, {
+    required String title,
+  }) {
+    return showDialog<PromptResult?>(
+      context: context,
+      builder: (BuildContext context) {
+        TextEditingController editingController = TextEditingController();
+        return Dialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text("$title"),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: editingController,
+                  onEditingComplete: () {},
+                  onChanged: (String s) {
+                    editingController.text = s;
+                  },
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(PromptResult());
+                    },
+                    child: Text("Cancel"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      print(editingController.text);
+                      Navigator.of(context).pop(PromptResult(status: true, value: editingController.text));
+                    },
+                    child: Text("OK"),
+                  ),
+                ],
+              )
             ],
           ),
         );
@@ -788,6 +862,43 @@ class DialogProvider {
         return 3;
     }
     return 0;
+  }
+}
+
+/// 输入条件返回结果。
+class PromptResult {
+  PromptResult({this.status = false, this.value});
+
+  bool status;
+  String? value;
+}
+
+///
+/// 对话框返回结果对象定义。
+///
+/// @param status   状态，即确认取消状态。true为成功状态，即确定按钮的关闭等。
+/// @param code     状态码，不同操作返回的状态码定义。
+/// @param msg      返回的信息，一般日志等。
+/// @param data     返回的数据。
+///
+class DialogResult {
+  DialogResult({this.status = false, this.code, this.msg, this.data});
+
+  final bool status;
+  final int? code;
+  final String? msg;
+  final Object? data;
+
+  @override
+  String toString() {
+    return 'DialogResult{status: $status, code: $code, msg: $msg, data: $data}';
+  }
+}
+
+class CustomDialog {
+  ///
+  show<T>(BuildContext context, WidgetBuilder builder) {
+    return showDialog<T>(context: context, builder: builder);
   }
 }
 

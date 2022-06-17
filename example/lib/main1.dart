@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:plume/framework/builder/list_builder.dart';
 import 'package:plume/widget/counter.dart';
 import 'package:plume/widget/head.dart';
@@ -68,7 +69,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
               color: Colors.blueAccent,
               width: 80,
               child: TextField(
-                maxLengthEnforced: false,
+                maxLengthEnforcement: MaxLengthEnforcement.none,
                 enabled: false,
                 decoration: null,
                 controller: myController,
