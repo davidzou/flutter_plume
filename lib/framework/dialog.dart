@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:plume/framework/container/ternary.dart';
 
 /// 统一圆角值
@@ -254,12 +253,13 @@ class DialogProvider {
   ///
   /// ### 参数    |参数名|描述|是否必须|
   ///
-  /// * context           上下文<Must>
-  /// * title             信息标题<Must>
-  /// * centerContent     是否居中显示，默认不居中。
-  /// * onTapedRight      按钮点击事件响应。
-  /// * onTapedLeft       排版，左边缩进的距离。
-  /// * dark              是否强制指定夜间模式或者白天模式，不设置使用系统默认。
+  /// * context             上下文<Must>
+  /// * title               信息标题<Must>
+  /// * centerContent       是否居中显示，默认不居中。
+  /// * onTapedRight        按钮点击事件响应。
+  /// * onTapedLeft         排版，左边缩进的距离。
+  /// * dark                是否强制指定夜间模式或者白天模式，不设置使用系统默认。
+  /// * barrierDismissible  对话框空白区域点击关闭是否支持，默认支持点击空白区域可以关闭对话框。
   ///
   static Future<DialogResult?> dilemma(
     BuildContext context, {
@@ -641,11 +641,15 @@ class DialogProvider {
   ///
   /// ### 参数    |参数名|描述|是否必须|
   ///
-  /// * context           上下文<Must>
-  /// * status            表示状态的文字
-  /// * statusIcon        表示状态相对于的图标
-  /// * closeIcon         右上角关闭按钮的图标
-  /// * description       描述文字，用于表示状态获取后的描述。
+  /// * context               上下文<Must>
+  /// * status                表示状态的文字
+  /// * statusIcon            表示状态相对于的图标
+  /// * closeIcon             右上角关闭按钮的图标
+  /// * description           描述文字，用于表示状态获取后的描述。
+  /// * colors                渐变背景色
+  /// * begin                 渐变色起始位置
+  /// * end                   渐变色结束位置
+  /// * barrierDismissible    对话框空白区域点击关闭是否支持，默认支持点击空白区域可以关闭对话框。
   ///
   static Future<T?> status<T>(
     BuildContext context, {
@@ -660,9 +664,12 @@ class DialogProvider {
     ],
     Alignment begin = Alignment.topLeft,
     Alignment end = Alignment.bottomRight,
+    bool barrierDismissible = false,
+    VoidCallback? onTapClosed,
   }) {
     return showDialog<T>(
       context: context,
+      barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
         return Dialog(
           backgroundColor: Colors.transparent,
@@ -711,7 +718,7 @@ class DialogProvider {
                 child: CircleAvatar(
                   backgroundColor: Colors.black54,
                   child: InkWell(
-                    onTap: () {
+                    onTap: onTapClosed ?? () {
                       Navigator.of(context).pop();
                     },
                     child: Icon(
