@@ -44,8 +44,11 @@ class DialogsPage extends StatelessWidget {
           /// Status 状态弹窗
           _createStatusMode(context),
 
-          /// Prompt 输入条件弹窗（单个条件）
-          _createPromptDialog(context),
+          /// Prompt 输入条件弹窗白天模式（单个条件）
+          _createPromptLightDialog(context),
+
+          /// Prompt 输入条件弹窗黑夜模式（单个条件）
+          _createPromptDarkDialog(context),
 
           ListTile(
             leading: Icon(Icons.wb_incandescent_outlined),
@@ -403,7 +406,7 @@ class DialogsPage extends StatelessWidget {
     );
   }
 
-  ListTile _createPromptDialog(BuildContext context) {
+  ListTile _createPromptLightDialog(BuildContext context) {
     return ListTile(
       leading: Icon(
         Icons.wb_incandescent_outlined,
@@ -414,7 +417,7 @@ class DialogsPage extends StatelessWidget {
           context,
           title: "输入条件",
           label: "请输入",
-          dark: true,
+          dark: false,
         )
             .then(
               (value) {
@@ -425,7 +428,40 @@ class DialogsPage extends StatelessWidget {
             .whenComplete(() => print("complete!"));
       },
       title: Text(
-        "Prompt 弹窗模式(条件输入)",
+        "Prompt 弹窗白天模式(条件输入)",
+        maxLines: 1,
+      ),
+      subtitle: Text(
+        "操作成功后的弹窗，返回条件。",
+        maxLines: 2,
+        style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
+      ),
+    );
+  }
+
+  ListTile _createPromptDarkDialog(BuildContext context) {
+    return ListTile(
+      leading: Icon(
+        Icons.wb_incandescent_outlined,
+        color: Colors.lightBlueAccent,
+      ),
+      onTap: () {
+        DialogProvider.prompt(
+          context,
+          title: "输入条件",
+          label: "请输入",
+          dark: true,
+        )
+            .then(
+                (value) {
+              print("value: $value");
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("输入的内容为：${value!.data}")));
+            }
+        )
+            .whenComplete(() => print("complete!"));
+      },
+      title: Text(
+        "Prompt 弹窗黑夜模式(条件输入)",
         maxLines: 1,
       ),
       subtitle: Text(
