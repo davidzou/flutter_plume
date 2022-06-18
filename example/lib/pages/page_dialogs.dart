@@ -44,6 +44,9 @@ class DialogsPage extends StatelessWidget {
           /// Status 状态弹窗
           _createStatusMode(context),
 
+          /// Prompt 输入条件弹窗（单个条件）
+          _createPromptDialog(context),
+
           ListTile(
             leading: Icon(Icons.wb_incandescent_outlined),
             onTap: () {
@@ -97,37 +100,6 @@ class DialogsPage extends StatelessWidget {
             ),
             subtitle: Text(
               "操作成功后的弹窗，表示状态信息的。",
-              maxLines: 2,
-              style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
-            ),
-          ),
-
-          /// prompt输入内容。
-          ListTile(
-            leading: Icon(Icons.wb_incandescent_outlined),
-            onTap: () {
-              // DialogProvider.status(
-              //   context,
-              //   status: "SUCCESS",
-              //   statusIcon: Icon(
-              //     Icons.where_to_vote_outlined,
-              //     color: Colors.white,
-              //     size: 48.0,
-              //   ),
-              //   description: "成功了，你想给点什么奖励，提示些什么，升级了的状态。写这里吧。",
-              // );
-              DialogProvider.prompt(context, title: "title")
-                  .then(
-                    (value) => print("value: $value"),
-                  )
-                  .whenComplete(() => print("complete!"));
-            },
-            title: Text(
-              "Prompt 弹窗模式(条件输入)",
-              maxLines: 1,
-            ),
-            subtitle: Text(
-              "操作成功后的弹窗，返回条件。",
               maxLines: 2,
               style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
             ),
@@ -425,6 +397,39 @@ class DialogsPage extends StatelessWidget {
       ),
       subtitle: Text(
         "操作成功后的弹窗，表示状态信息的。",
+        maxLines: 2,
+        style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
+      ),
+    );
+  }
+
+  ListTile _createPromptDialog(BuildContext context) {
+    return ListTile(
+      leading: Icon(
+        Icons.wb_incandescent_outlined,
+        color: Colors.blue,
+      ),
+      onTap: () {
+        DialogProvider.prompt(
+          context,
+          title: "输入条件",
+          label: "请输入",
+          dark: true,
+        )
+            .then(
+              (value) {
+                print("value: $value");
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("输入的内容为：${value!.data}")));
+              }
+            )
+            .whenComplete(() => print("complete!"));
+      },
+      title: Text(
+        "Prompt 弹窗模式(条件输入)",
+        maxLines: 1,
+      ),
+      subtitle: Text(
+        "操作成功后的弹窗，返回条件。",
         maxLines: 2,
         style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
       ),

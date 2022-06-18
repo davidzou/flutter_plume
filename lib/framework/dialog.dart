@@ -775,13 +775,15 @@ class DialogProvider {
               padding: const EdgeInsets.only(top: 25.0, bottom: 10.0, left: 20.0, right: 20.0),
               child: Text(
                 title,
-                style: TextStyle(fontSize: 18.0, shadows: kElevationToShadow[4]),
+                style: TextStyle(fontSize: 18.0, shadows: kElevationToShadow[4], color: _dark ? Colors.white : Colors.black87,),
               ),
             ),
             content: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
               child: CustomTextInput(
                 label: label,
+                style: TextStyle(color: _dark ? Colors.white : Colors.black87,),
+                labelStyle: TextStyle(color: _dark ? Colors.white : Colors.black87,),
                 editingController: editingController,
               ),
             ),
@@ -935,9 +937,11 @@ class DialogProvider {
 }
 
 class CustomTextInput extends StatefulWidget {
-  const CustomTextInput({Key? key, this.label, required this.editingController}) : super(key: key);
+  const CustomTextInput({Key? key, this.label, this.style, this.labelStyle, required this.editingController}) : super(key: key);
 
   final String? label;
+  final TextStyle? style;
+  final TextStyle? labelStyle;
   final TextEditingController editingController;
 
   @override
@@ -962,6 +966,7 @@ class _CustomTextInputState extends State<CustomTextInput> {
       child: TextField(
         autofocus: true,
         controller: widget.editingController,
+        style: widget.style,
         onSubmitted: (String s) {
           // 监听回车键
           setState(() {
@@ -979,6 +984,7 @@ class _CustomTextInputState extends State<CustomTextInput> {
         },
         decoration: InputDecoration(
           labelText: widget.label,
+          labelStyle: widget.labelStyle,
           errorText: _getErrorText(),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Color(0xFF409EFF), width: 2.0),
