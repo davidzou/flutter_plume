@@ -1,6 +1,12 @@
 ChangeLog
 ======
 
+## [0.1.5-dev.3]
+
+* 修正Dialog中的UI布局，返回参数统一处理等。
+* 新增Prompt类型输入框条件弹出框。
+* 新增DialogResult数据模型作为Dialog返回数据对象。
+ 
 ## [0.1.5-dev.2]
 
 * 修正ListViewBuilder中参数height的设定
