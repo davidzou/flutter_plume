@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:plume/framework/container/ternary.dart';
 
 /// 统一圆角值
@@ -744,7 +743,12 @@ class DialogProvider {
   /// * title                 对话框标题
   /// * label                 输入框Label
   /// * textField             自定义输入框
+  /// * leftButton            左边按钮名称
+  /// * rightButton           右边按钮名称
+  /// * onTapedLeft           左边按钮点击事件，自定义处理。需注意返回的类型[DialogResult]
+  /// * onTapedRight          右边按钮点击事件，自定义处理。需注意返回的类型[DialogResult]
   /// * barrierDismissible    对话框空白区域点击关闭是否支持，默认支持点击空白区域可以关闭对话框。
+  /// * dark                  是否强制使用黑夜模式。
   ///
   static Future<DialogResult?> prompt(
     BuildContext context, {
@@ -756,7 +760,7 @@ class DialogProvider {
     VoidCallback? onTapedLeft,
     VoidCallback? onTapedRight,
     bool barrierDismissible = false,
-    bool? dark = false,
+    bool? dark,
   }) {
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
     return showDialog<DialogResult>(
