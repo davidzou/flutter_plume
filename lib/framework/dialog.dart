@@ -196,6 +196,7 @@ class DialogProvider {
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
     return showDialog(
       context: context,
+      barrierColor: _dark ? Color(0xaa000000) : Color(0x9effffff),
       builder: (context) {
         return Dialog(
           backgroundColor: _dark ? Colors.black45 : Colors.white24,
@@ -277,6 +278,7 @@ class DialogProvider {
     Color _fontColor = _dark ? Colors.white : Colors.black;
     return showDialog<DialogResult>(
       context: context,
+      barrierColor: _dark ? Color(0xaa000000) : Color(0x9effffff),
       barrierDismissible: barrierDismissible,
       builder: (context) {
         return Dialog(
@@ -364,6 +366,80 @@ class DialogProvider {
                   // SizedBox(height: 10.0,),
                 ],
               )),
+        );
+      },
+    );
+  }
+
+  ///
+  /// 两难选择模式，Android Material Design样式。
+  ///
+  /// ### 用途
+  /// * 提示内容，两难选择
+  ///
+  static Future<DialogResult?> dilemmaMaterial(
+    BuildContext context, {
+    required String title,
+    required String content,
+    String rightButton = "ACCEPT",
+    String leftButton = "CANCEL",
+    bool centerContent = false,
+    bool? dark,
+    VoidCallback? onTapedRight,
+    VoidCallback? onTapedLeft,
+  }) {
+    bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
+    Color _fontColor = _dark ? Colors.white : Colors.black;
+    TextStyle getTextStyle(Set<MaterialState> states) {
+      const Set<MaterialState> interactiveStates = <MaterialState>{
+        MaterialState.pressed,
+        MaterialState.hovered,
+        MaterialState.focused,
+      };
+      if (states.any(interactiveStates.contains)) {
+        return TextStyle(color: Color(0xFF6200EE));
+      }
+      return TextStyle(color: _fontColor);
+    }
+
+    return showDialog<DialogResult>(
+      context: context,
+      barrierColor: _dark ? Color(0xaa000000) : Color(0x9effffff),
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: _dark ? Colors.black87.withOpacity(0.8) : Colors.white70.withOpacity(0.8),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radiusValue)),
+          title: Text(
+            title,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: _dark ? Colors.white : Colors.black87),
+          ),
+          content: Text(
+            content,
+            style: TextStyle(color: _dark ? Colors.white : Colors.black87),
+          ),
+          actions: [
+            TextButton(
+              onPressed: onTapedLeft ??
+                  () {
+                    Navigator.of(context).pop(DialogResult(status: false, code: 200));
+                  },
+              child: Text(
+                leftButton,
+                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Theme.of(context).primaryColor),
+              ),
+            ),
+            TextButton(
+              onPressed: onTapedRight ??
+                  () {
+                    Navigator.of(context).pop(DialogResult(status: true, code: 200));
+                  },
+              child: Text(
+                rightButton,
+                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Theme.of(context).primaryColor),
+              ),
+            )
+          ],
         );
       },
     );
@@ -565,73 +641,6 @@ class DialogProvider {
   }
 
   ///
-  /// 两难选择模式，Android Material Design样式。
-  ///
-  /// ### 用途
-  /// * 提示内容，两难选择
-  ///
-  static Future<DialogResult?> dilemmaMaterial(
-    BuildContext context, {
-    required String title,
-    required String content,
-    String rightButton = "ACCEPT",
-    String leftButton = "CANCEL",
-    bool centerContent = false,
-    bool? dark,
-    VoidCallback? onTapedRight,
-    VoidCallback? onTapedLeft,
-  }) {
-    bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
-    Color _fontColor = _dark ? Colors.white : Colors.black;
-    TextStyle getTextStyle(Set<MaterialState> states) {
-      const Set<MaterialState> interactiveStates = <MaterialState>{
-        MaterialState.pressed,
-        MaterialState.hovered,
-        MaterialState.focused,
-      };
-      if (states.any(interactiveStates.contains)) {
-        return TextStyle(color: Color(0xFF6200EE));
-      }
-      return TextStyle(color: _fontColor);
-    }
-
-    return showDialog<DialogResult>(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: _dark ? Colors.black87.withOpacity(0.8) : Colors.white70.withOpacity(0.8),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radiusValue)),
-          title: Text(title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: _dark ? Colors.white : Colors.black87),),
-          content: Text(content, style: TextStyle(color: _dark ? Colors.white : Colors.black87),),
-          actions: [
-            TextButton(
-              onPressed: onTapedLeft ??
-                  () {
-                    Navigator.of(context).pop(DialogResult(status: false, code: 200));
-                  },
-              child: Text(
-                leftButton,
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Theme.of(context).primaryColor),
-              ),
-            ),
-            TextButton(
-              onPressed: onTapedRight ??
-                  () {
-                    Navigator.of(context).pop(DialogResult(status: true, code: 200));
-                  },
-              child: Text(
-                rightButton,
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Theme.of(context).primaryColor),
-              ),
-            )
-          ],
-        );
-      },
-    );
-  }
-
-  ///
   /// 状态栏，表示成功，失败，奖励等状态的提示
   ///
   /// ### 用途
@@ -779,15 +788,23 @@ class DialogProvider {
               padding: const EdgeInsets.only(top: 25.0, bottom: 10.0, left: 20.0, right: 20.0),
               child: Text(
                 title,
-                style: TextStyle(fontSize: 18.0, shadows: kElevationToShadow[4], color: _dark ? Colors.white : Colors.black87,),
+                style: TextStyle(
+                  fontSize: 18.0,
+                  shadows: kElevationToShadow[4],
+                  color: _dark ? Colors.white : Colors.black87,
+                ),
               ),
             ),
             content: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
               child: CustomTextInput(
                 label: label,
-                style: TextStyle(color: _dark ? Colors.white : Colors.black87,),
-                labelStyle: TextStyle(color: _dark ? Colors.white : Colors.black87,),
+                style: TextStyle(
+                  color: _dark ? Colors.white : Colors.black87,
+                ),
+                labelStyle: TextStyle(
+                  color: _dark ? Colors.white : Colors.black87,
+                ),
                 editingController: editingController,
               ),
             ),
