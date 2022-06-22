@@ -83,7 +83,7 @@ class TernaryContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double _width = MediaQuery.of(context).size.width * 72 / 100;
+    double _width = MediaQuery.of(context).size.width * 0.72;
     return Container(
       width: inDialog ? _width : null,
       child: _childBuild(),
