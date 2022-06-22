@@ -295,79 +295,81 @@ class DialogProvider {
           // insetAnimationCurve: Curves.easeInOutQuad,
           // insetAnimationDuration: Duration(milliseconds: 5000),
           child: TernaryContainer(
-              inDialog: true,
-              header: Container(
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.only(top: 25.0, bottom: 10.0),
-                  child: Text(
-                    title,
-                    style: TextStyle(color: _fontColor, fontSize: 18.0, shadows: kElevationToShadow[4]),
-                  )),
-              content: Container(
-                padding: EdgeInsets.only(top: 10.0, bottom: 20.0, left: 20.0, right: 10.0),
-                child: Text(
-                  content,
-                  textAlign: centerContent ? TextAlign.center : TextAlign.left,
-                  style: TextStyle(
-                    color: _fontColor,
-                  ),
+            inDialog: true,
+            header: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.only(top: 25.0, bottom: 10.0),
+              child: Text(
+                title,
+                style: TextStyle(color: _fontColor, fontSize: 20.0, shadows: kElevationToShadow[4]),
+              ),
+            ),
+            content: Container(
+              padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, left: 20.0, right: 10.0),
+              child: Text(
+                content,
+                textAlign: centerContent ? TextAlign.center : TextAlign.left,
+                style: TextStyle(
+                  color: _fontColor,
                 ),
               ),
-              footer: Column(
-                children: [
-                  Divider(
-                    color: Colors.grey,
-                    height: 2,
-                  ),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: TextButton(
-                              onPressed: onTapedLeft ??
-                                  () {
-                                    Navigator.of(context).pop(DialogResult(status: false, code: 200));
-                                  },
-                              child: Text(
-                                leftButton,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 16.0, color: Theme.of(context).primaryColor),
-                              ),
+            ),
+            footer: Column(
+              children: [
+                Divider(
+                  color: Colors.grey,
+                  height: 2,
+                ),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: TextButton(
+                            onPressed: onTapedLeft ??
+                                () {
+                                  Navigator.of(context).pop(DialogResult(status: false, code: 200));
+                                },
+                            child: Text(
+                              leftButton,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 16.0, color: Theme.of(context).primaryColor),
                             ),
                           ),
                         ),
-                        Container(
-                            height: 48,
-                            child: const VerticalDivider(
-                              color: Colors.grey,
-                              width: 2,
-                            )),
-                        Expanded(
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: TextButton(
-                              onPressed: onTapedRight ??
-                                  () {
-                                    Navigator.of(context).pop(DialogResult(status: true, code: 200));
-                                  },
-                              child: Text(
-                                rightButton,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 16.0, color: Theme.of(context).primaryColor),
-                              ),
+                      ),
+                      Container(
+                        height: 48,
+                        child: const VerticalDivider(
+                          color: Colors.grey,
+                          width: 2,
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: TextButton(
+                            onPressed: onTapedRight ??
+                                () {
+                                  Navigator.of(context).pop(DialogResult(status: true, code: 200));
+                                },
+                            child: Text(
+                              rightButton,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 16.0, color: Theme.of(context).primaryColor),
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  // SizedBox(height: 10.0,),
-                ],
-              )),
+                ),
+              ],
+            ),
+          ),
         );
       },
     );
@@ -416,11 +418,11 @@ class DialogProvider {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radiusValue)),
           title: Text(
             title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: _dark ? Colors.white : Colors.black87),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: _fontColor),
           ),
           content: Text(
             content,
-            style: TextStyle(color: _dark ? Colors.white : Colors.black87),
+            style: TextStyle(color: _fontColor),
           ),
           actions: [
             TextButton(
@@ -1016,7 +1018,7 @@ class _CustomTextInputState extends State<CustomTextInput> {
           if (s.isNotEmpty && _errorText != null) {
             // 第一次输入做以此检测，onSubmit
             setState(() {
-                _errorText = null;
+              _errorText = null;
             });
           }
         },
