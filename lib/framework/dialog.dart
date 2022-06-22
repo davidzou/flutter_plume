@@ -1013,7 +1013,12 @@ class _CustomTextInputState extends State<CustomTextInput> {
           });
         },
         onChanged: (String s) {
-          // editingController.text = s;
+          if (s.isNotEmpty && _errorText != null) {
+            // 第一次输入做以此检测，onSubmit
+            setState(() {
+                _errorText = null;
+            });
+          }
         },
         decoration: InputDecoration(
           labelText: widget.label,
