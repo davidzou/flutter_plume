@@ -275,14 +275,16 @@ class DialogProvider {
     VoidCallback? onTapedLeft,
   }) {
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
+    Color _barrierColor = _dark ? Color(0xaa000000) : Color(0x9effffff);
+    Color _backgroundColor = _dark ? Colors.black45 : Colors.white60;
     Color _fontColor = _dark ? Colors.white : Colors.black;
     return showDialog<DialogResult>(
       context: context,
-      barrierColor: _dark ? Color(0xaa000000) : Color(0x9effffff),
+      barrierColor: _barrierColor,
       barrierDismissible: barrierDismissible,
       builder: (context) {
         return Dialog(
-          backgroundColor: _dark ? Colors.black87 : Colors.white,
+          backgroundColor: _backgroundColor,
           // 对话框区域背景色
           elevation: 12.0,
           insetPadding: EdgeInsets.zero,
@@ -389,6 +391,8 @@ class DialogProvider {
     VoidCallback? onTapedLeft,
   }) {
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
+    Color _barrierColor = _dark ? Color(0xaa000000) : Color(0x9effffff);
+    Color _backgroundColor = _dark ? Colors.black45 : Colors.white60;
     Color _fontColor = _dark ? Colors.white : Colors.black;
     TextStyle getTextStyle(Set<MaterialState> states) {
       const Set<MaterialState> interactiveStates = <MaterialState>{
@@ -404,11 +408,11 @@ class DialogProvider {
 
     return showDialog<DialogResult>(
       context: context,
-      barrierColor: _dark ? Color(0xaa000000) : Color(0x9effffff),
+      barrierColor: _barrierColor,
       barrierDismissible: false,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: _dark ? Colors.black87.withOpacity(0.8) : Colors.white70.withOpacity(0.8),
+          backgroundColor: _backgroundColor,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radiusValue)),
           title: Text(
             title,
@@ -523,13 +527,14 @@ class DialogProvider {
   }) {
     double _width = MediaQuery.of(context).size.width * 72 / 100;
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
-    Color _fontColor = _dark ? Colors.white : Colors.black;
+    Color _barrierColor = _dark ? Color(0xaa000000) : Color(0x9effffff);
+    Color _backgroundColor = _dark ? Colors.black45 : Colors.white60;
     return showDialog<T>(
       context: context,
+      barrierColor: _barrierColor,
       builder: (context) {
         return Dialog(
-          backgroundColor: _dark ? Colors.black87 : Colors.white,
-          // backgroundColor: Colors.grey.withOpacity(0.1),
+          backgroundColor: _backgroundColor,
           // 对话框区域背景色
           elevation: 12.0,
           insetPadding: EdgeInsets.zero,
@@ -675,9 +680,14 @@ class DialogProvider {
     Alignment end = Alignment.bottomRight,
     bool barrierDismissible = false,
     VoidCallback? onTapClosed,
+    bool? dark,
   }) {
+    bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
+    Color _barrierColor = _dark ? Color(0xaa000000) : Color(0x9effffff);
+    Color _backgroundColor = _dark ? Colors.black45 : Colors.white60;
     return showDialog<T>(
       context: context,
+      barrierColor: _barrierColor,
       barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
         return Dialog(
@@ -772,13 +782,15 @@ class DialogProvider {
     bool? dark,
   }) {
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
+    Color _barrierColor = _dark ? Color(0xaa000000) : Color(0x9effffff);
+    Color _backgroundColor = _dark ? Colors.black45 : Colors.white60;
+    Color _fontColor = _dark ? Colors.white : Colors.black;
     return showDialog<DialogResult>(
       context: context,
-      barrierColor: _dark ? Color(0xaa000000) : Color(0x9effffff),
+      barrierColor: _barrierColor,
       barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
         TextEditingController editingController = TextEditingController();
-        Color _backgroundColor = _dark ? Colors.black45 : Colors.white60;
         return Dialog(
           backgroundColor: _backgroundColor,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -791,7 +803,7 @@ class DialogProvider {
                 style: TextStyle(
                   fontSize: 18.0,
                   shadows: kElevationToShadow[4],
-                  color: _dark ? Colors.white : Colors.black87,
+                  color: _fontColor,
                 ),
               ),
             ),
@@ -800,10 +812,10 @@ class DialogProvider {
               child: CustomTextInput(
                 label: label,
                 style: TextStyle(
-                  color: _dark ? Colors.white : Colors.black87,
+                  color: _fontColor,
                 ),
                 labelStyle: TextStyle(
-                  color: _dark ? Colors.white : Colors.black87,
+                  color: _fontColor,
                 ),
                 editingController: editingController,
               ),
