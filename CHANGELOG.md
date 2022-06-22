@@ -1,6 +1,11 @@
 ChangeLog
 ======
 
+## [0.1.5-dev.4]
+
+* 修正dialog中barrier color的颜色统一
+* 修正dialog中支持dark模式的设置统一
+ 
 ## [0.1.5-dev.3]
 
 * 修正Dialog中的UI布局，返回参数统一处理等。
