@@ -100,20 +100,23 @@ class DialogProvider {
     // 取宽，屏幕的72%用于对话框。
     double _width = MediaQuery.of(context).size.width * 0.72;
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
+    Color _barrierColor = _dark ? Color(0xaa000000) : Color(0x9effffff);
+    Color _backgroundColor = _dark ? Colors.black45 : Colors.white60;
+    Color _fontColor = _dark ? Colors.white : Colors.black;
     return showDialog<DialogResult>(
       context: context,
       // Color(0x9eB2EbF2) 忧郁蓝
-      barrierColor: _dark ? Color(0xaa000000) : Color(0x9effffff),
+      barrierColor: _barrierColor,
       barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
         return Dialog(
-          backgroundColor: _dark ? Colors.black45 : Colors.white60,
+          backgroundColor: _backgroundColor,
           // 对话框区域背景色
           elevation: 12.0,
           insetPadding: EdgeInsets.zero,
           clipBehavior: Clip.hardEdge,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18.0),
+          shape: const RoundedRectangleBorder(
+            borderRadius: _borderRadius
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -126,7 +129,7 @@ class DialogProvider {
                 padding: EdgeInsets.fromLTRB(indent, 28.0, 8.0, 8.0),
                 child: Text(
                   title,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: _dark ? Colors.white : Colors.black87),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: _fontColor),
                 ),
               ),
               SizedBox(
@@ -144,7 +147,7 @@ class DialogProvider {
                 padding: EdgeInsets.fromLTRB((indent + 8.0), 8.0, 8.0, 8.0),
                 child: Text(
                   content,
-                  style: TextStyle(color: _dark ? Colors.white : Colors.black87),
+                  style: TextStyle(color: _fontColor),
                 ),
               ),
               // button
@@ -182,10 +185,6 @@ class DialogProvider {
     BuildContext context, {
     required Widget title,
     required Widget content,
-    // Widget button = const ElevatedButton(
-    //   child: Text("Got it"),
-    //   onPressed: null,
-    // ),
     Widget? button,
     VoidCallback? onPressed,
     double indent = 28,
@@ -194,18 +193,21 @@ class DialogProvider {
     // 取宽，屏幕的60%用于对话框。
     double _width = MediaQuery.of(context).size.width * 0.72;
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
+    Color _barrierColor = _dark ? Color(0xaa000000) : Color(0x9effffff);
+    Color _backgroundColor = _dark ? Colors.black45 : Colors.white60;
+    // Color _fontColor = _dark ? Colors.white : Colors.black;
     return showDialog(
       context: context,
-      barrierColor: _dark ? Color(0xaa000000) : Color(0x9effffff),
+      barrierColor: _barrierColor,
       builder: (context) {
         return Dialog(
-          backgroundColor: _dark ? Colors.black45 : Colors.white24,
+          backgroundColor: _backgroundColor,
           // 对话框区域背景色
           elevation: 12.0,
           insetPadding: EdgeInsets.zero,
           clipBehavior: Clip.hardEdge,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18.0),
+          shape: const RoundedRectangleBorder(
+            borderRadius: _borderRadius,
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -289,8 +291,8 @@ class DialogProvider {
           elevation: 12.0,
           insetPadding: EdgeInsets.zero,
           clipBehavior: Clip.antiAlias,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18.0),
+          shape: const RoundedRectangleBorder(
+            borderRadius: _borderRadius,
           ),
           // insetAnimationCurve: Curves.easeInOutQuad,
           // insetAnimationDuration: Duration(milliseconds: 5000),
@@ -396,17 +398,17 @@ class DialogProvider {
     Color _barrierColor = _dark ? Color(0xaa000000) : Color(0x9effffff);
     Color _backgroundColor = _dark ? Colors.black45 : Colors.white60;
     Color _fontColor = _dark ? Colors.white : Colors.black;
-    TextStyle getTextStyle(Set<MaterialState> states) {
-      const Set<MaterialState> interactiveStates = <MaterialState>{
-        MaterialState.pressed,
-        MaterialState.hovered,
-        MaterialState.focused,
-      };
-      if (states.any(interactiveStates.contains)) {
-        return TextStyle(color: Color(0xFF6200EE));
-      }
-      return TextStyle(color: _fontColor);
-    }
+    // TextStyle getTextStyle(Set<MaterialState> states) {
+    //   const Set<MaterialState> interactiveStates = <MaterialState>{
+    //     MaterialState.pressed,
+    //     MaterialState.hovered,
+    //     MaterialState.focused,
+    //   };
+    //   if (states.any(interactiveStates.contains)) {
+    //     return TextStyle(color: Color(0xFF6200EE));
+    //   }
+    //   return TextStyle(color: _fontColor);
+    // }
 
     return showDialog<DialogResult>(
       context: context,
@@ -415,7 +417,7 @@ class DialogProvider {
       builder: (context) {
         return AlertDialog(
           backgroundColor: _backgroundColor,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radiusValue)),
+          shape: const RoundedRectangleBorder(borderRadius: _borderRadius),
           title: Text(
             title,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: _fontColor),
@@ -463,7 +465,6 @@ class DialogProvider {
     Color? dialogBackgroundColor,
     bool barrierDismissible = true, // 点击空白区域用作取消
   }) {
-    const _radius = const Radius.circular(18.0);
     return showDialog(
       context: context,
       barrierColor: barrierColor,
@@ -471,21 +472,16 @@ class DialogProvider {
       builder: (context) {
         return SimpleDialog(
           backgroundColor: dialogBackgroundColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: _radius,
-              topRight: Radius.circular(18.0),
-              bottomLeft: Radius.circular(18.0),
-              bottomRight: Radius.circular(18.0),
-            ),
+          shape: const RoundedRectangleBorder(
+            borderRadius: _borderRadius,
           ),
           title: Container(
             padding: EdgeInsets.all(18.0),
             child: title,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(18.0),
-                topRight: Radius.circular(18.0),
+              borderRadius: const BorderRadius.only(
+                topLeft: const Radius.circular(_radiusValue),
+                topRight: const Radius.circular(_radiusValue),
               ),
               color: titleBackgroundColor,
               boxShadow: kElevationToShadow[4],
@@ -541,7 +537,7 @@ class DialogProvider {
           elevation: 12.0,
           insetPadding: EdgeInsets.zero,
           clipBehavior: Clip.antiAlias,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
             borderRadius: _borderRadius,
           ),
           child: Container(
@@ -602,7 +598,7 @@ class DialogProvider {
                       Container(
                         height: 48,
                         decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(_radiusValue), bottomRight: Radius.circular(_radiusValue)),
+                          borderRadius: const BorderRadius.only(bottomLeft: const Radius.circular(_radiusValue), bottomRight: const Radius.circular(_radiusValue)),
                           color: Colors.orangeAccent.withOpacity(0.8),
                           boxShadow: kElevationToShadow[8],
                         ),
@@ -686,7 +682,7 @@ class DialogProvider {
   }) {
     bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
     Color _barrierColor = _dark ? Color(0xaa000000) : Color(0x9effffff);
-    Color _backgroundColor = _dark ? Colors.black45 : Colors.white60;
+    // Color _backgroundColor = _dark ? Colors.black45 : Colors.white60;
     return showDialog<T>(
       context: context,
       barrierColor: _barrierColor,
@@ -795,7 +791,7 @@ class DialogProvider {
         TextEditingController editingController = TextEditingController();
         return Dialog(
           backgroundColor: _backgroundColor,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+          shape: const RoundedRectangleBorder(borderRadius: _borderRadius),
           child: TernaryContainer(
             header: Container(
               alignment: Alignment.center,
@@ -902,8 +898,7 @@ class DialogProvider {
           return SimpleDialog(
             title: Text("title"),
             backgroundColor: Colors.white.withOpacity(0.8),
-            // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
+            shape: const RoundedRectangleBorder(borderRadius: _borderRadius),
             contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
             children: [
               // 选择列表
