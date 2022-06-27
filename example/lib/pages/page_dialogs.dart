@@ -267,13 +267,13 @@ class DialogsPage extends StatelessWidget {
       ),
       // 放截屏的缩略图
       trailing: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: 64, maxHeight: 64),
+        constraints: BoxConstraints(maxWidth: 128, maxHeight: 128),
         // child: Placeholder(
         //   color: Colors.grey,
         //   fallbackWidth: 64,
         //   fallbackHeight: 64,
         // ),
-        child: Image.asset("assets/images/dialog_dilemma_bright.png"),
+        child: Image.asset("assets/images/dialog_dilemma_cupertino_bright.png"),
       ),
       onTap: () {
         DialogProvider.dilemma(
@@ -314,13 +314,13 @@ class DialogsPage extends StatelessWidget {
       ),
       // 放截屏的缩略图
       trailing: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: 64, maxHeight: 64),
+        constraints: BoxConstraints(maxWidth: 128, maxHeight: 128),
         // child: Placeholder(
         //   color: Colors.grey,
         //   fallbackWidth: 64,
         //   fallbackHeight: 64,
         // ),
-        child: Image.asset("assets/images/dialog_dilemma_dark.png"),
+        child: Image.asset("assets/images/dialog_dilemma_cupertino_dark.png"),
       ),
       onTap: () {
         DialogProvider.dilemma(context, title: "title", content: "内容部分，你想展示些什么，或者你能选择什么，来拿出来！", dark: true,
@@ -349,6 +349,16 @@ class DialogsPage extends StatelessWidget {
       leading: Icon(
         Icons.wb_incandescent_outlined,
         color: Colors.lightBlueAccent,
+      ),
+      // 放截屏的缩略图
+      trailing: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: 128, maxHeight: 128),
+        // child: Placeholder(
+        //   color: Colors.grey,
+        //   fallbackWidth: 64,
+        //   fallbackHeight: 64,
+        // ),
+        child: Image.asset("assets/images/dialog_dilemma_matrial_bright.png"),
       ),
       onTap: () {
         DialogProvider.dilemmaMaterial(
@@ -382,6 +392,16 @@ class DialogsPage extends StatelessWidget {
       leading: Icon(
         Icons.wb_incandescent_outlined,
         color: Colors.cyanAccent,
+      ),
+      // 放截屏的缩略图
+      trailing: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: 128, maxHeight: 128),
+        // child: Placeholder(
+        //   color: Colors.grey,
+        //   fallbackWidth: 64,
+        //   fallbackHeight: 64,
+        // ),
+        child: Image.asset("assets/images/dialog_dilemma_matrial_dark.png"),
       ),
       onTap: () {
         DialogProvider.dilemmaMaterial(
