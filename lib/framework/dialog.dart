@@ -154,7 +154,7 @@ class DialogProvider {
               Container(
                 width: _width,
                 alignment: Alignment.centerRight,
-                padding: EdgeInsets.only(right: 8.0),
+                padding: const EdgeInsets.only(right: 8.0),
                 child: TextButton(
                   child: Text(
                     buttonName,
@@ -178,15 +178,14 @@ class DialogProvider {
 
   ///
   ///
-  ///
+  /// 自定义内容标题等，当时显示风格不变。
   /// Do not use it.
   /// TODO 扩展出内容，仅有布局框架。
-  Future<T?> noticeX<T>(
+  static Future<T?> noticeX<T>(
     BuildContext context, {
     required Widget title,
     required Widget content,
     Widget? button,
-    VoidCallback? onPressed,
     double indent = 28,
     bool? dark,
   }) {

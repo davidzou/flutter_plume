@@ -29,6 +29,8 @@ class DialogsPage extends StatelessWidget {
           /// Notice黑夜
           _createNoticeDarkMode(context),
 
+          _createNoticeX(context),
+
           /// Dilemma Cupertino白天
           _createDilemmaCupertinoLightMode(context),
 
@@ -224,6 +226,39 @@ class DialogsPage extends StatelessWidget {
     );
   }
 
+  ListTile _createNoticeX(BuildContext context) {
+    return ListTile(
+      leading: Icon(
+        Icons.wb_incandescent_outlined,
+        color: Colors.cyanAccent,
+      ),
+      // 放截屏的缩略图
+      trailing: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: 128, maxHeight: 128),
+        child: Image.asset("assets/images/dialog_notice_dark.png"),
+      ),
+      onTap: () {
+        DialogProvider.noticeX(
+          context,
+          title: Text("信息"),
+          content: Text("中国国家統計局が18日発表した2021年7～9月期の国内総生産（GDP）は、物価変動の影響を除いた実質で前年同期比4・9％増となった。6四半期連続のプラス成長だが、4～6月期（7・9％増）から大きく減速した。前期比でも0・2％増（4～6月期は1・2％増）と低調だった。"),
+          button: ElevatedButton(onPressed: (){}, child: Text("了解")),
+          indent: 28,
+          dark: false, // 强制为黑暗模式
+        ).then((value) => print("notice: $value"));
+      },
+      title: Text(
+        "Notice 自定义模式",
+        maxLines: 1,
+      ),
+      subtitle: Text(
+        "(通知或者告知类的信息), 标题加内容，以及一个知道了按钮事件。有白天和黑夜两种模式。",
+        style: TextStyle(color: Colors.blueGrey, fontSize: 11.0),
+      ),
+    );
+  }
+
+
   ListTile _createDilemmaCupertinoLightMode(BuildContext context) {
     return ListTile(
       leading: Icon(
@@ -255,7 +290,7 @@ class DialogsPage extends StatelessWidget {
           //   Navigator.of(context).pop();
           // },
         ).then((value) {
-          if (!value!.status) {
+          if (value != null && !(value.status)) {
             print(value);
           }
         });
