@@ -3,8 +3,6 @@ description: A new Flutter package project.
 version: 1.0.0
 homepage: https://github.com/davidzou
 publish_to: none
-authors:
-  - DavidZou
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

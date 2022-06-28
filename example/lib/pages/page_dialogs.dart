@@ -436,6 +436,16 @@ class DialogsPage extends StatelessWidget {
         Icons.wb_incandescent_outlined,
         color: Colors.blue,
       ),
+      // 放截屏的缩略图
+      trailing: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: 128, maxHeight: 128),
+        // child: Placeholder(
+        //   color: Colors.grey,
+        //   fallbackWidth: 64,
+        //   fallbackHeight: 64,
+        // ),
+        child: Image.asset("assets/images/dialog_status_bright.png"),
+      ),
       onTap: () {
         // 状态信息没有数据返回
         DialogProvider.status(
@@ -466,6 +476,16 @@ class DialogsPage extends StatelessWidget {
       leading: Icon(
         Icons.wb_incandescent_outlined,
         color: Colors.blue,
+      ),
+      // 放截屏的缩略图
+      trailing: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: 128, maxHeight: 128),
+        // child: Placeholder(
+        //   color: Colors.grey,
+        //   fallbackWidth: 64,
+        //   fallbackHeight: 64,
+        // ),
+        child: Image.asset("assets/images/dialog_prompt_bright.png"),
       ),
       onTap: () {
         DialogProvider.prompt(
@@ -499,6 +519,16 @@ class DialogsPage extends StatelessWidget {
       leading: Icon(
         Icons.wb_incandescent_outlined,
         color: Colors.lightBlueAccent,
+      ),
+      // 放截屏的缩略图
+      trailing: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: 128, maxHeight: 128),
+        // child: Placeholder(
+        //   color: Colors.grey,
+        //   fallbackWidth: 64,
+        //   fallbackHeight: 64,
+        // ),
+        child: Image.asset("assets/images/dialog_prompt_dark.png"),
       ),
       onTap: () {
         DialogProvider.prompt(
