@@ -222,8 +222,7 @@ class ImageButton extends StatelessWidget {
       this.top,
       this.bottom,
       this.onPressed})
-      : assert(title != null),
-        assert(
+      : assert(
             color == null || decoration == null,
             'Cannot provide both a color and a decoration\n'
             'To provide both, use "decoration: BoxDecoration(color: color)".'),

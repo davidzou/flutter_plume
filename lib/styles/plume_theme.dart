@@ -21,9 +21,11 @@ const defaultLetterSpacing = 0.03;
 
 const ColorScheme shrineColorScheme = ColorScheme(
   primary: shrinePink100,
-  primaryVariant: shrineBrown900,
+  // primaryVariant: shrineBrown900,
+  primaryContainer: shrineBrown900,
   secondary: shrineBrown900,
-  secondaryVariant: shrineBrown900,
+  // secondaryVariant: shrineBrown900,
+  secondaryContainer: shrineBrown900,
   surface: shrineSurfaceWhite,
   background: shrineBackgroundWhite,
   error: shrineErrorRed,
@@ -70,14 +72,12 @@ class DefaultThemes extends Themes {
   static ThemeData base() {
     final ThemeData base = ThemeData.light();
     return base.copyWith(
-      colorScheme: shrineColorScheme,
       toggleableActiveColor: shrinePink400,
-      accentColor: shrineBrown900,
       primaryColor: Colors.lightBlueAccent,
-      buttonColor: shrinePink100,
+      // buttonColor: shrinePink100,
       scaffoldBackgroundColor: shrineBackgroundWhite,
       cardColor: shrineBackgroundWhite,
-      textSelectionColor: shrinePink100,
+      // textSelectionColor: shrinePink100,
       errorColor: shrineErrorRed,
       buttonTheme: const ButtonThemeData(
         colorScheme: shrineColorScheme,
@@ -86,11 +86,11 @@ class DefaultThemes extends Themes {
       primaryIconTheme: _customIconTheme(base.iconTheme),
       textTheme: _buildShrineTextTheme(base.textTheme),
       primaryTextTheme: _buildShrineTextTheme(base.primaryTextTheme),
-      accentTextTheme: _buildShrineTextTheme(base.accentTextTheme),
+      // accentTextTheme: _buildShrineTextTheme(base.accentTextTheme),
       iconTheme: _customIconTheme(base.iconTheme),
       dialogTheme: DialogTheme(
         backgroundColor: shrinePink100,
-      ),
+      ), colorScheme: shrineColorScheme.copyWith(secondary: shrineBrown900),
     );
   }
 

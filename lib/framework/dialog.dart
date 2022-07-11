@@ -7,8 +7,13 @@ const double _radiusValue = 18.0;
 const BorderRadius _borderRadius = const BorderRadius.all(const Radius.circular(_radiusValue));
 
 ///
+/// 对话框提供者。
 ///
-///
+/// ### 类型
+/// 1. notice     通知型
+/// 2. dilemma    两难型
+/// 3. prompt     单条件输入型
+/// 4. status     状态型
 ///
 class DialogProvider {
   ///
@@ -71,12 +76,23 @@ class DialogProvider {
   ///
   /// 通知，公告。
   ///
-  /// ### 用途
+  /// ## 用途
+  ///
   /// * 提示信息
   /// * 展示内容
   /// * 展示说明
   ///
-  /// ### 参数    |参数名|描述|是否必须|
+  /// For example:
+  /// ```dart
+  ///   DialogProvider.notice(
+  ///     context,
+  ///     title: "通知",
+  ///     content: "Just told you.",
+  ///   );
+  /// ```
+  ///
+  /// ### 参数
+  /// |参数名|描述|是否必须|
   ///
   /// * context                 上下文<Must>
   /// * title                   信息标题<Must>
@@ -86,6 +102,9 @@ class DialogProvider {
   /// * indent                  排版，左边缩进的距离。
   /// * barrierDismissible      对话框空白区域点击关闭是否支持，默认支持点击空白区域可以关闭对话框。
   /// * dark                    是否强制指定夜间模式或者白天模式，不设置使用系统默认。
+  ///
+  /// ![](doc/images/dialog_notice_bright.png)
+  /// ![](doc/images/dialog_notice_dark.png)
   ///
   static Future<DialogResult?> notice(
     BuildContext context, {

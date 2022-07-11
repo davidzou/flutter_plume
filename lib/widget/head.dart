@@ -116,13 +116,13 @@ class HeadTitle extends StatelessWidget {
 
   List<Widget> _children(String title, String? subTitle) {
     List<Widget> list = [];
-    if (title != null) {
+    // if (title != null) {
       var tx = Text(
         title,
         style: titleStyle ?? _titleStyle(),
       );
       list.add(tx);
-    }
+    // }
     if (subTitle != null) {
       var subTx = Text(
         subTitle,

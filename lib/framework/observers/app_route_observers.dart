@@ -36,10 +36,10 @@ class AppRouteObserver {
   static final RouteObserver<ModalRoute<void>> _routeObserver =
       RouteObserver<ModalRoute<void>>();
 
-  static final AppRouteObserver _appRouteObserver =
-      AppRouteObserver._internal();
+  static final AppRouteObserver _appRouteObserver = AppRouteObserver._internal();
 
-  AppRouteObserver._internal() {}
+  AppRouteObserver._internal();
+
   //通过单例的get方法轻松获取路由监听器
   RouteObserver<ModalRoute<void>> get routeObserver {
     return _routeObserver;
