@@ -788,7 +788,7 @@ class DialogProvider {
   static Future<DialogResult?> prompt(
     BuildContext context, {
     required String title,
-    String? label = "输入需要的答案，确认并返回",
+    String? label,
     TextField? textField,
     String leftButton = "Cancel",
     String rightButton = "OK",
