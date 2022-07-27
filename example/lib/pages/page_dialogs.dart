@@ -497,7 +497,7 @@ class DialogsPage extends StatelessWidget {
             .then(
               (value) {
                 print("value: $value");
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("输入的内容为：${value!.data}")));
+                // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("输入的内容为：${value!.data}")));
               }
             )
             .whenComplete(() => print("complete!"));

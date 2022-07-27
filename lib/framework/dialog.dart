@@ -806,7 +806,8 @@ class DialogProvider {
       barrierColor: _barrierColor,
       barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
-        TextEditingController editingController = TextEditingController();
+        print("Dialog build....");
+        final TextEditingController editingController = TextEditingController();
         return Dialog(
           backgroundColor: _backgroundColor,
           shape: const RoundedRectangleBorder(borderRadius: _borderRadius),
@@ -1009,40 +1010,43 @@ class _CustomTextInputState extends State<CustomTextInput> {
   }
 
   @override
+  void dispose() {
+    widget.editingController.dispose();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      child: TextField(
-        autofocus: true,
-        controller: widget.editingController,
-        style: widget.style,
-        onSubmitted: (String s) {
-          // 监听回车键
-          setState(() {
-            if (s.isEmpty) {
-              _errorText = "不能为空";
-              print("isEmpty ");
-            } else {
-              print("isNotEmpty");
-              _errorText = null;
-            }
-          });
-        },
-        onChanged: (String s) {
-          if (s.isNotEmpty && _errorText != null) {
-            // 第一次输入做以此检测，onSubmit
-            setState(() {
-              _errorText = null;
-            });
+    return TextField(
+      autofocus: true,
+      controller: widget.editingController,
+      style: widget.style,
+      onSubmitted: (String s) {
+        // 监听回车键
+        setState(() {
+          if (s.isEmpty) {
+            _errorText = "不能为空";
+            // print("isEmpty ");
+          } else {
+            // print("isNotEmpty");
+            _errorText = null;
           }
-        },
-        decoration: InputDecoration(
-          labelText: widget.label,
-          labelStyle: widget.labelStyle,
-          errorText: _getErrorText(),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Color(0xFF409EFF), width: 2.0),
-            borderRadius: BorderRadius.circular(6.0),
-          ),
+        });
+      },
+      onChanged: (String s) {
+        if (s.isNotEmpty && _errorText != null) {
+          // 第一次输入做以此检测，onSubmit
+          setState(() {
+            _errorText = null;
+          });
+        }
+      },
+      decoration: InputDecoration(
+        labelText: widget.label,
+        labelStyle: widget.labelStyle,
+        errorText: _getErrorText(),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color(0xFF409EFF), width: 2.0),
+          borderRadius: BorderRadius.circular(6.0),
         ),
       ),
     );
