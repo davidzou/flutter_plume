@@ -19,9 +19,12 @@ dependencies:
   voice_label: ^1.0.3
   just_audio: ^0.9.20
 
+  cupertino_icons: 1.0.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -33,6 +36,7 @@ flutter:
   assets:
     - assets/audios/additive_name_1.mp3
     - assets/images/
+    - assets/bg/
   # To add assets to your package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

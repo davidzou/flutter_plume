@@ -134,9 +134,7 @@ class DialogProvider {
           elevation: 12.0,
           insetPadding: EdgeInsets.zero,
           clipBehavior: Clip.hardEdge,
-          shape: const RoundedRectangleBorder(
-            borderRadius: _borderRadius
-          ),
+          shape: const RoundedRectangleBorder(borderRadius: _borderRadius),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -902,6 +900,125 @@ class DialogProvider {
     );
   }
 
+  /// 表单
+  static Future<DialogResult<Map<String, Object?>?>?> form(
+    BuildContext context, {
+    required String title,
+    required List<FormField> children,  // 表单项FormField
+    String? label,
+    String leftButton = "Cancel",
+    String rightButton = "OK",
+    VoidCallback? onTapedLeft,
+    VoidCallback? onTapedRight,
+    bool barrierDismissible = false,
+    bool? dark,
+  }) {
+    bool _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
+    Color _barrierColor = _dark ? Color(0xaa000000) : Color(0x9effffff);
+    Color _backgroundColor = _dark ? Colors.black45 : Colors.white60;
+    Color _fontColor = _dark ? Colors.white : Colors.black;
+    final GlobalKey<FormState> _formKey = GlobalKey();
+    final Map<String, Object?> _strings = <String, Object?>{};
+    return showDialog<DialogResult<Map<String, Object?>?>>(
+      context: context,
+      barrierColor: _barrierColor,
+      barrierDismissible: barrierDismissible,
+      builder: (BuildContext context) {
+        print("Dialog build....");
+        return Dialog(
+          backgroundColor: _backgroundColor,
+          shape: const RoundedRectangleBorder(borderRadius: _borderRadius),
+          child: TernaryContainer(
+            header: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.only(top: 25.0, bottom: 10.0, left: 20.0, right: 20.0),
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 18.0,
+                  shadows: kElevationToShadow[4],
+                  color: _fontColor,
+                ),
+              ),
+            ),
+            content: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: children,
+                  ),
+                )),
+            footer: Column(
+              children: [
+                Divider(
+                  color: Colors.grey,
+                  height: 2,
+                ),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: TextButton(
+                            onPressed: onTapedLeft ??
+                                () {
+                                  Navigator.of(context).pop(DialogResult<Map<String, Object?>?>(status: false, code: 200));
+                                },
+                            child: Text(
+                              leftButton,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 16.0, color: Theme.of(context).primaryColor),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                          height: 48,
+                          child: const VerticalDivider(
+                            color: Colors.grey,
+                            width: 2,
+                          )),
+                      Expanded(
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: TextButton(
+                            onPressed: onTapedRight ??
+                                () {
+                                  // if (editingController.text.isEmpty) {
+                                  //   // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("右边的按钮被按到了")));
+                                  //   return;
+                                  // }
+                                  if (_formKey.currentState!.validate()) {
+                                    // Process data
+                                    _formKey.currentState!.save();
+                                    print(_strings);
+                                    Navigator.of(context).pop(DialogResult<Map<String, Object?>?>(status: true, code: 200, msg: "返回输入内容", data: _strings));
+                                  }
+                                },
+                            child: Text(
+                              rightButton,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 16.0, color: Theme.of(context).primaryColor),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // SizedBox(height: 10.0,),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   static Future<int> showDialogNormal(
     BuildContext context, {
     // required String status,
@@ -1003,6 +1120,15 @@ class _CustomTextInputState extends State<CustomTextInput> {
   @override
   void initState() {
     super.initState();
+    // widget.editingController.addListener(() {
+    //   final String text = widget.editingController.text.toLowerCase();
+    //   widget.editingController.value = widget.editingController.value.copyWith(
+    //     text: text,
+    //     selection:
+    //     TextSelection(baseOffset: text.length, extentOffset: text.length),
+    //     composing: TextRange.empty,
+    //   );
+    // });
   }
 
   _getErrorText() {
@@ -1014,6 +1140,7 @@ class _CustomTextInputState extends State<CustomTextInput> {
     widget.editingController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -1061,13 +1188,13 @@ class _CustomTextInputState extends State<CustomTextInput> {
 /// @param msg      返回的信息，一般日志等。
 /// @param data     返回的数据。
 ///
-class DialogResult {
+class DialogResult<T> {
   DialogResult({this.status = false, this.code, this.msg, this.data});
 
   final bool status;
   final int? code;
   final String? msg;
-  final Object? data;
+  final T? data;
 
   @override
   String toString() {

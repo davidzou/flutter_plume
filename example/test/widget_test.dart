@@ -7,12 +7,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:plumedemo/main1.dart';
+import 'package:plume/framework/dialogs/dialog_provider.dart';
+import 'package:plumedemo/pages/page_main_list.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(ExampleApp());
+    await tester.pumpWidget(MainListPage());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
@@ -25,5 +26,7 @@ void main() {
     // Verify that our counter has incremented.
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
+
+    // DialogProviderPlus(tester.)..addTextFormField()..addTextFormField();
   });
 }

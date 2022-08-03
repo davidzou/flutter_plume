@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plume/framework/dialog.dart';
+import 'package:plume/framework/dialogs/dialog_provider.dart';
 
 ///
 /// 自定义对话框
@@ -55,21 +56,56 @@ class DialogsPage extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.wb_incandescent_outlined),
             onTap: () {
-              DialogProvider.dilemmaX(
-                context,
-                delegate: SliverChildBuilderDelegate((context, index) {
-                  return Container();
-                }),
-                centerContent: false,
-                onTapedRight: () {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("右边的按钮被按到了")));
-                  Navigator.of(context).pop();
-                },
-                onTapedLeft: () {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("左边的按钮被按到了")));
-                  Navigator.of(context).pop();
-                },
-              );
+              // DialogProvider.dilemmaX(
+              //   context,
+              //   delegate: SliverChildBuilderDelegate((context, index) {
+              //     return Container();
+              //   }),
+              //   centerContent: false,
+              //   onTapedRight: () {
+              //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("右边的按钮被按到了")));
+              //     Navigator.of(context).pop();
+              //   },
+              //   onTapedLeft: () {
+              //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("左边的按钮被按到了")));
+              //     Navigator.of(context).pop();
+              //   },
+              // );
+
+              // DialogProviderPlus.login(context, backgroundImage: DecorationImage(image: AssetImage("assets/bg/login_bg7.jpeg"))).show(context).then((value) => print("value: $value"));
+              DialogProviderPlus(context)
+                ..addTextFormField(key: "key1")
+                ..addText(Text("我是分割的"))
+                ..addTextFormField(inputDecoration: InputDecoration(label: Text("用户名"), hintText: "输入用户名：", border: kOutLineInputBorder))
+                ..addText(Text("标题党"))
+                ..addTextFormField()
+                // ..addDropDownButton(key: "dropdown", values: ["String", "Double", "Integer", "Short"])
+                ..addDropDownButton(key: "dropdown", values: [1, 3, 4, 5, 7, 9])
+                ..show(context).then((value){
+                  print(value);
+                  print(value?.data!['key1']); // 获取数据
+                });
+              // DialogProvider.form(context, title: "form", children: [
+              //   TextFormField(
+              //     initialValue: "",
+              //     onSaved: (value) {},
+              //   ),
+              //   DropdownButtonFormField(
+              //     items: [
+              //       DropdownMenuItem(
+              //         child: Text("!"),
+              //         value: 1,
+              //       )
+              //     ],
+              //     onSaved: (value) {
+              //
+              //     },
+              //     value: 1,
+              //     onChanged: (v) {},
+              //   )
+              // ]).then((value) {
+              //   print(value);
+              // });
             },
             title: Text(
               "Dilemma 弹窗白天模式(两难选择,Cupertino风格)",
@@ -242,7 +278,7 @@ class DialogsPage extends StatelessWidget {
           context,
           title: Text("信息"),
           content: Text("中国国家統計局が18日発表した2021年7～9月期の国内総生産（GDP）は、物価変動の影響を除いた実質で前年同期比4・9％増となった。6四半期連続のプラス成長だが、4～6月期（7・9％増）から大きく減速した。前期比でも0・2％増（4～6月期は1・2％増）と低調だった。"),
-          button: ElevatedButton(onPressed: (){}, child: Text("了解")),
+          button: ElevatedButton(onPressed: () {}, child: Text("了解")),
           indent: 28,
           dark: false, // 强制为黑暗模式
         ).then((value) => print("notice: $value"));
@@ -257,7 +293,6 @@ class DialogsPage extends StatelessWidget {
       ),
     );
   }
-
 
   ListTile _createDilemmaCupertinoLightMode(BuildContext context) {
     return ListTile(
@@ -493,14 +528,10 @@ class DialogsPage extends StatelessWidget {
           title: "输入条件",
           label: "请输入",
           dark: false,
-        )
-            .then(
-              (value) {
-                print("value: $value");
-                // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("输入的内容为：${value!.data}")));
-              }
-            )
-            .whenComplete(() => print("complete!"));
+        ).then((value) {
+          print("value: $value");
+          // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("输入的内容为：${value!.data}")));
+        }).whenComplete(() => print("complete!"));
       },
       title: Text(
         "Prompt 弹窗白天模式(条件输入)",
@@ -536,14 +567,10 @@ class DialogsPage extends StatelessWidget {
           title: "输入条件",
           label: "请输入",
           dark: true,
-        )
-            .then(
-                (value) {
-              print("value: $value");
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("输入的内容为：${value!.data}")));
-            }
-        )
-            .whenComplete(() => print("complete!"));
+        ).then((value) {
+          print("value: $value");
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("输入的内容为：${value!.data}")));
+        }).whenComplete(() => print("complete!"));
       },
       title: Text(
         "Prompt 弹窗黑夜模式(条件输入)",
