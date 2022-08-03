@@ -139,12 +139,15 @@ class DialogProviderPlus {
   ///
   void addDropDownButton<T>({String? key, List<T>? values, DropMenuItemWidgetBuilder? builder}) {
     if (values == null || values.isEmpty) return;
-    T _currentValue = values.first;
+    T? _currentValue;
     _children.add(
       StatefulBuilder(builder: (context, StateSetter setState) {
         return DropdownButtonFormField<T>(
-          value: values.first,
-          // icon: Icon(Icons.safety_check),
+          value: _currentValue,
+          hint: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: const Text("请选择"),
+          ),
           items: values
               .map(
                 (e) => DropdownMenuItem<T>(
@@ -170,7 +173,6 @@ class DialogProviderPlus {
           },
           onSaved: (value) {
             maps[key ?? "field${maps.length}"] = value;
-            print("dropdown on saved.");
           },
           validator: (value) {
             if (value == null) {
