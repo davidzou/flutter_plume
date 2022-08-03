@@ -18,6 +18,7 @@ void main() {
       //   // unselectedWidgetColor: Colors.blue,
       // ),
       // theme: DefaultThemes.base(),
+      title: "Plume Demo",
       home: MainListPage(),
       routes: {
         // drawer
