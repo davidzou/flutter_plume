@@ -85,6 +85,7 @@ class DialogsPage extends StatelessWidget {
                 // ..setBackGroundGradient(LinearGradient(colors: [Colors.white70, Colors.redAccent, Colors.pinkAccent]))
                 // ..setBackgroundImage(DecorationImage(image: AssetImage("assets/bg/login_bg7.jpeg")))
                 ..show(context).then((value){
+                  if (value == null || !value.status) return;
                   print(value);
                   print(value?.data!['key1']); // 获取数据
                 });

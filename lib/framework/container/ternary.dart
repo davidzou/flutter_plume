@@ -54,7 +54,7 @@ class TernaryContainer extends StatelessWidget {
       crossAxisAlignment: crossAxisAlignment,
       children: [
         header,
-        content,
+        Flexible(child: content),
         footer,
       ],
     );
@@ -68,7 +68,7 @@ class TernaryContainer extends StatelessWidget {
       crossAxisAlignment: crossAxisAlignment,
       children: [
         header,
-        content,
+        Flexible(child: content),
         footer,
       ],
     );

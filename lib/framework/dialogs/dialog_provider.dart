@@ -88,9 +88,11 @@ class DialogProviderPlus {
     final OutlineInputBorder _focusedBorder = _outlineInputBorder.copyWith(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2.0));
     final OutlineInputBorder _enabledBorder = _outlineInputBorder.copyWith(borderSide: BorderSide(color: _borderEnableColor, width: 2.0));
     InputDecoration _defaultInputDecoration = InputDecoration(
+      labelText: "Label",   // 如果没有Lable，errorBorder就不是border
       labelStyle: _style,
       hintStyle: _style.copyWith(color: _hintColor),
       helperStyle: _style,
+      border: kOutLineInputBorder,
       focusedBorder: _focusedBorder,
       enabledBorder: _enabledBorder,
     );
@@ -168,9 +170,12 @@ class DialogProviderPlus {
           },
           onSaved: (value) {
             maps[key ?? "field${maps.length}"] = value;
+            print("dropdown on saved.");
           },
           validator: (value) {
-            print(value);
+            if (value == null) {
+              return "Select it value.";
+            }
             return null;
           },
         );
@@ -288,14 +293,11 @@ class DialogProviderPlus {
                   style: TextStyle(color: _textColor, fontWeight: FontWeight.bold, fontSize: 20, shadows: kElevationToShadow[4]),
                 ),
               ),
-              content: Container(
-                // height: _children.length > 2 ? 200 : null,
-                child: SingleChildScrollView(
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: _children,
-                    ),
+              content: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: _children,
                   ),
                 ),
               ),
