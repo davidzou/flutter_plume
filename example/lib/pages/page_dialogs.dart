@@ -73,39 +73,21 @@ class DialogsPage extends StatelessWidget {
               // );
 
               // DialogProviderPlus.login(context, backgroundImage: DecorationImage(image: AssetImage("assets/bg/login_bg7.jpeg"))).show(context).then((value) => print("value: $value"));
-              DialogProviderPlus(context)
+              DialogProviderPlus(context, dark: false)
                 ..addTextFormField(key: "key1")
-                ..addText(Text("我是分割的"))
+                // ..addText(Text("我是分割的"))
                 ..addTextFormField(inputDecoration: InputDecoration(label: Text("用户名"), hintText: "输入用户名：", border: kOutLineInputBorder))
-                ..addText(Text("标题党"))
+                // ..addText(Text("标题党"))
                 ..addTextFormField()
                 // ..addDropDownButton(key: "dropdown", values: ["String", "Double", "Integer", "Short"])
                 ..addDropDownButton(key: "dropdown", values: [1, 3, 4, 5, 7, 9])
+                // 设置图片背景
+                // ..setBackGroundGradient(LinearGradient(colors: [Colors.white70, Colors.redAccent, Colors.pinkAccent]))
+                // ..setBackgroundImage(DecorationImage(image: AssetImage("assets/bg/login_bg7.jpeg")))
                 ..show(context).then((value){
                   print(value);
                   print(value?.data!['key1']); // 获取数据
                 });
-              // DialogProvider.form(context, title: "form", children: [
-              //   TextFormField(
-              //     initialValue: "",
-              //     onSaved: (value) {},
-              //   ),
-              //   DropdownButtonFormField(
-              //     items: [
-              //       DropdownMenuItem(
-              //         child: Text("!"),
-              //         value: 1,
-              //       )
-              //     ],
-              //     onSaved: (value) {
-              //
-              //     },
-              //     value: 1,
-              //     onChanged: (v) {},
-              //   )
-              // ]).then((value) {
-              //   print(value);
-              // });
             },
             title: Text(
               "Dilemma 弹窗白天模式(两难选择,Cupertino风格)",

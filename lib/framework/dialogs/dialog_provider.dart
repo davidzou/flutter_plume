@@ -30,8 +30,10 @@ class DialogProviderPlus {
     // 这里初始化些什么
     _dark = dark ?? (Theme.of(context).brightness == Brightness.dark);
     _barrierColor = _dark ? kDarkBarrierColor : kLightBarrierColor;
-    _backgroundColor = _dark ? Colors.black45 : Colors.white70;
+    _backgroundColor = _dark ? Colors.black54 : Colors.white70;
     _textColor = _dark ? Colors.white : Colors.black87;
+    _borderEnableColor = _dark ? Colors.white54 : Colors.black54;
+    _hintColor = _dark ? Colors.white54 : Colors.black54;
   }
 
   /// 是否强制设置黑夜和白天模式
@@ -46,6 +48,8 @@ class DialogProviderPlus {
   Color _barrierColor = kLightBarrierColor;
   Color _backgroundColor = Colors.black45;
   Color _textColor = Colors.white;
+  Color _borderEnableColor = Colors.black45;
+  Color _hintColor = Colors.black45;
   Gradient? _gradient;
   DecorationImage? _image;
 
@@ -80,17 +84,34 @@ class DialogProviderPlus {
 
   /// 添加一个输入框表单项。
   void addTextFormField({String? key, InputDecoration? inputDecoration, TextInputType? inputType, bool? obscureText}) {
-    _children.add(Padding(
+    final TextStyle _style = TextStyle(color: _textColor);
+    final OutlineInputBorder _focusedBorder = _outlineInputBorder.copyWith(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2.0));
+    final OutlineInputBorder _enabledBorder = _outlineInputBorder.copyWith(borderSide: BorderSide(color: _borderEnableColor, width: 2.0));
+    InputDecoration _defaultInputDecoration = InputDecoration(
+      labelStyle: _style,
+      hintStyle: _style.copyWith(color: _hintColor),
+      helperStyle: _style,
+      focusedBorder: _focusedBorder,
+      enabledBorder: _enabledBorder,
+    );
+    if (inputDecoration != null) {
+      // 设置默认配色
+      _defaultInputDecoration = inputDecoration.copyWith(
+        labelStyle: _style,
+        hintStyle: _style.copyWith(color: _hintColor),
+        helperStyle: _style,
+        focusedBorder: _focusedBorder,
+        enabledBorder: _enabledBorder,
+      );
+    }
+    Widget _widget = Padding(
       padding: EdgeInsets.symmetric(vertical: 20.0),
       child: TextFormField(
         keyboardType: inputType,
+        style: _style,
         obscureText: obscureText ?? inputType == TextInputType.visiblePassword ? true : false,
         autofocus: true,
-        decoration: inputDecoration ??
-            const InputDecoration(
-              label: const Text("label"),
-              border: _outlineInputBorder,
-            ),
+        decoration: _defaultInputDecoration,
         validator: (value) {
           // 验证
           if (value == null || value.isEmpty) {
@@ -103,12 +124,20 @@ class DialogProviderPlus {
           print("onSaved");
         },
       ),
-    ));
+    );
+
+    _children.add(_widget);
   }
 
+  ///
+  /// ### 参数
+  /// * key       返回值[DialogResult].data的自定义键值，默认返回的是FormField所在列表中的下标（如：'field1'）。
+  /// * values    DropList的值，即被选择的值。String和int较为适用。
+  /// * builder   自定义构建，如MenuItem不满足需求时。
+  ///
   void addDropDownButton<T>({String? key, List<T>? values, DropMenuItemWidgetBuilder? builder}) {
     if (values == null || values.isEmpty) return;
-    T currentValue = values.first;
+    T _currentValue = values.first;
     _children.add(
       StatefulBuilder(builder: (context, StateSetter setState) {
         return DropdownButtonFormField<T>(
@@ -118,14 +147,23 @@ class DialogProviderPlus {
               .map(
                 (e) => DropdownMenuItem<T>(
                   value: e,
-                  child: builder == null ? Padding(padding: EdgeInsets.symmetric(horizontal: 10.0), child: Text("$e")) : builder.call(context, e),
+                  child: builder == null
+                      ? Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Text(
+                            "$e",
+                            style: TextStyle(color: _textColor),
+                          ))
+                      : builder.call(context, e),
                   onTap: () {},
                 ),
               )
               .toList(),
+          borderRadius: BorderRadius.circular(10.0),
+          dropdownColor: _backgroundColor,
           onChanged: (value) {
             setState(() {
-              currentValue = value!;
+              _currentValue = value!;
             });
           },
           onSaved: (value) {
@@ -140,7 +178,7 @@ class DialogProviderPlus {
     );
   }
 
-  addFo() {
+  addFoo() {
     // _children.add(
     //   InputDatePickerFormField(
     //     firstDate: DateTime.now().subtract(Duration(days: 30)),
@@ -152,14 +190,14 @@ class DialogProviderPlus {
     // );
   }
 
-  addChoiceFormField() {
-    print("choiceForm");
-    _children.add(ChoiceChip(
-      label: Text("label"),
-      selected: false,
-      onSelected: (v) {},
-    ));
-  }
+  // addChoiceFormField() {
+  //   print("choiceForm");
+  //   _children.add(ChoiceChip(
+  //     label: Text("label"),
+  //     selected: false,
+  //     onSelected: (v) {},
+  //   ));
+  // }
 
   /// 添加文本
   addText(Text text, {AlignmentGeometry? alignment}) {
@@ -247,7 +285,7 @@ class DialogProviderPlus {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   title ?? "Dialog",
-                  style: TextStyle(color: _textColor, fontWeight: FontWeight.bold, fontSize: 20),
+                  style: TextStyle(color: _textColor, fontWeight: FontWeight.bold, fontSize: 20, shadows: kElevationToShadow[4]),
                 ),
               ),
               content: Container(
@@ -279,7 +317,7 @@ class DialogProviderPlus {
             TextButton(
                 child: Text(
                   cancelButton ?? "Cancel",
-                  style: TextStyle(fontSize: 20, color: Colors.grey),
+                  style: TextStyle(fontSize: 20, color: _hintColor),
                 ),
                 onPressed: () {
                   Navigator.pop(
