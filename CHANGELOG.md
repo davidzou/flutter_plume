@@ -1,6 +1,10 @@
 ChangeLog
 ======
 
+## [0.1.5-dev.5]
+
+* 更新Dialog 新的方式支持，DialogProviderPlus
+
 ## [0.1.5-dev.4]
 
 * 修正dialog中barrier color的颜色统一
