@@ -13,6 +13,9 @@ const kDarkBarrierColor = const Color(0xaa000000);
 const kLightBarrierColor = const Color(0x9effffff);
 const kOutLineInputBorder = _outlineInputBorder;
 
+/// horizontal padding with value 10.0
+const kHorizontalPaddingTen = const EdgeInsets.symmetric(horizontal: 10.0);
+
 typedef DropMenuItemWidgetBuilder = Widget Function<T>(BuildContext context, T value);
 
 /// prompt, hint, notice, selector, multi_choice, form, status and more.
@@ -86,9 +89,10 @@ class DialogProviderPlus {
   void addTextFormField({String? key, InputDecoration? inputDecoration, TextInputType? inputType, bool? obscureText}) {
     final TextStyle _style = TextStyle(color: _textColor);
     final OutlineInputBorder _focusedBorder = _outlineInputBorder.copyWith(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2.0));
-    final OutlineInputBorder _enabledBorder = _outlineInputBorder.copyWith(borderSide: BorderSide(color: _borderEnableColor, width: 2.0));
+    final OutlineInputBorder _enabledBorder = _outlineInputBorder.copyWith(borderSide: BorderSide(color: _borderEnableColor));
     InputDecoration _defaultInputDecoration = InputDecoration(
-      labelText: "Label",   // 如果没有Lable，errorBorder就不是border
+      labelText: "Label",
+      // 如果没有Lable，errorBorder就不是roundborder
       labelStyle: _style,
       hintStyle: _style.copyWith(color: _hintColor),
       helperStyle: _style,
@@ -185,26 +189,101 @@ class DialogProviderPlus {
     );
   }
 
-  addFoo() {
-    // _children.add(
-    //   InputDatePickerFormField(
-    //     firstDate: DateTime.now().subtract(Duration(days: 30)),
-    //     lastDate: DateTime.now().add(Duration(days: 30)),
-    //     onDateSaved: (time) {
-    //       maps["time${maps.length}"] = time.toString();
-    //     },
-    //   ),
-    // );
+  addDivider() {
+    _children.add(Divider(color: _textColor, height: 1.0, thickness: 1.0, ));
   }
 
-  // addChoiceFormField() {
-  //   print("choiceForm");
-  //   _children.add(ChoiceChip(
-  //     label: Text("label"),
-  //     selected: false,
-  //     onSelected: (v) {},
-  //   ));
-  // }
+  /// 双数字选择，时间和分的选择，返回的数据是由分隔符'：'分割的。
+  addFoo({String? key, Widget? title}) {
+    var _currentValue;
+    // 下拉数字列表
+    List<int> _createNumList({int from = 0, int end = 100}) {
+      List<int> _list = <int>[];
+      for (int i = from; i <= end; i++) {
+        _list.add(i);
+      }
+      return _list;
+    }
+
+    final List<int> _hourValues = _createNumList(from: 0, end: 24);
+    final List<int> _minuteValues = _createNumList(end: 60);
+    // menu item
+    DropdownMenuItem<int> _createDropdownMenuItem(int value) {
+      return DropdownMenuItem<int>(
+        value: value,
+        alignment: Alignment.centerRight,
+        child: Padding(padding: kHorizontalPaddingTen, child: Text("$value", style: TextStyle(color: _textColor))),
+      );
+    }
+    final Widget _hint = Padding(
+      padding: kHorizontalPaddingTen,
+      child: const Text(
+        "请选择",
+        style: TextStyle(fontSize: 13.0),
+      ),
+    );
+
+    final InputDecoration _decoration = InputDecoration(
+      border: _outlineInputBorder,
+      // suffixText: "dd",
+      // alignLabelWithHint: true,
+    );
+
+    Widget _createDropdownButtonFormField(List<int> values, bool isHour) {
+      Duration _duration = Duration(hours: 0, minutes: 0);
+      return StatefulBuilder(builder: (context, StateSetter setState) {
+        return DropdownButtonFormField<int>(
+          value: _currentValue,
+          hint: _hint,
+          isExpanded: true,
+          items: values.map((e) => _createDropdownMenuItem(e)).toList(),
+          decoration: _decoration.copyWith(labelText: isHour ? "小时" : "分钟"),
+          borderRadius: BorderRadius.circular(10.0),
+          dropdownColor: _backgroundColor,
+          onTap: () {
+            print("value");
+          },
+          onChanged: (value) {
+            setState(() {
+              _currentValue = value!;
+            });
+          },
+          onSaved: (value) {
+            print("onSave $isHour, $value");
+            String? tmp = (maps[key ?? "field${maps.length}"] ?? "") as String;
+            if (tmp.isNotEmpty) {
+              tmp = "$tmp:";
+            }
+            maps[key ?? "field${maps.length}"] = "$tmp$value";
+          },
+          validator: (value) {
+            if (value == null) {
+              return "Select it value.";
+            }
+            return null;
+          },
+        );
+      });
+    }
+    // 时
+    final Widget _hours = _createDropdownButtonFormField(_hourValues, true);
+    // 分
+    final Widget _minutes = _createDropdownButtonFormField(_minuteValues, false);
+
+    final Widget _widget = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(padding: EdgeInsets.symmetric(vertical: 10.0), child: title ?? Text("计划耗费", style: TextStyle(color: _textColor, fontSize: 16.0, fontWeight: FontWeight.w400),)),
+        Row(
+          children: [
+            Expanded(child: Padding(padding: EdgeInsets.all(5.0), child: _hours)),
+            Expanded(child: Padding(padding: EdgeInsets.all(5.0), child: _minutes)),
+          ],
+        ),
+      ],
+    );
+    _children.add(_widget);
+  }
 
   /// 添加文本
   addText(Text text, {AlignmentGeometry? alignment}) {
@@ -337,4 +416,21 @@ class DialogProviderPlus {
       },
     );
   }
+}
+
+class CustomFormFiled extends FormField<String> {
+  CustomFormFiled()
+      : super(
+          builder: (field) {
+            return Container(
+              child: Text("d"),
+            );
+          },
+        );
+
+  @override
+  FormFieldSetter<String>? get onSaved => super.onSaved;
+
+  @override
+  FormFieldValidator<String>? get validator => super.validator;
 }
