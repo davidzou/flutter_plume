@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plume/framework/container/ternary.dart';
+import 'package:plume/framework/dialogs/dialog_result.dart';
 
 /// 统一圆角值
 ///
@@ -1061,28 +1062,28 @@ class _CustomTextInputState extends State<CustomTextInput> {
   }
 }
 
-///
-/// 对话框返回结果对象定义。
-///
-/// @param status   状态，即确认取消状态。true为成功状态，即确定按钮的关闭等。
-/// @param code     状态码，不同操作返回的状态码定义。
-/// @param msg      返回的信息，一般日志等。
-/// @param data     返回的数据。
-///
-@Deprecated("framework/dialogs/dialog_result.dart Instead it")
-class DialogResult<T> {
-  DialogResult({this.status = false, this.code, this.msg, this.data});
-
-  final bool status;
-  final int? code;
-  final String? msg;
-  final T? data;
-
-  @override
-  String toString() {
-    return 'DialogResult{status: $status, code: $code, msg: $msg, data: $data}';
-  }
-}
+// ///
+// /// 对话框返回结果对象定义。
+// ///
+// /// @param status   状态，即确认取消状态。true为成功状态，即确定按钮的关闭等。
+// /// @param code     状态码，不同操作返回的状态码定义。
+// /// @param msg      返回的信息，一般日志等。
+// /// @param data     返回的数据。
+// ///
+// @Deprecated("framework/dialogs/dialog_result.dart Instead it")
+// class DialogResult<T> {
+//   DialogResult({this.status = false, this.code, this.msg, this.data});
+//
+//   final bool status;
+//   final int? code;
+//   final String? msg;
+//   final T? data;
+//
+//   @override
+//   String toString() {
+//     return 'DialogResult{status: $status, code: $code, msg: $msg, data: $data}';
+//   }
+// }
 
 // class CustomDialog {
 //   ///

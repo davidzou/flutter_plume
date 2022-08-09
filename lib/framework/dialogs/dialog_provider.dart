@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plume/framework/container/ternary.dart';
-import 'package:plume/framework/dialog.dart';
+import 'package:plume/framework/dialogs/dialog_result.dart';
 
 /// 统一圆角值
 const double _radiusValue = 18.0;
@@ -141,13 +141,22 @@ class DialogProviderPlus {
   /// * values    DropList的值，即被选择的值。String和int较为适用。
   /// * builder   自定义构建，如MenuItem不满足需求时。
   ///
-  void addDropDownButton<T>({String? key, List<T>? values, DropMenuItemWidgetBuilder? builder}) {
+  void addDropDownButton<T>({
+    String? key,
+    List<T>? values,
+    T? defaultValue,
+    DropMenuItemWidgetBuilder? builder,
+  }) {
     if (values == null || values.isEmpty) return;
-    T? _currentValue;
+    T? _currentValue = defaultValue;
     _children.add(
       StatefulBuilder(builder: (context, StateSetter setState) {
         return DropdownButtonFormField<T>(
           value: _currentValue,
+          decoration: InputDecoration(
+            labelText: "label",
+            border: _outlineInputBorder,
+          ),
           hint: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: const Text("请选择"),
@@ -189,13 +198,29 @@ class DialogProviderPlus {
     );
   }
 
-  addDivider() {
-    _children.add(Divider(color: _textColor, height: 1.0, thickness: 1.0, ));
+  ///
+  /// 分割线
+  ///
+  addDivider({double? indent, double? endIndent, double vertical = 10.0}) {
+    _children.add(
+      Padding(
+        padding: EdgeInsets.symmetric(vertical: vertical),
+        child: Divider(
+          color: _textColor,
+          height: 1.0,
+          thickness: 1.0,
+          indent: indent,
+          endIndent: endIndent,
+        ),
+      ),
+    );
   }
 
+  ///
   /// 双数字选择，时间和分的选择，返回的数据是由分隔符'：'分割的。
-  addFoo({String? key, Widget? title}) {
-    var _currentValue;
+  ///
+  addHourMinutesSelector({String? key, Widget? title}) {
+    var _currentValue = 0;
     // 下拉数字列表
     List<int> _createNumList({int from = 0, int end = 100}) {
       List<int> _list = <int>[];
@@ -215,6 +240,7 @@ class DialogProviderPlus {
         child: Padding(padding: kHorizontalPaddingTen, child: Text("$value", style: TextStyle(color: _textColor))),
       );
     }
+
     final Widget _hint = Padding(
       padding: kHorizontalPaddingTen,
       child: const Text(
@@ -265,6 +291,7 @@ class DialogProviderPlus {
         );
       });
     }
+
     // 时
     final Widget _hours = _createDropdownButtonFormField(_hourValues, true);
     // 分
@@ -273,7 +300,13 @@ class DialogProviderPlus {
     final Widget _widget = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(padding: EdgeInsets.symmetric(vertical: 10.0), child: title ?? Text("计划耗费", style: TextStyle(color: _textColor, fontSize: 16.0, fontWeight: FontWeight.w400),)),
+        Padding(
+            padding: EdgeInsets.symmetric(vertical: 10.0),
+            child: title ??
+                Text(
+                  "计划耗费",
+                  style: TextStyle(color: _textColor, fontSize: 16.0, fontWeight: FontWeight.w400),
+                )),
         Row(
           children: [
             Expanded(child: Padding(padding: EdgeInsets.all(5.0), child: _hours)),
