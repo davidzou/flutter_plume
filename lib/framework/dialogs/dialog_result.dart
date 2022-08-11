@@ -8,7 +8,7 @@
 /// @param data     返回的数据。
 ///
 class DialogResult<T> {
-  DialogResult({required this.status, this.msg, required this.code, this.data});
+  const DialogResult({required this.status, this.msg, required this.code, this.data});
 
   factory DialogResult.success({String? msg, T? data}) {
     return DialogResult<T>(status: true, code: 200, msg: msg, data: data);

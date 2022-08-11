@@ -11,12 +11,13 @@ import 'package:plumedemo/pages/page_test.dart';
 void main() {
   runApp(
     MaterialApp(
-      // theme: ThemeData(
+      theme: ThemeData(
       //   primaryColor: MAIN_COLOR,
       //   primarySwatch: Colors.blue,
       //   visualDensity: VisualDensity.adaptivePlatformDensity,
       //   // unselectedWidgetColor: Colors.blue,
-      // ),
+        unselectedWidgetColor: Colors.white
+      ),
       // theme: DefaultThemes.base(),
       title: "Plume Demo",
       home: MainListPage(),

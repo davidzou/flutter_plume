@@ -80,12 +80,13 @@ class DialogsPage extends StatelessWidget {
                 // ..addText(Text("标题党"))
                 // ..addTextFormField()
                 // ..addDropDownButton(key: "dropdown", values: ["String", "Double", "Integer", "Short"])
-                ..addDropDownButton(key: "dropdown", values: [1, 3, 4, 5, 7, 9])
+                // ..addDropDownButton(key: "dropdown", values: [1, 3, 4, 5, 7, 9])
                 // 设置图片背景
                 // ..setBackGroundGradient(LinearGradient(colors: [Colors.white70, Colors.redAccent, Colors.pinkAccent]))
                 // ..setBackgroundImage(DecorationImage(image: AssetImage("assets/bg/login_bg7.jpeg")))
                 ..addDivider()
-                ..addHourMinutesSelector(key: "date",)
+                ..addCheckBox(key:  "custom")
+                // ..addHourMinutesSelector(key: "date",)
                 ..show(context).then((value){
                   if (value == null || !value.status) return;
                   print(value);
