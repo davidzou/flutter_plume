@@ -18,6 +18,8 @@ const kOutLineInputBorder = _outlineInputBorder;
 
 /// horizontal padding with value 10.0
 const kHorizontalPaddingTen = const EdgeInsets.symmetric(horizontal: 10.0);
+/// vertical padding with value 10.0
+const kVerticalPaddingTen = const EdgeInsets.symmetric(vertical: 10.0);
 
 typedef DropMenuItemWidgetBuilder = Widget Function<T>(BuildContext context, T value);
 
@@ -132,7 +134,7 @@ class DialogProviderPlus {
       );
     }
     Widget _widget = Padding(
-      padding: EdgeInsets.symmetric(vertical: 20.0),
+      padding: kVerticalPaddingTen,
       child: TextFormField(
         keyboardType: inputType,
         style: _style,
@@ -348,7 +350,7 @@ class DialogProviderPlus {
           label: label ??
               Text(
                 "checked",
-                style: TextStyle(color: _textColor),
+                // style: TextStyle(color: _textColor),
               ),
           onSaved: (value) {
             print("saved:$value");
@@ -558,9 +560,10 @@ class CheckFormFiled extends FormField<bool> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        label ?? Text(""),
+                        label ?? Text("", style: Theme.of(state.context).dialogTheme.contentTextStyle,),
                         Checkbox(
                           value: state.checkable,
+                          splashRadius: 5.0,
                           onChanged: (value) {
                             field.checkable = value!;
                           },

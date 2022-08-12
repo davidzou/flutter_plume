@@ -79,8 +79,9 @@ class DialogsPage extends StatelessWidget {
                 // ..addTextFormField(inputDecoration: InputDecoration(label: Text("用户名"), hintText: "输入用户名：", border: kOutLineInputBorder))
                 // ..addText(Text("标题党"))
                 // ..addTextFormField()
-                // ..addDropDownButton(key: "dropdown", values: ["String", "Double", "Integer", "Short"])
-                // ..addDropDownButton(key: "dropdown", values: [1, 3, 4, 5, 7, 9])
+                ..addDropDownButton(key: "dropdown", values: ["String", "Double", "Integer", "Short"])
+                ..addDivider()
+                ..addDropDownButton(key: "dropdown", values: [1, 3, 4, 5, 7, 9], labelText: "选择序列")
                 // 设置图片背景
                 // ..setBackGroundGradient(LinearGradient(colors: [Colors.white70, Colors.redAccent, Colors.pinkAccent]))
                 // ..setBackgroundImage(DecorationImage(image: AssetImage("assets/bg/login_bg7.jpeg")))
