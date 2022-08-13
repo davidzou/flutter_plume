@@ -23,6 +23,30 @@ const kVerticalPaddingTen = const EdgeInsets.symmetric(vertical: 10.0);
 
 typedef DropMenuItemWidgetBuilder = Widget Function<T>(BuildContext context, T value);
 
+
+/// 对话框类型
+enum DialogType {
+  ///
+  /// 通知类型
+  ///
+  notice,
+
+  ///
+  /// 单条件输入类型
+  ///
+  prompt,
+
+  ///
+  /// 状态类型
+  ///
+  status,
+
+  ///
+  /// form表单类型
+  ///
+  form,
+}
+
 ///
 /// prompt, hint, notice, selector, multi_choice, form, status and more.
 ///
@@ -485,6 +509,7 @@ class DialogProviderPlus {
                   ),
                 ),
                 actions: [
+                  // Action 没有 Cupertino和materialdesign的区分，会自动区分
                   TextButton(
                     child: Text(
                       okButton ?? "Ok",
