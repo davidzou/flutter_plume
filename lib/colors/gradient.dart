@@ -167,6 +167,183 @@ const List gradients = const [
   Shahabi,
   Alihossein,
   Ali,
+  PurpleWhite,
+  ColorsOfSky,
+  Decent,
+  DeepSpace,
+  DarkSkies,
+  Suzy,
+  Superman,
+  Nighthawk,
+  Forest,
+  MiamiDolphins,
+  MinnesotaVikings,
+  Christmas,
+  Joomla,
+  Pizelex,
+  Haikus,
+  PaleWood,
+  Purplin,
+  Inbox,
+  Blush,
+  BackToTheFuture,
+  Pancho,
+  GreenAndBlue,
+  LightOrange,
+  Netflix,
+  LittleLeaf,
+  DeepPurple,
+  BackToEarth,
+  MasterCard,
+  ClearSky,
+  Passion,
+  Timber,
+  BetweenNightAndDay,
+  SagePersuasion,
+  Lizard,
+  Piglet,
+  DarkKnight,
+  CuriosityBlue,
+  Ukraine,
+  GreenToDark,
+  FreshTurboscent,
+  KokoCaramel,
+  VirginAmerica,
+  Portrait,
+  TurquoiseFlow,
+  Vine,
+  Flickr,
+  Instagram,
+  Atlas,
+  Twitch,
+  PastelOrangeAtTheSun,
+  EndlessRiver,
+  Predawn,
+  PurpleBliss,
+  TalkingToMiceElf,
+  Hersheys,
+  CrazyOrangeI,
+  BetweenTheClouds,
+  MetallicToad,
+  Martini,
+  Friday,
+  ServQuick,
+  Behongo,
+  SoundCloud,
+  FacebookMessenger,
+  Shore,
+  CheerUpEmoKid,
+  Amethyst,
+  ManOfSteel,
+  NeonLife,
+  TealLove,
+  RedMist,
+  Starfall,
+  DanceToForget,
+  ParkLife,
+  CherryBlossoms,
+  Ash,
+  Virgin,
+  Earthly,
+  DirtyFog,
+  TheStrain,
+  Reef,
+  Candy,
+  Autumn,
+  Nelson,
+  Winter,
+  ForeverLost,
+  Almost,
+  Moor,
+  Aqualicious,
+  MistyMeadow,
+  Kyoto,
+  SiriusTamed,
+  Jonquil,
+  Petrichor,
+  ALostMemory,
+  Vasily,
+  BlurryBeach,
+  Namn,
+  DayTripper,
+  PinotNoir,
+  Miaka,
+  Army,
+  Shrimpy,
+  Influenza,
+  CalmDarya,
+  Bourbon,
+  Stellar,
+  Clouds,
+  Moonrise,
+  Peach,
+  Dracula,
+  Mantle,
+  Titanium,
+  Opa,
+  SeaBlizz,
+  MidnightCity,
+  Mystic,
+  ShroomHaze,
+  Moss,
+  BoraBora,
+  VeniceBlue,
+  ElectricViolet,
+  Kashmir,
+  SteelGray,
+  Mirage,
+  JuicyOrange,
+  Mojito,
+  Cherry,
+  Pinky,
+  SeaWeed,
+  Stripe,
+  PurpleParadise,
+  Sunrise,
+  AquaMarine,
+  Aubergine,
+  BloodyMary,
+  MangoPulp,
+  Frozen,
+  RoseWater,
+  Horizon,
+  MonteCarlo,
+  LemonTwist,
+  EmeraldWater,
+  IntuitivePurple,
+  GreenBeach,
+  PlayingWithReds,
+  HarmonicEnergy,
+  CoolBrown,
+  YouTube,
+  NoonToDusk,
+  Hazel,
+  Nimvelo,
+  SeaBlue,
+  Booker20,
+  SexyBlue,
+  PurpleLove,
+  DIMIGO,
+  Skyline,
+  Sel,
+  Sky,
+  Petrol,
+  Anamnisar,
+  Copper,
+  RoyalBlueWithPetrol,
+  RoyalBlue,
+  Windy,
+  Rea,
+  Bupe,
+  Mango,
+  Reaqua,
+  Lunada,
+  BlueLagoo,
+  Anwar,
+  Combi,
+  VerBlack,
+  Ver,
+  Blu,
 ];
 
 // 渐变配色
@@ -326,7 +503,6 @@ const List<Color> RedOcean = const <Color>[Color(0xff1d4350), Color(0xffa43931)]
 const List<Color> Shahabi = const <Color>[Color(0xffa80077), Color(0xff2f0743)];
 const List<Color> Alihossein = const <Color>[Color(0xfff7ff00), Color(0xffdb36a4)];
 const List<Color> Ali = const <Color>[Color(0xffff4b1f), Color(0xff1fddff)];
-
 const List<Color> PurpleWhite = const <Color>[Color(0xffba5370), Color(0xfff4e2d8)];
 const List<Color> ColorsOfSky = const <Color>[Color(0xffe0eafc), Color(0xffcfdef3)];
 const List<Color> Decent = const <Color>[Color(0xff4ca1af), Color(0xffc4e0e5)];
@@ -335,3 +511,172 @@ const List<Color> DarkSkies = const <Color>[Color(0xff4b79a1), Color(0xff283e51)
 const List<Color> Suzy = const <Color>[Color(0xff834d9b), Color(0xffd04ed6)];
 const List<Color> Superman = const <Color>[Color(0xff0099f7), Color(0xfff11712)];
 const List<Color> Nighthawk = const <Color>[Color(0xff2980b9), Color(0xff2c3e50)];
+const List<Color> Forest = const <Color>[Color(0xff5a3f37), Color(0xff2c7744)];
+const List<Color> MiamiDolphins = const <Color>[Color(0xff4da0b0), Color(0xffd39d38)];
+const List<Color> MinnesotaVikings = const <Color>[Color(0xff5614b0), Color(0xffdbd65c)];
+const List<Color> Christmas = const <Color>[Color(0xff2f7336), Color(0xffaa3a38)];
+const List<Color> Joomla = const <Color>[Color(0xff1e3c72), Color(0xff2a5298)];
+const List<Color> Pizelex = const <Color>[Color(0xff114357), Color(0xfff29492)];
+const List<Color> Haikus = const <Color>[Color(0xfffd746c), Color(0xffff9068)];
+const List<Color> PaleWood = const <Color>[Color(0xffeacda3), Color(0xffd6ae7b)];
+const List<Color> Purplin = const <Color>[Color(0xff6a3093), Color(0xffa044ff)];
+const List<Color> Inbox = const <Color>[Color(0xff457fca), Color(0xff5691c8)];
+const List<Color> Blush = const <Color>[Color(0xffb24592), Color(0xfff15f79)];
+const List<Color> BackToTheFuture = const <Color>[Color(0xffc02425), Color(0xfff0cb35)];
+const List<Color> Pancho = const <Color>[Color(0xff403a3e), Color(0xffbe5869)];
+const List<Color> GreenAndBlue = const <Color>[Color(0xffc2e59c), Color(0xff64b3f4)];
+const List<Color> LightOrange = const <Color>[Color(0xffffb75e), Color(0xffed8f03)];
+const List<Color> Netflix = const <Color>[Color(0xff8e0e00), Color(0xff1f1c18)];
+const List<Color> LittleLeaf = const <Color>[Color(0xff76b852), Color(0xff8dc26f)];
+const List<Color> DeepPurple = const <Color>[Color(0xff673ab7), Color(0xff512da8)];
+const List<Color> BackToEarth = const <Color>[Color(0xff00c9ff), Color(0xff92fe9d)];
+const List<Color> MasterCard = const <Color>[Color(0xfff46b45), Color(0xffeea849)];
+const List<Color> ClearSky = const <Color>[Color(0xff005c97), Color(0xff363795)];
+const List<Color> Passion = const <Color>[Color(0xffe53935), Color(0xffe35d5b)];
+const List<Color> Timber = const <Color>[Color(0xfffc00ff), Color(0xff00dbde)];
+const List<Color> BetweenNightAndDay = const <Color>[Color(0xff2c3e50), Color(0xff3498db)];
+const List<Color> SagePersuasion = const <Color>[Color(0xffccccb2), Color(0xff757519)];
+const List<Color> Lizard = const <Color>[Color(0xff304352), Color(0xffd7d2cc)];
+const List<Color> Piglet = const <Color>[Color(0xffee9ca7), Color(0xffffdde1)];
+const List<Color> DarkKnight = const <Color>[Color(0xffba8b02), Color(0xff181818)];
+const List<Color> CuriosityBlue = const <Color>[Color(0xff525252), Color(0xff3d72b4)];
+const List<Color> Ukraine = const <Color>[Color(0xff004ff9), Color(0xfffff94c)];
+const List<Color> GreenToDark = const <Color>[Color(0xff6a9113), Color(0xff141517)];
+const List<Color> FreshTurboscent = const <Color>[Color(0xfff1f2b5), Color(0xff135058)];
+const List<Color> KokoCaramel = const <Color>[Color(0xffd1913c), Color(0xffffd194)];
+const List<Color> VirginAmerica = const <Color>[Color(0xff7b4397), Color(0xffdc2430)];
+const List<Color> Portrait = const <Color>[Color(0xff8e9eab), Color(0xffeef2f3)];
+const List<Color> TurquoiseFlow = const <Color>[Color(0xff136a8a), Color(0xff267871)];
+const List<Color> Vine = const <Color>[Color(0xff00bf8f), Color(0xff001510)];
+const List<Color> Flickr = const <Color>[Color(0xffff0084), Color(0xff33001b)];
+const List<Color> Instagram = const <Color>[Color(0xff833ab4), Color(0xfffd1d1d), Color(0xfffcb045)];
+const List<Color> Atlas = const <Color>[Color(0xfffeac5e), Color(0xffc779d0), Color(0xff4bc0c8)];
+const List<Color> Twitch = const <Color>[Color(0xff6441a5), Color(0xff2a0845)];
+const List<Color> PastelOrangeAtTheSun = const <Color>[Color(0xffffb347), Color(0xffffcc33)];
+const List<Color> EndlessRiver = const <Color>[Color(0xff43cea2), Color(0xff185a9d)];
+const List<Color> Predawn = const <Color>[Color(0xffffa17f), Color(0xff00223e)];
+const List<Color> PurpleBliss = const <Color>[Color(0xff360033), Color(0xff0b8793)];
+const List<Color> TalkingToMiceElf = const <Color>[Color(0xff948e99), Color(0xff2e1437)];
+const List<Color> Hersheys = const <Color>[Color(0xff1e130c), Color(0xff9a8478)];
+const List<Color> CrazyOrangeI = const <Color>[Color(0xffd38312), Color(0xffa83279)];
+const List<Color> BetweenTheClouds = const <Color>[Color(0xff73c8a9), Color(0xff373b44)];
+const List<Color> MetallicToad = const <Color>[Color(0xffabbaab), Color(0xffffffff)];
+const List<Color> Martini = const <Color>[Color(0xfffdfc47), Color(0xff24fe41)];
+const List<Color> Friday = const <Color>[Color(0xff83a4d4), Color(0xffb6fbff)];
+const List<Color> ServQuick = const <Color>[Color(0xff485563), Color(0xff29323c)];
+const List<Color> Behongo = const <Color>[Color(0xff52c234), Color(0xff061700)];
+const List<Color> SoundCloud = const <Color>[Color(0xfffe8c00), Color(0xfff83600)];
+const List<Color> FacebookMessenger = const <Color>[Color(0xff00c6ff), Color(0xff0072ff)];
+const List<Color> Shore = const <Color>[Color(0xff70e1f5), Color(0xffffd194)];
+const List<Color> CheerUpEmoKid = const <Color>[Color(0xff556270), Color(0xffff6b6b)];
+const List<Color> Amethyst = const <Color>[Color(0xff9d50bb), Color(0xff6e48aa)];
+const List<Color> ManOfSteel = const <Color>[Color(0xff780206), Color(0xff061161)];
+const List<Color> NeonLife = const <Color>[Color(0xffb3ffab), Color(0xff12fff7)];
+const List<Color> TealLove = const <Color>[Color(0xffaaffa9), Color(0xff11ffbd)];
+const List<Color> RedMist = const <Color>[Color(0xff000000), Color(0xffe74c3c)];
+const List<Color> Starfall = const <Color>[Color(0xfff0c27b), Color(0xff4b1248)];
+const List<Color> DanceToForget = const <Color>[Color(0xffff4e50), Color(0xfff9d423)];
+const List<Color> ParkLife = const <Color>[Color(0xffadd100), Color(0xff7b920a)];
+const List<Color> CherryBlossoms = const <Color>[Color(0xfffbd3e9), Color(0xffbb377d)];
+const List<Color> Ash = const <Color>[Color(0xff606c88), Color(0xff3f4c6b)];
+const List<Color> Virgin = const <Color>[Color(0xffc9ffbf), Color(0xffffafbd)];
+const List<Color> Earthly = const <Color>[Color(0xff649173), Color(0xffdbd5a4)];
+const List<Color> DirtyFog = const <Color>[Color(0xffb993d6), Color(0xff8ca6db)];
+const List<Color> TheStrain = const <Color>[Color(0xff870000), Color(0xff190a05)];
+const List<Color> Reef = const <Color>[Color(0xff00d2ff), Color(0xff3a7bd5)];
+const List<Color> Candy = const <Color>[Color(0xffd3959b), Color(0xffbfe6ba)];
+const List<Color> Autumn = const <Color>[Color(0xffdad299), Color(0xffb0dab9)];
+const List<Color> Nelson = const <Color>[Color(0xfff2709c), Color(0xffff9472)];
+const List<Color> Winter = const <Color>[Color(0xffe6dada), Color(0xff274046)];
+const List<Color> ForeverLost = const <Color>[Color(0xff5d4157), Color(0xffa8caba)];
+const List<Color> Almost = const <Color>[Color(0xffddd6f3), Color(0xfffaaca8)];
+const List<Color> Moor = const <Color>[Color(0xff616161), Color(0xff9bc5c3)];
+const List<Color> Aqualicious = const <Color>[Color(0xff50c9c3), Color(0xff96deda)];
+const List<Color> MistyMeadow = const <Color>[Color(0xff215f00), Color(0xffe4e4d9)];
+const List<Color> Kyoto = const <Color>[Color(0xffc21500), Color(0xffffc500)];
+const List<Color> SiriusTamed = const <Color>[Color(0xffefefbb), Color(0xffd4d3dd)];
+const List<Color> Jonquil = const <Color>[Color(0xffffeeee), Color(0xffddefbb)];
+const List<Color> Petrichor = const <Color>[Color(0xff666600), Color(0xff999966)];
+const List<Color> ALostMemory = const <Color>[Color(0xffde6262), Color(0xffffb88c)];
+const List<Color> Vasily = const <Color>[Color(0xffe9d362), Color(0xff333333)];
+const List<Color> BlurryBeach = const <Color>[Color(0xffd53369), Color(0xffcbad6d)];
+const List<Color> Namn = const <Color>[Color(0xffa73737), Color(0xff7a2828)];
+const List<Color> DayTripper = const <Color>[Color(0xfff857a6), Color(0xffff5858)];
+const List<Color> PinotNoir = const <Color>[Color(0xff4b6cb7), Color(0xff182848)];
+const List<Color> Miaka = const <Color>[Color(0xfffc354c), Color(0xff0abfbc)];
+const List<Color> Army = const <Color>[Color(0xff414d0b), Color(0xff727a17)];
+const List<Color> Shrimpy = const <Color>[Color(0xffe43a15), Color(0xffe65245)];
+const List<Color> Influenza = const <Color>[Color(0xffc04848), Color(0xff480048)];
+const List<Color> CalmDarya = const <Color>[Color(0xff5f2c82), Color(0xff49a09d)];
+const List<Color> Bourbon = const <Color>[Color(0xffec6f66), Color(0xfff3a183)];
+const List<Color> Stellar = const <Color>[Color(0xff7474bf), Color(0xff348ac7)];
+const List<Color> Clouds = const <Color>[Color(0xffece9e6), Color(0xffffffff)];
+const List<Color> Moonrise = const <Color>[Color(0xffdae2f8), Color(0xffd6a4a4)];
+const List<Color> Peach = const <Color>[Color(0xffed4264), Color(0xffffedbc)];
+const List<Color> Dracula = const <Color>[Color(0xffdc2424), Color(0xff4a569d)];
+const List<Color> Mantle = const <Color>[Color(0xff24c6dc), Color(0xff514a9d)];
+const List<Color> Titanium = const <Color>[Color(0xff283048), Color(0xff859398)];
+const List<Color> Opa = const <Color>[Color(0xff3d7eaa), Color(0xffffe47a)];
+const List<Color> SeaBlizz = const <Color>[Color(0xff1cd8d2), Color(0xff93edc7)];
+const List<Color> MidnightCity = const <Color>[Color(0xff232526), Color(0xff414345)];
+const List<Color> Mystic = const <Color>[Color(0xff757f9a), Color(0xffd7dde8)];
+const List<Color> ShroomHaze = const <Color>[Color(0xff5c258d), Color(0xff4389a2)];
+const List<Color> Moss = const <Color>[Color(0xff134e5e), Color(0xff71b280)];
+const List<Color> BoraBora = const <Color>[Color(0xff2bc0e4), Color(0xffeaecc6)];
+const List<Color> VeniceBlue = const <Color>[Color(0xff085078), Color(0xff85d8ce)];
+const List<Color> ElectricViolet = const <Color>[Color(0xff4776e6), Color(0xff8e54e9)];
+const List<Color> Kashmir = const <Color>[Color(0xff614385), Color(0xff516395)];
+const List<Color> SteelGray = const <Color>[Color(0xff1f1c2c), Color(0xff928dab)];
+const List<Color> Mirage = const <Color>[Color(0xff16222a), Color(0xff3a6073)];
+const List<Color> JuicyOrange = const <Color>[Color(0xffff8008), Color(0xffffc837)];
+const List<Color> Mojito = const <Color>[Color(0xff1d976c), Color(0xff93f9b9)];
+const List<Color> Cherry = const <Color>[Color(0xffeb3349), Color(0xfff45c43)];
+const List<Color> Pinky = const <Color>[Color(0xffdd5e89), Color(0xfff7bb97)];
+const List<Color> SeaWeed = const <Color>[Color(0xff4cb8c4), Color(0xff3cd3ad)];
+const List<Color> Stripe = const <Color>[Color(0xff1fa2ff), Color(0xff12d8fa), Color(0xffa6ffcb)];
+const List<Color> PurpleParadise = const <Color>[Color(0xff1d2b64), Color(0xfff8cdda)];
+const List<Color> Sunrise = const <Color>[Color(0xffff512f), Color(0xfff09819)];
+const List<Color> AquaMarine = const <Color>[Color(0xff1a2980), Color(0xff26d0ce)];
+const List<Color> Aubergine = const <Color>[Color(0xffaa076b), Color(0xff61045f)];
+const List<Color> BloodyMary = const <Color>[Color(0xffff512f), Color(0xffdd2476)];
+const List<Color> MangoPulp = const <Color>[Color(0xfff09819), Color(0xffedde5d)];
+const List<Color> Frozen = const <Color>[Color(0xff403b4a), Color(0xffe7e9bb)];
+const List<Color> RoseWater = const <Color>[Color(0xffe55d87), Color(0xff5fc3e4)];
+const List<Color> Horizon = const <Color>[Color(0xff003973), Color(0xffe5e5be)];
+const List<Color> MonteCarlo = const <Color>[Color(0xffcc95c0), Color(0xffdbd4b4), Color(0xff7aa1d2)];
+const List<Color> LemonTwist = const <Color>[Color(0xff3ca55c), Color(0xffb5ac49)];
+const List<Color> EmeraldWater = const <Color>[Color(0xff348f50), Color(0xff56b4d3)];
+const List<Color> IntuitivePurple = const <Color>[Color(0xffda22ff), Color(0xff9733ee)];
+const List<Color> GreenBeach = const <Color>[Color(0xff02aab0), Color(0xff00cdac)];
+const List<Color> PlayingWithReds = const <Color>[Color(0xffd31027), Color(0xffea384d)];
+const List<Color> HarmonicEnergy = const <Color>[Color(0xff16a085), Color(0xfff4d03f)];
+const List<Color> CoolBrown = const <Color>[Color(0xff603813), Color(0xffb29f94)];
+const List<Color> YouTube = const <Color>[Color(0xffe52d27), Color(0xffb31217)];
+const List<Color> NoonToDusk = const <Color>[Color(0xffff6e7f), Color(0xffbfe9ff)];
+const List<Color> Hazel = const <Color>[Color(0xff77a1d3), Color(0xff79cbca), Color(0xffe684ae)];
+const List<Color> Nimvelo = const <Color>[Color(0xff314755), Color(0xff26a0da)];
+const List<Color> SeaBlue = const <Color>[Color(0xff1b5876), Color(0xff4e4376)];
+const List<Color> Booker20 = const <Color>[Color(0xffe65c00), Color(0xfff9d423)];
+const List<Color> SexyBlue = const <Color>[Color(0xff2193b0), Color(0xff6dd5ed)];
+const List<Color> PurpleLove = const <Color>[Color(0xffcc2b5e), Color(0xff753a88)];
+const List<Color> DIMIGO = const <Color>[Color(0xffec008c), Color(0xfffc6767)];
+const List<Color> Skyline = const <Color>[Color(0xff1488cc), Color(0xff2b32b2)];
+const List<Color> Sel = const <Color>[Color(0xff00467f), Color(0xffa5cc82)];
+const List<Color> Sky = const <Color>[Color(0xff076585), Color(0xffffffff)];
+const List<Color> Petrol = const <Color>[Color(0xffbbd2c5), Color(0xff536976)];
+const List<Color> Anamnisar = const <Color>[Color(0xff9796f0), Color(0xfffbc7d4)];
+const List<Color> Copper = const <Color>[Color(0xffb79891), Color(0xff94716b)];
+const List<Color> RoyalBlueWithPetrol = const <Color>[Color(0xffbbd2c5), Color(0xff536967), Color(0xff292e49)];
+const List<Color> RoyalBlue = const <Color>[Color(0xff536976), Color(0xff292e49)];
+const List<Color> Windy = const <Color>[Color(0xffacb6e5), Color(0xff86fde8)];
+const List<Color> Rea = const <Color>[Color(0xffffe000), Color(0xff799f0c)];
+const List<Color> Bupe = const <Color>[Color(0xff00416a), Color(0xffe4e5e6)];
+const List<Color> Mango = const <Color>[Color(0xffffe259), Color(0xffffa751)];
+const List<Color> Reaqua = const <Color>[Color(0xff799f0c), Color(0xffacbb78)];
+const List<Color> Lunada = const <Color>[Color(0xff5433ff), Color(0xff20bdff), Color(0xffa5fecb)];
+const List<Color> BlueLagoo = const <Color>[Color(0xff0052d4), Color(0xff4364f7), Color(0xff6fb1fc)];
+const List<Color> Anwar = const <Color>[Color(0xff334d50), Color(0xffcbcaa5)];
+const List<Color> Combi = const <Color>[Color(0xff00416a), Color(0xff799f0c), Color(0xffffe000)];
+const List<Color> VerBlack = const <Color>[Color(0xfff7f8f8), Color(0xffacbb78)];
+const List<Color> Ver = const <Color>[Color(0xffffe000), Color(0xff799f0c)];
+const List<Color> Blu = const <Color>[Color(0xff00416a), Color(0xffe4e5e6)];
