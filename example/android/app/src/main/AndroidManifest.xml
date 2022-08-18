@@ -10,7 +10,7 @@
 
     <application
         android:name="${applicationName}"
-        android:label="plume_example"
+        android:label="plume"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity

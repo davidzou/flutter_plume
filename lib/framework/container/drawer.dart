@@ -66,42 +66,13 @@ class DrawerBuilder {
   static Drawer drawer(
     BuildContext context, {
     DrawerDelegate delegate = const DrawerChildListDelegate(children: []),
+    Color? backgroundColor,
+    double? width,
+    double? elevation,
+    ShapeBorder? shape,
   }) {
     Widget _builderHeader() {
-      // if (delegate.buildHeader() != null) {
-      //   return Container();
-      // }
       return delegate.buildHeader() ?? Container();
-      // if (delegate.enableHeader()) {
-      //   if (delegate.buildHeader() != null) {
-      //     // 默认自定义
-      //     return Container(
-      //       width: double.infinity,
-      //       child: DrawerHeader(
-      //         padding: EdgeInsets.zero,
-      //         margin: EdgeInsets.zero,
-      //         decoration: BoxDecoration(
-      //             gradient: LinearGradient(colors: [
-      //           Colors.black12,
-      //           Colors.orangeAccent,
-      //         ])),
-      //         child: Text("header"),
-      //       ),
-      //     );
-      //   } else {
-      //     // 自定义
-      //     return Container(
-      //       width: double.infinity,
-      //       child: DrawerHeader(
-      //         child: Text(""),
-      //       ),
-      //     );
-      //   }
-      // } else {
-      //   return Container(
-      //     width: double.infinity,
-      //   );
-      // }
     }
 
     List<Widget> _buildList(BuildContext context) {
@@ -113,6 +84,10 @@ class DrawerBuilder {
     }
 
     return Drawer(
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      width: width,
+      shape: shape,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -151,7 +126,7 @@ abstract class DrawerDelegate {
   /// * 可定制背景
   /// * 可定义内容
   ///
-  DrawerHeader? buildHeader();
+  Widget? buildHeader();
 
   /// 构建菜单列表
   List<Widget> buildList(BuildContext context);
@@ -179,7 +154,7 @@ class DrawerChildListDelegate extends DrawerDelegate {
 
   final List<Widget> children;
   final bool enable;
-  final DrawerHeader? header;
+  final Widget? header;
   final Widget? footer;
 
   @override
@@ -188,7 +163,7 @@ class DrawerChildListDelegate extends DrawerDelegate {
   }
 
   @override
-  DrawerHeader? buildHeader() {
+  Widget? buildHeader() {
     return header;
   }
 
@@ -225,7 +200,7 @@ class DrawerChildBuilderDelegate extends DrawerDelegate {
 
   final Widget? footer;
 
-  final DrawerHeader? header;
+  final Widget? header;
 
   @override
   Widget? buildFooter() {
@@ -238,7 +213,7 @@ class DrawerChildBuilderDelegate extends DrawerDelegate {
   }
 
   @override
-  DrawerHeader? buildHeader() => header;
+  Widget? buildHeader() => header;
 
   @override
   List<Widget> buildList(BuildContext context) {
