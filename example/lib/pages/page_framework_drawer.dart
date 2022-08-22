@@ -30,6 +30,12 @@ class _FrameworkDrawerState extends State<_FrameworkDrawerBody> with DrawerPrope
   ValueNotifier<bool> isOpenFooter = ValueNotifier(false);
 
   @override
+  void initState() {
+    super.initState();
+    addItem(ListTile(title: Text("abc"), subtitle: Text("abcdefghijklmnopqrstuvwxyz"),));
+  }
+
+  @override
   void dispose() {
     isOpenHeader.dispose();
     isOpenFooter.dispose();
@@ -89,7 +95,8 @@ class _FrameworkDrawerState extends State<_FrameworkDrawerBody> with DrawerPrope
       ),
       drawer: DrawerBuilder.drawer(
         context,
-        width: 300.0,
+        // width: 300.0,
+        // elevation: 2.0,
         delegate: DrawerChildListDelegate(
           children: drawerItems(),
           enable: true,
