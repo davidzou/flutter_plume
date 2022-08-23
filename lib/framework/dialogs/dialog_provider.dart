@@ -133,13 +133,13 @@ class DialogProviderPlus {
   ///
   /// 添加一个输入框表单项。
   ///
-  void addTextFormField({String? key, InputDecoration? inputDecoration, TextInputType? inputType, bool? obscureText}) {
+  void addTextFormField({String? key, String? labelText, InputDecoration? inputDecoration, TextInputType? inputType, bool? obscureText}) {
     final TextStyle _style = TextStyle(color: _textColor);
     final OutlineInputBorder _focusedBorder = _outlineInputBorder.copyWith(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2.0));
     final OutlineInputBorder _enabledBorder = _outlineInputBorder.copyWith(borderSide: BorderSide(color: _borderEnableColor));
     InputDecoration _defaultInputDecoration = InputDecoration(
-      labelText: "Label",
-      // 如果没有Lable，errorBorder就不是roundborder
+      labelText: labelText ?? "Label",
+      // 如果没有Label，errorBorder就不是roundborder
       labelStyle: _style,
       hintStyle: _style.copyWith(color: _hintColor),
       helperStyle: _style,
@@ -193,48 +193,51 @@ class DialogProviderPlus {
     T? _currentValue = defaultValue;
     _children.add(
       StatefulBuilder(builder: (context, StateSetter setState) {
-        return DropdownButtonFormField<T>(
-          value: _currentValue,
-          decoration: InputDecoration(
-            labelText: labelText,
-            border: _outlineInputBorder,
+        return Padding(
+          padding: kVerticalPaddingTen,
+          child: DropdownButtonFormField<T>(
+            value: _currentValue,
+            decoration: InputDecoration(
+              labelText: labelText,
+              border: _outlineInputBorder,
+            ),
+            hint: Padding(
+              padding: kHorizontalPaddingTen,
+              child: const Text("请选择"),
+            ),
+            items: values
+                .map(
+                  (e) => DropdownMenuItem<T>(
+                    value: e,
+                    child: builder == null
+                        ? Padding(
+                            padding: kHorizontalPaddingTen,
+                            child: Text(
+                              "$e",
+                              style: TextStyle(color: _textColor),
+                            ))
+                        : builder.call(context, e),
+                    onTap: () {},
+                  ),
+                )
+                .toList(),
+            borderRadius: BorderRadius.circular(10.0),
+            dropdownColor: _backgroundColor,
+            onChanged: (value) {
+              setState(() {
+                _currentValue = value!;
+              });
+            },
+            onSaved: (value) {
+              maps[key ?? "field${maps.length}"] = value;
+            },
+            validator: (value) {
+              if (value == null) {
+                return "Select it value.";
+              }
+              return null;
+            },
           ),
-          hint: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: const Text("请选择"),
-          ),
-          items: values
-              .map(
-                (e) => DropdownMenuItem<T>(
-                  value: e,
-                  child: builder == null
-                      ? Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text(
-                            "$e",
-                            style: TextStyle(color: _textColor),
-                          ))
-                      : builder.call(context, e),
-                  onTap: () {},
-                ),
-              )
-              .toList(),
-          borderRadius: BorderRadius.circular(10.0),
-          dropdownColor: _backgroundColor,
-          onChanged: (value) {
-            setState(() {
-              _currentValue = value!;
-            });
-          },
-          onSaved: (value) {
-            maps[key ?? "field${maps.length}"] = value;
-          },
-          validator: (value) {
-            if (value == null) {
-              return "Select it value.";
-            }
-            return null;
-          },
         );
       }),
     );
