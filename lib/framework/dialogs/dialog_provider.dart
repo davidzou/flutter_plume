@@ -153,6 +153,7 @@ class DialogProviderPlus {
         labelStyle: _style,
         hintStyle: _style.copyWith(color: _hintColor),
         helperStyle: _style,
+        border: kOutLineInputBorder,
         focusedBorder: _focusedBorder,
         enabledBorder: _enabledBorder,
       );

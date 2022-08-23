@@ -5,7 +5,7 @@ A tools for flutter [StatelessWidget], for widgets that always build the same wa
 ## Getting Started
 
 
-[![plume flutter pub package](https://img.shields.io/static/v1?label=pub&message=v0.1.5-dev.6&color=informational)](https://github.com/davidzou/flutter_plume)
+[![plume flutter pub package](https://img.shields.io/static/v1?label=pub&message=v0.1.5-dev.7&color=informational)](https://github.com/davidzou/flutter_plume)
 
 
 [MORE GUIDE](doc/getting_started.md)

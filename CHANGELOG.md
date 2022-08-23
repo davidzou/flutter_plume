@@ -1,6 +1,10 @@
 ChangeLog
 ======
 
+## [0.1.5-dev.7]
+
+* 修正了Dialog的边框参数等。统一数据
+  
 ## [0.1.5-dev.6]
 
 * 优化更新DialogProviderPlus类
