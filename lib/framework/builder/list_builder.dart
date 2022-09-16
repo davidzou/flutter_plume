@@ -72,17 +72,18 @@ mixin RefreshMore<T> {
 ///
 abstract class ListViewBuilder<T extends ListItem> {
   ListViewBuilder({
-    required this.list,
+    List<T>? list,
     this.onItemTap,
     this.height,
-    this.scrollController,
+    ScrollController? controller,
     this.blankTitle = "",
     this.onPullToRefreshed,
     this.onLoadingMore,
-  });
+  })  : scrollController = controller ?? ScrollController(),
+        _list = list ?? [];
 
   /// 数据列表
-  final List<T> list;
+  List<T> _list;
 
   /// 单个控件点击事件
   final OnItemTaped<T>? onItemTap;
@@ -90,7 +91,7 @@ abstract class ListViewBuilder<T extends ListItem> {
   /// 高度(一个控件的高度)
   final double? height;
 
-  final ScrollController? scrollController;
+  final ScrollController scrollController;
 
   /// list的长度为0时，显示的文字内容。
   final String blankTitle;
@@ -101,8 +102,19 @@ abstract class ListViewBuilder<T extends ListItem> {
   /// 加载更多
   final VoidCallback? onLoadingMore;
 
+  ValueNotifier<bool> _isLoadingNotifier = ValueNotifier(false);
+
   /// 是否加载中
-  bool isLoading = false;
+  // bool isLoading = false;
+
+  List<T> get list => _list;
+  set list(List<T> list) {
+    _list.clear();
+    _list.addAll(list);
+  }
+  void add(T t) {
+    _list.add(t);
+  }
 
   ///
   /// 单个List自定义控件
@@ -144,37 +156,22 @@ abstract class ListViewBuilder<T extends ListItem> {
   /// ```
   ///
   void init() {
-    scrollController?.addListener(() {
-      if (scrollController?.position.pixels ==
-          scrollController?.position.maxScrollExtent) {
+    scrollController.addListener(() {
+      print("pixels : ${scrollController.position.pixels} , max : ${scrollController.position.maxScrollExtent}");
+      if (scrollController.position.pixels - scrollController.position.maxScrollExtent > 100) {
         // 最底部时加载数据。
         _onLoadMore();
-        isLoading = true;
+        // isLoading = true;
+        _isLoadingNotifier.value = true;
       }
     });
   }
 
   void dispose() {
     /// 释放资源
-    scrollController?.dispose();
+    scrollController.dispose();
+    _list.clear();
     print("list build dispose");
-  }
-
-  ///
-  /// 加载更多
-  /// 网络请求，数据刷新。
-  ///
-  Future _onLoadMore() async {
-    if (isLoading) {
-      print("more has loading");
-      return;
-    }
-    print("list build loding more");
-    await Future.delayed(Duration(seconds: 3), () {
-      onLoadingMore?.call();
-    }).whenComplete(() =>
-        // 加载完成。loadingMore 错误那么加载失败。
-        isLoading = false);
   }
 
   ///
@@ -185,44 +182,81 @@ abstract class ListViewBuilder<T extends ListItem> {
   }
 
   Widget build() {
-    if (list.length == 0) {
-      return Container(
-        child: buildBlank(),
+    if (_list.length == 0) {
+      return RefreshIndicator(
+        child: Scrollbar(
+          controller: scrollController,
+          child: Container(
+            child: Stack(
+              children: [
+                ListView(),
+                buildBlank(),
+              ],
+            ),
+          ),
+        ),
+        onRefresh: _doRefresh,
       );
     }
     return RefreshIndicator(
       child: Scrollbar(
-        child: ListView.builder(
-            controller: scrollController,
-
-            // 这里是列表数量，如果不添加不会显示，还会报错哦！
-            itemCount: list.length + 1,
-
-            // 使用构建器显示列表内容
-            itemBuilder: (BuildContext context, int index) {
-              print("list index $index - ${list.length}");
-              if (index == list.length) {
-                return Visibility(
-                  visible: isLoading,
-                  child: SizedBox(
-                    child: Text("加载中"),
-                  ),
-                );
-              } else {
-                return onItemTap == null
-                    ? Container(
-                        child: itemBuild(context, list[index], index),
-                      )
-                    : Container(
-                        height: height,
-                        child: InkWell(
-                          onTap: () => onItemTap!(list[index], index),
-                          // 列表布局
-                          child: itemBuild(context, list[index], index),
-                        ),
-                      );
-              }
-            }),
+        controller: scrollController,
+        child: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                    physics: AlwaysScrollableScrollPhysics(),
+                    controller: scrollController,
+                    // 这里是列表数量，如果不添加不会显示，还会报错哦！
+                    itemCount: _list.length,
+                    // 使用构建器显示列表内容
+                    itemBuilder: (BuildContext context, int index) {
+                      // print("list index $index - ${list.length}");
+                      // if (index == list.length) {
+                      //   // return
+                      // } else {
+                      return onItemTap == null
+                          ? Container(
+                              height: height,
+                              child: itemBuild(context, _list[index], index),
+                            )
+                          : Container(
+                              height: height,
+                              child: InkWell(
+                                onTap: () => onItemTap!(_list[index], index),
+                                // 列表布局
+                                child: itemBuild(context, _list[index], index),
+                              ),
+                            );
+                      // }
+                    }),
+              ),
+              // Divider(),
+              // 加载中，及加载状态区域
+              ValueListenableBuilder(
+                  valueListenable: _isLoadingNotifier,
+                  builder: (BuildContext context, bool value, Widget? child) {
+                    return Visibility(
+                      visible: value,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RefreshProgressIndicator(
+                            color: Colors.blue,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Center(child: Text("加载中")),
+                        ],
+                      ),
+                    );
+                  }),
+            ],
+          ),
+        ),
       ),
       onRefresh: _doRefresh,
     );
@@ -233,5 +267,25 @@ abstract class ListViewBuilder<T extends ListItem> {
     // return onLoadRefresh();
     await Future.delayed(Duration(seconds: 3));
     onPullToRefreshed?.call();
+  }
+
+  ///
+  /// 加载更多
+  /// 网络请求，数据刷新。
+  ///
+  _onLoadMore() {
+    if (_isLoadingNotifier.value) {
+      print("more has loading");
+      return;
+    }
+    print("list build loding more");
+    Future.delayed(Duration(seconds: 3), () {
+      onLoadingMore?.call();
+    }).whenComplete(() {
+      // 加载完成。loadingMore 错误那么加载失败。
+      _isLoadingNotifier.value = false;
+      print("onLoadingMore completed  ${scrollController.positions}, ${scrollController.position.maxScrollExtent}");
+      scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 500), curve: Curves.decelerate);
+    });
   }
 }

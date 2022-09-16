@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:plumedemo/pages/page_dialogs.dart';
 import 'package:plumedemo/pages/page_flipable.dart';
 import 'package:plumedemo/pages/page_framework_drawer.dart';
+import 'package:plumedemo/pages/page_list_builder.dart';
 import 'package:plumedemo/pages/page_main_list.dart';
 import 'package:plumedemo/pages/page_perspective.dart';
 import 'package:plumedemo/pages/page_test.dart';
@@ -32,6 +33,8 @@ void main() {
         FLIP_PAGE: (BuildContext context) => FlipPage(),
         // test
         TEST_PAGE: (BuildContext context) => TestPage(),
+        // listbuilder
+        LIST_BUILDER_PAGE: (BuildContext context) => ListBuilderPage(),
       },
 
       // *******  调试类参数
@@ -55,9 +58,11 @@ const String PERSPECTIVE_PAGE = "/PerspectivePage";
 
 const String DIALOGS_PAGE = "/dialogs";
 
-const String FLIP_PAGE = "/flipable";
+const String FLIP_PAGE = "/flippable";
 
 const String TEST_PAGE = "/test";
+
+const String LIST_BUILDER_PAGE ="/list_builder";
 
 ///
 /// key ： 控件名称，即测试页Route名称
@@ -74,4 +79,6 @@ const LIST = [
   {FLIP_PAGE: "旋转的卡片"},
 
   {TEST_PAGE: "测试用"},
+
+  {LIST_BUILDER_PAGE: "自定义ListBuilder"},
 ];
