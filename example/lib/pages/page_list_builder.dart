@@ -65,16 +65,16 @@ class ListWidget extends StatefulWidget {
 
 class ListWidgetState extends State<ListWidget> {
   late ListBuilder _listBuilder;
-  List<MessItem> array = [];
+  // List<MessItem> array = [];
 
   @override
   void initState() {
-    for (int i = 0; i < 20; i++) {
-      array.add(MessItem(name: "name-default$i"));
-    }
+    // for (int i = 0; i < 20; i++) {
+    //   array.add(MessItem(name: "name-default$i"));
+    // }
     super.initState();
     _listBuilder = ListBuilder(
-        list: array,
+        // list: array,
         scrollController: ScrollController(),
         onPullToRefreshed: () {
           print("voidCallback update list");
@@ -98,7 +98,7 @@ class ListWidgetState extends State<ListWidget> {
   @override
   void dispose() {
     _listBuilder.dispose();
-    array.clear();
+    // array.clear();
     super.dispose();
   }
 
