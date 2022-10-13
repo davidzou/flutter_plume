@@ -18,7 +18,6 @@ import 'dart:math' as math;
 ///        filterQuality: FilterQuality.high,
 ///        child: child,
 ///        turns: animate,
-///        direction: direction,
 ///      );
 ///    },
 ///    child: Container(
