@@ -5,7 +5,8 @@ import 'package:plume/framework/dialogs/dialog_result.dart';
 /// 统一圆角值
 ///
 const double _radiusValue = 18.0;
-const BorderRadius _borderRadius = const BorderRadius.all(const Radius.circular(_radiusValue));
+const BorderRadius _borderRadius =
+    const BorderRadius.all(const Radius.circular(_radiusValue));
 
 ///
 /// 对话框提供者。
@@ -46,7 +47,8 @@ class DialogProvider {
               children: [
                 Text(
                   title,
-                  style: TextStyle(color: Colors.black54, fontWeight: FontWeight.w800),
+                  style: TextStyle(
+                      color: Colors.black54, fontWeight: FontWeight.w800),
                 ),
                 SizedBox(
                   width: 12,
@@ -147,7 +149,10 @@ class DialogProvider {
                 padding: EdgeInsets.fromLTRB(indent, 28.0, 8.0, 8.0),
                 child: Text(
                   title,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: _fontColor),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                      color: _fontColor),
                 ),
               ),
               SizedBox(
@@ -183,7 +188,8 @@ class DialogProvider {
                   ),
                   onPressed: onPressed ??
                       () {
-                        Navigator.of(context).pop(DialogResult(status: true, code: 200));
+                        Navigator.of(context)
+                            .pop(DialogResult(status: true, code: 200));
                       },
                 ),
               )
@@ -320,11 +326,15 @@ class DialogProvider {
               padding: const EdgeInsets.only(top: 25.0, bottom: 10.0),
               child: Text(
                 title,
-                style: TextStyle(color: _fontColor, fontSize: 20.0, shadows: kElevationToShadow[4]),
+                style: TextStyle(
+                    color: _fontColor,
+                    fontSize: 20.0,
+                    shadows: kElevationToShadow[4]),
               ),
             ),
             content: Container(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, left: 20.0, right: 10.0),
+              padding: const EdgeInsets.only(
+                  top: 10.0, bottom: 20.0, left: 20.0, right: 10.0),
               child: Text(
                 content,
                 textAlign: centerContent ? TextAlign.center : TextAlign.left,
@@ -350,12 +360,15 @@ class DialogProvider {
                           child: TextButton(
                             onPressed: onTapedLeft ??
                                 () {
-                                  Navigator.of(context).pop(DialogResult(status: false, code: 200));
+                                  Navigator.of(context).pop(
+                                      DialogResult(status: false, code: 200));
                                 },
                             child: Text(
                               leftButton,
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 16.0, color: Theme.of(context).primaryColor),
+                              style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Theme.of(context).primaryColor),
                             ),
                           ),
                         ),
@@ -373,12 +386,15 @@ class DialogProvider {
                           child: TextButton(
                             onPressed: onTapedRight ??
                                 () {
-                                  Navigator.of(context).pop(DialogResult(status: true, code: 200));
+                                  Navigator.of(context).pop(
+                                      DialogResult(status: true, code: 200));
                                 },
                             child: Text(
                               rightButton,
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 16.0, color: Theme.of(context).primaryColor),
+                              style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Theme.of(context).primaryColor),
                             ),
                           ),
                         ),
@@ -437,7 +453,8 @@ class DialogProvider {
           shape: const RoundedRectangleBorder(borderRadius: _borderRadius),
           title: Text(
             title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: _fontColor),
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 20.0, color: _fontColor),
           ),
           content: Text(
             content,
@@ -447,21 +464,29 @@ class DialogProvider {
             TextButton(
               onPressed: onTapedLeft ??
                   () {
-                    Navigator.of(context).pop(DialogResult(status: false, code: 200));
+                    Navigator.of(context)
+                        .pop(DialogResult(status: false, code: 200));
                   },
               child: Text(
                 leftButton,
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Theme.of(context).primaryColor),
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle1!
+                    .copyWith(color: Theme.of(context).primaryColor),
               ),
             ),
             TextButton(
               onPressed: onTapedRight ??
                   () {
-                    Navigator.of(context).pop(DialogResult(status: true, code: 200));
+                    Navigator.of(context)
+                        .pop(DialogResult(status: true, code: 200));
                   },
               child: Text(
                 rightButton,
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Theme.of(context).primaryColor),
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle1!
+                    .copyWith(color: Theme.of(context).primaryColor),
               ),
             )
           ],
@@ -587,10 +612,12 @@ class DialogProvider {
                     children: [
                       // Container(height: 28, color: Colors.transparent,),
                       ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: 200, maxWidth: _width),
+                        constraints:
+                            BoxConstraints(maxHeight: 200, maxWidth: _width),
                         child: ListView.custom(
                           shrinkWrap: true,
-                          childrenDelegate: SliverChildBuilderDelegate((context, index) {
+                          childrenDelegate:
+                              SliverChildBuilderDelegate((context, index) {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
@@ -605,7 +632,8 @@ class DialogProvider {
                                     color: Colors.lightGreenAccent,
                                   ),
                                   title: Text("index$index, High light"),
-                                  subtitle: Text("we are list tile, and this is subtitle."),
+                                  subtitle: Text(
+                                      "we are list tile, and this is subtitle."),
                                 ),
                               ),
                             );
@@ -615,7 +643,9 @@ class DialogProvider {
                       Container(
                         height: 48,
                         decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(bottomLeft: const Radius.circular(_radiusValue), bottomRight: const Radius.circular(_radiusValue)),
+                          borderRadius: const BorderRadius.only(
+                              bottomLeft: const Radius.circular(_radiusValue),
+                              bottomRight: const Radius.circular(_radiusValue)),
                           color: Colors.orangeAccent.withOpacity(0.8),
                           boxShadow: kElevationToShadow[8],
                         ),
@@ -710,7 +740,8 @@ class DialogProvider {
           child: Stack(
             children: [
               Container(
-                padding: EdgeInsets.only(top: 12.0, left: 12.0, bottom: 12.0, right: 10.0),
+                padding: EdgeInsets.only(
+                    top: 12.0, left: 12.0, bottom: 12.0, right: 10.0),
                 margin: EdgeInsets.only(right: 18.0, top: 12.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
@@ -734,7 +765,10 @@ class DialogProvider {
                       padding: EdgeInsets.only(bottom: 8.0),
                       child: Text(
                         status,
-                        style: TextStyle(fontSize: 28.0, color: Colors.white, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 28.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                     Container(
@@ -813,7 +847,8 @@ class DialogProvider {
           child: TernaryContainer(
             header: Container(
               alignment: Alignment.center,
-              padding: const EdgeInsets.only(top: 25.0, bottom: 10.0, left: 20.0, right: 20.0),
+              padding: const EdgeInsets.only(
+                  top: 25.0, bottom: 10.0, left: 20.0, right: 20.0),
               child: Text(
                 title,
                 style: TextStyle(
@@ -824,7 +859,8 @@ class DialogProvider {
               ),
             ),
             content: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
               child: CustomTextInput(
                 label: label,
                 style: TextStyle(
@@ -853,12 +889,15 @@ class DialogProvider {
                           child: TextButton(
                             onPressed: onTapedLeft ??
                                 () {
-                                  Navigator.of(context).pop(DialogResult(status: false, code: 200));
+                                  Navigator.of(context).pop(
+                                      DialogResult(status: false, code: 200));
                                 },
                             child: Text(
                               leftButton,
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 16.0, color: Theme.of(context).primaryColor),
+                              style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Theme.of(context).primaryColor),
                             ),
                           ),
                         ),
@@ -879,12 +918,18 @@ class DialogProvider {
                                     // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("右边的按钮被按到了")));
                                     return;
                                   }
-                                  Navigator.of(context).pop(DialogResult(status: true, code: 200, msg: "返回输入内容", data: editingController.text));
+                                  Navigator.of(context).pop(DialogResult(
+                                      status: true,
+                                      code: 200,
+                                      msg: "返回输入内容",
+                                      data: editingController.text));
                                 },
                             child: Text(
                               rightButton,
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 16.0, color: Theme.of(context).primaryColor),
+                              style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Theme.of(context).primaryColor),
                             ),
                           ),
                         ),
@@ -985,7 +1030,13 @@ class DialogProvider {
 }
 
 class CustomTextInput extends StatefulWidget {
-  const CustomTextInput({Key? key, this.label, this.style, this.labelStyle, required this.editingController}) : super(key: key);
+  const CustomTextInput(
+      {Key? key,
+      this.label,
+      this.style,
+      this.labelStyle,
+      required this.editingController})
+      : super(key: key);
 
   final String? label;
   final TextStyle? style;

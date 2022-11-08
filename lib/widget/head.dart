@@ -117,11 +117,11 @@ class HeadTitle extends StatelessWidget {
   List<Widget> _children(String title, String? subTitle) {
     List<Widget> list = [];
     // if (title != null) {
-      var tx = Text(
-        title,
-        style: titleStyle ?? _titleStyle(),
-      );
-      list.add(tx);
+    var tx = Text(
+      title,
+      style: titleStyle ?? _titleStyle(),
+    );
+    list.add(tx);
     // }
     if (subTitle != null) {
       var subTx = Text(
@@ -161,10 +161,32 @@ class HeadTitle extends StatelessWidget {
         width: double.infinity,
         margin: EdgeInsets.all(8),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: _children(title, subTitle),
         ),
+      ),
+    );
+  }
+}
+
+///
+/// 标题，文字仅。字体大小设置默认，样式随主题。
+///
+/// +------------------+
+/// ｜ head            ｜
+/// +------------------+
+///
+///
+class Header extends StatelessWidget {
+  const Header({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text(
+        "",
+        style: Theme.of(context).textTheme.bodyText2?.copyWith(fontSize: 20.0),
       ),
     );
   }

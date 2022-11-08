@@ -90,7 +90,8 @@ class DefaultThemes extends Themes {
       iconTheme: _customIconTheme(base.iconTheme),
       dialogTheme: DialogTheme(
         backgroundColor: shrinePink100,
-      ), colorScheme: shrineColorScheme.copyWith(secondary: shrineBrown900),
+      ),
+      colorScheme: shrineColorScheme.copyWith(secondary: shrineBrown900),
     );
   }
 

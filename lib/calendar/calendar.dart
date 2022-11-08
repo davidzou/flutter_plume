@@ -134,8 +134,10 @@ class Calendar {
       }
     }
     // 头部标题，标记星期几，具体展现方式见实现
-    dayClips.insertAll(0,
-        _tuningTitle.map((e) => WeekDayClip(e, delegate: weekDayClipDelegate)));
+    dayClips.insertAll(
+      0,
+      _tuningTitle.map((e) => WeekDayClip(e, delegate: weekDayClipDelegate)),
+    );
     return dayClips;
   }
 }

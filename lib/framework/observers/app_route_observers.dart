@@ -36,7 +36,8 @@ class AppRouteObserver {
   static final RouteObserver<ModalRoute<void>> _routeObserver =
       RouteObserver<ModalRoute<void>>();
 
-  static final AppRouteObserver _appRouteObserver = AppRouteObserver._internal();
+  static final AppRouteObserver _appRouteObserver =
+      AppRouteObserver._internal();
 
   AppRouteObserver._internal();
 

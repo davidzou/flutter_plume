@@ -112,6 +112,7 @@ abstract class ListViewBuilder<T extends ListItem> {
     _list.clear();
     _list.addAll(list);
   }
+
   void add(T t) {
     _list.add(t);
   }
@@ -157,8 +158,11 @@ abstract class ListViewBuilder<T extends ListItem> {
   ///
   void init() {
     scrollController.addListener(() {
-      print("pixels : ${scrollController.position.pixels} , max : ${scrollController.position.maxScrollExtent}");
-      if (scrollController.position.pixels - scrollController.position.maxScrollExtent > 100) {
+      print(
+          "pixels : ${scrollController.position.pixels} , max : ${scrollController.position.maxScrollExtent}");
+      if (scrollController.position.pixels -
+              scrollController.position.maxScrollExtent >
+          100) {
         // 最底部时加载数据。
         _onLoadMore();
         // isLoading = true;
@@ -284,8 +288,10 @@ abstract class ListViewBuilder<T extends ListItem> {
     }).whenComplete(() {
       // 加载完成。loadingMore 错误那么加载失败。
       _isLoadingNotifier.value = false;
-      print("onLoadingMore completed  ${scrollController.positions}, ${scrollController.position.maxScrollExtent}");
-      scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 500), curve: Curves.decelerate);
+      print(
+          "onLoadingMore completed  ${scrollController.positions}, ${scrollController.position.maxScrollExtent}");
+      scrollController.animateTo(scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 500), curve: Curves.decelerate);
     });
   }
 }

@@ -91,7 +91,6 @@ class TernaryContainer extends StatelessWidget {
   }
 }
 
-
 /// 带图片的布局，三部分
 class TernaryImageContainer extends StatelessWidget {
   const TernaryImageContainer({Key? key}) : super(key: key);
