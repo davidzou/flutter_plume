@@ -29,13 +29,7 @@ class HeadTitle extends StatelessWidget {
   /// @param subTitle   副标题文字
   /// @param color      主题色
   ///
-  const HeadTitle(this.title,
-      {Key? key,
-      this.subTitle,
-      this.color = const Color(0xff2d85f0),
-      this.titleStyle,
-      this.subTitleStyle})
-      : super(key: key);
+  const HeadTitle(this.title, {Key? key, this.subTitle, this.color = const Color(0xff2d85f0), this.titleStyle, this.subTitleStyle}) : super(key: key);
 
   final String title;
   final TextStyle? titleStyle;
@@ -147,15 +141,8 @@ class HeadTitle extends StatelessWidget {
           ),
 //        boxShadow: 0 0 0 1px #5F5A4B, 1px 1px 6px 1px rgba(10, 10, 0, 0.5)
           boxShadow: [
-            BoxShadow(
-                color: Color(0xff5f5a4b),
-                offset: Offset(0, 0),
-                spreadRadius: 1),
-            BoxShadow(
-                color: Color.fromARGB(127, 10, 10, 0),
-                offset: Offset(1, 1),
-                spreadRadius: 1,
-                blurRadius: 6),
+            BoxShadow(color: Color(0xff5f5a4b), offset: Offset(0, 0), spreadRadius: 1),
+            BoxShadow(color: Color.fromARGB(127, 10, 10, 0), offset: Offset(1, 1), spreadRadius: 1, blurRadius: 6),
           ]),
       child: Container(
         width: double.infinity,
@@ -179,14 +166,22 @@ class HeadTitle extends StatelessWidget {
 ///
 ///
 class Header extends StatelessWidget {
-  const Header({Key? key}) : super(key: key);
+  const Header({
+    Key? key,
+    required this.title,
+    double fontSize = 30.0,
+  }) : this.fontSize = fontSize, super(key: key);
+
+  final String title;
+  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(left: 20.0, right: 10.0, top: 10.0, bottom: 10.0),
       child: Text(
-        "",
-        style: Theme.of(context).textTheme.bodyText2?.copyWith(fontSize: 20.0),
+        this.title,
+        style: Theme.of(context).textTheme.bodyText2?.copyWith(fontSize: fontSize, fontWeight: FontWeight.bold, letterSpacing: 3.0),
       ),
     );
   }

@@ -1,6 +1,6 @@
 name: plume
 description: Birds can't do without feathers, so that they can travel in the sky. A good application needs standardized components to beautify and enrich it. It is.
-version: 0.1.5-dev.8
+version: 0.1.5-dev.9
 homepage: https://github.com/davidzou/flutter_plume
 
 environment:

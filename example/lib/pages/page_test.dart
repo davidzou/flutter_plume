@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plume/framework/dialog.dart';
+import 'package:plume/widget/head.dart';
 
 class TestPage extends StatelessWidget {
   @override
@@ -105,14 +106,15 @@ class TestPage extends StatelessWidget {
                       TextButton(onPressed: () {}, child: Text('Cancel')),
                       TextButton(
                           onPressed: () {
-                            DialogProvider.dilemmaX(
-                              context,
-                              delegate: SliverChildBuilderDelegate(
-                                  (context, index) {
-                                    return Container(child: ListTile(title: Text("index$index"),),);
-                                  },
-                              )
-                            );
+                            DialogProvider.dilemmaX(context, delegate: SliverChildBuilderDelegate(
+                              (context, index) {
+                                return Container(
+                                  child: ListTile(
+                                    title: Text("index$index"),
+                                  ),
+                                );
+                              },
+                            ));
                           },
                           child: Text('OK')),
                     ],
@@ -132,6 +134,19 @@ class TestPage extends StatelessWidget {
                 size: 128,
                 color: Colors.greenAccent,
               ),
+            ),
+          ),
+
+          Positioned(
+            top: 400,
+            left: 0,
+            right: 0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Header(title: "我是标题"),
+                Padding(padding: EdgeInsets.all(20.0), child: Text("content")),
+              ],
             ),
           ),
         ],
