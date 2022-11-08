@@ -144,7 +144,9 @@ class TestPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Header(title: "我是标题"),
+                HeaderSmall(title: "我是标题Small"),
+                HeaderMedium(title: "我是标题Medium"),
+                HeaderLarge(title: "我是标题Large"),
                 Padding(padding: EdgeInsets.all(20.0), child: Text("content")),
               ],
             ),

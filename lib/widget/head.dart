@@ -158,30 +158,93 @@ class HeadTitle extends StatelessWidget {
 }
 
 ///
-/// 标题，文字仅。字体大小设置默认，样式随主题。
+/// 标题，仅文字。字体大小设置默认，样式随主题。
 ///
 /// +------------------+
 /// ｜ head            ｜
 /// +------------------+
 ///
+/// See Also:
+/// [TextTheme.headlineSmall]
 ///
-class Header extends StatelessWidget {
-  const Header({
+class HeaderSmall extends StatelessWidget {
+  const HeaderSmall({
     Key? key,
     required this.title,
-    double fontSize = 30.0,
-  }) : this.fontSize = fontSize, super(key: key);
+  }) : super(key: key);
 
   final String title;
-  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 20.0, right: 10.0, top: 10.0, bottom: 10.0),
+      alignment: Alignment.centerLeft,
+      padding: EdgeInsets.symmetric(horizontal: 8.0),
       child: Text(
         this.title,
-        style: Theme.of(context).textTheme.bodyText2?.copyWith(fontSize: fontSize, fontWeight: FontWeight.bold, letterSpacing: 3.0),
+        style: Theme.of(context).textTheme.headlineSmall,
+      ),
+    );
+  }
+}
+
+///
+/// 标题，仅文字。字体大小设置默认，样式随主题。
+///
+/// +------------------+
+/// ｜ head            ｜
+/// +------------------+
+///
+/// See Also:
+/// [TextTheme.headlineMedium]
+///
+class HeaderMedium extends StatelessWidget {
+  const HeaderMedium({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      padding: EdgeInsets.symmetric(horizontal: 8.0),
+      child: Text(
+        this.title,
+        style: Theme.of(context).textTheme.headlineMedium,
+      ),
+    );
+  }
+}
+
+///
+/// 标题，仅文字。字体大小设置默认，样式随主题。
+///
+/// +------------------+
+/// ｜ head            ｜
+/// +------------------+
+///
+/// See Also:
+/// [TextTheme.headlineLarge]
+///
+class HeaderLarge extends StatelessWidget {
+  const HeaderLarge({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      padding: EdgeInsets.symmetric(horizontal: 8.0),
+      child: Text(
+        this.title,
+        style: Theme.of(context).textTheme.headlineLarge,
       ),
     );
   }

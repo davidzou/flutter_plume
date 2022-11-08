@@ -1,6 +1,10 @@
 ChangeLog
 ======
 
+## [0.1.5-dev.10]
+
+* 更新Header的传参
+ 
 ## [0.1.5-dev.9]
 
 * 添加了Header类
