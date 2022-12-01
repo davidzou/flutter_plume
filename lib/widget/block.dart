@@ -50,7 +50,7 @@ class Block extends StatelessWidget {
   ///
   final Color color;
 
-  final TextStyle titleStyle;
+  final TextStyle? titleStyle;
 
   @override
   Widget build(BuildContext context) {
