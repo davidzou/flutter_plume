@@ -32,7 +32,7 @@ class _FrameworkDrawerState extends State<_FrameworkDrawerBody> with DrawerPrope
   @override
   void initState() {
     super.initState();
-    addItem(ListTile(title: Text("abc"), subtitle: Text("abcdefghijklmnopqrstuvwxyz"),));
+    addItem(ListTile(title: Text("Title"), subtitle: Text("默认选项"), leading: Icon(Icons.business_center_outlined)));
   }
 
   @override
@@ -59,7 +59,7 @@ class _FrameworkDrawerState extends State<_FrameworkDrawerBody> with DrawerPrope
           Builder(
             builder: (context) {
               return _createButton("添加菜单", onPressed: () {
-                addItem(Text("菜单${itemLength() + 1}"));
+                addItem(ListTile(title: Text("Title ${itemLength() + 1}"), subtitle: Text("默认选项"), leading: Icon(Icons.business_center_outlined)));
                 Scaffold.of(context).openDrawer();
               });
             },
@@ -95,8 +95,8 @@ class _FrameworkDrawerState extends State<_FrameworkDrawerBody> with DrawerPrope
       ),
       drawer: DrawerBuilder.drawer(
         context,
-        // width: 300.0,
-        // elevation: 2.0,
+        width: 260.0,
+        elevation: 16.0,
         delegate: DrawerChildListDelegate(
           children: drawerItems(),
           enable: true,
