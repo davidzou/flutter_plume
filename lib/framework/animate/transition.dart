@@ -27,6 +27,8 @@ import 'dart:math' as math;
 ///  )
 ///  </code>
 ///
+/// See Also:
+/// [AnimatedWidget], [Animation]
 class DegreeAngleRotationTransition extends AnimatedWidget {
   const DegreeAngleRotationTransition({
     Key? key,

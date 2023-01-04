@@ -153,6 +153,7 @@ class DrawerChildListDelegate extends DrawerDelegate {
         );
 
   final List<Widget> children;
+  @deprecated
   final bool enable;
   final Widget? header;
   final Widget? footer;

@@ -99,7 +99,7 @@ class _FrameworkDrawerState extends State<_FrameworkDrawerBody> with DrawerPrope
         elevation: 16.0,
         delegate: DrawerChildListDelegate(
           children: drawerItems(),
-          enable: true,
+          // enable: true,
           header: ValueListenableBuilder(valueListenable: isOpenHeader, builder: (context, value, child) {
             print("open header $value");
             return _drawerHeader ?? Container();
