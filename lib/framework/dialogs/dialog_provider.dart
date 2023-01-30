@@ -4,17 +4,13 @@ import 'package:plume/framework/dialogs/dialog_result.dart';
 
 /// 统一圆角值
 const double _radiusValue = 18.0;
-const BorderRadius _borderRadius =
-    const BorderRadius.all(const Radius.circular(_radiusValue));
+const BorderRadius _borderRadius = const BorderRadius.all(const Radius.circular(_radiusValue));
 
 const double _formFieldRadiusValue = 8.0;
-const BorderRadius _formFieldBorderRadius =
-    const BorderRadius.all(const Radius.circular(_formFieldRadiusValue));
+const BorderRadius _formFieldBorderRadius = const BorderRadius.all(const Radius.circular(_formFieldRadiusValue));
 
 /// FormBuild OutLineBorder
-const OutlineInputBorder _outlineInputBorder = const OutlineInputBorder(
-    borderRadius:
-        const BorderRadius.all(Radius.circular(_formFieldRadiusValue)));
+const OutlineInputBorder _outlineInputBorder = const OutlineInputBorder(borderRadius: const BorderRadius.all(Radius.circular(_formFieldRadiusValue)));
 
 const kDarkBarrierColor = const Color(0xaa000000);
 const kLightBarrierColor = const Color(0x9effffff);
@@ -26,8 +22,7 @@ const kHorizontalPaddingTen = const EdgeInsets.symmetric(horizontal: 10.0);
 /// vertical padding with value 10.0
 const kVerticalPaddingTen = const EdgeInsets.symmetric(vertical: 10.0);
 
-typedef DropMenuItemWidgetBuilder = Widget Function<T>(
-    BuildContext context, T value);
+typedef DropMenuItemWidgetBuilder = Widget Function<T>(BuildContext context, T value);
 
 /// 对话框类型
 enum DialogType {
@@ -37,7 +32,7 @@ enum DialogType {
   notice,
 
   ///
-  /// 单条件输入类型
+  /// 条件输入类型
   ///
   prompt,
 
@@ -50,6 +45,15 @@ enum DialogType {
   /// form表单类型
   ///
   form,
+
+  /// 单选项
+  choice,
+
+  /// 多选项
+  selector,
+
+  /// 标签，tag选择
+  chips,
 }
 
 ///
@@ -114,8 +118,7 @@ class DialogProviderPlus {
     BuildContext context, {
     DecorationImage? backgroundImage,
   }) {
-    return DialogProviderPlus(context,
-        title: "Login", okButton: "Login", cancelButton: "Cancel")
+    return DialogProviderPlus(context, title: "Login", okButton: "Login", cancelButton: "Cancel")
       ..addTextFormField(
         inputDecoration: InputDecoration(
           label: const Text("Username"),
@@ -136,21 +139,35 @@ class DialogProviderPlus {
       ..setBackgroundImage(backgroundImage);
   }
 
+  /// A choice Dialog
+  factory DialogProviderPlus.choice(
+    BuildContext context, {
+    DecorationImage? backgroundImage,
+    String? key,
+    List<dynamic>? values,
+    dynamic defaultValue,
+    DropMenuItemWidgetBuilder? builder,
+    String? labelText,
+  }) {
+    return DialogProviderPlus(
+      context,
+      title: "Choice",
+    )..addDropDownButton(
+        key: key,
+        labelText: labelText,
+        values: values,
+        defaultValue: defaultValue,
+        builder: builder,
+      );
+  }
+
   ///
   /// 添加一个输入框表单项。
   ///
-  void addTextFormField(
-      {String? key,
-      String? labelText,
-      InputDecoration? inputDecoration,
-      TextInputType? inputType,
-      bool? obscureText}) {
+  void addTextFormField({String? key, String? labelText, InputDecoration? inputDecoration, TextInputType? inputType, bool? obscureText}) {
     final TextStyle _style = TextStyle(color: _textColor);
-    final OutlineInputBorder _focusedBorder = _outlineInputBorder.copyWith(
-        borderSide:
-            BorderSide(color: Theme.of(context).primaryColor, width: 2.0));
-    final OutlineInputBorder _enabledBorder = _outlineInputBorder.copyWith(
-        borderSide: BorderSide(color: _borderEnableColor));
+    final OutlineInputBorder _focusedBorder = _outlineInputBorder.copyWith(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2.0));
+    final OutlineInputBorder _enabledBorder = _outlineInputBorder.copyWith(borderSide: BorderSide(color: _borderEnableColor));
     InputDecoration _defaultInputDecoration = InputDecoration(
       labelText: labelText ?? "Label",
       // 如果没有Label，errorBorder就不是roundborder
@@ -177,9 +194,7 @@ class DialogProviderPlus {
       child: TextFormField(
         keyboardType: inputType,
         style: _style,
-        obscureText: obscureText ?? inputType == TextInputType.visiblePassword
-            ? true
-            : false,
+        obscureText: obscureText ?? inputType == TextInputType.visiblePassword ? true : false,
         autofocus: true,
         decoration: _defaultInputDecoration,
         validator: (value) {
@@ -205,12 +220,7 @@ class DialogProviderPlus {
   /// * values    DropList的值，即被选择的值。String和int较为适用。
   /// * builder   自定义构建，如MenuItem不满足需求时。
   ///
-  void addDropDownButton<T>(
-      {String? key,
-      List<T>? values,
-      T? defaultValue,
-      DropMenuItemWidgetBuilder? builder,
-      String? labelText}) {
+  void addDropDownButton<T>({String? key, List<T>? values, T? defaultValue, DropMenuItemWidgetBuilder? builder, String? labelText}) {
     if (values == null || values.isEmpty) return;
     T? _currentValue = defaultValue;
     _children.add(
@@ -268,11 +278,7 @@ class DialogProviderPlus {
   ///
   /// 分割线
   ///
-  void addDivider(
-      {double? indent,
-      double? endIndent,
-      double vertical = 10.0,
-      Color? color}) {
+  void addDivider({double? indent, double? endIndent, double vertical = 10.0, Color? color}) {
     _children.add(
       Padding(
         padding: EdgeInsets.symmetric(vertical: vertical),
@@ -308,9 +314,7 @@ class DialogProviderPlus {
       return DropdownMenuItem<int>(
         value: value,
         alignment: Alignment.centerRight,
-        child: Padding(
-            padding: kHorizontalPaddingTen,
-            child: Text("$value", style: TextStyle(color: _textColor))),
+        child: Padding(padding: kHorizontalPaddingTen, child: Text("$value", style: TextStyle(color: _textColor))),
       );
     }
 
@@ -365,8 +369,7 @@ class DialogProviderPlus {
     // 时
     final Widget _hours = _createDropdownButtonFormField(_hourValues, true);
     // 分
-    final Widget _minutes =
-        _createDropdownButtonFormField(_minuteValues, false);
+    final Widget _minutes = _createDropdownButtonFormField(_minuteValues, false);
 
     final Widget _widget = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -381,14 +384,8 @@ class DialogProviderPlus {
         // ),
         Row(
           children: [
-            Expanded(
-                child: Padding(
-                    padding: EdgeInsets.only(top: 5.0, bottom: 5.0, right: 2.5),
-                    child: _hours)),
-            Expanded(
-                child: Padding(
-                    padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 2.5),
-                    child: _minutes)),
+            Expanded(child: Padding(padding: EdgeInsets.only(top: 5.0, bottom: 5.0, right: 2.5), child: _hours)),
+            Expanded(child: Padding(padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 2.5), child: _minutes)),
           ],
         ),
       ],
@@ -407,8 +404,7 @@ class DialogProviderPlus {
   void addCheckBox({String? key, Text? label}) {
     _children.add(
       Theme(
-        data: ThemeData(
-            unselectedWidgetColor: _dark ? Colors.white : Colors.grey),
+        data: ThemeData(unselectedWidgetColor: _dark ? Colors.white : Colors.grey),
         child: CheckFormFiled(
           label: label ??
               Text(
@@ -427,8 +423,7 @@ class DialogProviderPlus {
   ///
   /// 设置图片背景
   ///
-  void setBackgroundImage(DecorationImage? image,
-      {double? opacity, BoxFit? fit}) {
+  void setBackgroundImage(DecorationImage? image, {double? opacity, BoxFit? fit}) {
     if (image == null) return;
     _image = DecorationImage(
       image: image.image,
@@ -458,12 +453,11 @@ class DialogProviderPlus {
   /// 返回结构数据
   /// map key is 'field[0..n]' to get data. if not set it in add method
   ///
-  Future<DialogResult<Map<String, Object?>?>?> show(BuildContext context) {
+  Future<DialogResult<Map<String, Object?>?>?> show() {
     return Navigator.of(context, rootNavigator: true)
         .push<DialogResult<Map<String, Object?>?>?>(
           _dialogBuilder<DialogResult<Map<String, Object?>?>?>(context, null),
-        )
-        .onError((error, stackTrace) => throw Exception(error));
+        );
   }
 
   /// 一般标题，居中， 居左或者居右显示。
@@ -510,11 +504,7 @@ class DialogProviderPlus {
               // 这个是Dialog的外边框
               elevation: 12.0,
               // alignment: Alignment.bottomCenter
-              titleTextStyle: TextStyle(
-                  color: _textColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  shadows: kElevationToShadow[4]),
+              titleTextStyle: TextStyle(color: _textColor, fontWeight: FontWeight.bold, fontSize: 20, shadows: kElevationToShadow[4]),
               contentTextStyle: TextStyle(
                 color: _textColor,
               ),
@@ -529,9 +519,7 @@ class DialogProviderPlus {
                   padding: const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
                   decoration: BoxDecoration(
                     image: _image,
-                    borderRadius: BorderRadius.only(
-                        topLeft: _borderRadius.topLeft,
-                        topRight: _borderRadius.topRight),
+                    borderRadius: BorderRadius.only(topLeft: _borderRadius.topLeft, topRight: _borderRadius.topRight),
                     gradient: _gradient,
                   ),
                   child: TernaryContainer(
@@ -559,40 +547,22 @@ class DialogProviderPlus {
                   TextButton(
                     child: Text(
                       okButton ?? "Ok",
-                      style: Theme.of(context)
-                          .textButtonTheme
-                          .style
-                          ?.textStyle
-                          ?.resolve(<MaterialState>{MaterialState.selected}),
+                      style: Theme.of(context).textButtonTheme.style?.textStyle?.resolve(<MaterialState>{MaterialState.selected}),
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
-                        Navigator.pop(
-                            context,
-                            DialogResult<Map<String, Object?>?>(
-                                status: true,
-                                code: 200,
-                                msg: "back",
-                                data: maps));
+                        Navigator.pop(context, DialogResult<Map<String, Object?>?>(status: true, code: 200, msg: "back", data: maps));
                       }
                     },
                   ),
                   TextButton(
                     child: Text(
                       cancelButton ?? "Cancel",
-                      style: Theme.of(context)
-                          .textButtonTheme
-                          .style
-                          ?.textStyle
-                          ?.resolve({MaterialState.selected})?.copyWith(
-                              color: _hintColor),
+                      style: Theme.of(context).textButtonTheme.style?.textStyle?.resolve({MaterialState.selected})?.copyWith(color: _hintColor),
                     ),
                     onPressed: () {
-                      Navigator.pop(
-                          context,
-                          const DialogResult<Map<String, Object?>?>(
-                              status: false, code: 400, msg: ""));
+                      Navigator.pop(context, const DialogResult<Map<String, Object?>?>(status: false, code: 400, msg: ""));
                     },
                   ),
                 ],
@@ -640,15 +610,10 @@ class CheckFormFiled extends FormField<bool> {
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius: _formFieldBorderRadius,
-                    border: Border.all(
-                        color: state._focused
-                            ? Theme.of(state.context).primaryColor
-                            : Colors.grey,
-                        width: state._focused ? 2.0 : 1.0),
+                    border: Border.all(color: state._focused ? Theme.of(state.context).primaryColor : Colors.grey, width: state._focused ? 2.0 : 1.0),
                   ),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10.0, vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -657,9 +622,7 @@ class CheckFormFiled extends FormField<bool> {
                         label ??
                             Text(
                               "",
-                              style: Theme.of(state.context)
-                                  .dialogTheme
-                                  .contentTextStyle,
+                              style: Theme.of(state.context).dialogTheme.contentTextStyle,
                             ),
                         Checkbox(
                           value: state.checkable,

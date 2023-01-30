@@ -88,7 +88,7 @@ class DialogsPage extends StatelessWidget {
                 ..addDivider()
                 ..addCheckBox(key:  "custom")
                 // ..addHourMinutesSelector(key: "date",)
-                ..show(context).then((value){
+                ..show().then((value){
                   if (value == null || !value.status) return;
                   print(value);
                   print(value.data!['key1']); // 获取数据

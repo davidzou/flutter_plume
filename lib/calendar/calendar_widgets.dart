@@ -11,8 +11,8 @@ import 'package:flutter/material.dart';
 ///
 class YearsMonthWidget extends StatefulWidget {
   YearsMonthWidget({
-    @required this.onYearChanged,
-    @required this.onMonthChanged,
+    required this.onYearChanged,
+    required this.onMonthChanged,
     this.initByYear,
     this.initByMonth,
     this.suffixByYear = " 年",
