@@ -142,12 +142,12 @@ class DialogProviderPlus {
   /// A choice Dialog
   factory DialogProviderPlus.choice(
     BuildContext context, {
-    DecorationImage? backgroundImage,
     String? key,
-    List<dynamic>? values,
+    String? labelText,
+    DecorationImage? backgroundImage,
+    required List<dynamic> values,
     dynamic defaultValue,
     DropMenuItemWidgetBuilder? builder,
-    String? labelText,
   }) {
     return DialogProviderPlus(
       context,
@@ -164,31 +164,41 @@ class DialogProviderPlus {
   ///
   /// 添加一个输入框表单项。
   ///
-  void addTextFormField({String? key, String? labelText, InputDecoration? inputDecoration, TextInputType? inputType, bool? obscureText}) {
+  void addTextFormField({
+    String? key,
+    String? labelText,
+    String? hintText,
+    InputDecoration? inputDecoration,
+    TextInputType? inputType,
+    bool? obscureText,
+  }) {
+    final MaterialLocalizations localizations = MaterialLocalizations.of(context);
+    final InputDecorationTheme inputTheme = Theme.of(context).inputDecorationTheme;
+
     final TextStyle _style = TextStyle(color: _textColor);
-    final OutlineInputBorder _focusedBorder = _outlineInputBorder.copyWith(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2.0));
-    final OutlineInputBorder _enabledBorder = _outlineInputBorder.copyWith(borderSide: BorderSide(color: _borderEnableColor));
-    InputDecoration _defaultInputDecoration = InputDecoration(
-      labelText: labelText ?? "Label",
-      // 如果没有Label，errorBorder就不是roundborder
-      labelStyle: _style,
-      hintStyle: _style.copyWith(color: _hintColor),
-      helperStyle: _style,
-      border: kOutLineInputBorder,
-      focusedBorder: _focusedBorder,
-      enabledBorder: _enabledBorder,
-    );
-    if (inputDecoration != null) {
-      // 设置默认配色
-      _defaultInputDecoration = inputDecoration.copyWith(
-        labelStyle: _style,
-        hintStyle: _style.copyWith(color: _hintColor),
-        helperStyle: _style,
-        border: kOutLineInputBorder,
-        focusedBorder: _focusedBorder,
-        enabledBorder: _enabledBorder,
-      );
-    }
+    // final OutlineInputBorder _focusedBorder = _outlineInputBorder.copyWith(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2.0));
+    // final OutlineInputBorder _enabledBorder = _outlineInputBorder.copyWith(borderSide: BorderSide(color: _borderEnableColor));
+    // InputDecoration _defaultInputDecoration = InputDecoration(
+    //   labelText: labelText ?? "Label",
+    //   // 如果没有Label，errorBorder就不是roundborder
+    //   labelStyle: _style,
+    //   hintStyle: _style.copyWith(color: _hintColor),
+    //   helperStyle: _style,
+    //   border: kOutLineInputBorder,
+    //   focusedBorder: _focusedBorder,
+    //   enabledBorder: _enabledBorder,
+    // );
+    // if (inputDecoration != null) {
+    //   // 设置默认配色
+    //   _defaultInputDecoration = inputDecoration.copyWith(
+    //     labelStyle: _style,
+    //     hintStyle: _style.copyWith(color: _hintColor),
+    //     helperStyle: _style,
+    //     border: kOutLineInputBorder,
+    //     focusedBorder: _focusedBorder,
+    //     enabledBorder: _enabledBorder,
+    //   );
+    // }
     Widget _widget = Padding(
       padding: kVerticalPaddingTen,
       child: TextFormField(
@@ -196,7 +206,12 @@ class DialogProviderPlus {
         style: _style,
         obscureText: obscureText ?? inputType == TextInputType.visiblePassword ? true : false,
         autofocus: true,
-        decoration: _defaultInputDecoration,
+        decoration: InputDecoration(
+          border: inputTheme.border ?? const UnderlineInputBorder(),
+          filled: inputTheme.filled,
+          hintText: hintText ?? localizations.dateHelpText,
+          labelText: labelText ?? localizations.dateInputLabel,
+        ),
         validator: (value) {
           // 验证
           if (value == null || value.isEmpty) {
@@ -220,77 +235,110 @@ class DialogProviderPlus {
   /// * values    DropList的值，即被选择的值。String和int较为适用。
   /// * builder   自定义构建，如MenuItem不满足需求时。
   ///
-  void addDropDownButton<T>({String? key, List<T>? values, T? defaultValue, DropMenuItemWidgetBuilder? builder, String? labelText}) {
-    if (values == null || values.isEmpty) return;
+  addDropDownButton<T>({
+    String? key,
+    required List<T> values,
+    T? defaultValue,
+    DropMenuItemWidgetBuilder? builder,
+    String? labelText,
+    String? hintText,
+  }) {
+    if (values.isEmpty) return;
     T? _currentValue = defaultValue;
-    _children.add(
-      StatefulBuilder(builder: (context, StateSetter setState) {
-        return Padding(
-          padding: kVerticalPaddingTen,
-          child: DropdownButtonFormField<T>(
-            value: _currentValue,
-            decoration: InputDecoration(
-              labelText: labelText,
-              border: _outlineInputBorder,
-            ),
-            hint: Padding(
-              padding: kHorizontalPaddingTen,
-              child: const Text("请选择"),
-            ),
-            items: values
-                .map(
-                  (e) => DropdownMenuItem<T>(
-                    value: e,
-                    child: builder == null
-                        ? Padding(
-                            padding: kHorizontalPaddingTen,
-                            child: Text(
-                              "$e",
-                              style: TextStyle(color: _textColor),
-                            ))
-                        : builder.call(context, e),
-                    onTap: () {},
-                  ),
-                )
-                .toList(),
-            borderRadius: BorderRadius.circular(10.0),
-            dropdownColor: _backgroundColor,
-            onChanged: (value) {
-              setState(() {
-                _currentValue = value!;
-              });
-            },
-            onSaved: (value) {
-              maps[key ?? "field${maps.length}"] = value;
-            },
-            validator: (value) {
-              if (value == null) {
-                return "Select it value.";
-              }
-              return null;
-            },
+    final MaterialLocalizations localizations = MaterialLocalizations.of(context);
+    final InputDecorationTheme inputTheme = Theme.of(context).inputDecorationTheme;
+    final dropDownButton = StatefulBuilder(builder: (context, StateSetter setState) {
+      return Padding(
+        padding: kVerticalPaddingTen,
+        child: DropdownButtonFormField<T>(
+          value: _currentValue,
+          decoration: InputDecoration(
+            border: inputTheme.border ?? const UnderlineInputBorder(),
+            filled: inputTheme.filled,
+            hintText: hintText ?? localizations.dateHelpText,
+            labelText: labelText ?? localizations.dateInputLabel,
           ),
-        );
-      }),
-    );
+          hint: Padding(
+            padding: kHorizontalPaddingTen,
+            child: Text(hintText ?? "请选择"),
+          ),
+          items: values
+              .map(
+                (e) => DropdownMenuItem<T>(
+                  value: e,
+                  child: builder == null
+                      ? Padding(
+                          padding: kHorizontalPaddingTen,
+                          child: Text("$e",
+                              style: TextStyle(
+                                color: _textColor,
+                              )))
+                      : builder.call(context, e),
+                  onTap: () {},
+                ),
+              )
+              .toList(),
+          borderRadius: BorderRadius.circular(10.0),
+          dropdownColor: _backgroundColor,
+          onChanged: (value) {
+            setState(() {
+              _currentValue = value!;
+            });
+          },
+          onSaved: (value) {
+            maps[key ?? "field${maps.length}"] = value;
+          },
+          validator: (value) {
+            if (value == null) {
+              return "Select it value.";
+            }
+            return null;
+          },
+        ),
+      );
+    });
+
+    // Add to list
+    _children.add(dropDownButton);
   }
 
   ///
   /// 分割线
   ///
-  void addDivider({double? indent, double? endIndent, double vertical = 10.0, Color? color}) {
-    _children.add(
-      Padding(
-        padding: EdgeInsets.symmetric(vertical: vertical),
-        child: Divider(
-          color: color,
-          height: 1.0,
-          thickness: 1.0,
-          indent: indent,
-          endIndent: endIndent,
-        ),
+  addDivider({
+    double? indent,
+    double? endIndent,
+    double vertical = 10.0, // TODO It can that to set for all in one
+    Color? color,
+  }) {
+    final divider = Padding(
+      padding: EdgeInsets.symmetric(vertical: vertical),
+      child: Divider(
+        color: color,
+        height: 1.0,
+        thickness: 1.0,
+        indent: indent,
+        endIndent: endIndent,
       ),
     );
+    // Add to list.
+    _children.add(divider);
+  }
+
+  ///
+  /// 日期选择器
+  ///
+  void addDatePicker({String? key, DateTime? start, DateTime? end}) {
+    _children.add(InputDatePickerFormField(
+      initialDate: DateTime.now(),
+      firstDate: DateTime.parse("1970-01-01"),
+      lastDate: DateTime.now(),
+      onDateSubmitted: (v) {
+        print(v);
+      },
+      onDateSaved: (v) {},
+      fieldLabelText: "Label",
+    ));
   }
 
   ///
@@ -454,10 +502,9 @@ class DialogProviderPlus {
   /// map key is 'field[0..n]' to get data. if not set it in add method
   ///
   Future<DialogResult<Map<String, Object?>?>?> show() {
-    return Navigator.of(context, rootNavigator: true)
-        .push<DialogResult<Map<String, Object?>?>?>(
-          _dialogBuilder<DialogResult<Map<String, Object?>?>?>(context, null),
-        );
+    return Navigator.of(context, rootNavigator: true).push<DialogResult<Map<String, Object?>?>?>(
+      _dialogBuilder<DialogResult<Map<String, Object?>?>?>(context, null),
+    );
   }
 
   /// 一般标题，居中， 居左或者居右显示。
@@ -682,4 +729,58 @@ class _CheckFormFieldState extends FormFieldState<bool> {
 
   @protected
   bool get checkable => _checkable;
+}
+
+///
+class DatePickerFormField extends FormField<DateTime> {
+  DatePickerFormField({
+    Key? key,
+  }) : super(
+            key: key,
+            initialValue: DateTime.now(),
+            onSaved: (v) {},
+            builder: (FormFieldState<DateTime> field) {
+              final _DatePickerFormFieldState<DateTime> state = field as _DatePickerFormFieldState<DateTime>;
+              return Focus(
+                canRequestFocus: true,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Label"),
+                    // OutlinedButton(
+                    //   onPressed: () {
+                    //     showDatePicker(
+                    //       context: state.context,
+                    //       initialDate: DateTime.now(),
+                    //       firstDate: DateTime.parse("1970-01-01"),
+                    //       lastDate: DateTime.now(),
+                    //     ).then((value) => state.didChange(value));
+                    //   },
+                    //   child: Text("${state.value ?? "--"}"),
+                    // )
+                  ],
+                ),
+              );
+            });
+
+  @override
+  FormFieldState<DateTime> createState() => _DatePickerFormFieldState<DateTime>();
+}
+
+class _DatePickerFormFieldState<DateTime> extends FormFieldState<DateTime> {
+  @override
+  void didChange(DateTime? value) {
+    super.didChange(value);
+    // final DatePickerFormField datePickerFormField = widget as DatePickerFormField;
+    // assert(datePickerFormField.onChanged != null);
+    // datePickerFormField.onChanged!(value);
+  }
+
+  @override
+  void didUpdateWidget(covariant FormField<DateTime> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialValue != widget.initialValue) {
+      setValue(widget.initialValue);
+    }
+  }
 }
