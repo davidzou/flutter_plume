@@ -77,6 +77,7 @@ class DialogProviderPlus {
     this.context, {
     bool? dark,
     this.title,
+    this.titleAlignment,
     this.okButton,
     this.cancelButton,
   }) {
@@ -92,6 +93,7 @@ class DialogProviderPlus {
   /// 是否强制设置黑夜和白天模式
   final BuildContext context;
   final String? title;
+  final AlignmentGeometry? titleAlignment;
   final String? okButton;
   final String? cancelButton;
 
@@ -102,6 +104,7 @@ class DialogProviderPlus {
   Color _textColor = Colors.white;
   Color _borderEnableColor = Colors.black45;
   Color _hintColor = Colors.black45;
+
   Gradient? _gradient;
   DecorationImage? _image;
 
@@ -114,28 +117,20 @@ class DialogProviderPlus {
   ///
   /// 固定格式用户名密码弹出框
   ///
+  /// ```
+  /// DialogProviderPlus.login(context).show().then((value) => print(${value.data['username']}, ${value.data['password']}););
+  /// ```
+  ///
   factory DialogProviderPlus.login(
     BuildContext context, {
+    String title = "Login",
+    String okButtonName = "Login",
+    String cancelButtonName = "Cancel",
     DecorationImage? backgroundImage,
   }) {
-    return DialogProviderPlus(context, title: "Login", okButton: "Login", cancelButton: "Cancel")
-      ..addTextFormField(
-        inputDecoration: InputDecoration(
-          label: const Text("Username"),
-          hintText: "Please input a username.",
-          border: _outlineInputBorder,
-        ),
-        inputType: TextInputType.name,
-      )
-      ..addTextFormField(
-        inputDecoration: InputDecoration(
-          label: const Text("Password"),
-          hintText: "Please input a password.",
-          border: _outlineInputBorder,
-        ),
-        inputType: TextInputType.visiblePassword,
-        obscureText: true,
-      )
+    return DialogProviderPlus(context, title: title, okButton: okButtonName, cancelButton: cancelButtonName)
+      ..addTextFormField(key: "username", labelText: "Username", hintText: "Please input a username.", inputType: TextInputType.name)
+      ..addTextFormField(key: "password", labelText: "Password", hintText: "Please input a password.", inputType: TextInputType.visiblePassword, obscureText: true)
       ..setBackgroundImage(backgroundImage);
   }
 
@@ -164,7 +159,7 @@ class DialogProviderPlus {
   ///
   /// 添加一个输入框表单项。
   ///
-  void addTextFormField({
+  addTextFormField({
     String? key,
     String? labelText,
     String? hintText,
@@ -206,12 +201,13 @@ class DialogProviderPlus {
         style: _style,
         obscureText: obscureText ?? inputType == TextInputType.visiblePassword ? true : false,
         autofocus: true,
-        decoration: InputDecoration(
-          border: inputTheme.border ?? const UnderlineInputBorder(),
-          filled: inputTheme.filled,
-          hintText: hintText ?? localizations.dateHelpText,
-          labelText: labelText ?? localizations.dateInputLabel,
-        ),
+        decoration: inputDecoration ??
+            InputDecoration(
+              border: inputTheme.border ?? const UnderlineInputBorder(),
+              filled: inputTheme.filled,
+              hintText: hintText ?? localizations.dateHelpText,
+              labelText: labelText ?? localizations.dateInputLabel,
+            ),
         validator: (value) {
           // 验证
           if (value == null || value.isEmpty) {
@@ -571,8 +567,8 @@ class DialogProviderPlus {
                   ),
                   child: TernaryContainer(
                     header: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, right: 8.0),
+                      alignment: titleAlignment ?? Alignment.centerLeft,
                       child: Text(
                         title ?? "Dialog",
                         style: Theme.of(context).dialogTheme.titleTextStyle,
