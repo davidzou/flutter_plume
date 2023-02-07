@@ -167,7 +167,6 @@ class DialogProviderPlus {
     TextInputType? inputType,
     bool? obscureText,
   }) {
-    final MaterialLocalizations localizations = MaterialLocalizations.of(context);
     final InputDecorationTheme inputTheme = Theme.of(context).inputDecorationTheme;
 
     final TextStyle _style = TextStyle(color: _textColor);
@@ -205,8 +204,8 @@ class DialogProviderPlus {
             InputDecoration(
               border: inputTheme.border ?? const UnderlineInputBorder(),
               filled: inputTheme.filled,
-              hintText: hintText ?? localizations.dateHelpText,
-              labelText: labelText ?? localizations.dateInputLabel,
+              hintText: hintText,
+              labelText: labelText,
             ),
         validator: (value) {
           // 验证
@@ -241,7 +240,6 @@ class DialogProviderPlus {
   }) {
     if (values.isEmpty) return;
     T? _currentValue = defaultValue;
-    final MaterialLocalizations localizations = MaterialLocalizations.of(context);
     final InputDecorationTheme inputTheme = Theme.of(context).inputDecorationTheme;
     final dropDownButton = StatefulBuilder(builder: (context, StateSetter setState) {
       return Padding(
@@ -251,8 +249,8 @@ class DialogProviderPlus {
           decoration: InputDecoration(
             border: inputTheme.border ?? const UnderlineInputBorder(),
             filled: inputTheme.filled,
-            hintText: hintText ?? localizations.dateHelpText,
-            labelText: labelText ?? localizations.dateInputLabel,
+            hintText: hintText,
+            labelText: labelText,
           ),
           hint: Padding(
             padding: kHorizontalPaddingTen,
@@ -324,17 +322,34 @@ class DialogProviderPlus {
   ///
   /// 日期选择器
   ///
-  void addDatePicker({String? key, DateTime? start, DateTime? end}) {
-    _children.add(InputDatePickerFormField(
-      initialDate: DateTime.now(),
-      firstDate: DateTime.parse("1970-01-01"),
-      lastDate: DateTime.now(),
-      onDateSubmitted: (v) {
-        print(v);
-      },
-      onDateSaved: (v) {},
-      fieldLabelText: "Label",
-    ));
+  addDatePicker({
+    String? key,
+    String? labelText,
+    String? hintText,
+    DateTime? start,
+    DateTime? end,
+    SelectableDayPredicate? selectableDayPredicate,
+  }) {
+    var inputDate = Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0),
+      child: InputDatePickerFormField(
+        // initialDate: DateTime.now(),
+        firstDate: start ?? DateTime.parse("1970-01-01"),
+        lastDate: end ?? DateTime.now(),
+        onDateSubmitted: (v) {
+          print(v);
+        },
+        onDateSaved: (value) {
+          maps[key ?? "field${maps.length}"] = value;
+        },
+        fieldLabelText: labelText,
+        fieldHintText: hintText,
+        selectableDayPredicate: selectableDayPredicate,
+      ),
+    );
+
+    // Add to list.
+    _children.add(inputDate);
   }
 
   ///
