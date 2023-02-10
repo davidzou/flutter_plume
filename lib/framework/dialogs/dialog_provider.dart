@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:plume/framework/container/ternary.dart';
 import 'package:plume/framework/dialogs/dialog_result.dart';
 
@@ -166,6 +167,8 @@ class DialogProviderPlus {
     InputDecoration? inputDecoration,
     TextInputType? inputType,
     bool? obscureText,
+    List<TextInputFormatter>? inputFormatters,
+    bool intValue = false,
   }) {
     final InputDecorationTheme inputTheme = Theme.of(context).inputDecorationTheme;
 
@@ -214,8 +217,14 @@ class DialogProviderPlus {
           }
           return null;
         },
+        inputFormatters: inputFormatters,
         onSaved: (value) {
-          maps[key ?? 'field${maps.length}'] = value;
+          print(value);
+          if (intValue) {
+            maps[key ?? 'field${maps.length}'] = int.tryParse(value ?? "0");
+          } else {
+            maps[key ?? 'field${maps.length}'] = value;
+          }
           // print("onSaved");
         },
       ),
