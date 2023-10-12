@@ -3,6 +3,12 @@ import 'package:plume/framework/dialog.dart';
 import 'package:plume/widget/head.dart';
 
 class TestPage extends StatelessWidget {
+
+
+  svg() {
+
+  }
+
   @override
   Widget build(BuildContext context) {
     // 求一个背景色，是主题色的相对色的一半？
